@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -60,7 +61,9 @@ const Header = props => {
 				<Tab
 					className={classes.tab}
 					key={`${route}${index}`}
-					label={route.name}
+                    label={route.name}
+                    component={Link}
+                    to={route.link}
 				/>
 			))}
 		</Tabs>
