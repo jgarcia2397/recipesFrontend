@@ -20,9 +20,9 @@ const ElevationScroll = props => {
 const header = props => {
     return (
         <ElevationScroll>
-            <AppBar position='fixed'>
+            <AppBar position='fixed' color='primary'>
                 <Toolbar>
-                    <Typography variant='h4'>
+                    <Typography variant='h3'>
                         Good Food
                     </Typography>
                     {/* <Button>Home</Button>
