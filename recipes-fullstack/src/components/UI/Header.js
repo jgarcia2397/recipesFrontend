@@ -11,9 +11,16 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 const useStyles = makeStyles(theme => ({
+	appBar: {
+		zIndex: theme.zIndex.modal + 1
+	},
 	toolbarMargin: {
 		...theme.mixins.toolbar,
 	},
@@ -38,8 +45,8 @@ const useStyles = makeStyles(theme => ({
 	logo: {
 		...theme.typography.h3,
 		[theme.breakpoints.down('sm')]: {
-			fontSize: '2.5rem'
-		}
+			fontSize: '2.5rem',
+		},
 	},
 }));
 
@@ -61,6 +68,7 @@ const Header = props => {
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
 	const [tabValue, setTabValue] = useState(0);
+	const [openDrawer, setOpenDrawer] = useState(false);
 
 	const handleTabChange = (event, newValue) => {
 		setTabValue(newValue);
@@ -93,19 +101,41 @@ const Header = props => {
 	);
 
 	const drawer = (
-		<IconButton
-			className={classes.drawerIconContainer}
-			onClick={() => {}}
-			color='inherit'
-		>
-			<MenuIcon className={classes.drawerIcon} />
-		</IconButton>
+		<React.Fragment>
+			<SwipeableDrawer
+				open={openDrawer}
+				onClose={() => setOpenDrawer(false)}
+				onOpen={() => setOpenDrawer(true)}
+			>
+				<div className={classes.toolbarMargin} />
+				<List>
+					{routes.map((route, index) => (
+						<ListItem
+							key={`${route}${index}`}
+							button
+							component={Link}
+							to={route.link}
+							onClick={() => setOpenDrawer(false)}
+						>
+							<ListItemText>{route.name}</ListItemText>
+						</ListItem>
+					))}
+				</List>
+			</SwipeableDrawer>
+			<IconButton
+				className={classes.drawerIconContainer}
+				onClick={() => {setOpenDrawer(!openDrawer)}}
+				color='inherit'
+			>
+				<MenuIcon className={classes.drawerIcon} />
+			</IconButton>
+		</React.Fragment>
 	);
 
 	return (
 		<React.Fragment>
 			<ElevationScroll>
-				<AppBar position='fixed' color='primary'>
+				<AppBar position='fixed' color='primary' className={classes.appBar}>
 					<Toolbar>
 						<Typography className={classes.logo} variant='h3'>
 							Good Food
