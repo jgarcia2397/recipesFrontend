@@ -35,6 +35,12 @@ const useStyles = makeStyles(theme => ({
 		height: '40px',
 		width: '40px',
 	},
+	logo: {
+		...theme.typography.h3,
+		[theme.breakpoints.down('sm')]: {
+			fontSize: '2.5rem'
+		}
+	},
 }));
 
 const ElevationScroll = props => {
@@ -101,7 +107,9 @@ const Header = props => {
 			<ElevationScroll>
 				<AppBar position='fixed' color='primary'>
 					<Toolbar>
-						<Typography variant='h3'>Good Food</Typography>
+						<Typography className={classes.logo} variant='h3'>
+							Good Food
+						</Typography>
 						{matches ? drawer : tabs}
 					</Toolbar>
 				</AppBar>
