@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 const useStyles = makeStyles(theme => ({
@@ -18,8 +22,18 @@ const useStyles = makeStyles(theme => ({
 	},
 	tab: {
 		minWidth: 15,
-        marginLeft: '15px',
-        marginRight: '15px',
+		marginLeft: '15px',
+		marginRight: '15px',
+	},
+	drawerIconContainer: {
+		marginLeft: 'auto',
+		'&:hover': {
+			backgroundColor: 'transparent',
+		},
+	},
+	drawerIcon: {
+		height: '40px',
+		width: '40px',
 	},
 }));
 
@@ -37,6 +51,9 @@ const ElevationScroll = props => {
 
 const Header = props => {
 	const classes = useStyles();
+	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.down('md'));
+
 	const [tabValue, setTabValue] = useState(0);
 
 	const handleTabChange = (event, newValue) => {
@@ -54,19 +71,29 @@ const Header = props => {
 		<Tabs
 			className={classes.tabContainer}
 			value={tabValue}
-            onChange={handleTabChange}
-            /*indicatorColor='primary'*/
+			onChange={handleTabChange}
+			/*indicatorColor='primary'*/
 		>
 			{routes.map((route, index) => (
 				<Tab
 					className={classes.tab}
 					key={`${route}${index}`}
-                    label={route.name}
-                    component={Link}
-                    to={route.link}
+					label={route.name}
+					component={Link}
+					to={route.link}
 				/>
 			))}
 		</Tabs>
+	);
+
+	const drawer = (
+		<IconButton
+			className={classes.drawerIconContainer}
+			onClick={() => {}}
+			color='inherit'
+		>
+			<MenuIcon className={classes.drawerIcon} />
+		</IconButton>
 	);
 
 	return (
@@ -75,7 +102,7 @@ const Header = props => {
 				<AppBar position='fixed' color='primary'>
 					<Toolbar>
 						<Typography variant='h3'>Good Food</Typography>
-						{tabs}
+						{matches ? drawer : tabs}
 					</Toolbar>
 				</AppBar>
 			</ElevationScroll>
