@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
@@ -7,15 +6,10 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+
+import NavTabs from '../Navigation/NavTabs';
+import NavDrawer from '../Navigation/NavDrawer';
 
 const useStyles = makeStyles(theme => ({
 	appBar: {
@@ -24,42 +18,8 @@ const useStyles = makeStyles(theme => ({
 	toolbarMargin: {
 		...theme.mixins.toolbar,
 		[theme.breakpoints.down('xs')]: {
-			minHeight: 64
-		}
-	},
-	tabContainer: {
-		marginLeft: 'auto',
-	},
-	tab: {
-		...theme.typography.tab,
-		fontWeight: 700,
-		minWidth: 15,
-		marginLeft: '15px',
-		marginRight: '15px',
-	},
-	drawerIconContainer: {
-		marginLeft: 'auto',
-		'&:hover': {
-			backgroundColor: 'transparent',
+			minHeight: 64,
 		},
-	},
-	drawerIcon: {
-		height: '40px',
-		width: '40px',
-	},
-	drawerItem: {
-		...theme.typography.tab,
-		color: 'white',
-		opacity: 0.7,
-	},
-	drawerItemSelected: {
-		'& .MuiListItemText-root': {
-			color: theme.palette.common.yellow,
-			opacity: 1,
-		},
-	},
-	drawer: {
-		backgroundColor: theme.palette.common.green,
 	},
 	logo: {
 		...theme.typography.h3,
@@ -100,68 +60,6 @@ const Header = props => {
 		{ name: 'Log In/Out', link: '/auth', activeIndex: 3 },
 	];
 
-	const tabs = (
-		<Tabs
-			className={classes.tabContainer}
-			value={tabValue}
-			onChange={handleTabChange}
-			/*indicatorColor='primary'*/
-		>
-			{routes.map((route, index) => (
-				<Tab
-					className={classes.tab}
-					key={`${route}${index}`}
-					label={route.name}
-					component={Link}
-					to={route.link}
-				/>
-			))}
-		</Tabs>
-	);
-
-	const drawer = (
-		<React.Fragment>
-			<SwipeableDrawer
-				open={openDrawer}
-				onClose={() => setOpenDrawer(false)}
-				onOpen={() => setOpenDrawer(true)}
-				classes={{ paper: classes.drawer }}
-			>
-				<div className={classes.toolbarMargin} />
-				<List>
-					{routes.map((route, index) => (
-						<ListItem
-							key={`${route}${index}`}
-							button
-							divider
-							component={Link}
-							to={route.link}
-							onClick={() => {
-								setOpenDrawer(false);
-								setTabValue(route.activeIndex);
-							}}
-							selected={tabValue === route.activeIndex}
-							classes={{ selected: classes.drawerItemSelected }}
-						>
-							<ListItemText className={classes.drawerItem} disableTypography>
-								{route.name}
-							</ListItemText>
-						</ListItem>
-					))}
-				</List>
-			</SwipeableDrawer>
-			<IconButton
-				className={classes.drawerIconContainer}
-				onClick={() => {
-					setOpenDrawer(!openDrawer);
-				}}
-				color='inherit'
-			>
-				<MenuIcon className={classes.drawerIcon} />
-			</IconButton>
-		</React.Fragment>
-	);
-
 	return (
 		<React.Fragment>
 			<ElevationScroll>
@@ -170,7 +68,21 @@ const Header = props => {
 						<Typography className={classes.logo} variant='h3'>
 							Good Food
 						</Typography>
-						{matches ? drawer : tabs}
+						{matches ? (
+							<NavDrawer
+								routes={routes}
+								setTabValue={setTabValue}
+								tabValue={tabValue}
+								setOpenDrawer={setOpenDrawer}
+								openDrawer={openDrawer}
+							/>
+						) : (
+							<NavTabs
+								routes={routes}
+								tabVal={tabValue}
+								handleTabChange={handleTabChange}
+							/>
+						)}
 					</Toolbar>
 				</AppBar>
 			</ElevationScroll>
