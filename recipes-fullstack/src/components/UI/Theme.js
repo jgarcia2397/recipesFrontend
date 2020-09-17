@@ -23,6 +23,12 @@ const theme = createMuiTheme({
             main: yellow,
             dark: darkYellow,
         },
+    },
+    typography: {
+        tab: {
+            fontFamily: 'Montserrat',
+            fontSize: '1rem'
+        }
     }
 });
 

@@ -28,6 +28,8 @@ const useStyles = makeStyles(theme => ({
 		marginLeft: 'auto',
 	},
 	tab: {
+		...theme.typography.tab,
+		fontWeight: 700,
 		minWidth: 15,
 		marginLeft: '15px',
 		marginRight: '15px',
@@ -43,15 +45,16 @@ const useStyles = makeStyles(theme => ({
 		width: '40px',
 	},
 	drawerItem: {
+		...theme.typography.tab,
 		color: 'white',
-		opacity: 0.7
+		opacity: 0.7,
 	},
 	drawerItemSelected: {
-        "& .MuiListItemText-root": {
+		'& .MuiListItemText-root': {
 			color: theme.palette.common.yellow,
-            opacity: 1
-        }
-    },
+			opacity: 1,
+		},
+	},
 	drawer: {
 		backgroundColor: theme.palette.common.green,
 	},
@@ -130,11 +133,14 @@ const Header = props => {
 							divider
 							component={Link}
 							to={route.link}
-							onClick={() => {setOpenDrawer(false); setTabValue(route.activeIndex)}}
+							onClick={() => {
+								setOpenDrawer(false);
+								setTabValue(route.activeIndex);
+							}}
 							selected={tabValue === route.activeIndex}
-							classes={{selected: classes.drawerItemSelected}}
+							classes={{ selected: classes.drawerItemSelected }}
 						>
-							<ListItemText className={classes.drawerItem}>
+							<ListItemText className={classes.drawerItem} disableTypography>
 								{route.name}
 							</ListItemText>
 						</ListItem>
