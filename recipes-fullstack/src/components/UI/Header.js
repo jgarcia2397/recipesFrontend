@@ -23,6 +23,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	toolbarMargin: {
 		...theme.mixins.toolbar,
+		[theme.breakpoints.down('xs')]: {
+			minHeight: 64
+		}
 	},
 	tabContainer: {
 		marginLeft: 'auto',
