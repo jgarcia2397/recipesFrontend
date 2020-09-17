@@ -19,7 +19,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 const useStyles = makeStyles(theme => ({
 	appBar: {
-		zIndex: theme.zIndex.modal + 1
+		zIndex: theme.zIndex.modal + 1,
 	},
 	toolbarMargin: {
 		...theme.mixins.toolbar,
@@ -41,6 +41,19 @@ const useStyles = makeStyles(theme => ({
 	drawerIcon: {
 		height: '40px',
 		width: '40px',
+	},
+	drawerItem: {
+		color: 'white',
+		opacity: 0.7
+	},
+	drawerItemSelected: {
+        "& .MuiListItemText-root": {
+			color: theme.palette.common.yellow,
+            opacity: 1
+        }
+    },
+	drawer: {
+		backgroundColor: theme.palette.common.green,
 	},
 	logo: {
 		...theme.typography.h3,
@@ -75,10 +88,10 @@ const Header = props => {
 	};
 
 	const routes = [
-		{ name: 'Home', link: '/' },
-		{ name: 'My Recipes', link: '/recipes' },
-		{ name: 'My Profile', link: '/profile' },
-		{ name: 'Log In/Out', link: '/auth' },
+		{ name: 'Home', link: '/', activeIndex: 0 },
+		{ name: 'My Recipes', link: '/recipes', activeIndex: 1 },
+		{ name: 'My Profile', link: '/profile', activeIndex: 2 },
+		{ name: 'Log In/Out', link: '/auth', activeIndex: 3 },
 	];
 
 	const tabs = (
@@ -106,6 +119,7 @@ const Header = props => {
 				open={openDrawer}
 				onClose={() => setOpenDrawer(false)}
 				onOpen={() => setOpenDrawer(true)}
+				classes={{ paper: classes.drawer }}
 			>
 				<div className={classes.toolbarMargin} />
 				<List>
@@ -113,18 +127,25 @@ const Header = props => {
 						<ListItem
 							key={`${route}${index}`}
 							button
+							divider
 							component={Link}
 							to={route.link}
-							onClick={() => setOpenDrawer(false)}
+							onClick={() => {setOpenDrawer(false); setTabValue(route.activeIndex)}}
+							selected={tabValue === route.activeIndex}
+							classes={{selected: classes.drawerItemSelected}}
 						>
-							<ListItemText>{route.name}</ListItemText>
+							<ListItemText className={classes.drawerItem}>
+								{route.name}
+							</ListItemText>
 						</ListItem>
 					))}
 				</List>
 			</SwipeableDrawer>
 			<IconButton
 				className={classes.drawerIconContainer}
-				onClick={() => {setOpenDrawer(!openDrawer)}}
+				onClick={() => {
+					setOpenDrawer(!openDrawer);
+				}}
 				color='inherit'
 			>
 				<MenuIcon className={classes.drawerIcon} />
