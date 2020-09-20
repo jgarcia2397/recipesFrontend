@@ -11,19 +11,16 @@ const useStyles = makeStyles(theme => ({
 		elevation: 5,
 		width: 1000,
 		padding: '3px 6px',
-		margin: '300px auto',
+		margin: '0 auto',
 		display: 'flex',
 		[theme.breakpoints.down('md')]: {
 			width: 700,
-			margin: '200px auto',
 		},
 		[theme.breakpoints.down('sm')]: {
 			width: 550,
-			margin: '150px auto',
 		},
 		[theme.breakpoints.down('xs')]: {
 			width: 400,
-			margin: '100px auto',
 		},
 	},
 	searchIconContainer: {
