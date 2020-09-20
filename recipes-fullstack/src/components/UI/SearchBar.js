@@ -9,19 +9,10 @@ import IconButton from '@material-ui/core/IconButton';
 const useStyles = makeStyles(theme => ({
 	root: {
 		elevation: 5,
-		width: 1000,
+        minWidth: 200,
 		padding: '3px 6px',
 		margin: '0 auto',
-		display: 'flex',
-		[theme.breakpoints.down('md')]: {
-			width: 700,
-		},
-		[theme.breakpoints.down('sm')]: {
-			width: 550,
-		},
-		[theme.breakpoints.down('xs')]: {
-			width: 400,
-		},
+        display: 'flex',
 	},
 	searchIconContainer: {
 		'&:hover': {
