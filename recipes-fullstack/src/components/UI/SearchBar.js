@@ -7,25 +7,37 @@ import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        elevation: 5,
-        width: 1000,
-        padding: '3px 6px',
-        margin: '300px auto',
-        display: 'flex'
-    },
-    searchIconContainer: {
-        '&:hover': {
+	root: {
+		elevation: 5,
+		width: 1000,
+		padding: '3px 6px',
+		margin: '300px auto',
+		display: 'flex',
+		[theme.breakpoints.down('md')]: {
+			width: 700,
+			margin: '200px auto',
+		},
+		[theme.breakpoints.down('sm')]: {
+			width: 550,
+			margin: '150px auto',
+		},
+		[theme.breakpoints.down('xs')]: {
+			width: 400,
+			margin: '100px auto',
+		},
+	},
+	searchIconContainer: {
+		'&:hover': {
 			backgroundColor: 'transparent',
 		},
-    },
-    input: {
-        flex: 1
-    }
+	},
+	input: {
+		flex: 1,
+	},
 }));
 
 const SearchBar = () => {
-    const classes = useStyles();
+	const classes = useStyles();
 
 	return (
 		<Paper component='form' className={classes.root}>
