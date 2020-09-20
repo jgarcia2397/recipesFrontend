@@ -17,9 +17,9 @@ function App() {
 				<Header />
 				<Switch>
 					<Route exact path='/' render={() => <HomePage />} />
-          <Route exact path='/auth' render={() => <Auth />} />
-          <Route exact path='/recipes' render={() => <RecipePage />} />
-          <Route exact path='/profile' render={() => <ProfilePage />} />
+					<Route exact path='/auth' render={() => <Auth />} />
+					<Route exact path='/recipes' render={() => <RecipePage />} />
+					<Route exact path='/profile' render={() => <ProfilePage />} />
 				</Switch>
 			</BrowserRouter>
 		</ThemeProvider>
