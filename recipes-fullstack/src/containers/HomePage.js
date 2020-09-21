@@ -80,8 +80,14 @@ const styles = theme => ({
 		},
 	},
 	root: {
-		minWidth: 250,
+		// minWidth: 250,
+		width: '50%'
 	},
+	viewButton: {
+		width: '15%',
+		textTransform: 'none',
+		padding: 0
+	}
 });
 
 // Higher-order component API
@@ -93,32 +99,26 @@ class HomePage extends Component {
 				<Paper className={classes.paperContainer}>
 					<SearchBar />
 				</Paper>
-				<Paper className={classes.cardsContainer}>
-					<Grid container direction='row' justify='center' spacing={3}>
-						<Card className={classes.root}>
-							<CardContent>
-								<Typography variant='h4'>My Recipes</Typography>
-								<Typography variant='body1'>
-									View your recipes and add to your menu!
-								</Typography>
-							</CardContent>
-							<CardActions>
-								<Button size='small'>View Recipes</Button>
-							</CardActions>
-						</Card>
-						<Card className={classes.root}>
-							<CardContent>
-								<Typography variant='h4'>My Profile</Typography>
-								<Typography variant='body1'>
-									Update your profile for others to see!
-								</Typography>
-							</CardContent>
-							<CardActions>
-								<Button size='small'>View Profile</Button>
-							</CardActions>
-						</Card>
+				<Grid container direction='row' className={classes.cardsContainer}>
+					<Grid item className={classes.root}>
+						<Grid container direction='column'>
+							<Typography variant='h4'>My Recipes</Typography>
+							<Typography variant='body1'>
+								View your recipes and add to your menu!
+							</Typography>
+							<Button variant='outlined' className={classes.viewButton}>View Recipes</Button>
+						</Grid>
 					</Grid>
-				</Paper>
+					<Grid item className={classes.root} style={{textAlign: 'right'}}>
+						<Grid container direction='column' alignItems='flex-end'>
+							<Typography variant='h4'>My Profile</Typography>
+							<Typography variant='body1'>
+								Update your profile for others to see!
+							</Typography>
+							<Button variant='outlined' className={classes.viewButton}>View Profile</Button>
+						</Grid>
+					</Grid>
+				</Grid>
 			</React.Fragment>
 		);
 	}
