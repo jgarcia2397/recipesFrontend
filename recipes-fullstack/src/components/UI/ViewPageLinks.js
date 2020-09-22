@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -41,10 +42,11 @@ const useStyles = makeStyles(theme => ({
 	root: {
 		width: '50%',
 	},
+	rootSM: {
+		width: '100%',
+	},
 	viewButton: {
 		...theme.typography.button,
-		// maxWidth: '35px',
-		// minWidth: '25px',
 		textTransform: 'none',
 		padding: 0,
 	},
@@ -52,11 +54,25 @@ const useStyles = makeStyles(theme => ({
 
 const ViewPageLinks = () => {
 	const classes = useStyles();
+	const theme = useTheme();
+
+	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
 	return (
-		<Grid container direction='row' className={classes.cardsContainer}>
-			<Grid item className={classes.root}>
-				<Grid container direction='column' justify='space-between'>
+		<Grid
+			container
+			direction={matchesSM ? 'column' : 'row'}
+			alignItems={matchesSM ? 'center' : 'inherit'}
+			className={classes.cardsContainer}
+		>
+			<Grid item className={matchesSM ? classes.rootSM : classes.root}>
+				<Grid
+					container
+					direction='column'
+					alignItems={matchesSM ? 'center' : 'inherit'}
+					justify='space-between'
+					style={{ marginBottom: matchesSM ? '35px' : 0 }}
+				>
 					<Typography variant='h4' style={{ marginBottom: '6px' }}>
 						My Recipes
 					</Typography>
@@ -74,8 +90,12 @@ const ViewPageLinks = () => {
 					</Button>
 				</Grid>
 			</Grid>
-			<Grid item className={classes.root} style={{ textAlign: 'right' }}>
-				<Grid container direction='column' alignItems='flex-end'>
+			<Grid item className={matchesSM ? classes.rootSM : classes.root}>
+				<Grid
+					container
+					direction='column'
+					alignItems={matchesSM ? 'center' : 'flex-end'}
+				>
 					<Typography variant='h4' style={{ marginBottom: '6px' }}>
 						My Profile
 					</Typography>
