@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -38,7 +39,6 @@ const useStyles = makeStyles(theme => ({
 		},
 	},
 	root: {
-		// minWidth: 250,
 		width: '50%',
 	},
 	viewButton: {
@@ -62,7 +62,12 @@ const ViewPageLinks = () => {
 					<Typography variant='body1' style={{ marginBottom: '3px' }}>
 						View your recipes and add to your menu!
 					</Typography>
-					<Button variant='outlined' className={classes.viewButton}>
+					<Button
+						variant='outlined'
+						className={classes.viewButton}
+						component={Link}
+						to='/recipes'
+					>
 						View Recipes
 					</Button>
 				</Grid>
@@ -75,7 +80,12 @@ const ViewPageLinks = () => {
 					<Typography variant='body1' style={{ marginBottom: '3px' }}>
 						Update your profile for others to see!
 					</Typography>
-					<Button variant='outlined' className={classes.viewButton}>
+					<Button
+						variant='outlined'
+						className={classes.viewButton}
+						component={Link}
+						to='/profile'
+					>
 						View Profile
 					</Button>
 				</Grid>
