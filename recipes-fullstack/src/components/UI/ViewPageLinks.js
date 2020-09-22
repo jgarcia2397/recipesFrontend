@@ -43,7 +43,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	viewButton: {
 		...theme.typography.button,
-		width: '15%',
+		// maxWidth: '35px',
+		// minWidth: '25px',
 		textTransform: 'none',
 		padding: 0,
 	},
@@ -67,6 +68,7 @@ const ViewPageLinks = () => {
 						className={classes.viewButton}
 						component={Link}
 						to='/recipes'
+						style={{ maxWidth: '100px', minWidth: '100px' }}
 					>
 						View Recipes
 					</Button>
@@ -85,6 +87,7 @@ const ViewPageLinks = () => {
 						className={classes.viewButton}
 						component={Link}
 						to='/profile'
+						style={{ maxWidth: '100px', minWidth: '100px' }}
 					>
 						View Profile
 					</Button>
