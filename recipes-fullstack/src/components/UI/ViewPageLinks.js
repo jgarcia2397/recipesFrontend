@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
 		width: '50%',
 	},
 	viewButton: {
+        ...theme.typography.button,
 		width: '15%',
 		textTransform: 'none',
 		padding: 0,

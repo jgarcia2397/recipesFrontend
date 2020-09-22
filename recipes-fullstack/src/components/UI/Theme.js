@@ -28,6 +28,16 @@ const theme = createMuiTheme({
         tab: {
             fontFamily: 'Montserrat',
             fontSize: '1rem'
+        },
+        h4: {
+            fontFamily: 'Montserrat'
+        },
+        body1: {
+            fontFamily: 'Raleway'
+        },
+        button: {
+            fontFamily: 'Raleway',
+            fontWeight: 'bold'
         }
     }
 });
