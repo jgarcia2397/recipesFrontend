@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 		width: '50%',
 	},
 	viewButton: {
-        ...theme.typography.button,
+		...theme.typography.button,
 		width: '15%',
 		textTransform: 'none',
 		padding: 0,
@@ -55,9 +55,11 @@ const ViewPageLinks = () => {
 	return (
 		<Grid container direction='row' className={classes.cardsContainer}>
 			<Grid item className={classes.root}>
-				<Grid container direction='column'>
-					<Typography variant='h4'>My Recipes</Typography>
-					<Typography variant='body1'>
+				<Grid container direction='column' justify='space-between'>
+					<Typography variant='h4' style={{ marginBottom: '6px' }}>
+						My Recipes
+					</Typography>
+					<Typography variant='body1' style={{ marginBottom: '3px' }}>
 						View your recipes and add to your menu!
 					</Typography>
 					<Button variant='outlined' className={classes.viewButton}>
@@ -67,8 +69,10 @@ const ViewPageLinks = () => {
 			</Grid>
 			<Grid item className={classes.root} style={{ textAlign: 'right' }}>
 				<Grid container direction='column' alignItems='flex-end'>
-					<Typography variant='h4'>My Profile</Typography>
-					<Typography variant='body1'>
+					<Typography variant='h4' style={{ marginBottom: '6px' }}>
+						My Profile
+					</Typography>
+					<Typography variant='body1' style={{ marginBottom: '3px' }}>
 						Update your profile for others to see!
 					</Typography>
 					<Button variant='outlined' className={classes.viewButton}>
