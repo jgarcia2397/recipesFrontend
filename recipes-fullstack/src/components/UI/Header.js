@@ -46,11 +46,10 @@ const Header = props => {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
-	const [tabValue, setTabValue] = useState(0);
 	const [openDrawer, setOpenDrawer] = useState(false);
 
 	const handleTabChange = (event, newValue) => {
-		setTabValue(newValue);
+		props.setTabValue(newValue);
 	};
 
 	const routes = [
@@ -71,15 +70,15 @@ const Header = props => {
 						{matches ? (
 							<NavDrawer
 								routes={routes}
-								setTabValue={setTabValue}
-								tabValue={tabValue}
+								setTabValue={props.setTabValue}
+								tabValue={props.tabValue}
 								setOpenDrawer={setOpenDrawer}
 								openDrawer={openDrawer}
 							/>
 						) : (
 							<NavTabs
 								routes={routes}
-								tabVal={tabValue}
+								tabVal={props.tabValue}
 								handleTabChange={handleTabChange}
 							/>
 						)}

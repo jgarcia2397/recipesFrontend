@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-const ViewPageLinks = () => {
+const ViewPageLinks = props => {
 	const classes = useStyles();
 	const theme = useTheme();
 
@@ -85,6 +85,7 @@ const ViewPageLinks = () => {
 						component={Link}
 						to='/recipes'
 						style={{ maxWidth: '100px', minWidth: '100px' }}
+						onClick={() => props.setTabValue(1)}	// /recipes is activeIndex = 1
 					>
 						View Recipes
 					</Button>
@@ -108,6 +109,7 @@ const ViewPageLinks = () => {
 						component={Link}
 						to='/profile'
 						style={{ maxWidth: '100px', minWidth: '100px' }}
+						onClick={() => props.setTabValue(2)}	// /profile is activeIndex = 2
 					>
 						View Profile
 					</Button>

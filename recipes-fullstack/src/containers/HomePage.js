@@ -54,7 +54,7 @@ class HomePage extends Component {
 				<Paper className={classes.paperContainer}>
 					<SearchBar />
 				</Paper>
-				<ViewPageLinks />
+				<ViewPageLinks setTabValue={this.props.setTabValue} />
 			</React.Fragment>
 		);
 	}

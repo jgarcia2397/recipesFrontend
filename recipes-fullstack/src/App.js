@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 
@@ -11,12 +11,20 @@ import RecipePage from './containers/RecipePage';
 import ProfilePage from './containers/ProfilePage';
 
 function App() {
+	const [tabValue, setTabValue] = useState(0);
+
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
-				<Header />
+				<Header tabValue={tabValue} setTabValue={setTabValue} />
 				<Switch>
-					<Route exact path='/' render={() => <HomePage />} />
+					<Route
+						exact
+						path='/'
+						render={() => (
+							<HomePage setTabValue={setTabValue} />
+						)}
+					/>
 					<Route exact path='/auth' render={() => <Auth />} />
 					<Route exact path='/recipes' render={() => <RecipePage />} />
 					<Route exact path='/profile' render={() => <ProfilePage />} />
