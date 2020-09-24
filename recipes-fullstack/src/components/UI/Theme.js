@@ -7,7 +7,10 @@ const darkYellow = '#b28704';
 const yellow = '#ffc107';
 const lightYellow = '#ffcd38';
 
+// const defaultTheme = createMuiTheme();
+
 const theme = createMuiTheme({
+    // ...defaultTheme,
 	palette: {
         common: {
             green: green,
@@ -37,9 +40,29 @@ const theme = createMuiTheme({
         },
         button: {
             fontFamily: 'Raleway',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            color: 'white',
         }
-    }
+    },
+    // overrides: {
+    //     MuiTypography: {
+    //         h4: {
+    //             [defaultTheme.breakpoints.up('lg')]: {
+    //                 fontSize: '3.125rem'
+    //             }
+    //         },
+    //         body1: {
+    //             [defaultTheme.breakpoints.up('lg')]: {
+    //                 fontSize: '2rem'
+    //             }
+    //         },
+    //         button: {
+    //             [defaultTheme.breakpoints.up('lg')]: {
+    //                 fontSize: '1.875rem'
+    //             }
+    //         },
+    //     },
+    // }
 });
 
 export default theme;

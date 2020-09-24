@@ -49,6 +49,10 @@ const useStyles = makeStyles(theme => ({
 		...theme.typography.button,
 		textTransform: 'none',
 		padding: 0,
+		backgroundColor: theme.palette.secondary.main,
+		'&:hover': {
+			backgroundColor: theme.palette.secondary.dark,
+		},
 	},
 }));
 
@@ -85,7 +89,7 @@ const ViewPageLinks = props => {
 						component={Link}
 						to='/recipes'
 						style={{ maxWidth: '100px', minWidth: '100px' }}
-						onClick={() => props.setTabValue(1)}	// /recipes is activeIndex = 1
+						onClick={() => props.setTabValue(1)} // /recipes is activeIndex = 1
 					>
 						View Recipes
 					</Button>
@@ -109,7 +113,7 @@ const ViewPageLinks = props => {
 						component={Link}
 						to='/profile'
 						style={{ maxWidth: '100px', minWidth: '100px' }}
-						onClick={() => props.setTabValue(2)}	// /profile is activeIndex = 2
+						onClick={() => props.setTabValue(2)} // /profile is activeIndex = 2
 					>
 						View Profile
 					</Button>

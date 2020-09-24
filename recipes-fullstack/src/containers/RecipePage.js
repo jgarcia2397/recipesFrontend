@@ -22,9 +22,8 @@ const styles = theme => ({
 	},
 	newRecipeButton: {
 		...theme.typography.button,
-		color: 'white',
-		backgroundColor: theme.palette.secondary.main,
 		borderRadius: 50,
+		backgroundColor: theme.palette.secondary.main,
 		'&:hover': {
 			backgroundColor: theme.palette.secondary.dark,
 		},
