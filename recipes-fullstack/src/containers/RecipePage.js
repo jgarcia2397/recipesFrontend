@@ -6,6 +6,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
+import RecipeCard from '../components/UI/RecipeCard';
+
 const styles = theme => ({
 	root: {
 		height: '95vh',
@@ -27,7 +29,10 @@ const styles = theme => ({
 		'&:hover': {
 			backgroundColor: theme.palette.secondary.dark,
 		},
-	},
+    },
+    recipeCardsContainer: {
+        margin: '30px auto',
+    },
 });
 
 class RecipePage extends Component {
@@ -45,7 +50,11 @@ class RecipePage extends Component {
 								New Recipe
 							</Button>
 						</Grid>
-						<Grid item></Grid>
+						<Grid item className={classes.recipeCardsContainer}>
+                            <RecipeCard />
+                            <RecipeCard />
+                            <RecipeCard />
+                        </Grid>
 					</Grid>
 				</Paper>
 			</div>
