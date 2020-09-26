@@ -9,6 +9,7 @@ import HomePage from './containers/HomePage';
 import Auth from './containers/Auth';
 import RecipePage from './containers/RecipePage';
 import ProfilePage from './containers/ProfilePage';
+import RecipeFullDetailsPage from './containers/RecipeFullDetailsPage';
 
 function App() {
 	const [tabValue, setTabValue] = useState(0);
@@ -27,6 +28,7 @@ function App() {
 					/>
 					<Route exact path='/auth' render={() => <Auth />} />
 					<Route exact path='/recipes' render={() => <RecipePage />} />
+					<Route exact path='/recipe-full-details' render={() => <RecipeFullDetailsPage />} />
 					<Route exact path='/profile' render={() => <ProfilePage />} />
 				</Switch>
 			</BrowserRouter>

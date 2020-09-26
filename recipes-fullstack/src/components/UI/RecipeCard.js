@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -18,12 +19,12 @@ const useStyles = makeStyles(theme => ({
 		backgroundColor: theme.palette.secondary.main,
 		marginBottom: '30px',
 		[theme.breakpoints.down('sm')]: {
-			width: '60vh'
+			width: '60vh',
 		},
 		[theme.breakpoints.down('xs')]: {
 			height: '50vh',
 			width: '40vh',
-		}
+		},
 	},
 	mediaContainer: {
 		height: '100%',
@@ -31,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.down('xs')]: {
 			height: '50%',
 			width: '100%',
-		}
+		},
 	},
 	media: {
 		height: '100%',
@@ -44,14 +45,14 @@ const useStyles = makeStyles(theme => ({
 		},
 		[theme.breakpoints.down('xs')]: {
 			marginTop: '30px',
-		}
+		},
 	},
 	contentContainer: {
 		width: '70%',
 		textAlign: 'center',
 		[theme.breakpoints.down('xs')]: {
 			width: '100%',
-		}
+		},
 	},
 	viewRecipeButton: {
 		...theme.typography.button,
@@ -74,7 +75,11 @@ const RecipeCard = props => {
 
 	return (
 		<Card className={classes.root}>
-			<CardActionArea classes={{ root: classes.cardActionContainer }}>
+			<CardActionArea
+				classes={{ root: classes.cardActionContainer }}
+				component={Link}
+				to='recipe-full-details'
+			>
 				<Grid
 					container
 					alignItems='center'
