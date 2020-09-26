@@ -94,6 +94,7 @@ const RecipeCard = props => {
 							<Typography variant='h4'>Apple Pie</Typography>
 							<Typography variant='body1'>Prep Time: 20 mins</Typography>
 							<Typography variant='body1'>Cook Time: 1 hour</Typography>
+							<Typography variant='body2'>(Click for more details)</Typography>
 						</CardContent>
 					</Grid>
 				</Grid>
