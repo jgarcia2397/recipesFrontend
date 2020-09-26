@@ -6,6 +6,7 @@ const lightGreen = '#57975b';
 const darkYellow = '#b28704';
 const yellow = '#ffc107';
 const lightYellow = '#ffcd38';
+const black = '#000000';
 
 // const defaultTheme = createMuiTheme();
 
@@ -52,6 +53,9 @@ const theme = createMuiTheme({
             fontWeight: 'bold',
             color: 'white',
         }
+    },
+    divider: {
+        main: black,
     },
     // overrides: {
     //     MuiTypography: {
