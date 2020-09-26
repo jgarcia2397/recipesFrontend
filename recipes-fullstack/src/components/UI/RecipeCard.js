@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -16,10 +17,21 @@ const useStyles = makeStyles(theme => ({
 		width: '70vh',
 		backgroundColor: theme.palette.secondary.main,
 		marginBottom: '30px',
+		[theme.breakpoints.down('sm')]: {
+			width: '60vh'
+		},
+		[theme.breakpoints.down('xs')]: {
+			height: '50vh',
+			width: '40vh',
+		}
 	},
 	mediaContainer: {
 		height: '100%',
 		width: '30%',
+		[theme.breakpoints.down('xs')]: {
+			height: '50%',
+			width: '100%',
+		}
 	},
 	media: {
 		height: '100%',
@@ -30,10 +42,16 @@ const useStyles = makeStyles(theme => ({
 		'&:last-child': {
 			paddingBottom: 0,
 		},
+		[theme.breakpoints.down('xs')]: {
+			marginTop: '30px',
+		}
 	},
 	contentContainer: {
 		width: '70%',
 		textAlign: 'center',
+		[theme.breakpoints.down('xs')]: {
+			width: '100%',
+		}
 	},
 	viewRecipeButton: {
 		...theme.typography.button,
@@ -50,6 +68,9 @@ const useStyles = makeStyles(theme => ({
 
 const RecipeCard = props => {
 	const classes = useStyles();
+	const theme = useTheme();
+
+	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
 	return (
 		<Card className={classes.root}>
@@ -57,7 +78,7 @@ const RecipeCard = props => {
 				<Grid
 					container
 					alignItems='center'
-					direction='row'
+					direction={matchesXS ? 'column' : 'row'}
 					classes={{ root: classes.cardActionContainer }}
 				>
 					<Grid item className={classes.mediaContainer}>
