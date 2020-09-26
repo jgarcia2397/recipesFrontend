@@ -44,7 +44,8 @@ const theme = createMuiTheme({
         },
         body2: {
             fontFamily: 'Raleway',
-            fontSize: '0.6rem"'
+            fontSize: '0.75rem',
+            fontWeight: 'bold',
         },
         button: {
             fontFamily: 'Raleway',
