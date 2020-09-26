@@ -5,45 +5,46 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 
+import RecipeInfoColumn from '../components/UI/RecipeInfoColumn';
+
 const styles = theme => ({
-    root: {
-        height: '95vh',
-    },
-    infoColumn: {
-        width: '25vw',
-        height: '100%',
-        backgroundColor: theme.palette.primary.light,
-    },
-    instructColoumn: {
-        width: '37.44vw',
-        height: '100%',
-        backgroundColor: theme.palette.secondary.light,
-    },
-    divider: {
-        backgroundColor: theme.divider.main,
-    }
+	root: {
+		height: '95vh',
+	},
+	infoColumn: {
+		width: '25vw',
+		height: '100%',
+		backgroundColor: theme.palette.primary.light,
+	},
+	instructColoumn: {
+		width: '37.44vw',
+		height: '100%',
+		backgroundColor: theme.palette.secondary.light,
+	},
+	divider: {
+		backgroundColor: theme.divider.main,
+	},
 });
 
 class RecipeFullDetailsPage extends Component {
 	render() {
-
-        const { classes } = this.props;
+		const { classes } = this.props;
 
 		return (
-            <Grid container direction='row' className={classes.root}>
-                <Grid item className={classes.infoColumn}>
-                    Hello
-                </Grid>
-                <Divider orientation="vertical" classes={{root: classes.divider}} />
-                <Grid item className={classes.instructColoumn}>
-                    My name
-                </Grid>
-                <Divider orientation="vertical" classes={{root: classes.divider}} />
-                <Grid item className={classes.instructColoumn}>
-                    Jeff
-                </Grid>
-            </Grid>
-        );
+			<Grid container direction='row' className={classes.root}>
+				<Grid item className={classes.infoColumn}>
+					<RecipeInfoColumn />
+				</Grid>
+				<Divider orientation='vertical' classes={{ root: classes.divider }} />
+				<Grid item className={classes.instructColoumn}>
+					My name
+				</Grid>
+				<Divider orientation='vertical' classes={{ root: classes.divider }} />
+				<Grid item className={classes.instructColoumn}>
+					Jeff
+				</Grid>
+			</Grid>
+		);
 	}
 }
 
