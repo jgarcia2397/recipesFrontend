@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
 import RecipeCard from '../components/UI/RecipeCard';
+import { Typography } from '@material-ui/core';
 
 const styles = theme => ({
 	root: {
@@ -29,10 +30,19 @@ const styles = theme => ({
 		'&:hover': {
 			backgroundColor: theme.palette.secondary.dark,
 		},
-    },
-    recipeCardsContainer: {
-        margin: '30px auto',
-    },
+	},
+	recipeCardsContainer: {
+		margin: '30px auto',
+	},
+	titleContainer: {
+		marginTop: '30px',
+		marginLeft: '40px',
+		[theme.breakpoints.down('sm')]: {
+			marginTop: '30px',
+			marginLeft: 0,
+			textAlign: 'center',
+		},
+	},
 });
 
 class RecipePage extends Component {
@@ -42,6 +52,9 @@ class RecipePage extends Component {
 			<div className={classes.root}>
 				<Paper className={classes.background} square>
 					<Grid container direction='column'>
+						<Grid item className={classes.titleContainer}>
+							<Typography variant='h3'>My Recipes</Typography>
+						</Grid>
 						<Grid item className={classes.newRecipeButtonContainer}>
 							<Button
 								className={classes.newRecipeButton}
@@ -51,10 +64,10 @@ class RecipePage extends Component {
 							</Button>
 						</Grid>
 						<Grid item className={classes.recipeCardsContainer}>
-                            <RecipeCard />
-                            <RecipeCard />
-                            <RecipeCard />
-                        </Grid>
+							<RecipeCard />
+							<RecipeCard />
+							<RecipeCard />
+						</Grid>
 					</Grid>
 				</Paper>
 			</div>
