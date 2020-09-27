@@ -4,12 +4,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
 
 import RecipeInfoColumn from '../components/UI/RecipeInfoColumn';
-import RecipeList from '../components/UI/RecipeList';
+import RecipeInstructColumn from '../components/UI/RecipeInstructColumn';
 
 const styles = theme => ({
 	root: {
@@ -30,16 +27,6 @@ const styles = theme => ({
 		backgroundColor: theme.divider.main,
 		width: '0.1%',
 	},
-	titles: {
-		marginTop: '35px',
-		marginLeft: '15px',
-		fontWeight: 'bold',
-	},
-	addButtonContainer: {
-		marginTop: '15px',
-		width: '100%',
-		textAlign: 'center',
-	},
 });
 
 class RecipeFullDetailsPage extends Component {
@@ -53,7 +40,7 @@ class RecipeFullDetailsPage extends Component {
 			'1/2 cup sugar',
 			'6 apples',
 		];
-
+	
 		const directions = [
 			'Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees.',
 			'Make crust',
@@ -71,27 +58,11 @@ class RecipeFullDetailsPage extends Component {
 				</Grid>
 				<Divider orientation='vertical' classes={{ root: classes.divider }} />
 				<Grid item className={classes.instructColumn}>
-					<Typography variant='h4' className={classes.titles}>
-						Ingredients
-					</Typography>
-					<RecipeList array={ingredients} />
-					<div className={classes.addButtonContainer}>
-						<Button>
-							<AddCircleOutlinedIcon />
-						</Button>
-					</div>
+					<RecipeInstructColumn label='Ingredients' array={ingredients} />
 				</Grid>
 				<Divider orientation='vertical' classes={{ root: classes.divider }} />
 				<Grid item className={classes.instructColumn}>
-					<Typography variant='h4' className={classes.titles}>
-						Directions
-					</Typography>
-					<RecipeList array={directions} />
-					<div className={classes.addButtonContainer}>
-						<Button>
-							<AddCircleOutlinedIcon />
-						</Button>
-					</div>
+					<RecipeInstructColumn label='Directions' array={directions} />
 				</Grid>
 			</Grid>
 		);
