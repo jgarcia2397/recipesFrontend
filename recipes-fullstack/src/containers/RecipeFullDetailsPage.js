@@ -40,7 +40,7 @@ class RecipeFullDetailsPage extends Component {
 			'1/2 cup sugar',
 			'6 apples',
 		];
-	
+
 		const directions = [
 			'Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees.',
 			'Make crust',
@@ -56,11 +56,15 @@ class RecipeFullDetailsPage extends Component {
 				<Grid item className={classes.infoColumn}>
 					<RecipeInfoColumn />
 				</Grid>
-				<Divider orientation='vertical' classes={{ root: classes.divider }} />
+				<Grid item className={classes.divider}>
+					<Divider orientation='vertical' classes={{ root: classes.divider }} />
+				</Grid>
 				<Grid item className={classes.instructColumn}>
 					<RecipeInstructColumn label='Ingredients' array={ingredients} />
 				</Grid>
-				<Divider orientation='vertical' classes={{ root: classes.divider }} />
+				<Grid item className={classes.divider}>
+					<Divider orientation='vertical' />
+				</Grid>
 				<Grid item className={classes.instructColumn}>
 					<RecipeInstructColumn label='Directions' array={directions} />
 				</Grid>
