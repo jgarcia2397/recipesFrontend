@@ -12,11 +12,21 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles(theme => ({
-	root: {
+	listContainer: {
 		marginTop: '25px',
 		[theme.breakpoints.down('xs')]: {
 			marginTop: '5px',
 		},
+	},
+	root: {
+		overflow: 'auto',
+		maxHeight: '88%',
+		[theme.breakpoints.down('md')]: {
+			maxHeight: '75%',
+		},
+		[theme.breakpoints.down('xs')]: {
+			maxHeight: '70%',
+		}
 	},
 }));
 
@@ -33,8 +43,8 @@ const RecipeList = props => {
 	const classes = useStyles();
 
 	return (
-		<div>
-			<List className={classes.root}>
+		<div className={classes.root}>
+			<List className={classes.listContainer}>
 				{props.array.map(value => (
 					<ListItemWithWiderSecondaryAction>
 						<ListItemIcon>
