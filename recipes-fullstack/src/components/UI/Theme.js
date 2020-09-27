@@ -40,6 +40,9 @@ const theme = createMuiTheme({
         h4: {
             fontFamily: 'Montserrat'
         },
+        h5: {
+            fontFamily: 'Montserrat'
+        },
         body1: {
             fontFamily: 'Raleway'
         },

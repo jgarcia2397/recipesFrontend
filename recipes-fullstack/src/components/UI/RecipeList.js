@@ -11,13 +11,19 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
 	root: {
 		marginTop: '25px',
+		[theme.breakpoints.down('xs')]: {
+			marginTop: '5px',
+		},
 	},
-});
+}));
 
 const ListItemWithWiderSecondaryAction = withStyles({
+	root: {
+		paddingBottom: 0,
+	},
 	secondaryAction: {
 		paddingRight: 96,
 	},
