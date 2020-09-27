@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
 
 import RecipeInfoColumn from '../components/UI/RecipeInfoColumn';
 import RecipeList from '../components/UI/RecipeList';
@@ -19,7 +21,7 @@ const styles = theme => ({
 		height: '100%',
 		backgroundColor: theme.palette.primary.light,
 	},
-	instructColoumn: {
+	instructColumn: {
 		width: '37.3%',
 		height: '100%',
 		backgroundColor: theme.palette.secondary.light,
@@ -32,6 +34,11 @@ const styles = theme => ({
 		marginTop: '35px',
 		marginLeft: '15px',
 		fontWeight: 'bold',
+	},
+	addButtonContainer: {
+		marginTop: '15px',
+		width: '100%',
+		textAlign: 'center',
 	},
 });
 
@@ -63,18 +70,28 @@ class RecipeFullDetailsPage extends Component {
 					<RecipeInfoColumn />
 				</Grid>
 				<Divider orientation='vertical' classes={{ root: classes.divider }} />
-				<Grid item className={classes.instructColoumn}>
+				<Grid item className={classes.instructColumn}>
 					<Typography variant='h4' className={classes.titles}>
 						Ingredients
 					</Typography>
 					<RecipeList array={ingredients} />
+					<div className={classes.addButtonContainer}>
+						<Button>
+							<AddCircleOutlinedIcon />
+						</Button>
+					</div>
 				</Grid>
 				<Divider orientation='vertical' classes={{ root: classes.divider }} />
-				<Grid item className={classes.instructColoumn}>
+				<Grid item className={classes.instructColumn}>
 					<Typography variant='h4' className={classes.titles}>
 						Directions
 					</Typography>
-                    <RecipeList array={directions} />
+					<RecipeList array={directions} />
+					<div className={classes.addButtonContainer}>
+						<Button>
+							<AddCircleOutlinedIcon />
+						</Button>
+					</div>
 				</Grid>
 			</Grid>
 		);
