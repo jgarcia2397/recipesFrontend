@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
-import SearchBar from '../components/UI/SearchBar';
-import ViewPageLinks from '../components/UI/ViewPageLinks';
-import cooking from '../assets/cooking.jpg';
+import SearchBar from '../UI/SearchBar';
+import ViewPageLinks from '../UI/ViewPageLinks';
 
-const styles = theme => ({
+import cooking from '../../assets/cooking.jpg';
+
+const useStyles = makeStyles(theme => ({
 	paperContainer: {
 		backgroundImage: `url(${cooking})`,
 		backgroundPosition: 'center',
@@ -43,25 +43,19 @@ const styles = theme => ({
 			paddingBottom: '250px',
 		},
 	},
-});
+}));
 
-// Higher-order component API
-class HomePage extends Component {
-	render() {
-		const { classes } = this.props;
-		return (
-			<React.Fragment>
-				<Paper className={classes.paperContainer}>
-					<SearchBar />
-				</Paper>
-				<ViewPageLinks setTabValue={this.props.setTabValue} />
-			</React.Fragment>
-		);
-	}
-}
+const HomePage = props => {
+	const classes = useStyles();
 
-HomePage.propTypes = {
-	classes: PropTypes.object.isRequired,
+	return (
+		<React.Fragment>
+			<Paper className={classes.paperContainer}>
+				<SearchBar />
+			</Paper>
+			<ViewPageLinks setTabValue={props.setTabValue} />
+		</React.Fragment>
+	);
 };
 
-export default withStyles(styles)(HomePage);
+export default HomePage;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// ToDo: Make this a functional component
 class Auth extends Component {
     render () {
         return (

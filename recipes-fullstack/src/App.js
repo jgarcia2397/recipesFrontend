@@ -5,11 +5,11 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import Header from './components/UI/Header';
 import theme from './components/UI/Theme';
 
-import HomePage from './containers/HomePage';
+import HomePage from './components/Pages/HomePage';
 import Auth from './containers/Auth';
-import RecipePage from './containers/RecipePage';
+import RecipePage from './components/Pages/RecipePage';
 import ProfilePage from './containers/ProfilePage';
-import RecipeFullDetailsPage from './containers/RecipeFullDetailsPage';
+import RecipeFullDetailsPage from './components/Pages/RecipeFullDetailsPage';
 
 function App() {
 	const [tabValue, setTabValue] = useState(0);
