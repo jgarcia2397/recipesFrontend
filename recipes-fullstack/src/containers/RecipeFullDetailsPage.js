@@ -12,19 +12,21 @@ import RecipeList from '../components/UI/RecipeList';
 const styles = theme => ({
 	root: {
 		height: '95vh',
+		width: '100vw',
 	},
 	infoColumn: {
-		width: '25vw',
+		width: '25.2%',
 		height: '100%',
 		backgroundColor: theme.palette.primary.light,
 	},
 	instructColoumn: {
-		width: '37.44vw',
+		width: '37.3%',
 		height: '100%',
 		backgroundColor: theme.palette.secondary.light,
 	},
 	divider: {
 		backgroundColor: theme.divider.main,
+		width: '0.1%',
 	},
 	titles: {
 		marginTop: '35px',
