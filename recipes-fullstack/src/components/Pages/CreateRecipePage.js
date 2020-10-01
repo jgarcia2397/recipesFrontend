@@ -37,7 +37,12 @@ const CreateRecipePage = props => {
 
 	const [prepTimeUnits, setPrepTimeUnits] = useState('minutes');
 	const [cookTimeUnits, setCookTimeUnits] = useState('minutes');
-	const [difficulty, setDifficulty] = useState('Easy');
+    const [difficulty, setDifficulty] = useState('Easy');
+    
+    const timeUnits = [
+		{ value: 'minutes', label: 'minutes' },
+		{ value: 'hours', label: 'hours' },
+	];
 
 	const difficultyLevels = [
 		{ value: 'Easy', label: 'Easy' },
@@ -73,7 +78,8 @@ const CreateRecipePage = props => {
 									id={'prep-time'}
 									label={'Prep Time'}
 									timeUnits={prepTimeUnits}
-									handleChange={handlePrepTimeChange}
+                                    handleChange={handlePrepTimeChange}
+                                    options={timeUnits}
 								/>
 							</Grid>
 							<Grid item className={classes.inputSet}>
@@ -81,28 +87,24 @@ const CreateRecipePage = props => {
 									id={'cook-time'}
 									label={'Cook Time'}
 									timeUnits={cookTimeUnits}
-									handleChange={handleCookTimeChange}
+                                    handleChange={handleCookTimeChange}
+                                    options={timeUnits}
 								/>
 							</Grid>
 							<Grid item className={classes.inputSet}>
 								<TextField id='servings' label='Servings' variant='outlined' />
 							</Grid>
 							<Grid item className={classes.inputSet}>
-								<TextField // native for mobile?
-									id='difficulty'
-									label='Difficulty'
-									select
-									value={difficulty}
-									variant='outlined'
-									onChange={handleDifficultyChange}
-									className={classes.dropdown}
-								>
-									{difficultyLevels.map(option => (
-										<MenuItem key={option.value} value={option.value}>
-											{option.label}
-										</MenuItem>
-									))}
-								</TextField>
+								<Grid item className={classes.inputSet}>
+									<InputPair
+										id={'difficulty'}
+										label={'Difficulty'}
+										timeUnits={difficulty}
+                                        handleChange={handleDifficultyChange}
+                                        options={difficultyLevels}
+                                        isSingleDropdown
+									/>
+								</Grid>
 							</Grid>
 						</Grid>
 					</Grid>

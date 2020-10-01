@@ -13,18 +13,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const InputPair = props => {
-    const classes = useStyles();
-
-    const timeUnits = [
-		{ value: 'minutes', label: 'minutes' },
-		{ value: 'hours', label: 'hours' },
-    ];
+	const classes = useStyles();
 
 	return (
 		<Grid container direction='row' spacing={1}>
-			<Grid item>
-				<TextField id={props.id} label={props.label} variant='outlined' />
-			</Grid>
+			{!props.isSingleDropdown ? (
+				<Grid item>
+					<TextField id={props.id} label={props.label} variant='outlined' />
+				</Grid>
+			) : null}
 			<Grid item>
 				<TextField // native for mobile?
 					id={`${props.id}-units`}
@@ -34,7 +31,7 @@ const InputPair = props => {
 					onChange={props.handleChange}
 					className={classes.dropdown}
 				>
-					{timeUnits.map(option => (
+					{props.options.map(option => (
 						<MenuItem key={option.value} value={option.value}>
 							{option.label}
 						</MenuItem>
