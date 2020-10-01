@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import InputPair from '../UI/InputPair';
+
 const useStyles = makeStyles(theme => ({
 	root: {
 		height: '95vh',
@@ -37,28 +39,23 @@ const CreateRecipePage = props => {
 	const [cookTimeUnits, setCookTimeUnits] = useState('minutes');
 	const [difficulty, setDifficulty] = useState('Easy');
 
-	const timeUnits = [
-		{ value: 'minutes', label: 'minutes' },
-		{ value: 'hours', label: 'hours' },
-	];
-
 	const difficultyLevels = [
 		{ value: 'Easy', label: 'Easy' },
 		{ value: 'Medium', label: 'Medium' },
 		{ value: 'Hard', label: 'Hard' },
-    ];
-    
-    const handlePrepTimeChange = event => {
-        setPrepTimeUnits(event.target.value);
-    };
+	];
 
-    const handleCookTimeChange = event => {
-        setCookTimeUnits(event.target.value);
-    };
+	const handlePrepTimeChange = event => {
+		setPrepTimeUnits(event.target.value);
+	};
 
-    const handleDifficultyChange = event => {
-        setDifficulty(event.target.value);
-    };
+	const handleCookTimeChange = event => {
+		setCookTimeUnits(event.target.value);
+	};
+
+	const handleDifficultyChange = event => {
+		setDifficulty(event.target.value);
+	};
 
 	return (
 		<div className={classes.root}>
@@ -72,64 +69,28 @@ const CreateRecipePage = props => {
 							className={classes.basicInfoInputsContainer}
 						>
 							<Grid item className={classes.inputSet}>
-								<Grid container direction='row' spacing={1}>
-									<Grid item>
-										<TextField
-											id='prep-time'
-											label='Prep Time'
-											variant='outlined'
-										/>
-									</Grid>
-									<Grid item>
-										<TextField // native for mobile?
-											id='prep-time-units'
-											select
-											value={prepTimeUnits}
-											variant='outlined'
-											onChange={handlePrepTimeChange}
-											className={classes.dropdown}
-										>
-											{timeUnits.map(option => (
-												<MenuItem key={option.value} value={option.value}>
-													{option.label}
-												</MenuItem>
-											))}
-										</TextField>
-									</Grid>
-								</Grid>
+								<InputPair
+									id={'prep-time'}
+									label={'Prep Time'}
+									timeUnits={prepTimeUnits}
+									handleChange={handlePrepTimeChange}
+								/>
 							</Grid>
-                            <Grid item className={classes.inputSet}>
-								<Grid container direction='row' spacing={1}>
-									<Grid item>
-										<TextField
-											id='cook-time' label='Cook Time' variant='outlined'
-										/>
-									</Grid>
-									<Grid item>
-										<TextField // native for mobile?
-											id='cook-time-units'
-                                            select
-                                            value={cookTimeUnits}
-                                            variant='outlined'
-                                            onChange={handleCookTimeChange}
-                                            className={classes.dropdown}
-										>
-											{timeUnits.map(option => (
-												<MenuItem key={option.value} value={option.value}>
-													{option.label}
-												</MenuItem>
-											))}
-										</TextField>
-									</Grid>
-								</Grid>
+							<Grid item className={classes.inputSet}>
+								<InputPair
+									id={'cook-time'}
+									label={'Cook Time'}
+									timeUnits={cookTimeUnits}
+									handleChange={handleCookTimeChange}
+								/>
 							</Grid>
 							<Grid item className={classes.inputSet}>
 								<TextField id='servings' label='Servings' variant='outlined' />
 							</Grid>
 							<Grid item className={classes.inputSet}>
 								<TextField // native for mobile?
-                                    id='difficulty'
-                                    label='Difficulty'
+									id='difficulty'
+									label='Difficulty'
 									select
 									value={difficulty}
 									variant='outlined'
