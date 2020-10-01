@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -57,6 +58,8 @@ const RecipePage = props => {
 						<Button
 							className={classes.newRecipeButton}
 							style={{ maxWidth: '150px', minWidth: '150px' }}
+							component={Link}
+							to='/new-recipe'
 						>
 							New Recipe
 						</Button>
