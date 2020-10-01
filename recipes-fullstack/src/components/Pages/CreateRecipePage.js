@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
 
-import InputPair from '../UI/InputPair';
+import BasicRecipeInfoInputs from '../UI/BasicRecipeInfoInputs';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -19,94 +17,17 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 		overflow: 'auto',
 	},
-	basicInfoInputsContainer: {
-		marginTop: '50px',
-	},
-	dropdown: {
-		width: '7.5vw',
-		minWidth: '115px',
-	},
-	inputSet: {
-		marginLeft: '15px',
-		marginRight: '15px',
-	},
 }));
 
 const CreateRecipePage = props => {
 	const classes = useStyles();
-
-	const [prepTimeUnits, setPrepTimeUnits] = useState('minutes');
-	const [cookTimeUnits, setCookTimeUnits] = useState('minutes');
-    const [difficulty, setDifficulty] = useState('Easy');
-    
-    const timeUnits = [
-		{ value: 'minutes', label: 'minutes' },
-		{ value: 'hours', label: 'hours' },
-	];
-
-	const difficultyLevels = [
-		{ value: 'Easy', label: 'Easy' },
-		{ value: 'Medium', label: 'Medium' },
-		{ value: 'Hard', label: 'Hard' },
-	];
-
-	const handlePrepTimeChange = event => {
-		setPrepTimeUnits(event.target.value);
-	};
-
-	const handleCookTimeChange = event => {
-		setCookTimeUnits(event.target.value);
-	};
-
-	const handleDifficultyChange = event => {
-		setDifficulty(event.target.value);
-	};
 
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.background} square>
 				<Grid container direction='column'>
 					<Grid item>
-						<Grid
-							container
-							direction='row'
-							justify='center'
-							className={classes.basicInfoInputsContainer}
-						>
-							<Grid item className={classes.inputSet}>
-								<InputPair
-									id={'prep-time'}
-									label={'Prep Time'}
-									timeUnits={prepTimeUnits}
-                                    handleChange={handlePrepTimeChange}
-                                    options={timeUnits}
-								/>
-							</Grid>
-							<Grid item className={classes.inputSet}>
-								<InputPair
-									id={'cook-time'}
-									label={'Cook Time'}
-									timeUnits={cookTimeUnits}
-                                    handleChange={handleCookTimeChange}
-                                    options={timeUnits}
-								/>
-							</Grid>
-							<Grid item className={classes.inputSet}>
-								<TextField id='servings' label='Servings' variant='outlined' />
-							</Grid>
-							<Grid item className={classes.inputSet}>
-								<Grid item className={classes.inputSet}>
-									<InputPair
-										id={'difficulty'}
-										label={'Difficulty'}
-										timeUnits={difficulty}
-                                        handleChange={handleDifficultyChange}
-                                        options={difficultyLevels}
-                                        isSingleDropdown
-									/>
-								</Grid>
-							</Grid>
-						</Grid>
+						<BasicRecipeInfoInputs />
 					</Grid>
 				</Grid>
 			</Paper>
