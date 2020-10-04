@@ -38,7 +38,7 @@ const RecipeInstructColumn = props => {
 			<Typography variant={matchesXS ? 'h5' : 'h4'} className={classes.titles}>
 				{props.label}
 			</Typography>
-			<RecipeList array={props.array} />
+			<RecipeList array={props.array} isNewRecipe={props.isNewRecipe} />
 			<div className={classes.addButtonContainer}>
 				<Button>
 					<AddCircleOutlinedIcon />

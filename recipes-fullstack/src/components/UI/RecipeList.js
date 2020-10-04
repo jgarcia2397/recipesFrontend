@@ -28,6 +28,16 @@ const useStyles = makeStyles(theme => ({
 			maxHeight: '70%',
 		}
 	},
+	rootAlternate: {
+		overflow: 'auto',
+		maxHeight: '75%',
+		// [theme.breakpoints.down('md')]: {
+		// 	maxHeight: '75%',
+		// },
+		// [theme.breakpoints.down('xs')]: {
+		// 	maxHeight: '70%',
+		// }
+	},
 }));
 
 const ListItemWithWiderSecondaryAction = withStyles({
@@ -43,7 +53,7 @@ const RecipeList = props => {
 	const classes = useStyles();
 
 	return (
-		<div className={classes.root}>
+		<div className={props.isNewRecipe ? classes.rootAlternate : classes.root}>
 			<List className={classes.listContainer}>
 				{props.array.map(value => (
 					<ListItemWithWiderSecondaryAction>

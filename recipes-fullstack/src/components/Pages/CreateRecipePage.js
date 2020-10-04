@@ -31,6 +31,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	instructColumn: {
 		width: '49.97%',
+		height: '100%',
 		backgroundColor: theme.palette.secondary.light,
 		// [theme.breakpoints.down('md')]: {
 		// 	width: '100%',
@@ -69,6 +70,18 @@ const CreateRecipePage = props => {
 		'Make crust',
 		'Start peeling and slicing apples',
 		'Make crust',
+		'Make crust',
+		'Start peeling and slicing apples',
+		'Make crust',
+		'Make crust',
+		'Start peeling and slicing apples',
+		'Make crust',
+		'Make crust',
+		'Start peeling and slicing apples',
+		'Make crust',
+		'Make crust',
+		'Start peeling and slicing apples',
+		'Make crust',
 	];
 
 	return (
@@ -91,7 +104,7 @@ const CreateRecipePage = props => {
 							className={classes.recipeDetailsContainer}
 						>
 							<Grid item className={classes.instructColumn}>
-								<RecipeInstructColumn label='Ingredients' array={ingredients} />
+								<RecipeInstructColumn label='Ingredients' array={ingredients} isNewRecipe />
 							</Grid>
 							<Grid item>
 								<Divider
@@ -100,7 +113,7 @@ const CreateRecipePage = props => {
 								/>
 							</Grid>
 							<Grid item className={classes.instructColumn}>
-								<RecipeInstructColumn label='Directions' array={directions} />
+								<RecipeInstructColumn label='Directions' array={directions} isNewRecipe />
 							</Grid>
 						</Grid>
 					</Grid>
