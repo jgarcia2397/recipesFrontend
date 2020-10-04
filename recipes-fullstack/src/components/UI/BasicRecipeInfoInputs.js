@@ -9,6 +9,7 @@ import InputPair from './InputPair';
 const useStyles = makeStyles(theme => ({
 	basicInfoInputsContainer: {
 		marginTop: '50px',
+		marginBottom: '50px',
 	},
 	dropdown: {
 		width: '7.5vw',
