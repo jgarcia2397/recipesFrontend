@@ -1,0 +1,66 @@
+import React from 'react';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        marginTop: '50px',
+    },
+	uploadContainer: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		flexDirection: 'column',
+	},
+	uploadPreview: {
+		width: '13rem',
+		height: '13rem',
+		border: '1px solid #ccc',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		textAlign: 'center',
+		marginBottom: '1rem',
+	},
+	uploadImageButton: {
+		...theme.typography.button,
+		borderRadius: 50,
+		backgroundColor: theme.palette.secondary.main,
+		'&:hover': {
+			backgroundColor: theme.palette.secondary.dark,
+		},
+	},
+}));
+
+const ImageUpload = props => {
+	const classes = useStyles();
+
+	return (
+		<div className={classes.root}>
+			<input
+				id='image-upload'
+				style={{ display: 'none' }}
+				type='file'
+				accept='.jpg,.png,.jpeg'
+			/>
+			<div className={classes.uploadContainer}>
+				<Paper square elevation={3} className={classes.uploadPreview}>
+					{/* {previewUrl && <img src={previewUrl} alt='preview' />}
+					{!previewUrl && <Typography variant='body1'>Please pick an image.</Typography>} */}
+					<Typography variant='body1'>Please pick an image.</Typography>
+				</Paper>
+				<Button
+					style={{ maxWidth: '140px', minWidth: '140px' }}
+					className={classes.uploadImageButton}
+				>
+					Upload Image
+				</Button>
+			</div>
+		</div>
+	);
+};
+
+export default ImageUpload;

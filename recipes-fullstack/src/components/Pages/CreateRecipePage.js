@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import BasicRecipeInfoInputs from '../UI/BasicRecipeInfoInputs';
+import ImageUpload from '../UI/ImageUpload';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -26,6 +27,9 @@ const CreateRecipePage = props => {
 		<div className={classes.root}>
 			<Paper className={classes.background} square>
 				<Grid container direction='column'>
+					<Grid item>
+						<ImageUpload />
+					</Grid>
 					<Grid item>
 						<BasicRecipeInfoInputs />
 					</Grid>
