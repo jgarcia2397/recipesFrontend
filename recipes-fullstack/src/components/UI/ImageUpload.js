@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 	uploadPreview: {
 		width: '30rem',
 		height: '20rem',
-		border: '1px solid #ccc',
+		border: '1px solid #000',
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
