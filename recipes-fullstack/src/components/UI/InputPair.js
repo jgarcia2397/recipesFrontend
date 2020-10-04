@@ -30,6 +30,7 @@ const InputPair = props => {
 					variant='outlined'
 					onChange={props.handleChange}
 					className={classes.dropdown}
+					label={props.isSingleDropdown ? props.label : ''}
 				>
 					{props.options.map(option => (
 						<MenuItem key={option.value} value={option.value}>
