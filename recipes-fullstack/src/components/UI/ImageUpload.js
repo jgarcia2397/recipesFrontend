@@ -34,9 +34,10 @@ const useStyles = makeStyles(theme => ({
 		},
     },
     image: {
-        backgroundPosition: 'center',
-		backgroundSize: 'cover',
-		backgroundRepeat: 'no-repeat',
+        // backgroundPosition: 'center',
+		// backgroundSize: 'cover',
+        // backgroundRepeat: 'no-repeat',
+        objectFit: 'cover',                 // do this for other images across app instead of above code? 
         height: '100%',
         width: '100%',
     },
