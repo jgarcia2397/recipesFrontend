@@ -6,7 +6,7 @@ import Header from './components/UI/Header';
 import theme from './components/UI/Theme';
 
 import HomePage from './components/Pages/HomePage';
-import Auth from './containers/Auth';
+import Auth from './components/Pages/Auth';
 import RecipePage from './components/Pages/RecipePage';
 import ProfilePage from './containers/ProfilePage';
 import RecipeFullDetailsPage from './components/Pages/RecipeFullDetailsPage';
