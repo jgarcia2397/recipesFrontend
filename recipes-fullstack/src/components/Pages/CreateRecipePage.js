@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import BasicRecipeInfoInputs from '../UI/BasicRecipeInfoInputs';
 import ImageUpload from '../UI/ImageUpload';
 import RecipeInstructColumn from '../UI/RecipeInstructColumn';
+import RecipeInstructions from '../UI/RecipeInstructions';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -114,7 +115,12 @@ const CreateRecipePage = props => {
 							direction='row'
 							className={classes.recipeDetailsContainer}
 						>
-							<Grid item className={classes.instructColumn}>
+							<RecipeInstructions
+								ingredientArray={ingredients}
+								directionsArray={directions}
+								isNewRecipe
+							/>
+							{/* <Grid item className={classes.instructColumn}>
 								<RecipeInstructColumn
 									label='Ingredients'
 									array={ingredients}
@@ -133,7 +139,7 @@ const CreateRecipePage = props => {
 									array={directions}
 									isNewRecipe
 								/>
-							</Grid>
+							</Grid> */}
 						</Grid>
 					</Grid>
 					<Grid item className={classes.divider}>

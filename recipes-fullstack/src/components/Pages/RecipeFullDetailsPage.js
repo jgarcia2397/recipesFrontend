@@ -7,6 +7,7 @@ import Divider from '@material-ui/core/Divider';
 
 import RecipeInfoColumn from '../../components/UI/RecipeInfoColumn';
 import RecipeInstructColumn from '../../components/UI/RecipeInstructColumn';
+import RecipeInstructions from '../UI/RecipeInstructions';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -103,7 +104,11 @@ const RecipeFullDetailsPage = props => {
 			<Grid item className={classes.divider}>
 				<Divider orientation={matchesMD ? 'horizontal' : 'vertical'} />
 			</Grid>
-			<Grid item className={classes.instructColumn}>
+			<RecipeInstructions
+				ingredientArray={ingredients}
+				directionsArray={directions}
+			/>
+			{/* <Grid item className={classes.instructColumn}>
 				<RecipeInstructColumn label='Ingredients' array={ingredients} />
 			</Grid>
 			<Grid item className={classes.divider}>
@@ -111,7 +116,7 @@ const RecipeFullDetailsPage = props => {
 			</Grid>
 			<Grid item className={classes.instructColumn}>
 				<RecipeInstructColumn label='Directions' array={directions} />
-			</Grid>
+			</Grid> */}
 		</Grid>
 	);
 };
