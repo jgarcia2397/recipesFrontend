@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 import BasicRecipeInfoInputs from '../UI/BasicRecipeInfoInputs';
 import ImageUpload from '../UI/ImageUpload';
@@ -12,7 +13,7 @@ import RecipeInstructColumn from '../UI/RecipeInstructColumn';
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		height: '95vh',
+		height: '180vh',
 		display: 'flex',
 	},
 	background: {
@@ -42,17 +43,21 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 	},
 	recipeDetailsContainer: {
-		height: '45vh',
+		height: '55vh',
 	},
 	saveRecipeButton: {
 		...theme.typography.button,
-		marginTop: '15px',
+		marginTop: '45px',
 		borderRadius: 50,
 		backgroundColor: theme.palette.secondary.main,
 		'&:hover': {
 			backgroundColor: theme.palette.secondary.dark,
 		},
-    },
+	},
+	titleContainer: {
+		marginTop: '200px',
+		marginBottom: '100px',
+	},
 }));
 
 const CreateRecipePage = props => {
@@ -88,11 +93,17 @@ const CreateRecipePage = props => {
 		<div className={classes.root}>
 			<Paper className={classes.background} square>
 				<Grid container direction='column' alignItems='center'>
-					<Grid item>
-						<ImageUpload />
+					<Grid item className={classes.titleContainer}>
+						<Typography variant='h3'>Basic Recipe Info</Typography>
 					</Grid>
 					<Grid item>
 						<BasicRecipeInfoInputs />
+					</Grid>
+					<Grid item>
+						<ImageUpload />
+					</Grid>
+					<Grid item className={classes.titleContainer}>
+						<Typography variant='h3'>Detailed Recipe Info</Typography>
 					</Grid>
 					<Grid item className={classes.divider}>
 						<Divider />
@@ -104,7 +115,11 @@ const CreateRecipePage = props => {
 							className={classes.recipeDetailsContainer}
 						>
 							<Grid item className={classes.instructColumn}>
-								<RecipeInstructColumn label='Ingredients' array={ingredients} isNewRecipe />
+								<RecipeInstructColumn
+									label='Ingredients'
+									array={ingredients}
+									isNewRecipe
+								/>
 							</Grid>
 							<Grid item>
 								<Divider
@@ -113,7 +128,11 @@ const CreateRecipePage = props => {
 								/>
 							</Grid>
 							<Grid item className={classes.instructColumn}>
-								<RecipeInstructColumn label='Directions' array={directions} isNewRecipe />
+								<RecipeInstructColumn
+									label='Directions'
+									array={directions}
+									isNewRecipe
+								/>
 							</Grid>
 						</Grid>
 					</Grid>
@@ -121,7 +140,12 @@ const CreateRecipePage = props => {
 						<Divider />
 					</Grid>
 					<Grid item>
-						<Button className={classes.saveRecipeButton}>Save Recipe</Button>
+						<Button
+							className={classes.saveRecipeButton}
+							style={{ maxWidth: '140px', minWidth: '140px' }}
+						>
+							Save Recipe
+						</Button>
 					</Grid>
 				</Grid>
 			</Paper>

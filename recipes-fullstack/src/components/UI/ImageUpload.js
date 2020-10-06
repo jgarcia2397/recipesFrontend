@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles(theme => ({
     root: {
         marginTop: '50px',
+        marginBottom: '140px',
     },
 	uploadContainer: {
 		display: 'flex',
