@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 
 import BasicRecipeInfoInputs from '../UI/BasicRecipeInfoInputs';
 import ImageUpload from '../UI/ImageUpload';
-import RecipeInstructColumn from '../UI/RecipeInstructColumn';
 import RecipeInstructions from '../UI/RecipeInstructions';
 
 const useStyles = makeStyles(theme => ({

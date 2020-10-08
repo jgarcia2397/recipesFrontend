@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 
 import RecipeInfoColumn from '../../components/UI/RecipeInfoColumn';
-import RecipeInstructColumn from '../../components/UI/RecipeInstructColumn';
 import RecipeInstructions from '../UI/RecipeInstructions';
 
 const useStyles = makeStyles(theme => ({
