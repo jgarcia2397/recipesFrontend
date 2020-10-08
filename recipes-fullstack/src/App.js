@@ -8,7 +8,7 @@ import theme from './components/UI/Theme';
 import HomePage from './components/Pages/HomePage';
 import Auth from './components/Pages/Auth';
 import RecipePage from './components/Pages/RecipePage';
-import ProfilePage from './containers/ProfilePage';
+import ProfilePage from './components/Pages/ProfilePage';
 import RecipeFullDetailsPage from './components/Pages/RecipeFullDetailsPage';
 import CreateRecipePage from './components/Pages/CreateRecipePage';
 
