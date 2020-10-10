@@ -37,7 +37,7 @@ const UserProfile = props => {
 			className={classes.profileContainer}
 		>
 			<Grid item>
-				<Paper className={classes.profilePic} />
+				<Paper className={classes.profilePic} elevation={3} />
 			</Grid>
 			<Grid item>
 				<Grid

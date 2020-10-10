@@ -78,7 +78,7 @@ const RecipeInfoColumn = props => {
 			className={classes.infoContainer}
 		>
 			<Grid item className={classes.recipeImageContainer}>
-				<Paper className={classes.recipeImage} />
+				<Paper className={classes.recipeImage} elevation={3} />
 			</Grid>
 			<Grid item>
 				<Typography variant={matchesXS ? 'h4' : 'h3'} className={classes.recipeTitle}>

@@ -74,7 +74,7 @@ const RecipeCard = props => {
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
 	return (
-		<Card className={classes.root}>
+		<Card className={classes.root} elevation={3}>
 			<CardActionArea
 				classes={{ root: classes.cardActionContainer }}
 				component={Link}
