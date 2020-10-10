@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
@@ -8,21 +9,26 @@ import InputPair from './InputPair';
 
 const useStyles = makeStyles(theme => ({
 	basicInfoInputsContainer: {
-		// marginTop: '50px',
 		marginBottom: '50px',
-	},
-	dropdown: {
-		width: '7.5vw',
-		minWidth: '115px',
 	},
 	inputSet: {
 		marginLeft: '15px',
 		marginRight: '15px',
+		[theme.breakpoints.down('md')]: {
+			marginBottom: '25px',
+		},
+	},
+	textInput: {
+		width: '11.5vw',
+		minWidth: '200px',
 	},
 }));
 
 const BasicRecipeInfoInputs = props => {
 	const classes = useStyles();
+	const theme = useTheme();
+
+	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
 	const [prepTimeUnits, setPrepTimeUnits] = useState('minutes');
 	const [cookTimeUnits, setCookTimeUnits] = useState('minutes');
@@ -54,8 +60,9 @@ const BasicRecipeInfoInputs = props => {
 	return (
 		<Grid
 			container
-			direction='row'
+			direction={matchesMD ? 'column' : 'row'}
 			justify='center'
+			alignItems='center'
 			className={classes.basicInfoInputsContainer}
 		>
 			<Grid item className={classes.inputSet}>
@@ -77,7 +84,12 @@ const BasicRecipeInfoInputs = props => {
 				/>
 			</Grid>
 			<Grid item className={classes.inputSet}>
-				<TextField id='servings' label='Servings' variant='outlined' />
+				<TextField
+					id='servings'
+					label='Servings'
+					variant='outlined'
+					className={classes.textInput}
+				/>
 			</Grid>
 			<Grid item className={classes.inputSet}>
 				<InputPair

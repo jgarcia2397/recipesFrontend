@@ -10,6 +10,10 @@ const useStyles = makeStyles(theme => ({
 		width: '7.5vw',
 		minWidth: '115px',
 	},
+	textInput: {
+		width: '11.5vw',
+		minWidth: '200px',
+	},
 }));
 
 const InputPair = props => {
@@ -19,7 +23,12 @@ const InputPair = props => {
 		<Grid container direction='row' spacing={1}>
 			{!props.isSingleDropdown ? (
 				<Grid item>
-					<TextField id={props.id} label={props.label} variant='outlined' />
+					<TextField
+						id={props.id}
+						label={props.label}
+						variant='outlined'
+						className={classes.textInput}
+					/>
 				</Grid>
 			) : null}
 			<Grid item>
