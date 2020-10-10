@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -57,11 +58,18 @@ const useStyles = makeStyles(theme => ({
 	titleContainer: {
 		marginTop: '200px',
 		marginBottom: '100px',
+		[theme.breakpoints.down('md')]: {
+			marginTop: '125px',
+			marginBottom: '70px',
+		},
 	},
 }));
 
 const CreateRecipePage = props => {
 	const classes = useStyles();
+	const theme = useTheme();
+
+	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const ingredients = [
 		'1/2 cup butter',
@@ -94,7 +102,12 @@ const CreateRecipePage = props => {
 			<Paper className={classes.background} square>
 				<Grid container direction='column' alignItems='center'>
 					<Grid item className={classes.titleContainer}>
-						<Typography variant='h3'>Basic Recipe Info</Typography>
+						<Typography
+							variant={matchesSM ? 'h4' : 'h3'}
+							style={{ fontWeight: 'bold' }}
+						>
+							Basic Recipe Info
+						</Typography>
 					</Grid>
 					<Grid item>
 						<BasicRecipeInfoInputs />
@@ -103,7 +116,12 @@ const CreateRecipePage = props => {
 						<ImageUpload />
 					</Grid>
 					<Grid item className={classes.titleContainer}>
-						<Typography variant='h3'>Detailed Recipe Info</Typography>
+						<Typography
+							variant={matchesSM ? 'h4' : 'h3'}
+							style={{ fontWeight: 'bold' }}
+						>
+							Detailed Recipe Info
+						</Typography>
 					</Grid>
 					<Grid item className={classes.divider}>
 						<Divider />
