@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	textInput: {
 		width: '11.5vw',
-		minWidth: '200px',
+		minWidth: '150px',
 	},
 }));
 
