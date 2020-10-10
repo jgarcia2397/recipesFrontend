@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 		overflow: 'auto',
 	},
 	profileDetailsContainer: {
-		marginTop: '40px',
+		marginTop: '55px',
 	},
 	profileHeadings: {
 		paddingLeft: '550px',
@@ -79,12 +79,14 @@ const ProfilePage = props => {
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.background} square>
-				<UserProfile />
 				<Grid
 					container
 					direction='column'
 					className={classes.profileDetailsContainer}
 				>
+					<Grid item>
+						<UserProfile />
+					</Grid>
 					<Grid item className={classes.profileHeadings}>
 						<Typography
 							variant='h4'

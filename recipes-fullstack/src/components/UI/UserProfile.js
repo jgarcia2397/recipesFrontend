@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 		},
 	},
 	profileContainer: {
-		marginTop: '100px',
+		marginBottom: '50px',
 	},
 	profileTitlesContainer: {
 		marginLeft: '55px',
