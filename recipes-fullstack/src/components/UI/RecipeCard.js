@@ -15,15 +15,19 @@ import applePie from '../../assets/applePie.jpg';
 const useStyles = makeStyles(theme => ({
 	root: {
 		height: '15vh',
-		width: '70vh',
+		width: '40vw',
 		backgroundColor: theme.palette.secondary.main,
 		marginBottom: '30px',
+		minWidth: '300px',
+		[theme.breakpoints.down('md')]: {
+			width: '50vw',
+		},
 		[theme.breakpoints.down('sm')]: {
-			width: '60vh',
+			width: '60vw',
 		},
 		[theme.breakpoints.down('xs')]: {
 			height: '50vh',
-			width: '40vh',
+			// width: '40vw',
 		},
 	},
 	mediaContainer: {
