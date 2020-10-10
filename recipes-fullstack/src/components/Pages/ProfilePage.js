@@ -21,13 +21,16 @@ const useStyles = makeStyles(theme => ({
 	},
 	profileDetailsContainer: {
 		marginTop: '40px',
-		// marginLeft: '150px',
-		// marginRight: '150px',
 	},
-	profileDetails: {
-		paddingLeft: '350px',
-		paddingRight: '350px',
+	profileHeadings: {
+		paddingLeft: '550px',
+		paddingRight: '550px',
 		paddingBottom: '25px',
+	},
+	profileText: {
+		paddingLeft: '550px',
+		paddingRight: '550px',
+		paddingBottom: '75px',
 	},
 	recipeCardsContainer: {
 		margin: '30px auto',
@@ -46,10 +49,12 @@ const ProfilePage = props => {
 					direction='column'
 					className={classes.profileDetailsContainer}
 				>
-					<Grid item className={classes.profileDetails}>
-						<Typography variant='h4'>About Me</Typography>
+					<Grid item className={classes.profileHeadings}>
+						<Typography variant='h4' style={{ fontWeight: 'bold' }}>
+							About Me
+						</Typography>
 					</Grid>
-					<Grid item className={classes.profileDetails}>
+					<Grid item className={classes.profileText}>
 						<Typography variant='body1'>
 							My name's Cheffff... Just kidding, my real name is up top! I love
 							to cook and Gordon Ramsey is my hero! I wanna be like him someday,
@@ -57,16 +62,20 @@ const ProfilePage = props => {
 							scrambled eggs though!
 						</Typography>
 					</Grid>
-					<Grid item className={classes.profileDetails}>
-						<Typography variant='h4'>Favourite Things to Cook</Typography>
+					<Grid item className={classes.profileHeadings}>
+						<Typography variant='h4' style={{ fontWeight: 'bold' }}>
+							Favourite Things to Cook
+						</Typography>
 					</Grid>
-					<Grid item className={classes.profileDetails}>
+					<Grid item className={classes.profileText}>
 						<Typography variant='body1'>
 							I like to make Idiot Sandwiches and Gordon's famous Lamb Sauce.
 						</Typography>
 					</Grid>
-					<Grid item className={classes.profileDetails}>
-						<Typography variant='h4'>Recipe Preview</Typography>
+					<Grid item className={classes.profileHeadings}>
+						<Typography variant='h4' style={{ fontWeight: 'bold' }}>
+							Recipe Preview
+						</Typography>
 					</Grid>
 					<Grid item className={classes.recipeCardsContainer}>
 						<RecipeCard />
