@@ -119,26 +119,6 @@ const CreateRecipePage = props => {
 								directionsArray={directions}
 								isNewRecipe
 							/>
-							{/* <Grid item className={classes.instructColumn}>
-								<RecipeInstructColumn
-									label='Ingredients'
-									array={ingredients}
-									isNewRecipe
-								/>
-							</Grid>
-							<Grid item>
-								<Divider
-									orientation='vertical'
-									style={{ backgroundColor: '#000' }}
-								/>
-							</Grid>
-							<Grid item className={classes.instructColumn}>
-								<RecipeInstructColumn
-									label='Directions'
-									array={directions}
-									isNewRecipe
-								/>
-							</Grid> */}
 						</Grid>
 					</Grid>
 					<Grid item className={classes.divider}>

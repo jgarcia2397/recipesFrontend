@@ -107,15 +107,6 @@ const RecipeFullDetailsPage = props => {
 				ingredientArray={ingredients}
 				directionsArray={directions}
 			/>
-			{/* <Grid item className={classes.instructColumn}>
-				<RecipeInstructColumn label='Ingredients' array={ingredients} />
-			</Grid>
-			<Grid item className={classes.divider}>
-				<Divider orientation={matchesMD ? 'horizontal' : 'vertical'} />
-			</Grid>
-			<Grid item className={classes.instructColumn}>
-				<RecipeInstructColumn label='Directions' array={directions} />
-			</Grid> */}
 		</Grid>
 	);
 };

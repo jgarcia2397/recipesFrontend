@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 
@@ -25,10 +26,21 @@ const useStyles = makeStyles(theme => ({
 		// 	height: '33.2%',
 		// },
 	},
+	divider: {
+		backgroundColor: theme.divider.main,
+		width: '0.1%',
+		[theme.breakpoints.down('md')]: {
+			width: '100%',
+			height: '0.1%',
+		},
+	},
 }));
 
 const RecipeInstructions = props => {
 	const classes = useStyles();
+	const theme = useTheme();
+
+	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
 	return (
 		<React.Fragment>
@@ -46,9 +58,8 @@ const RecipeInstructions = props => {
 					isNewRecipe={props.isNewRecipe}
 				/>
 			</Grid>
-			<Grid item>
-				<Divider orientation='vertical' style={{ backgroundColor: '#000' }} />
-                {/* <Divider orientation={matchesMD ? 'horizontal' : 'vertical'} /> */}     {/* ToDo: Horizontal divider not present in RecipeFullDetailsPage when switching to small screen */}
+			<Grid item className={classes.divider}>
+				<Divider orientation={matchesMD ? 'horizontal' : 'vertical'} />
 			</Grid>
 			<Grid
 				item
