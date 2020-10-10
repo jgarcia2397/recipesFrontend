@@ -31,20 +31,14 @@ const useStyles = makeStyles(theme => ({
 		// 	height: '0.1%',
 		// },
 	},
-	instructColumn: {
-		width: '49.97%',
-		height: '100%',
-		backgroundColor: theme.palette.secondary.light,
-		// [theme.breakpoints.down('md')]: {
-		// 	width: '100%',
-		// 	height: '33.2%',
-		// },
-	},
 	recipeDetailsRoot: {
 		width: '100%',
 	},
 	recipeDetailsContainer: {
 		height: '55vh',
+		[theme.breakpoints.down('md')]: {
+			height: '110vh',
+		},
 	},
 	saveRecipeButton: {
 		...theme.typography.button,
@@ -53,6 +47,9 @@ const useStyles = makeStyles(theme => ({
 		backgroundColor: theme.palette.secondary.main,
 		'&:hover': {
 			backgroundColor: theme.palette.secondary.dark,
+		},
+		[theme.breakpoints.down('md')]: {
+			marginBottom: '20px',
 		},
 	},
 	titleContainer: {
@@ -70,6 +67,7 @@ const CreateRecipePage = props => {
 	const theme = useTheme();
 
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
+	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
 	const ingredients = [
 		'1/2 cup butter',
@@ -129,7 +127,7 @@ const CreateRecipePage = props => {
 					<Grid item className={classes.recipeDetailsRoot}>
 						<Grid
 							container
-							direction='row'
+							direction={matchesMD ? 'column' : 'row'}
 							className={classes.recipeDetailsContainer}
 						>
 							<RecipeInstructions

@@ -21,17 +21,17 @@ const useStyles = makeStyles(theme => ({
 		width: '49.97%',
 		height: '100%',
 		backgroundColor: theme.palette.secondary.light,
-		// [theme.breakpoints.down('md')]: {
-		// 	width: '100%',
-		// 	height: '33.2%',
-		// },
+		[theme.breakpoints.down('md')]: {
+			width: '100%',
+			height: '49.97%',
+		},
 	},
 	divider: {
 		backgroundColor: theme.divider.main,
 		width: '0.06%',
 		[theme.breakpoints.down('md')]: {
 			width: '100%',
-			height: '0.1%',
+			height: '0.06%',
 		},
 	},
 }));
