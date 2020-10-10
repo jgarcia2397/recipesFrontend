@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -16,6 +17,10 @@ const useStyles = makeStyles(theme => ({
 		borderRadius: 120,
 		height: '225px',
 		width: '225px',
+		[theme.breakpoints.down('sm')]: {
+			height: '195px',
+			width: '195px',
+		},
 	},
 	profileContainer: {
 		marginTop: '100px',
@@ -23,17 +28,25 @@ const useStyles = makeStyles(theme => ({
 	profileTitlesContainer: {
 		marginLeft: '55px',
 		height: '100%',
+		[theme.breakpoints.down('xs')]: {
+			marginLeft: '0px',
+			marginTop: '35px',
+		},
 	},
 }));
 
 const UserProfile = props => {
-    const classes = useStyles();
+	const classes = useStyles();
+	const theme = useTheme();
+
+	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
 	return (
 		<Grid
 			container
-			direction='row'
+			direction={matchesXS ? 'column' : 'row'}
 			justify='center'
+			alignItems='center'
 			className={classes.profileContainer}
 		>
 			<Grid item>
@@ -47,10 +60,14 @@ const UserProfile = props => {
 					className={classes.profileTitlesContainer}
 				>
 					<Grid item>
-						<Typography variant='h3'>Joshua Garcia</Typography>
+						<Typography variant='h3' align={matchesXS ? 'center' : ''}>
+							Joshua Garcia
+						</Typography>
 					</Grid>
 					<Grid item>
-						<Typography variant='h4'>Master Chef</Typography>
+						<Typography variant='h4' align={matchesXS ? 'center' : ''}>
+							Master Chef
+						</Typography>
 					</Grid>
 				</Grid>
 			</Grid>
