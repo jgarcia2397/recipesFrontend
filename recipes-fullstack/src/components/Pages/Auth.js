@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
 	loginContainer: {
 		height: '40%',
 		width: '40%',
+		minWidth: '275px',
 		position: 'fixed',
 		top: '0',
 		bottom: '0',
@@ -27,6 +28,9 @@ const useStyles = makeStyles(theme => ({
 		margin: 'auto',
 		backgroundColor: '#fff',
 		border: `4px solid ${theme.palette.secondary.light}`,
+		[theme.breakpoints.down('xs')]: {
+			height: '55%',
+		},
 	},
 	title: {
 		marginTop: '20px',
@@ -34,6 +38,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	inputContainer: {
 		marginTop: '50px',
+		[theme.breakpoints.down('sm')]: {
+			marginTop: '25px',
+		},
 	},
 	input: {
 		width: '11.5vw',
@@ -46,6 +53,9 @@ const useStyles = makeStyles(theme => ({
 		backgroundColor: theme.palette.secondary.main,
 		'&:hover': {
 			backgroundColor: theme.palette.secondary.dark,
+		},
+		[theme.breakpoints.down('sm')]: {
+			marginTop: '45px',
 		},
 	},
 }));
