@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
 	root: {
 		height: '15vh',
 		width: '40vw',
+		minHeight: '150px',
 		backgroundColor: theme.palette.secondary.main,
 		marginBottom: '30px',
 		minWidth: '300px',
