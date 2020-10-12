@@ -32,8 +32,12 @@ const useStyles = makeStyles(theme => ({
 		marginTop: '20px',
 		marginBottom: '20px',
 	},
-	input: {
+	inputContainer: {
 		marginTop: '50px',
+	},
+	input: {
+		width: '11.5vw',
+		minWidth: '250px',
 	},
 	loginButton: {
 		...theme.typography.button,
@@ -59,11 +63,22 @@ const Auth = props => {
 								Login
 							</Typography>
 						</Grid>
-						<Grid item className={classes.input}>
-							<TextField id='email' label='Email' variant='outlined' />
+						<Grid item className={classes.inputContainer}>
+							<TextField
+								id='email'
+								label='Email'
+								variant='outlined'
+								className={classes.input}
+							/>
 						</Grid>
-						<Grid item className={classes.input}>
-							<TextField id='password' label='Password' variant='outlined' />
+						<Grid item className={classes.inputContainer}>
+							<TextField
+								id='password'
+								label='Password'
+								variant='outlined'
+								type='password'
+								className={classes.input}
+							/>
 						</Grid>
 						<Grid item>
 							<Button
