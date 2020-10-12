@@ -17,9 +17,8 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 	},
 	loginContainer: {
-		height: '40%',
-		width: '40%',
-		minWidth: '275px',
+		height: '500px',
+		width: '700px',
 		position: 'fixed',
 		top: '0',
 		bottom: '0',
@@ -28,8 +27,16 @@ const useStyles = makeStyles(theme => ({
 		margin: 'auto',
 		backgroundColor: '#fff',
 		border: `4px solid ${theme.palette.secondary.light}`,
+		[theme.breakpoints.down('lg')]: {
+			height: '450px',
+			width: '600px',
+		},
+		[theme.breakpoints.down('md')]: {
+			height: '350px',
+			width: '500px',
+		},
 		[theme.breakpoints.down('xs')]: {
-			height: '55%',
+			width: '275px',
 		},
 	},
 	title: {
@@ -38,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	inputContainer: {
 		marginTop: '50px',
-		[theme.breakpoints.down('sm')]: {
+		[theme.breakpoints.down('md')]: {
 			marginTop: '25px',
 		},
 	},
@@ -54,7 +61,7 @@ const useStyles = makeStyles(theme => ({
 		'&:hover': {
 			backgroundColor: theme.palette.secondary.dark,
 		},
-		[theme.breakpoints.down('sm')]: {
+		[theme.breakpoints.down('md')]: {
 			marginTop: '45px',
 		},
 	},
