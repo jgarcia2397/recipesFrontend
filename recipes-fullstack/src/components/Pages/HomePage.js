@@ -21,26 +21,26 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.down('lg')]: {
 			paddingLeft: '250px',
 			paddingRight: '250px',
-			paddingTop: '500px',
-			paddingBottom: '500px',
+			paddingTop: '250px',
+			paddingBottom: '250px',
 		},
 		[theme.breakpoints.down('md')]: {
 			paddingLeft: '150px',
 			paddingRight: '150px',
-			paddingTop: '400px',
-			paddingBottom: '400px',
+			paddingTop: '550px',
+			paddingBottom: '700px',
 		},
 		[theme.breakpoints.down('sm')]: {
 			paddingLeft: '50px',
 			paddingRight: '50px',
-			paddingTop: '300px',
-			paddingBottom: '300px',
+			paddingTop: '400px',
+			paddingBottom: '515px',
 		},
 		[theme.breakpoints.down('xs')]: {
 			paddingLeft: '50px',
 			paddingRight: '50px',
 			paddingTop: '250px',
-			paddingBottom: '250px',
+			paddingBottom: '300px',
 		},
 	},
 }));
