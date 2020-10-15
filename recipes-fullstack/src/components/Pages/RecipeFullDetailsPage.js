@@ -25,15 +25,6 @@ const useStyles = makeStyles(theme => ({
 			height: '33.4%',
 		},
 	},
-	instructColumn: {
-		width: '37.3%',
-		height: '100%',
-		backgroundColor: theme.palette.secondary.light,
-		[theme.breakpoints.down('md')]: {
-			width: '100%',
-			height: '33.2%',
-		},
-	},
 	divider: {
 		backgroundColor: theme.divider.main,
 		width: '0.1%',
