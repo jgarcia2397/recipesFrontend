@@ -57,6 +57,8 @@ const Header = props => {
 		{ name: 'My Recipes', link: '/recipes', activeIndex: 1 },
 		{ name: 'My Profile', link: '/profile', activeIndex: 2 },
 		{ name: 'Log In/Out', link: '/auth', activeIndex: 3 },
+		// { name: 'New Recipe', link: '/new-recipe', activeIndex: -1 },
+		// { name: 'Full Recipe Details', link: '/recipe-full-details', activeIndex: -1 },
 	];
 
 	useEffect(() => {

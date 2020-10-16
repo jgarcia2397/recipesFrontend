@@ -23,13 +23,21 @@ function App() {
 					<Route
 						exact
 						path='/'
-						render={() => (
-							<HomePage setTabValue={setTabValue} />
-						)}
+						render={() => <HomePage setTabValue={setTabValue} />}
 					/>
 					<Route exact path='/auth' render={() => <Auth />} />
-					<Route exact path='/recipes' render={() => <RecipePage />} />
-					<Route exact path='/recipe-full-details' render={() => <RecipeFullDetailsPage />} />
+					<Route
+						exact
+						path='/recipes'
+						render={() => (
+							<RecipePage tabValue={tabValue} setTabValue={setTabValue} />
+						)}
+					/>
+					<Route
+						exact
+						path='/recipe-full-details'
+						render={() => <RecipeFullDetailsPage />}
+					/>
 					<Route exact path='/new-recipe' render={() => <CreateRecipePage />} />
 					<Route exact path='/profile' render={() => <ProfilePage />} />
 				</Switch>
