@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
@@ -58,6 +58,20 @@ const Header = props => {
 		{ name: 'My Profile', link: '/profile', activeIndex: 2 },
 		{ name: 'Log In/Out', link: '/auth', activeIndex: 3 },
 	];
+
+	useEffect(() => {
+		[...routes].forEach(route => {
+			switch (window.location.pathname) {
+				case `${route.link}`:
+					if (props.tabValue !== route.activeIndex) {
+						props.setTabValue(route.activeIndex);
+					}
+					break;
+				default:
+					break;
+			}
+		});
+	}, [props.tabValue, routes]);
 
 	return (
 		<React.Fragment>
