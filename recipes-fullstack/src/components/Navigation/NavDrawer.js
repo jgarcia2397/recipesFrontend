@@ -10,7 +10,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles(theme => ({
-    toolbarMargin: {
+	toolbarMargin: {
 		...theme.mixins.toolbar,
 		[theme.breakpoints.down('xs')]: {
 			minHeight: 64,
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const NavDrawer = props => {
-    const classes = useStyles();
+	const classes = useStyles();
 
 	return (
 		<React.Fragment>
@@ -55,25 +55,27 @@ const NavDrawer = props => {
 			>
 				<div className={classes.toolbarMargin} />
 				<List>
-					{props.routes.map((route, index) => (
-						<ListItem
-							key={`${route}${index}`}
-							button
-							divider
-							component={Link}
-							to={route.link}
-							onClick={() => {
-								props.setOpenDrawer(false);
-								props.setTabValue(route.activeIndex);
-							}}
-							selected={props.tabValue === route.activeIndex}
-							classes={{ selected: classes.drawerItemSelected }}
-						>
-							<ListItemText className={classes.drawerItem} disableTypography>
-								{route.name}
-							</ListItemText>
-						</ListItem>
-					))}
+					{props.routes.map((route, index) =>
+						route.isMainTab ? (
+							<ListItem
+								key={`${route}${index}`}
+								button
+								divider
+								component={Link}
+								to={route.link}
+								onClick={() => {
+									props.setOpenDrawer(false);
+									props.setTabValue(route.activeIndex);
+								}}
+								selected={props.tabValue === route.activeIndex}
+								classes={{ selected: classes.drawerItemSelected }}
+							>
+								<ListItemText className={classes.drawerItem} disableTypography>
+									{route.name}
+								</ListItemText>
+							</ListItem>
+						) : null
+					)}
 				</List>
 			</SwipeableDrawer>
 			<IconButton

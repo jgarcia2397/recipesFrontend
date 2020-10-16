@@ -28,15 +28,17 @@ const NavTabs = props => {
 			onChange={props.handleTabChange}
 			/*indicatorColor='primary'*/
 		>
-			{props.routes.map((route, index) => (
-				<Tab
-					className={classes.tab}
-					key={`${route}${index}`}
-					label={route.name}
-					component={Link}
-					to={route.link}
-				/>
-			))}
+			{props.routes.map((route, index) =>
+				route.isMainTab ? (
+					<Tab
+						className={classes.tab}
+						key={`${route}${index}`}
+						label={route.name}
+						component={Link}
+						to={route.link}
+					/>
+				) : null
+			)}
 		</Tabs>
 	);
 };

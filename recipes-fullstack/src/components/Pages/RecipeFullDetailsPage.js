@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -81,6 +81,20 @@ const RecipeFullDetailsPage = props => {
 		'Pour mixture in pie crust',
 		'Bake pie for 45 mins',
 	];
+
+	useEffect(() => {
+		[...props.routes].forEach(route => {
+			switch (window.location.pathname) {
+				case `${route.link}`:
+					if (props.tabValue !== route.activeIndex) {
+						props.setTabValue(route.activeIndex);
+					}
+					break;
+				default:
+					break;
+			}
+		});
+	}, [props.tabValue, props.routes]);
 
 	return (
 		<Grid
