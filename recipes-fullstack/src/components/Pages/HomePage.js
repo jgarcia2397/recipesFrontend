@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -47,6 +47,20 @@ const useStyles = makeStyles(theme => ({
 
 const HomePage = props => {
 	const classes = useStyles();
+
+	useEffect(() => {
+		[...props.routes].forEach(route => {
+			switch (window.location.pathname) {
+				case `${route.link}`:
+					if (props.tabValue !== route.activeIndex) {
+						props.setTabValue(route.activeIndex);
+					}
+					break;
+				default:
+					break;
+			}
+		});
+	}, [props.tabValue, props.routes]);
 
 	return (
 		<React.Fragment>

@@ -15,22 +15,39 @@ import CreateRecipePage from './components/Pages/CreateRecipePage';
 function App() {
 	const [tabValue, setTabValue] = useState(0);
 
+	const routes = [
+		{ name: 'Home', link: '/', activeIndex: 0 },
+		{ name: 'My Recipes', link: '/recipes', activeIndex: 1 },
+		{ name: 'My Profile', link: '/profile', activeIndex: 2 },
+		{ name: 'Log In/Out', link: '/auth', activeIndex: 3 },
+	];
+
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
-				<Header tabValue={tabValue} setTabValue={setTabValue} />
+				<Header routes={routes} tabValue={tabValue} setTabValue={setTabValue} />
 				<Switch>
 					<Route
 						exact
 						path='/'
-						render={() => <HomePage setTabValue={setTabValue} />}
+						render={() => (
+							<HomePage routes={routes} setTabValue={setTabValue} />
+						)}
 					/>
-					<Route exact path='/auth' render={() => <Auth />} />
+					<Route
+						exact
+						path='/auth'
+						render={() => <Auth routes={routes} setTabValue={setTabValue} />}
+					/>
 					<Route
 						exact
 						path='/recipes'
 						render={() => (
-							<RecipePage tabValue={tabValue} setTabValue={setTabValue} />
+							<RecipePage
+								tabValue={tabValue}
+								routes={routes}
+								setTabValue={setTabValue}
+							/>
 						)}
 					/>
 					<Route
@@ -39,7 +56,13 @@ function App() {
 						render={() => <RecipeFullDetailsPage />}
 					/>
 					<Route exact path='/new-recipe' render={() => <CreateRecipePage />} />
-					<Route exact path='/profile' render={() => <ProfilePage />} />
+					<Route
+						exact
+						path='/profile'
+						render={() => (
+							<ProfilePage routes={routes} setTabValue={setTabValue} />
+						)}
+					/>
 				</Switch>
 			</BrowserRouter>
 		</ThemeProvider>

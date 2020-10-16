@@ -52,17 +52,8 @@ const Header = props => {
 		props.setTabValue(newValue);
 	};
 
-	const routes = [
-		{ name: 'Home', link: '/', activeIndex: 0 },
-		{ name: 'My Recipes', link: '/recipes', activeIndex: 1 },
-		{ name: 'My Profile', link: '/profile', activeIndex: 2 },
-		{ name: 'Log In/Out', link: '/auth', activeIndex: 3 },
-		// { name: 'New Recipe', link: '/new-recipe', activeIndex: -1 },
-		// { name: 'Full Recipe Details', link: '/recipe-full-details', activeIndex: -1 },
-	];
-
 	useEffect(() => {
-		[...routes].forEach(route => {
+		[...props.routes].forEach(route => {
 			switch (window.location.pathname) {
 				case `${route.link}`:
 					if (props.tabValue !== route.activeIndex) {
@@ -73,7 +64,7 @@ const Header = props => {
 					break;
 			}
 		});
-	}, [props.tabValue, routes]);
+	}, [props.tabValue, props.routes]);
 
 	return (
 		<React.Fragment>
@@ -85,7 +76,7 @@ const Header = props => {
 						</Typography>
 						{matches ? (
 							<NavDrawer
-								routes={routes}
+								routes={props.routes}
 								setTabValue={props.setTabValue}
 								tabValue={props.tabValue}
 								setOpenDrawer={setOpenDrawer}
@@ -93,7 +84,7 @@ const Header = props => {
 							/>
 						) : (
 							<NavTabs
-								routes={routes}
+								routes={props.routes}
 								tabVal={props.tabValue}
 								handleTabChange={handleTabChange}
 							/>

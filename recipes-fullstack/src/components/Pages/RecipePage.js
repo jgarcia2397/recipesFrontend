@@ -48,17 +48,8 @@ const useStyles = makeStyles(theme => ({
 const RecipePage = props => {
 	const classes = useStyles();
 
-	const routes = [
-		{ name: 'Home', link: '/', activeIndex: 0 },
-		{ name: 'My Recipes', link: '/recipes', activeIndex: 1 },
-		{ name: 'My Profile', link: '/profile', activeIndex: 2 },
-		{ name: 'Log In/Out', link: '/auth', activeIndex: 3 },
-		// { name: 'New Recipe', link: '/new-recipe', activeIndex: -1 },
-		// { name: 'Full Recipe Details', link: '/recipe-full-details', activeIndex: -1 },
-	];
-
 	useEffect(() => {
-		[...routes].forEach(route => {
+		[...props.routes].forEach(route => {
 			switch (window.location.pathname) {
 				case `${route.link}`:
 					if (props.tabValue !== route.activeIndex) {
@@ -69,7 +60,7 @@ const RecipePage = props => {
 					break;
 			}
 		});
-	}, [props.tabValue, routes]);
+	}, [props.tabValue, props.routes]);
 
 	return (
 		<div className={classes.root}>

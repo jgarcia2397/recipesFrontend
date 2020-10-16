@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -75,6 +75,20 @@ const ProfilePage = props => {
 	const theme = useTheme();
 
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
+
+	useEffect(() => {
+		[...props.routes].forEach(route => {
+			switch (window.location.pathname) {
+				case `${route.link}`:
+					if (props.tabValue !== route.activeIndex) {
+						props.setTabValue(route.activeIndex);
+					}
+					break;
+				default:
+					break;
+			}
+		});
+	}, [props.tabValue, props.routes]);
 
 	return (
 		<div className={classes.root}>
