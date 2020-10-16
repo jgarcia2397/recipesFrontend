@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 	root: {
 		overflow: 'auto',
 		maxHeight: '88%',
-		[theme.breakpoints.down('md')]: {
+		[theme.breakpoints.down('lg')]: {
 			maxHeight: '75%',
 		},
 		[theme.breakpoints.down('xs')]: {
@@ -31,12 +31,15 @@ const useStyles = makeStyles(theme => ({
 	rootAlternate: {
 		overflow: 'auto',
 		maxHeight: '75%',
-		// [theme.breakpoints.down('md')]: {
-		// 	maxHeight: '75%',
-		// },
-		// [theme.breakpoints.down('xs')]: {
-		// 	maxHeight: '70%',
-		// }
+		[theme.breakpoints.down('lg')]: {
+			maxHeight: '60%',
+		},
+		[theme.breakpoints.down('md')]: {
+			maxHeight: '75%',
+		},
+		[theme.breakpoints.down('xs')]: {
+			maxHeight: '70%',
+		}
 	},
 }));
 
