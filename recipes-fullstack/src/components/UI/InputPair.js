@@ -19,6 +19,8 @@ const useStyles = makeStyles(theme => ({
 const InputPair = props => {
 	const classes = useStyles();
 
+	const dropdownID = props.id === 'difficulty' ? props.id : `${props.id}Units`;
+
 	return (
 		<Grid container direction='row' spacing={1}>
 			{!props.isSingleDropdown ? (
@@ -28,16 +30,18 @@ const InputPair = props => {
 						label={props.label}
 						variant='outlined'
 						className={classes.textInput}
+						onChange={event => props.handleChange(event, props.id)}
 					/>
 				</Grid>
 			) : null}
 			<Grid item>
 				<TextField // native for mobile?
-					id={`${props.id}-units`}
+					id={`${props.id}Units`}
 					select
 					value={props.timeUnits}
 					variant='outlined'
-					onChange={props.handleChange}
+					// onChange={props.handleChange}
+					onChange={event => props.handleChange(event, dropdownID)}
 					className={classes.dropdown}
 					label={props.isSingleDropdown ? props.label : ''}
 				>

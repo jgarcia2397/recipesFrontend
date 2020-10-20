@@ -30,9 +30,9 @@ const BasicRecipeInfoInputs = props => {
 
 	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
-	const [prepTimeUnits, setPrepTimeUnits] = useState('minutes');
-	const [cookTimeUnits, setCookTimeUnits] = useState('minutes');
-	const [difficulty, setDifficulty] = useState('Easy');
+	// const [prepTimeUnits, setPrepTimeUnits] = useState('minutes');
+	// const [cookTimeUnits, setCookTimeUnits] = useState('minutes');
+	// const [difficulty, setDifficulty] = useState('Easy');
 
 	const timeUnits = [
 		{ value: 'minutes', label: 'minutes' },
@@ -45,17 +45,17 @@ const BasicRecipeInfoInputs = props => {
 		{ value: 'Hard', label: 'Hard' },
 	];
 
-	const handlePrepTimeChange = event => {
-		setPrepTimeUnits(event.target.value);
-	};
+	// const handlePrepTimeChange = event => {
+	// 	setPrepTimeUnits(event.target.value);
+	// };
 
-	const handleCookTimeChange = event => {
-		setCookTimeUnits(event.target.value);
-	};
+	// const handleCookTimeChange = event => {
+	// 	setCookTimeUnits(event.target.value);
+	// };
 
-	const handleDifficultyChange = event => {
-		setDifficulty(event.target.value);
-	};
+	// const handleDifficultyChange = event => {
+	// 	setDifficulty(event.target.value);
+	// };
 
 	return (
 		<Grid
@@ -67,19 +67,23 @@ const BasicRecipeInfoInputs = props => {
 		>
 			<Grid item className={classes.inputSet}>
 				<InputPair
-					id={'prep-time'}
+					id={'prepTime'}
 					label={'Prep Time'}
-					timeUnits={prepTimeUnits}
-					handleChange={handlePrepTimeChange}
+					// timeUnits={prepTimeUnits}
+					// handleChange={handlePrepTimeChange}
+					timeUnits={props.prepTimeUnits}
+					handleChange={props.changed}
 					options={timeUnits}
 				/>
 			</Grid>
 			<Grid item className={classes.inputSet}>
 				<InputPair
-					id={'cook-time'}
+					id={'cookTime'}
 					label={'Cook Time'}
-					timeUnits={cookTimeUnits}
-					handleChange={handleCookTimeChange}
+					// timeUnits={cookTimeUnits}
+					// handleChange={handleCookTimeChange}
+					timeUnits={props.cookTimeUnits}
+					handleChange={props.changed}
 					options={timeUnits}
 				/>
 			</Grid>
@@ -89,14 +93,17 @@ const BasicRecipeInfoInputs = props => {
 					label='Servings'
 					variant='outlined'
 					className={classes.textInput}
+					onChange={(event) => props.changed(event, 'servings')}
 				/>
 			</Grid>
 			<Grid item className={classes.inputSet}>
 				<InputPair
 					id={'difficulty'}
 					label={'Difficulty'}
-					timeUnits={difficulty}
-					handleChange={handleDifficultyChange}
+					// timeUnits={difficulty}
+					// handleChange={handleDifficultyChange}
+					timeUnits={props.difficulty}
+					handleChange={props.changed}
 					options={difficultyLevels}
 					isSingleDropdown
 				/>

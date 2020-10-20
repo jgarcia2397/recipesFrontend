@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import { updateObject } from '../../shared/utility';
 import BasicRecipeInfoInputs from '../UI/BasicRecipeInfoInputs';
 import ImageUpload from '../UI/ImageUpload';
 import RecipeInstructions from '../UI/RecipeInstructions';
@@ -95,6 +96,81 @@ const CreateRecipePage = props => {
 		'Make crust',
 	];
 
+	const [basicRecipeForm, setBasicRecipeForm] = useState({
+		prepTime: {
+			elementType: 'input',
+			value: '',
+			validation: {
+				required: true,
+			},
+			valid: false,
+			// touched: false,
+		},
+		prepTimeUnits: {
+			elementType: 'dropdown',
+			value: 'minutes',
+			validation: {
+				required: true,
+			},
+			valid: true,
+		},
+		cookTime: {
+			elementType: 'input',
+			value: '',
+			validation: {
+				required: true,
+			},
+			valid: false,
+			// touched: false,
+		},
+		cookTimeUnits: {
+			elementType: 'dropdown',
+			value: 'minutes',
+			validation: {
+				required: true,
+			},
+			valid: true,
+		},
+		servings: {
+			elementType: 'input',
+			value: '',
+			validation: {
+				required: true,
+			},
+			valid: false,
+			// touched: false,
+		},
+		difficulty: {
+			elementType: 'dropdown',
+			value: 'Easy',
+			validation: {
+				required: true,
+			},
+			valid: true,
+		},
+	});
+	const [detailRecipeForm, setDetailRecipeForm] = useState({
+		ingredients: {
+			elementType: 'list',
+			value: [...ingredients],
+			validation: {
+				required: true,
+			},
+			valid: false,
+			touched: false,
+		},
+		directions: {
+			elementType: 'list',
+			value: [...directions],
+			validation: {
+				required: true,
+			},
+			valid: false,
+			touched: false,
+		},
+	});
+	const [formIsValid, setFormIsValid] = useState(false);
+
 	useEffect(() => {
 		[...props.routes].forEach(route => {
 			switch (window.location.pathname) {
@@ -109,59 +185,86 @@ const CreateRecipePage = props => {
 		});
 	}, [props.tabValue, props.routes]);
 
+	const newRecipeHandler = event => {};
+
+	const basicInputChangedHandler = (event, inputID) => {
+		const updatedFormElement = updateObject(basicRecipeForm[inputID], {
+			value: event.target.value,
+		});
+
+		const updatedForm = updateObject(basicRecipeForm, {
+			[inputID]: updatedFormElement,
+		});
+
+		setBasicRecipeForm(updatedForm);
+		console.log(updatedForm);
+	};
+
+	let form = (
+		<React.Fragment>
+			<Grid item className={classes.titleContainer}>
+				<Typography
+					variant={matchesSM ? 'h4' : 'h3'}
+					style={{ fontWeight: 'bold' }}
+				>
+					Basic Recipe Info
+				</Typography>
+			</Grid>
+			<Grid item>
+				<BasicRecipeInfoInputs
+					changed={basicInputChangedHandler}
+					prepTimeUnits={basicRecipeForm.prepTimeUnits.value}
+					cookTimeUnits={basicRecipeForm.cookTimeUnits.value}
+					difficulty={basicRecipeForm.difficulty.value}
+				/>
+			</Grid>
+			<Grid item>
+				<ImageUpload />
+			</Grid>
+			<Grid item className={classes.titleContainer}>
+				<Typography
+					variant={matchesSM ? 'h4' : 'h3'}
+					style={{ fontWeight: 'bold' }}
+				>
+					Detailed Recipe Info
+				</Typography>
+			</Grid>
+			<Grid item className={classes.divider}>
+				<Divider />
+			</Grid>
+			<Grid item className={classes.recipeDetailsRoot}>
+				<Grid
+					container
+					direction={matchesMD ? 'column' : 'row'}
+					className={classes.recipeDetailsContainer}
+				>
+					<RecipeInstructions
+						ingredientArray={ingredients}
+						directionsArray={directions}
+						isNewRecipe
+					/>
+				</Grid>
+			</Grid>
+			<Grid item className={classes.divider}>
+				<Divider />
+			</Grid>
+			<Grid item>
+				<Button
+					className={classes.saveRecipeButton}
+					style={{ maxWidth: '140px', minWidth: '140px' }}
+					onClick={newRecipeHandler}
+				>
+					Save Recipe
+				</Button>
+			</Grid>
+		</React.Fragment>
+	);
+
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.background} square>
 				<Grid container direction='column' alignItems='center'>
-					<Grid item className={classes.titleContainer}>
-						<Typography
-							variant={matchesSM ? 'h4' : 'h3'}
-							style={{ fontWeight: 'bold' }}
-						>
-							Basic Recipe Info
-						</Typography>
-					</Grid>
-					<Grid item>
-						<BasicRecipeInfoInputs />
-					</Grid>
-					<Grid item>
-						<ImageUpload />
-					</Grid>
-					<Grid item className={classes.titleContainer}>
-						<Typography
-							variant={matchesSM ? 'h4' : 'h3'}
-							style={{ fontWeight: 'bold' }}
-						>
-							Detailed Recipe Info
-						</Typography>
-					</Grid>
-					<Grid item className={classes.divider}>
-						<Divider />
-					</Grid>
-					<Grid item className={classes.recipeDetailsRoot}>
-						<Grid
-							container
-							direction={matchesMD ? 'column' : 'row'}
-							className={classes.recipeDetailsContainer}
-						>
-							<RecipeInstructions
-								ingredientArray={ingredients}
-								directionsArray={directions}
-								isNewRecipe
-							/>
-						</Grid>
-					</Grid>
-					<Grid item className={classes.divider}>
-						<Divider />
-					</Grid>
-					<Grid item>
-						<Button
-							className={classes.saveRecipeButton}
-							style={{ maxWidth: '140px', minWidth: '140px' }}
-						>
-							Save Recipe
-						</Button>
-					</Grid>
+					{form}
 				</Grid>
 			</Paper>
 		</div>
