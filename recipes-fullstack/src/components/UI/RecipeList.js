@@ -58,8 +58,8 @@ const RecipeList = props => {
 	return (
 		<div className={props.isNewRecipe ? classes.rootAlternate : classes.root}>
 			<List className={classes.listContainer}>
-				{props.array.map(value => (
-					<ListItemWithWiderSecondaryAction>
+				{props.array.map((value, index) => (
+					<ListItemWithWiderSecondaryAction key={index}>
 						<ListItemIcon>
 							<ArrowRightIcon />
 						</ListItemIcon>
