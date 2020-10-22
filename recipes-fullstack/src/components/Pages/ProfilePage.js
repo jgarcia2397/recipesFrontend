@@ -107,13 +107,13 @@ const ProfilePage = props => {
 						<Typography
 							variant='h4'
 							style={{ fontWeight: 'bold' }}
-							align={matchesSM ? 'center' : ''}
+							align={matchesSM ? 'center' : 'left'}
 						>
 							About Me
 						</Typography>
 					</Grid>
 					<Grid item className={classes.profileText}>
-						<Typography variant='body1' align={matchesSM ? 'center' : ''}>
+						<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
 							My name's Cheffff... Just kidding, my real name is up top! I love
 							to cook and Gordon Ramsey is my hero! I wanna be like him someday,
 							but I'm not a great chef like him. I can make some decent
@@ -124,13 +124,13 @@ const ProfilePage = props => {
 						<Typography
 							variant='h4'
 							style={{ fontWeight: 'bold' }}
-							align={matchesSM ? 'center' : ''}
+							align={matchesSM ? 'center' : 'left'}
 						>
 							Favourite Things to Cook
 						</Typography>
 					</Grid>
 					<Grid item className={classes.profileText}>
-						<Typography variant='body1' align={matchesSM ? 'center' : ''}>
+						<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
 							I like to make Idiot Sandwiches and Gordon's famous Lamb Sauce.
 						</Typography>
 					</Grid>
@@ -138,7 +138,7 @@ const ProfilePage = props => {
 						<Typography
 							variant='h4'
 							style={{ fontWeight: 'bold' }}
-							align={matchesSM ? 'center' : ''}
+							align={matchesSM ? 'center' : 'left'}
 						>
 							Recipe Preview
 						</Typography>

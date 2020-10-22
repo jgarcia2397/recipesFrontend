@@ -60,12 +60,12 @@ const UserProfile = props => {
 					className={classes.profileTitlesContainer}
 				>
 					<Grid item>
-						<Typography variant='h3' align={matchesXS ? 'center' : ''}>
+						<Typography variant='h3' align={matchesXS ? 'center' : 'left'}>
 							Joshua Garcia
 						</Typography>
 					</Grid>
 					<Grid item>
-						<Typography variant='h4' align={matchesXS ? 'center' : ''}>
+						<Typography variant='h4' align={matchesXS ? 'center' : 'left'}>
 							Master Chef
 						</Typography>
 					</Grid>
