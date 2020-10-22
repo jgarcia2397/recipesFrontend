@@ -66,14 +66,14 @@ const ViewPageLinks = props => {
 		<Grid
 			container
 			direction={matchesSM ? 'column' : 'row'}
-			alignItems={matchesSM ? 'center' : 'inherit'}
+			alignItems={matchesSM ? 'center' : 'flex-start'}
 			className={classes.cardsContainer}
 		>
 			<Grid item className={matchesSM ? classes.rootSM : classes.root}>
 				<Grid
 					container
 					direction='column'
-					alignItems={matchesSM ? 'center' : 'inherit'}
+					alignItems={matchesSM ? 'center' : 'flex-start'}
 					justify='space-between'
 					style={{ marginBottom: matchesSM ? '35px' : 0 }}
 				>
