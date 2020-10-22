@@ -48,19 +48,21 @@ const useStyles = makeStyles(theme => ({
 const RecipePage = props => {
 	const classes = useStyles();
 
+	const {tabValue, routes, setTabValue} = props;
+
 	useEffect(() => {
-		[...props.routes].forEach(route => {
+		[...routes].forEach(route => {
 			switch (window.location.pathname) {
 				case `${route.link}`:
-					if (props.tabValue !== route.activeIndex) {
-						props.setTabValue(route.activeIndex);
+					if (tabValue !== route.activeIndex) {
+						setTabValue(route.activeIndex);
 					}
 					break;
 				default:
 					break;
 			}
 		});
-	}, [props.tabValue, props.routes]);
+	}, [tabValue, routes, setTabValue]);
 
 	return (
 		<div className={classes.root}>
@@ -75,15 +77,15 @@ const RecipePage = props => {
 							style={{ maxWidth: '150px', minWidth: '150px' }}
 							component={Link}
 							to='/new-recipe'
-							onClick={() => props.setTabValue(-1)}
+							onClick={() => setTabValue(-1)}
 						>
 							New Recipe
 						</Button>
 					</Grid>
 					<Grid item className={classes.recipeCardsContainer}>
-						<RecipeCard setTabValue={props.setTabValue} />
-						<RecipeCard setTabValue={props.setTabValue} />
-						<RecipeCard setTabValue={props.setTabValue} />
+						<RecipeCard setTabValue={setTabValue} />
+						<RecipeCard setTabValue={setTabValue} />
+						<RecipeCard setTabValue={setTabValue} />
 					</Grid>
 				</Grid>
 			</Paper>

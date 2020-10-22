@@ -76,19 +76,21 @@ const ProfilePage = props => {
 
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
+	const {tabValue, routes, setTabValue} = props;
+
 	useEffect(() => {
-		[...props.routes].forEach(route => {
+		[...routes].forEach(route => {
 			switch (window.location.pathname) {
 				case `${route.link}`:
-					if (props.tabValue !== route.activeIndex) {
-						props.setTabValue(route.activeIndex);
+					if (tabValue !== route.activeIndex) {
+						setTabValue(route.activeIndex);
 					}
 					break;
 				default:
 					break;
 			}
 		});
-	}, [props.tabValue, props.routes]);
+	}, [tabValue, routes, setTabValue]);
 
 	return (
 		<div className={classes.root}>
