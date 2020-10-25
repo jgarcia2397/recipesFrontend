@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 		},
 		[theme.breakpoints.down('xs')]: {
 			maxHeight: '70%',
-		}
+		},
 	},
 	rootAlternate: {
 		overflow: 'auto',
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 		},
 		[theme.breakpoints.down('xs')]: {
 			maxHeight: '70%',
-		}
+		},
 	},
 }));
 
@@ -65,10 +65,22 @@ const RecipeList = props => {
 						</ListItemIcon>
 						<ListItemText primary={value} />
 						<ListItemSecondaryAction>
-							<IconButton edge='end' aria-label='edit'>
+							<IconButton
+								edge='end'
+								aria-label='edit'
+								onClick={() => {
+									props.clicked('Edit');
+								}}
+							>
 								<EditIcon />
 							</IconButton>
-							<IconButton edge='end' aria-label='delete'>
+							<IconButton
+								edge='end'
+								aria-label='delete'
+								onClick={() => {
+									props.clicked('Delete');
+								}}
+							>
 								<DeleteIcon />
 							</IconButton>
 						</ListItemSecondaryAction>

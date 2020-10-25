@@ -61,13 +61,15 @@ const Modal = props => {
 		>
 			<DialogContent className={classes.contentContainer}>
 				<Typography variant='h4' className={classes.modalTitleContainer}>
-					Add New Ingredient
+					{props.mode} Ingredient{props.mode === 'Delete' ? '?' : ''}
 				</Typography>
-				<TextField
-					id='newEntry'
-					variant='outlined'
-					className={classes.textInput}
-				/>
+				{props.mode !== 'Delete' ? (
+					<TextField
+						id='newEntry'
+						variant='outlined'
+						className={classes.textInput}
+					/>
+				) : null}
 			</DialogContent>
 			<DialogActions>
 				<Button
@@ -80,7 +82,7 @@ const Modal = props => {
 					onClick={props.modalCloseHandler}
 					className={classes.confirmButton}
 				>
-					Save
+					{props.mode === 'Delete' ? 'Delete' : 'Save'}
 				</Button>
 			</DialogActions>
 		</Dialog>

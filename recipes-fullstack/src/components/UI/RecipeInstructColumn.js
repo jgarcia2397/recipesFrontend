@@ -33,6 +33,7 @@ const RecipeInstructColumn = props => {
 	const theme = useTheme();
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [clickedButton, setClickedButton] = useState('Add New');
 
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -44,18 +45,36 @@ const RecipeInstructColumn = props => {
 		setIsModalOpen(false);
 	};
 
+	const buttonClickHandler = buttonType => {
+		setClickedButton(buttonType);
+		modalOpenHandler();
+		// console.log(clickedButton);
+	};
+
 	return (
 		<React.Fragment>
 			<Typography variant={matchesXS ? 'h5' : 'h4'} className={classes.titles}>
 				{props.label}
 			</Typography>
-			<RecipeList array={props.array} isNewRecipe={props.isNewRecipe} />
+			<RecipeList
+				array={props.array}
+				isNewRecipe={props.isNewRecipe}
+				clicked={buttonClickHandler}
+			/>
 			<div className={classes.addButtonContainer}>
-				<Button onClick={modalOpenHandler}>
+				<Button
+					onClick={() => {
+						buttonClickHandler('Add New');
+					}}
+				>
 					<AddCircleOutlinedIcon />
 				</Button>
 			</div>
-			<Modal isOpen={isModalOpen} modalCloseHandler={modalCloseHandler} />
+			<Modal
+				isOpen={isModalOpen}
+				modalCloseHandler={modalCloseHandler}
+				mode={clickedButton}
+			/>
 		</React.Fragment>
 	);
 };
