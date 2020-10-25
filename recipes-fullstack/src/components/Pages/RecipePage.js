@@ -77,7 +77,6 @@ const RecipePage = props => {
 							style={{ maxWidth: '150px', minWidth: '150px' }}
 							component={Link}
 							to='/new-recipe'
-							onClick={() => setTabValue(-1)}
 						>
 							New Recipe
 						</Button>

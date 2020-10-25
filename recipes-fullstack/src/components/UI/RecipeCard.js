@@ -84,7 +84,6 @@ const RecipeCard = props => {
 				classes={{ root: classes.cardActionContainer }}
 				component={Link}
 				to='/recipe-full-details'
-				onClick={() => props.setTabValue(-1)}
 			>
 				<Grid
 					container
