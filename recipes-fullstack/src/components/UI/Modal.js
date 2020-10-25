@@ -48,6 +48,23 @@ const Modal = props => {
 	const classes = useStyles();
 	const theme = useTheme();
 
+	let textField =
+		props.columnType === 'Ingredients' ? (
+			<TextField
+				id='newEntry'
+				variant='outlined'
+				className={classes.textInput}
+			/>
+		) : (
+			<TextField
+				id='newEntry'
+				variant='outlined'
+				className={classes.textInput}
+				multiline
+				rows={4}
+			/>
+		);
+
 	return (
 		<Dialog
 			style={{ zIndex: theme.zIndex.modal + 2 }}
@@ -61,15 +78,11 @@ const Modal = props => {
 		>
 			<DialogContent className={classes.contentContainer}>
 				<Typography variant='h4' className={classes.modalTitleContainer}>
-					{props.mode} Ingredient{props.mode === 'Delete' ? '?' : ''}
+					{props.mode}{' '}
+					{props.columnType === 'Ingredients' ? 'Ingredient' : 'Direction'}
+					{props.mode === 'Delete' ? '?' : ''}
 				</Typography>
-				{props.mode !== 'Delete' ? (
-					<TextField
-						id='newEntry'
-						variant='outlined'
-						className={classes.textInput}
-					/>
-				) : null}
+				{props.mode !== 'Delete' ? textField : null}
 			</DialogContent>
 			<DialogActions>
 				<Button
