@@ -74,7 +74,8 @@ const RecipeInstructColumn = props => {
 				isOpen={isModalOpen}
 				modalCloseHandler={modalCloseHandler}
                 mode={clickedButton}
-                columnType={props.label}
+				columnType={props.label}
+				listChange={props.changedList}
 			/>
 		</React.Fragment>
 	);

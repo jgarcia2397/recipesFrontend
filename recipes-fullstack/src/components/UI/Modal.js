@@ -55,6 +55,13 @@ const Modal = props => {
 		// console.log(textValue);
 	};
 
+	const updateRecipeDetailHandler = () => {
+		const listType = props.columnType === 'Ingredients' ? 'ingredients' : 'directions';
+
+		props.listChange(textValue, listType);
+		props.modalCloseHandler();
+	};
+
 	let textField =
 		props.columnType === 'Ingredients' ? (
 			<TextField
@@ -95,13 +102,13 @@ const Modal = props => {
 			</DialogContent>
 			<DialogActions>
 				<Button
-					onClick={props.modalCloseHandler}
+					onClick={updateRecipeDetailHandler}
 					className={classes.cancelButton}
 				>
 					Cancel
 				</Button>
 				<Button
-					onClick={props.modalCloseHandler}
+					onClick={updateRecipeDetailHandler}
 					className={classes.confirmButton}
 				>
 					{props.mode === 'Delete' ? 'Delete' : 'Save'}

@@ -56,6 +56,7 @@ const RecipeInstructions = props => {
 					label='Ingredients'
 					array={props.ingredientArray}
 					isNewRecipe={props.isNewRecipe}
+					changedList={props.changedListHandler}
 				/>
 			</Grid>
 			<Grid item className={classes.divider}>
@@ -73,6 +74,7 @@ const RecipeInstructions = props => {
 					label='Directions'
 					array={props.directionsArray}
 					isNewRecipe={props.isNewRecipe}
+					changedList={props.changedListHandler}
 				/>
 			</Grid>
 		</React.Fragment>
