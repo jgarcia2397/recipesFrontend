@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
@@ -48,12 +48,20 @@ const Modal = props => {
 	const classes = useStyles();
 	const theme = useTheme();
 
+	const [textValue, setTextValue] = useState('');
+
+	const inputChangedHandler = (event) => {
+		setTextValue(event.target.value);
+		// console.log(textValue);
+	};
+
 	let textField =
 		props.columnType === 'Ingredients' ? (
 			<TextField
 				id='newEntry'
 				variant='outlined'
 				className={classes.textInput}
+				onChange={event => inputChangedHandler(event)}
 			/>
 		) : (
 			<TextField
@@ -62,6 +70,7 @@ const Modal = props => {
 				className={classes.textInput}
 				multiline
 				rows={4}
+				onChange={event => inputChangedHandler(event)}
 			/>
 		);
 
