@@ -70,32 +70,6 @@ const CreateRecipePage = props => {
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
-	// const ingredients = [
-	// 	'1/2 cup butter',
-	// 	'3 tablespoons flour',
-	// 	'1/4 cup water',
-	// 	'1/2 cup sugar',
-	// 	'6 apples',
-	// ];
-	// const directions = [
-	// 	'Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees.',
-	// 	'Make crust',
-	// 	'Start peeling and slicing apples',
-	// 	'Make crust',
-	// 	'Make crust',
-	// 	'Start peeling and slicing apples',
-	// 	'Make crust',
-	// 	'Make crust',
-	// 	'Start peeling and slicing apples',
-	// 	'Make crust',
-	// 	'Make crust',
-	// 	'Start peeling and slicing apples',
-	// 	'Make crust',
-	// 	'Make crust',
-	// 	'Start peeling and slicing apples',
-	// 	'Make crust',
-	// ];
-
 	const [basicRecipeForm, setBasicRecipeForm] = useState({
 		prepTime: {
 			elementType: 'input',
@@ -152,7 +126,6 @@ const CreateRecipePage = props => {
 	const [detailRecipeForm, setDetailRecipeForm] = useState({
 		ingredients: {
 			elementType: 'list',
-			// value: [...ingredients],
 			value: [],
 			validation: {
 				required: true,
@@ -162,7 +135,6 @@ const CreateRecipePage = props => {
 		},
 		directions: {
 			elementType: 'list',
-			// value: [...directions],
 			value: [],
 			validation: {
 				required: true,
