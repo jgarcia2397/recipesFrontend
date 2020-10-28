@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -12,6 +13,8 @@ import { updateObject } from '../../shared/utility';
 import BasicRecipeInfoInputs from '../UI/BasicRecipeInfoInputs';
 import ImageUpload from '../UI/ImageUpload';
 import RecipeInstructions from '../UI/RecipeInstructions';
+
+import * as actions from '../../store/actions/index';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -145,6 +148,10 @@ const CreateRecipePage = props => {
 	});
 	const [formIsValid, setFormIsValid] = useState(false);
 
+	const dispatch = useDispatch();
+
+	const onCreateRecipe = (basicDetails, ingredients, directions) => dispatch(actions.createRecipe(basicDetails, ingredients, directions));
+
 	const {tabValue, routes, setTabValue} = props;
 
 	useEffect(() => {
@@ -161,7 +168,19 @@ const CreateRecipePage = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
-	const newRecipeHandler = event => {};
+	const newRecipeHandler = event => {
+		// event.preventDefault();
+
+		const basicDetails = {};
+		for (let formElementID in basicRecipeForm) {
+			basicDetails[formElementID] = basicRecipeForm[formElementID].value;
+		}
+
+		const ingredientList = [...detailRecipeForm.ingredients.value];
+		const directionList = [...detailRecipeForm.directions.value];
+
+		onCreateRecipe(basicDetails, ingredientList, directionList);
+	};
 
 	const basicInputChangedHandler = (event, inputID) => {
 		const updatedFormElement = updateObject(basicRecipeForm[inputID], {
@@ -265,4 +284,13 @@ const CreateRecipePage = props => {
 	);
 };
 
+
 export default CreateRecipePage;
+
+// const mapDispatchToProps = dispatch => {
+// 	return {
+// 		onCreateRecipe: (basicDetails, ingredients, directions) => dispatch(actions.createRecipe(basicDetails, ingredients, directions)),
+// 	};
+// };
+
+// export default connect(null, mapDispatchToProps)(CreateRecipePage);
