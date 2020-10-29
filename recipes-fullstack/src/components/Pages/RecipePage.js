@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 const RecipePage = props => {
 	const classes = useStyles();
 
-	const {tabValue, routes, setTabValue} = props;
+	const { tabValue, routes, setTabValue } = props;
 
 	useEffect(() => {
 		[...routes].forEach(route => {
@@ -68,6 +68,8 @@ const RecipePage = props => {
 	}, [tabValue, routes, setTabValue]);
 
 	const dispatch = useDispatch();
+
+	const recipes = useSelector(state => state.createRecipe.recipes);
 
 	const onCreateRecipeInit = () => dispatch(actions.createRecipeInit());
 
@@ -90,9 +92,16 @@ const RecipePage = props => {
 						</Button>
 					</Grid>
 					<Grid item className={classes.recipeCardsContainer}>
-						<RecipeCard setTabValue={setTabValue} />
-						<RecipeCard setTabValue={setTabValue} />
-						<RecipeCard setTabValue={setTabValue} />
+						{/* <RecipeCard setTabValue={setTabValue} /> */}
+						{recipes.map(recipe => (
+							<RecipeCard
+								prepTime={recipe.basicDetails.prepTime}
+								cookTime={recipe.basicDetails.cookTime}
+								prepTimeUnits={recipe.basicDetails.prepTimeUnits}
+								cookTimeUnits={recipe.basicDetails.cookTimeUnits}
+								setTabValue={setTabValue}
+							/>
+						))}
 					</Grid>
 				</Grid>
 			</Paper>
