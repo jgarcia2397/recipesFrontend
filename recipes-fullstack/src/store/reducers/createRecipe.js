@@ -2,41 +2,44 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../shared/utility';
 
 const initialState = {
-    recipes: [],
-	// basicDetails: [],
-	// ingredients: [],
-	// directions: [],
+	recipes: [],
+	recipeCreated: false,
 	loading: false,
 	error: null,
 };
 
 const createRecipeStart = (state, action) => {
-    return updateObject(state, { loading: true });
+	return updateObject(state, { loading: true, recipeCreated: false });
 };
 
 const createRecipeSuccess = (state, action) => {
-    const newIngredients = [...action.ingredients];
-    const newDirections = [...action.directions];
+	const newIngredients = [...action.ingredients];
+	const newDirections = [...action.directions];
 
-    const newRecipe = {
-        basicDetails: action.basicDetails,
-        ingredients: newIngredients,
-        directions: newDirections,
-    };
+	const newRecipe = {
+		basicDetails: action.basicDetails,
+		ingredients: newIngredients,
+		directions: newDirections,
+	};
 
-    const newRecipeList = [...state.recipes, newRecipe];
+	const newRecipeList = [...state.recipes, newRecipe];
 
-    const updatedObject = {
-        recipes: newRecipeList,
-        loading: false,
-        error: null,
-    };
+	const updatedObject = {
+		recipes: newRecipeList,
+		loading: false,
+		error: null,
+		recipeCreated: true,
+	};
 
-    return updateObject(state, updatedObject);
+	return updateObject(state, updatedObject);
 };
 
 const createRecipeFailed = (state, action) => {
-	return updateObject(state, { loading: false, error: action.error });
+	return updateObject(state, {
+		loading: false,
+		recipeCreated: false,
+		error: action.error,
+	});
 };
 
 const reducer = (state = initialState, action) => {

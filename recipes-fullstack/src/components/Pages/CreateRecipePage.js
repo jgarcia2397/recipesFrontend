@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -150,6 +151,8 @@ const CreateRecipePage = props => {
 
 	const dispatch = useDispatch();
 
+	const isRecipeCreated = useSelector(state => state.createRecipe.recipeCreated);
+
 	const onCreateRecipe = (basicDetails, ingredients, directions) => dispatch(actions.createRecipe(basicDetails, ingredients, directions));
 
 	const {tabValue, routes, setTabValue} = props;
@@ -273,8 +276,11 @@ const CreateRecipePage = props => {
 		</React.Fragment>
 	);
 
+	const createRecipeRedirect = isRecipeCreated ? <Redirect to='/recipes' /> : null;
+
 	return (
 		<div className={classes.root}>
+			{createRecipeRedirect}
 			<Paper className={classes.background} square>
 				<Grid container direction='column' alignItems='center'>
 					{form}
@@ -284,13 +290,4 @@ const CreateRecipePage = props => {
 	);
 };
 
-
 export default CreateRecipePage;
-
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		onCreateRecipe: (basicDetails, ingredients, directions) => dispatch(actions.createRecipe(basicDetails, ingredients, directions)),
-// 	};
-// };
-
-// export default connect(null, mapDispatchToProps)(CreateRecipePage);
