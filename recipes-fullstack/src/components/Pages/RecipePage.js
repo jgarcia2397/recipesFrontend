@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -8,6 +9,8 @@ import Button from '@material-ui/core/Button';
 
 import RecipeCard from '../../components/UI/RecipeCard';
 import { Typography } from '@material-ui/core';
+
+import * as actions from '../../store/actions/index';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -64,6 +67,10 @@ const RecipePage = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
+	const dispatch = useDispatch();
+
+	const onCreateRecipeInit = () => dispatch(actions.createRecipeInit());
+
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.background} square>
@@ -77,6 +84,7 @@ const RecipePage = props => {
 							style={{ maxWidth: '150px', minWidth: '150px' }}
 							component={Link}
 							to='/new-recipe'
+							onClick={() => onCreateRecipeInit()}
 						>
 							New Recipe
 						</Button>

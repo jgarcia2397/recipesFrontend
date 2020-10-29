@@ -1,5 +1,11 @@
 import * as actionTypes from './actionTypes';
 
+export const createRecipeInit = () => {
+	return {
+		type: actionTypes.CREATE_RECIPE_INIT,
+	};
+};
+
 export const createRecipeStart = () => {
 	return {
 		type: actionTypes.CREATE_RECIPE_START,

@@ -8,6 +8,10 @@ const initialState = {
 	error: null,
 };
 
+const createRecipeInit = (state, action) => {
+	return updateObject(state, { recipeCreated: false });
+};
+
 const createRecipeStart = (state, action) => {
 	return updateObject(state, { loading: true, recipeCreated: false });
 };
@@ -44,6 +48,8 @@ const createRecipeFailed = (state, action) => {
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
+        case actionTypes.CREATE_RECIPE_INIT:
+			return createRecipeInit(state, action);
 		case actionTypes.CREATE_RECIPE_START:
 			return createRecipeStart(state, action);
 		case actionTypes.CREATE_RECIPE_SUCCESS:
