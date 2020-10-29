@@ -101,7 +101,7 @@ const RecipeCard = props => {
 					</Grid>
 					<Grid item className={classes.contentContainer}>
 						<CardContent classes={{ root: classes.contentRoot }}>
-							<Typography variant='h4'>Apple Pie</Typography>
+							<Typography variant='h4'>{props.recipeName}</Typography>
 							<Typography variant='body1'>
 								Prep Time: {props.prepTime} {props.prepTimeUnits}
 							</Typography>

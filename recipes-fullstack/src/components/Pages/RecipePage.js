@@ -95,6 +95,7 @@ const RecipePage = props => {
 						{/* <RecipeCard setTabValue={setTabValue} /> */}
 						{recipes.map(recipe => (
 							<RecipeCard
+								recipeName={recipe.basicDetails.recipeName}
 								prepTime={recipe.basicDetails.prepTime}
 								cookTime={recipe.basicDetails.cookTime}
 								prepTimeUnits={recipe.basicDetails.prepTimeUnits}
