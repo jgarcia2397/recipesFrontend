@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 import { updateObject } from '../../shared/utility';
 import BasicRecipeInfoInputs from '../UI/BasicRecipeInfoInputs';
@@ -65,6 +66,13 @@ const useStyles = makeStyles(theme => ({
 			marginBottom: '60px',
 		},
 	},
+	textInput: {
+		width: '15vw',
+		minWidth: '150px',
+	},
+	recipeNameInput: {
+		marginBottom: '25px',
+	},
 }));
 
 const CreateRecipePage = props => {
@@ -75,6 +83,15 @@ const CreateRecipePage = props => {
 	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
 	const [basicRecipeForm, setBasicRecipeForm] = useState({
+		recipeName: {
+			elementType: 'input',
+			value: '',
+			validation: {
+				required: true,
+			},
+			valid: false,
+			// touched: false,
+		},
 		prepTime: {
 			elementType: 'input',
 			value: '',
@@ -151,11 +168,14 @@ const CreateRecipePage = props => {
 
 	const dispatch = useDispatch();
 
-	const isRecipeCreated = useSelector(state => state.createRecipe.recipeCreated);
+	const isRecipeCreated = useSelector(
+		state => state.createRecipe.recipeCreated
+	);
 
-	const onCreateRecipe = (basicDetails, ingredients, directions) => dispatch(actions.createRecipe(basicDetails, ingredients, directions));
+	const onCreateRecipe = (basicDetails, ingredients, directions) =>
+		dispatch(actions.createRecipe(basicDetails, ingredients, directions));
 
-	const {tabValue, routes, setTabValue} = props;
+	const { tabValue, routes, setTabValue } = props;
 
 	useEffect(() => {
 		[...routes].forEach(route => {
@@ -199,7 +219,7 @@ const CreateRecipePage = props => {
 	};
 
 	const detailedListChangedHandler = (modalTextValue, list) => {
-		const oldListState = {...detailRecipeForm[list]};
+		const oldListState = { ...detailRecipeForm[list] };
 		const oldList = [...oldListState.value];
 		const newList = [...oldList, modalTextValue];
 
@@ -224,6 +244,15 @@ const CreateRecipePage = props => {
 				>
 					Basic Recipe Info
 				</Typography>
+			</Grid>
+			<Grid item className={classes.recipeNameInput}>
+				<TextField
+					id='recipeName'
+					label='Recipe Name'
+					variant='outlined'
+					className={classes.textInput}
+					onChange={event => basicInputChangedHandler(event, 'recipeName')}
+				/>
 			</Grid>
 			<Grid item>
 				<BasicRecipeInfoInputs
@@ -276,7 +305,9 @@ const CreateRecipePage = props => {
 		</React.Fragment>
 	);
 
-	const createRecipeRedirect = isRecipeCreated ? <Redirect to='/recipes' /> : null;
+	const createRecipeRedirect = isRecipeCreated ? (
+		<Redirect to='/recipes' />
+	) : null;
 
 	return (
 		<div className={classes.root}>
