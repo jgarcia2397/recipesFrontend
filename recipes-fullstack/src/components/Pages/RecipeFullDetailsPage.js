@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -40,47 +41,7 @@ const RecipeFullDetailsPage = props => {
 	const theme = useTheme();
 	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
-	const ingredients = [
-		'1/2 cup butter',
-		'3 tablespoons flour',
-		'1/4 cup water',
-		'1/2 cup sugar',
-		'6 apples',
-	];
-
-	const directions = [
-		'Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees. Preheat oven to 350 degrees.',
-		'Make crust',
-		'Start peeling and slicing apples',
-		'Mix apples with water and sugar',
-		'Boil mixture in saucepan until thick',
-		'Pour mixture in pie crust',
-		'Bake pie for 45 mins',
-		'Make crust',
-		'Start peeling and slicing apples',
-		'Mix apples with water and sugar',
-		'Boil mixture in saucepan until thick',
-		'Pour mixture in pie crust',
-		'Bake pie for 45 mins',
-		'Make crust',
-		'Start peeling and slicing apples',
-		'Mix apples with water and sugar',
-		'Boil mixture in saucepan until thick',
-		'Pour mixture in pie crust',
-		'Bake pie for 45 mins',
-		'Make crust',
-		'Start peeling and slicing apples',
-		'Mix apples with water and sugar',
-		'Boil mixture in saucepan until thick',
-		'Pour mixture in pie crust',
-		'Bake pie for 45 mins',
-		'Make crust',
-		'Start peeling and slicing apples',
-		'Mix apples with water and sugar',
-		'Boil mixture in saucepan until thick',
-		'Pour mixture in pie crust',
-		'Bake pie for 45 mins',
-	];
+	const recipes = useSelector(state => state.createRecipe.recipes);
 
 	const {tabValue, routes, setTabValue} = props;
 
@@ -98,8 +59,6 @@ const RecipeFullDetailsPage = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
-	console.log(props.location.id);
-
 	return (
 		<Grid
 			container
@@ -107,14 +66,22 @@ const RecipeFullDetailsPage = props => {
 			className={classes.root}
 		>
 			<Grid item className={classes.infoColumn}>
-				<RecipeInfoColumn />
+				<RecipeInfoColumn
+					recipeName={recipes[props.location.id.cardId].basicDetails.recipeName}
+					prepTime={recipes[props.location.id.cardId].basicDetails.prepTime}
+					cookTime={recipes[props.location.id.cardId].basicDetails.cookTime}
+					prepTimeUnits={recipes[props.location.id.cardId].basicDetails.prepTimeUnits}
+					cookTimeUnits={recipes[props.location.id.cardId].basicDetails.cookTimeUnits}
+					servings={recipes[props.location.id.cardId].basicDetails.servings}
+					difficulty={recipes[props.location.id.cardId].basicDetails.difficulty}
+				/>
 			</Grid>
 			<Grid item className={classes.divider}>
 				<Divider orientation={matchesMD ? 'horizontal' : 'vertical'} />
 			</Grid>
 			<RecipeInstructions
-				ingredientArray={ingredients}
-				directionsArray={directions}
+				ingredientArray={recipes[props.location.id.cardId].ingredients}
+				directionsArray={recipes[props.location.id.cardId].directions}
 			/>
 		</Grid>
 	);

@@ -82,32 +82,27 @@ const RecipeInfoColumn = props => {
 			</Grid>
 			<Grid item>
 				<Typography variant={matchesXS ? 'h4' : 'h3'} className={classes.recipeTitle}>
-					Apple Pie
+					{props.recipeName}
 				</Typography>
 			</Grid>
 			<Grid item>
 				<Typography variant={matchesXS ? 'body2' : 'body1'} className={classes.info}>
-					Prep Time: 20 mins
+					Prep Time: {props.prepTime} {props.prepTimeUnits}
 				</Typography>
 			</Grid>
 			<Grid item>
 				<Typography variant={matchesXS ? 'body2' : 'body1'} className={classes.info}>
-					Cook Time: 1 hr
+					Cook Time: {props.cookTime} {props.cookTimeUnits}
 				</Typography>
 			</Grid>
 			<Grid item>
 				<Typography variant={matchesXS ? 'body2' : 'body1'} className={classes.info}>
-					Total Time: 1 hr 20 mins
+					Servings: {props.servings}
 				</Typography>
 			</Grid>
 			<Grid item>
 				<Typography variant={matchesXS ? 'body2' : 'body1'} className={classes.info}>
-					Servings: 10
-				</Typography>
-			</Grid>
-			<Grid item>
-				<Typography variant={matchesXS ? 'body2' : 'body1'} className={classes.info}>
-					Difficulty: Medium
+					Difficulty: {props.difficulty}
 				</Typography>
 			</Grid>
 			<Grid item>
