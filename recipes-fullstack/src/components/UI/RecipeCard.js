@@ -83,7 +83,10 @@ const RecipeCard = props => {
 			<CardActionArea
 				classes={{ root: classes.cardActionContainer }}
 				component={Link}
-				to='/recipe-full-details'
+				to={{
+					pathname: '/recipe-full-details',
+					id: { cardId: props.id },
+				}}
 			>
 				<Grid
 					container

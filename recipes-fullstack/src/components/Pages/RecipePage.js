@@ -96,6 +96,7 @@ const RecipePage = props => {
 						{recipes.map((recipe, index) => (
 							<RecipeCard
 								key={index}
+								id={index}
 								recipeName={recipe.basicDetails.recipeName}
 								prepTime={recipe.basicDetails.prepTime}
 								cookTime={recipe.basicDetails.cookTime}
