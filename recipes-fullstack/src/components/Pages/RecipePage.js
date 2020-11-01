@@ -93,8 +93,9 @@ const RecipePage = props => {
 					</Grid>
 					<Grid item className={classes.recipeCardsContainer}>
 						{/* <RecipeCard setTabValue={setTabValue} /> */}
-						{recipes.map(recipe => (
+						{recipes.map((recipe, index) => (
 							<RecipeCard
+								key={index}
 								recipeName={recipe.basicDetails.recipeName}
 								prepTime={recipe.basicDetails.prepTime}
 								cookTime={recipe.basicDetails.cookTime}
