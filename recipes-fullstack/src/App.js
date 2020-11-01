@@ -55,8 +55,9 @@ function App() {
 					<Route
 						exact
 						path='/recipe-full-details'
-						render={() => (
+						render={props => (
 							<RecipeFullDetailsPage
+								{...props}
 								routes={routes}
 								setTabValue={setTabValue}
 							/>

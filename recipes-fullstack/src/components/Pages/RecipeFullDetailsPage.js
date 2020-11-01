@@ -98,6 +98,8 @@ const RecipeFullDetailsPage = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
+	console.log(props.location.id);
+
 	return (
 		<Grid
 			container
