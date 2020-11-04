@@ -50,17 +50,18 @@ const Modal = props => {
 
 	const [textValue, setTextValue] = useState('');
 
-	const { mode } = props;
+	const { mode, textToEdit } = props;
 
 	useEffect(() => {
-		if (mode === 'Delete') {
+		if (mode === 'Delete' || mode === 'Add New') {
 			setTextValue('');
+		} else if (mode === 'Edit') {
+			setTextValue(textToEdit);
 		}
-	}, [mode]);
+	}, [mode, textToEdit]);
 
 	const inputChangedHandler = (event) => {
 		setTextValue(event.target.value);
-		// console.log(textValue);
 	};
 
 	const updateRecipeDetailHandler = () => {
@@ -68,7 +69,9 @@ const Modal = props => {
 
 		props.listChange(textValue, props.mode, listType, props.clickedListIndex);
 		props.modalCloseHandler();
+		setTextValue('');
 	};
+
 	const cancelHandler = () => {
 		props.modalCloseHandler();
 	};
@@ -78,6 +81,7 @@ const Modal = props => {
 			<TextField
 				id='newEntry'
 				variant='outlined'
+				defaultValue={textValue}
 				className={classes.textInput}
 				onChange={event => inputChangedHandler(event)}
 			/>
@@ -85,6 +89,7 @@ const Modal = props => {
 			<TextField
 				id='newEntry'
 				variant='outlined'
+				defaultValue={textValue}
 				className={classes.textInput}
 				multiline
 				rows={4}

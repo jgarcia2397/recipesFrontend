@@ -69,7 +69,7 @@ const RecipeList = props => {
 								edge='end'
 								aria-label='edit'
 								onClick={() => {
-									props.clicked('Edit', index);
+									props.clicked('Edit', index, value);
 								}}
 							>
 								<EditIcon />
@@ -78,7 +78,7 @@ const RecipeList = props => {
 								edge='end'
 								aria-label='delete'
 								onClick={() => {
-									props.clicked('Delete', index);
+									props.clicked('Delete', index, '');
 								}}
 							>
 								<DeleteIcon />
