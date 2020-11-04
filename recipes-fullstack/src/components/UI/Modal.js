@@ -69,6 +69,9 @@ const Modal = props => {
 		props.listChange(textValue, listType, props.clickedListIndex);
 		props.modalCloseHandler();
 	};
+	const cancelHandler = () => {
+		props.modalCloseHandler();
+	};
 
 	let textField =
 		props.columnType === 'Ingredients' ? (
@@ -110,7 +113,7 @@ const Modal = props => {
 			</DialogContent>
 			<DialogActions>
 				<Button
-					onClick={updateRecipeDetailHandler}
+					onClick={cancelHandler}
 					className={classes.cancelButton}
 				>
 					Cancel
