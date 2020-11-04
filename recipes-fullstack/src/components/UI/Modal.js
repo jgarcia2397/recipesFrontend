@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
@@ -50,6 +50,14 @@ const Modal = props => {
 
 	const [textValue, setTextValue] = useState('');
 
+	const { mode } = props;
+
+	useEffect(() => {
+		if (mode === 'Delete') {
+			setTextValue('');
+		}
+	}, [mode]);
+
 	const inputChangedHandler = (event) => {
 		setTextValue(event.target.value);
 		// console.log(textValue);
@@ -58,7 +66,7 @@ const Modal = props => {
 	const updateRecipeDetailHandler = () => {
 		const listType = props.columnType === 'Ingredients' ? 'ingredients' : 'directions';
 
-		props.listChange(textValue, listType);
+		props.listChange(textValue, listType, props.clickedListIndex);
 		props.modalCloseHandler();
 	};
 

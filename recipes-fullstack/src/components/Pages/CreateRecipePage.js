@@ -218,10 +218,18 @@ const CreateRecipePage = props => {
 		console.log(updatedForm);
 	};
 
-	const detailedListChangedHandler = (modalTextValue, list) => {
+	const detailedListChangedHandler = (modalTextValue, list, index) => {
 		const oldListState = { ...detailRecipeForm[list] };
 		const oldList = [...oldListState.value];
-		const newList = [...oldList, modalTextValue];
+		let newList = [];
+
+		// console.log(modalTextValue);
+
+		if (modalTextValue === '') {		// Delete button clicked
+			newList = oldList.filter(i => oldList.indexOf(i) !== index);
+		} else {
+			newList = [...oldList, modalTextValue];
+		}
 
 		const updatedList = updateObject(detailRecipeForm[list], {
 			value: newList,

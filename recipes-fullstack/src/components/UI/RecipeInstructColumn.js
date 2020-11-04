@@ -34,6 +34,7 @@ const RecipeInstructColumn = props => {
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [clickedButton, setClickedButton] = useState('Add New');
+	const [listIndex, setListIndex] = useState(-1);
 
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -45,7 +46,9 @@ const RecipeInstructColumn = props => {
 		setIsModalOpen(false);
 	};
 
-	const buttonClickHandler = buttonType => {
+	const buttonClickHandler = (buttonType, index) => {
+		setListIndex(index);
+		// console.log(listIndex);
 		setClickedButton(buttonType);
 		modalOpenHandler();
 		// console.log(clickedButton);
@@ -64,7 +67,7 @@ const RecipeInstructColumn = props => {
 			<div className={classes.addButtonContainer}>
 				<Button
 					onClick={() => {
-						buttonClickHandler('Add New');
+						buttonClickHandler('Add New', -1);
 					}}
 				>
 					<AddCircleOutlinedIcon />
@@ -76,6 +79,7 @@ const RecipeInstructColumn = props => {
                 mode={clickedButton}
 				columnType={props.label}
 				listChange={props.changedList}
+				clickedListIndex={listIndex}
 			/>
 		</React.Fragment>
 	);
