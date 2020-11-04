@@ -66,7 +66,7 @@ const Modal = props => {
 	const updateRecipeDetailHandler = () => {
 		const listType = props.columnType === 'Ingredients' ? 'ingredients' : 'directions';
 
-		props.listChange(textValue, listType, props.clickedListIndex);
+		props.listChange(textValue, props.mode, listType, props.clickedListIndex);
 		props.modalCloseHandler();
 	};
 	const cancelHandler = () => {
