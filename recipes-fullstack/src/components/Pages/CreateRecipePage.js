@@ -227,7 +227,10 @@ const CreateRecipePage = props => {
 
 		if (mode === 'Delete') {		// Delete button clicked
 			newList = oldList.filter(i => oldList.indexOf(i) !== index);
-		} else {
+		} else if (mode === 'Edit') {	// Edit button clicked
+			oldList.splice(index, 1, modalTextValue);
+			newList = [...oldList];
+		} else {						// Add button clicked
 			newList = [...oldList, modalTextValue];
 		}
 
