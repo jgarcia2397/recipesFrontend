@@ -60,6 +60,16 @@ const RecipeInstructColumn = props => {
 		modalOpenHandler();
 	};
 
+	const addButton = props.isNewRecipe ? (
+		<Button
+			onClick={() => {
+				buttonClickHandler('Add New', -1, '');
+			}}
+		>
+			<AddCircleOutlinedIcon />
+		</Button>
+	) : null;
+
 	return (
 		<React.Fragment>
 			<Typography variant={matchesXS ? 'h5' : 'h4'} className={classes.titles}>
@@ -71,18 +81,12 @@ const RecipeInstructColumn = props => {
 				clicked={buttonClickHandler}
 			/>
 			<div className={classes.addButtonContainer}>
-				<Button
-					onClick={() => {
-						buttonClickHandler('Add New', -1, '');
-					}}
-				>
-					<AddCircleOutlinedIcon />
-				</Button>
+				{addButton}
 			</div>
 			<Modal
 				isOpen={isModalOpen}
 				modalCloseHandler={modalCloseHandler}
-                mode={clickedButton}
+				mode={clickedButton}
 				columnType={props.label}
 				listChange={props.changedList}
 				clickedListIndex={listIndex}

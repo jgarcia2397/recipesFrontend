@@ -55,6 +55,34 @@ const ListItemWithWiderSecondaryAction = withStyles({
 const RecipeList = props => {
 	const classes = useStyles();
 
+	// const editButton = (index, value) => {
+	// 	props.isNewRecipe ? (
+	// 		<IconButton
+	// 			edge='end'
+	// 			aria-label='edit'
+	// 			onClick={() => {
+	// 				props.clicked('Edit', index, value);
+	// 			}}
+	// 		>
+	// 			<EditIcon />
+	// 		</IconButton>
+	// 	) : null;
+	// };
+
+	// const deleteButton = index => {
+	// 	props.isNewRecipe ? (
+	// 		<IconButton
+	// 			edge='end'
+	// 			aria-label='delete'
+	// 			onClick={() => {
+	// 				props.clicked('Delete', index, '');
+	// 			}}
+	// 		>
+	// 			<DeleteIcon />
+	// 		</IconButton>
+	// 	) : null;
+	// };
+
 	return (
 		<div className={props.isNewRecipe ? classes.rootAlternate : classes.root}>
 			<List className={classes.listContainer}>
@@ -65,24 +93,28 @@ const RecipeList = props => {
 						</ListItemIcon>
 						<ListItemText primary={value} />
 						<ListItemSecondaryAction>
-							<IconButton
-								edge='end'
-								aria-label='edit'
-								onClick={() => {
-									props.clicked('Edit', index, value);
-								}}
-							>
-								<EditIcon />
-							</IconButton>
-							<IconButton
-								edge='end'
-								aria-label='delete'
-								onClick={() => {
-									props.clicked('Delete', index, '');
-								}}
-							>
-								<DeleteIcon />
-							</IconButton>
+							{props.isNewRecipe ? (
+								<IconButton
+									edge='end'
+									aria-label='edit'
+									onClick={() => {
+										props.clicked('Edit', index, value);
+									}}
+								>
+									<EditIcon />
+								</IconButton>
+							) : null}
+							{props.isNewRecipe ? (
+								<IconButton
+									edge='end'
+									aria-label='delete'
+									onClick={() => {
+										props.clicked('Delete', index, '');
+									}}
+								>
+									<DeleteIcon />
+								</IconButton>
+							) : null}
 						</ListItemSecondaryAction>
 					</ListItemWithWiderSecondaryAction>
 				))}
