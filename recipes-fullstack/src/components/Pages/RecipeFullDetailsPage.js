@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -8,6 +8,8 @@ import Divider from '@material-ui/core/Divider';
 
 import RecipeInfoColumn from '../../components/UI/RecipeInfoColumn';
 import RecipeInstructions from '../UI/RecipeInstructions';
+
+import * as actions from '../../store/actions/index';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -41,7 +43,11 @@ const RecipeFullDetailsPage = props => {
 	const theme = useTheme();
 	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
+	const dispatch = useDispatch();
+
 	const recipes = useSelector(state => state.createRecipe.recipes);
+
+	const onCreateRecipeInit = () => dispatch(actions.createRecipeInit());
 
 	const {tabValue, routes, setTabValue} = props;
 
@@ -67,6 +73,7 @@ const RecipeFullDetailsPage = props => {
 		>
 			<Grid item className={classes.infoColumn}>
 				<RecipeInfoColumn
+					recipeInit={onCreateRecipeInit}
 					recipeName={recipes[props.location.id.cardId].basicDetails.recipeName}
 					prepTime={recipes[props.location.id.cardId].basicDetails.prepTime}
 					cookTime={recipes[props.location.id.cardId].basicDetails.cookTime}

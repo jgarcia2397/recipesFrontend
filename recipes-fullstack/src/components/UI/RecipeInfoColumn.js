@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -81,32 +82,54 @@ const RecipeInfoColumn = props => {
 				<Paper className={classes.recipeImage} elevation={3} />
 			</Grid>
 			<Grid item>
-				<Typography variant={matchesXS ? 'h4' : 'h3'} className={classes.recipeTitle}>
+				<Typography
+					variant={matchesXS ? 'h4' : 'h3'}
+					className={classes.recipeTitle}
+				>
 					{props.recipeName}
 				</Typography>
 			</Grid>
 			<Grid item>
-				<Typography variant={matchesXS ? 'body2' : 'body1'} className={classes.info}>
+				<Typography
+					variant={matchesXS ? 'body2' : 'body1'}
+					className={classes.info}
+				>
 					Prep Time: {props.prepTime} {props.prepTimeUnits}
 				</Typography>
 			</Grid>
 			<Grid item>
-				<Typography variant={matchesXS ? 'body2' : 'body1'} className={classes.info}>
+				<Typography
+					variant={matchesXS ? 'body2' : 'body1'}
+					className={classes.info}
+				>
 					Cook Time: {props.cookTime} {props.cookTimeUnits}
 				</Typography>
 			</Grid>
 			<Grid item>
-				<Typography variant={matchesXS ? 'body2' : 'body1'} className={classes.info}>
+				<Typography
+					variant={matchesXS ? 'body2' : 'body1'}
+					className={classes.info}
+				>
 					Servings: {props.servings}
 				</Typography>
 			</Grid>
 			<Grid item>
-				<Typography variant={matchesXS ? 'body2' : 'body1'} className={classes.info}>
+				<Typography
+					variant={matchesXS ? 'body2' : 'body1'}
+					className={classes.info}
+				>
 					Difficulty: {props.difficulty}
 				</Typography>
 			</Grid>
 			<Grid item>
-				<Button className={classes.modifyRecipeButton}>Modify Recipe</Button>
+				<Button
+					className={classes.modifyRecipeButton}
+					component={Link}
+					to='/new-recipe'
+					onClick={() => props.recipeInit()}
+				>
+					Modify Recipe
+				</Button>
 			</Grid>
 		</Grid>
 	);
