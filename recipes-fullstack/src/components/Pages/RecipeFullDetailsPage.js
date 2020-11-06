@@ -72,6 +72,7 @@ const RecipeFullDetailsPage = props => {
 			className={classes.root}
 		>
 			<Grid item className={classes.infoColumn}>
+				{/* Can probably clean up the props passed here. Instead only pass recipes and props.location.id.cardId ??? */}
 				<RecipeInfoColumn
 					recipeInit={onCreateRecipeInit}
 					recipeName={recipes[props.location.id.cardId].basicDetails.recipeName}
@@ -81,6 +82,8 @@ const RecipeFullDetailsPage = props => {
 					cookTimeUnits={recipes[props.location.id.cardId].basicDetails.cookTimeUnits}
 					servings={recipes[props.location.id.cardId].basicDetails.servings}
 					difficulty={recipes[props.location.id.cardId].basicDetails.difficulty}
+					ingredientArray={recipes[props.location.id.cardId].ingredients}
+					directionsArray={recipes[props.location.id.cardId].directions}
 				/>
 			</Grid>
 			<Grid item className={classes.divider}>

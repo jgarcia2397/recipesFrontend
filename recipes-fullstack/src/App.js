@@ -20,8 +20,18 @@ function App() {
 		{ name: 'My Recipes', link: '/recipes', activeIndex: 1, isMainTab: true },
 		{ name: 'My Profile', link: '/profile', activeIndex: 2, isMainTab: true },
 		{ name: 'Log In/Out', link: '/auth', activeIndex: 3, isMainTab: true },
-		{ name: 'New Recipe', link: '/new-recipe', activeIndex: false, isMainTab: false },
-		{ name: 'Full Recipe Details', link: '/recipe-full-details', activeIndex: false, isMainTab: false },
+		{
+			name: 'New Recipe',
+			link: '/new-recipe',
+			activeIndex: false,
+			isMainTab: false,
+		},
+		{
+			name: 'Full Recipe Details',
+			link: '/recipe-full-details',
+			activeIndex: false,
+			isMainTab: false,
+		},
 	];
 
 	return (
@@ -66,8 +76,12 @@ function App() {
 					<Route
 						exact
 						path='/new-recipe'
-						render={() => (
-							<CreateRecipePage routes={routes} setTabValue={setTabValue} />
+						render={props => (
+							<CreateRecipePage
+								{...props}
+								routes={routes}
+								setTabValue={setTabValue}
+							/>
 						)}
 					/>
 					<Route

@@ -69,22 +69,24 @@ const BasicRecipeInfoInputs = props => {
 				<InputPair
 					id={'prepTime'}
 					label={'Prep Time'}
-					// timeUnits={prepTimeUnits}
-					// handleChange={handlePrepTimeChange}
 					timeUnits={props.prepTimeUnits}
 					handleChange={props.changed}
 					options={timeUnits}
+					isModify={props.isModify}
+					oldValue={props.oldDetails.prepTime}
+					oldUnits={props.oldDetails.prepTimeUnits}
 				/>
 			</Grid>
 			<Grid item className={classes.inputSet}>
 				<InputPair
 					id={'cookTime'}
 					label={'Cook Time'}
-					// timeUnits={cookTimeUnits}
-					// handleChange={handleCookTimeChange}
 					timeUnits={props.cookTimeUnits}
 					handleChange={props.changed}
 					options={timeUnits}
+					isModify={props.isModify}
+					oldValue={props.oldDetails.cookTime}
+					oldUnits={props.oldDetails.cookTimeUnits}
 				/>
 			</Grid>
 			<Grid item className={classes.inputSet}>
@@ -92,6 +94,7 @@ const BasicRecipeInfoInputs = props => {
 					id='servings'
 					label='Servings'
 					variant='outlined'
+					defaultValue={props.isModify ? props.oldDetails.servings : ''}
 					className={classes.textInput}
 					onChange={(event) => props.changed(event, 'servings')}
 				/>
@@ -100,12 +103,12 @@ const BasicRecipeInfoInputs = props => {
 				<InputPair
 					id={'difficulty'}
 					label={'Difficulty'}
-					// timeUnits={difficulty}
-					// handleChange={handleDifficultyChange}
 					timeUnits={props.difficulty}
 					handleChange={props.changed}
 					options={difficultyLevels}
 					isSingleDropdown
+					isModify={props.isModify}
+					oldUnits={props.oldDetails.difficulty}
 				/>
 			</Grid>
 		</Grid>

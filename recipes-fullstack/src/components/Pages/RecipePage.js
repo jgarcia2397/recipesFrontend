@@ -85,7 +85,10 @@ const RecipePage = props => {
 							className={classes.newRecipeButton}
 							style={{ maxWidth: '150px', minWidth: '150px' }}
 							component={Link}
-							to='/new-recipe'
+							to={{
+								pathname: '/new-recipe',
+								recipeDetails: {}
+							}}
 							onClick={() => onCreateRecipeInit()}
 						>
 							New Recipe

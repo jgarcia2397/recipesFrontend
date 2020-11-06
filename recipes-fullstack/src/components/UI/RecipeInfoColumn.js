@@ -70,6 +70,18 @@ const RecipeInfoColumn = props => {
 
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
+	const recipeDetails = {
+		name: props.recipeName,
+		prepTime: props.prepTime,
+		prepTimeUnits: props.prepTimeUnits,
+		cookTime: props.cookTime,
+		cookTimeUnits: props.cookTimeUnits,
+		servings: props.servings,
+		difficulty: props.difficulty,
+		ingredientArray: props.ingredients,
+		directionsArray: props.directions,
+	};
+
 	return (
 		<Grid
 			container
@@ -125,7 +137,10 @@ const RecipeInfoColumn = props => {
 				<Button
 					className={classes.modifyRecipeButton}
 					component={Link}
-					to='/new-recipe'
+					to={{
+						pathname: '/new-recipe',
+						recipeDetails: recipeDetails,
+					}}
 					onClick={() => props.recipeInit()}
 				>
 					Modify Recipe

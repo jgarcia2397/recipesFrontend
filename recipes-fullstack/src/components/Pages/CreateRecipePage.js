@@ -246,6 +246,15 @@ const CreateRecipePage = props => {
 		console.log(updatedForm);
 	};
 
+	let oldRecipeDetails;
+	const isModifyRecipe = Object.keys(props.location.recipeDetails).length !== 0;
+
+	if (isModifyRecipe) {
+		oldRecipeDetails = props.location.recipeDetails;
+	} else {
+		oldRecipeDetails = {};
+	}
+
 	let form = (
 		<React.Fragment>
 			<Grid item className={classes.titleContainer}>
@@ -261,6 +270,7 @@ const CreateRecipePage = props => {
 					id='recipeName'
 					label='Recipe Name'
 					variant='outlined'
+					defaultValue={isModifyRecipe ? oldRecipeDetails.name : ''}
 					className={classes.textInput}
 					onChange={event => basicInputChangedHandler(event, 'recipeName')}
 				/>
@@ -271,6 +281,8 @@ const CreateRecipePage = props => {
 					prepTimeUnits={basicRecipeForm.prepTimeUnits.value}
 					cookTimeUnits={basicRecipeForm.cookTimeUnits.value}
 					difficulty={basicRecipeForm.difficulty.value}
+					isModify={isModifyRecipe}
+					oldDetails={oldRecipeDetails}
 				/>
 			</Grid>
 			<Grid item>
@@ -298,6 +310,8 @@ const CreateRecipePage = props => {
 						directionsArray={detailRecipeForm.directions.value}
 						isNewRecipe
 						changedListHandler={detailedListChangedHandler}
+						// isModify={isModifyRecipe}
+						// oldDetails={oldRecipeDetails}
 					/>
 				</Grid>
 			</Grid>
