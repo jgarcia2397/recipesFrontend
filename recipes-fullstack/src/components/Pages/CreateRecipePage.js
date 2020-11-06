@@ -310,8 +310,8 @@ const CreateRecipePage = props => {
 						directionsArray={detailRecipeForm.directions.value}
 						isNewRecipe
 						changedListHandler={detailedListChangedHandler}
-						// isModify={isModifyRecipe}
-						// oldDetails={oldRecipeDetails}
+						isModify={isModifyRecipe}
+						oldDetails={oldRecipeDetails}
 					/>
 				</Grid>
 			</Grid>

@@ -78,8 +78,8 @@ const RecipeInfoColumn = props => {
 		cookTimeUnits: props.cookTimeUnits,
 		servings: props.servings,
 		difficulty: props.difficulty,
-		ingredientArray: props.ingredients,
-		directionsArray: props.directions,
+		ingredientArray: props.ingredientArray,
+		directionsArray: props.directionsArray,
 	};
 
 	return (

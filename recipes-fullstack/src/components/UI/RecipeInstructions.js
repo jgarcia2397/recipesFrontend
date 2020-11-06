@@ -54,7 +54,7 @@ const RecipeInstructions = props => {
 			>
 				<RecipeInstructColumn
 					label='Ingredients'
-					array={props.ingredientArray}
+					array={props.isModify ? props.oldDetails.ingredientArray : props.ingredientArray}
 					isNewRecipe={props.isNewRecipe}
 					changedList={props.changedListHandler}
 				/>
@@ -72,7 +72,8 @@ const RecipeInstructions = props => {
 			>
 				<RecipeInstructColumn
 					label='Directions'
-					array={props.directionsArray}
+					// array={props.directionsArray}
+					array={props.isModify ? props.oldDetails.directionsArray : props.directionsArray}
 					isNewRecipe={props.isNewRecipe}
 					changedList={props.changedListHandler}
 				/>
