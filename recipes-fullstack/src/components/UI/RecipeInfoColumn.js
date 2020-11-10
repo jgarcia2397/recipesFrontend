@@ -141,7 +141,7 @@ const RecipeInfoColumn = props => {
 						pathname: '/new-recipe',
 						recipeDetails: recipeDetails,
 					}}
-					onClick={() => props.recipeInit()}
+					onClick={() => props.recipeInit(props.recipeId)}
 				>
 					Modify Recipe
 				</Button>

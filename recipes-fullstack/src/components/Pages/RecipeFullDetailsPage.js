@@ -47,7 +47,7 @@ const RecipeFullDetailsPage = props => {
 
 	const recipes = useSelector(state => state.createRecipe.recipes);
 
-	const onCreateRecipeInit = () => dispatch(actions.createRecipeInit());
+	const onUpdateRecipeInit = (id) => dispatch(actions.updateRecipeInit(id));
 
 	const {tabValue, routes, setTabValue} = props;
 
@@ -74,7 +74,8 @@ const RecipeFullDetailsPage = props => {
 			<Grid item className={classes.infoColumn}>
 				{/* Can probably clean up the props passed here. Instead only pass recipes and props.location.id.cardId ??? */}
 				<RecipeInfoColumn
-					recipeInit={onCreateRecipeInit}
+					recipeInit={onUpdateRecipeInit}
+					recipeId={props.location.id.cardId}
 					recipeName={recipes[props.location.id.cardId].basicDetails.recipeName}
 					prepTime={recipes[props.location.id.cardId].basicDetails.prepTime}
 					cookTime={recipes[props.location.id.cardId].basicDetails.cookTime}
