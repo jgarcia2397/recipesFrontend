@@ -172,8 +172,13 @@ const CreateRecipePage = props => {
 		state => state.createRecipe.recipeCreated
 	);
 
+	const recipeId = useSelector(state => state.createRecipe.recipeId);
+
 	const onCreateRecipe = (basicDetails, ingredients, directions) =>
 		dispatch(actions.createRecipe(basicDetails, ingredients, directions));
+
+	const onUpdateRecipe = (basicDetails, ingredients, directions) =>
+		dispatch(actions.updateRecipe(basicDetails, ingredients, directions));
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -202,7 +207,11 @@ const CreateRecipePage = props => {
 		const ingredientList = [...detailRecipeForm.ingredients.value];
 		const directionList = [...detailRecipeForm.directions.value];
 
-		onCreateRecipe(basicDetails, ingredientList, directionList);
+		if (recipeId === -1) {
+			onCreateRecipe(basicDetails, ingredientList, directionList);
+		} else {
+			onUpdateRecipe(basicDetails, ingredientList, directionList);
+		}
 	};
 
 	const basicInputChangedHandler = (event, inputID) => {
@@ -225,12 +234,15 @@ const CreateRecipePage = props => {
 
 		// console.log(modalTextValue);
 
-		if (mode === 'Delete') {		// Delete button clicked
+		if (mode === 'Delete') {
+			// Delete button clicked
 			newList = oldList.filter(i => oldList.indexOf(i) !== index);
-		} else if (mode === 'Edit') {	// Edit button clicked
+		} else if (mode === 'Edit') {
+			// Edit button clicked
 			oldList.splice(index, 1, modalTextValue);
 			newList = [...oldList];
-		} else {						// Add button clicked
+		} else {
+			// Add button clicked
 			newList = [...oldList, modalTextValue];
 		}
 

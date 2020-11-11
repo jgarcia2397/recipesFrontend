@@ -3,6 +3,7 @@ import { updateObject } from '../../shared/utility';
 
 const initialState = {
 	recipes: [],
+	recipeId: -1,
 	recipeCreated: false,
 	loading: false,
 	error: null,
@@ -46,9 +47,51 @@ const createRecipeFailed = (state, action) => {
 	});
 };
 
+const updateRecipeInit = (state, action) => {
+	return updateObject(state, { recipeCreated: false, recipeId: action.id });
+};
+
+const updateRecipeStart = (state, action) => {
+	return updateObject(state, { loading: true, recipeCreated: false });
+};
+
+// ToDo: This update is not fully working. Need to figure out how to merge oldRecipe object with new changes (newRecipe will have blank values for anything that did not change)
+const updateRecipeSuccess = (state, action) => {
+	const newIngredients = [...action.ingredients];
+	const newDirections = [...action.directions];
+
+	const newRecipe = {
+		basicDetails: action.basicDetails,
+		ingredients: newIngredients,
+		directions: newDirections,
+	};
+
+	const newRecipeList = [...state.recipes];
+	newRecipeList.splice(state.recipeId, 1, newRecipe);
+
+	const updatedObject = {
+		recipes: newRecipeList,
+		loading: false,
+		error: null,
+		recipeCreated: true,
+		recipeId: -1,
+	};
+
+	return updateObject(state, updatedObject);
+};
+
+const updateRecipeFailed = (state, action) => {
+	return updateObject(state, {
+		loading: false,
+		recipeCreated: false,
+		error: action.error,
+		recipeId: -1,
+	});
+};
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-        case actionTypes.CREATE_RECIPE_INIT:
+		case actionTypes.CREATE_RECIPE_INIT:
 			return createRecipeInit(state, action);
 		case actionTypes.CREATE_RECIPE_START:
 			return createRecipeStart(state, action);
@@ -56,6 +99,14 @@ const reducer = (state = initialState, action) => {
 			return createRecipeSuccess(state, action);
 		case actionTypes.CREATE_RECIPE_FAILED:
 			return createRecipeFailed(state, action);
+		case actionTypes.UPDATE_RECIPE_INIT:
+			return updateRecipeInit(state, action);
+		case actionTypes.UPDATE_RECIPE_START:
+			return updateRecipeStart(state, action);
+		case actionTypes.UPDATE_RECIPE_SUCCESS:
+			return updateRecipeSuccess(state, action);
+		case actionTypes.UPDATE_RECIPE_FAILED:
+			return updateRecipeFailed(state, action);
 		default:
 			return state;
 	}
