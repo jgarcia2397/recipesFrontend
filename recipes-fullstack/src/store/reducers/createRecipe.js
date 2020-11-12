@@ -55,13 +55,29 @@ const updateRecipeStart = (state, action) => {
 	return updateObject(state, { loading: true, recipeCreated: false });
 };
 
-// ToDo: This update is not fully working. Need to figure out how to merge oldRecipe object with new changes (newRecipe will have blank values for anything that did not change)
+// helper function for updateRecipeSuccess
+const mergeObjects = (obj1, obj2) => {
+	let answer = {...obj1};
+
+	const keys = Object.keys(obj2);
+	
+	for (const key of keys) {
+		if (obj2[key] !== '') {
+			answer[key] = obj2[key];
+		}
+	}
+	return answer;
+};
+
+// ToDo: RecipeList for ingredients and directions does not re-render when updating a recipe
 const updateRecipeSuccess = (state, action) => {
-	const newIngredients = [...action.ingredients];
-	const newDirections = [...action.directions];
+	const newIngredients = [...state.recipes[state.recipeId].ingredients, ...action.ingredients];
+	const newDirections = [...state.recipes[state.recipeId].directions, ...action.directions];
+
+	const newBasicDetails = mergeObjects(state.recipes[state.recipeId].basicDetails, action.basicDetails);
 
 	const newRecipe = {
-		basicDetails: action.basicDetails,
+		basicDetails: newBasicDetails,
 		ingredients: newIngredients,
 		directions: newDirections,
 	};
