@@ -42,6 +42,17 @@ const RecipeInstructions = props => {
 
 	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
+	let mergedIngredientArray = [];
+	let mergedDirectionArray = [];
+
+	if (props.isModify) {
+		mergedIngredientArray = [...props.oldDetails.ingredientArray, ...props.ingredientArray];
+		mergedDirectionArray = [...props.oldDetails.directionsArray, ...props.directionsArray];
+	} else {
+		mergedIngredientArray = [...props.ingredientArray];
+		mergedDirectionArray = [...props.directionsArray];
+	}
+
 	return (
 		<React.Fragment>
 			<Grid
@@ -54,7 +65,8 @@ const RecipeInstructions = props => {
 			>
 				<RecipeInstructColumn
 					label='Ingredients'
-					array={props.isModify ? props.oldDetails.ingredientArray : props.ingredientArray}
+					// array={props.isModify ? props.oldDetails.ingredientArray : props.ingredientArray}
+					array={mergedIngredientArray}
 					isNewRecipe={props.isNewRecipe}
 					changedList={props.changedListHandler}
 				/>
@@ -73,7 +85,8 @@ const RecipeInstructions = props => {
 				<RecipeInstructColumn
 					label='Directions'
 					// array={props.directionsArray}
-					array={props.isModify ? props.oldDetails.directionsArray : props.directionsArray}
+					// array={props.isModify ? props.oldDetails.directionsArray : props.directionsArray}
+					array={mergedDirectionArray}
 					isNewRecipe={props.isNewRecipe}
 					changedList={props.changedListHandler}
 				/>
