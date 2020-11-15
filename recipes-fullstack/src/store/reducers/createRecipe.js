@@ -71,8 +71,10 @@ const mergeObjects = (obj1, obj2) => {
 
 // ToDo: RecipeList for ingredients and directions does not re-render when updating a recipe
 const updateRecipeSuccess = (state, action) => {
-	const newIngredients = [...state.recipes[state.recipeId].ingredients, ...action.ingredients];
-	const newDirections = [...state.recipes[state.recipeId].directions, ...action.directions];
+	// const newIngredients = [...state.recipes[state.recipeId].ingredients, ...action.ingredients];
+	// const newDirections = [...state.recipes[state.recipeId].directions, ...action.directions];
+	const newIngredients = [...action.ingredients];
+	const newDirections = [...action.directions];
 
 	const newBasicDetails = mergeObjects(state.recipes[state.recipeId].basicDetails, action.basicDetails);
 

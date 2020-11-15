@@ -196,6 +196,53 @@ const CreateRecipePage = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
+	let oldRecipeDetails;
+	const isModifyRecipe = Object.keys(props.location.recipeDetails).length !== 0;
+
+	if (isModifyRecipe) {
+		oldRecipeDetails = props.location.recipeDetails;
+	} else {
+		oldRecipeDetails = {};
+	}
+
+	useEffect(() => {
+		let mergedIngredientArray = [];
+		let mergedDirectionArray = [];
+
+		if (isModifyRecipe) {
+
+			mergedIngredientArray = [
+				...oldRecipeDetails.ingredientArray,
+				...detailRecipeForm.ingredients.value,
+			];
+			mergedDirectionArray = [
+				...oldRecipeDetails.directionsArray,
+				...detailRecipeForm.directions.value,
+			];
+
+			const updatedIngredientList = updateObject(
+				detailRecipeForm['ingredients'],
+				{
+					value: mergedIngredientArray,
+				}
+			);
+
+			const updatedDirectionList = updateObject(
+				detailRecipeForm['directions'],
+				{
+					value: mergedDirectionArray,
+				}
+			);
+
+			const updatedForm = updateObject(detailRecipeForm, {
+				'ingredients': updatedIngredientList,
+				'directions': updatedDirectionList,
+			});
+
+			setDetailRecipeForm(updatedForm);
+		}
+	}, []);
+
 	const newRecipeHandler = event => {
 		// event.preventDefault();
 
@@ -232,8 +279,6 @@ const CreateRecipePage = props => {
 		const oldList = [...oldListState.value];
 		let newList = [];
 
-		// console.log(modalTextValue);
-
 		if (mode === 'Delete') {
 			// Delete button clicked
 			newList = oldList.filter(i => oldList.indexOf(i) !== index);
@@ -257,15 +302,6 @@ const CreateRecipePage = props => {
 		setDetailRecipeForm(updatedForm);
 		console.log(updatedForm);
 	};
-
-	let oldRecipeDetails;
-	const isModifyRecipe = Object.keys(props.location.recipeDetails).length !== 0;
-
-	if (isModifyRecipe) {
-		oldRecipeDetails = props.location.recipeDetails;
-	} else {
-		oldRecipeDetails = {};
-	}
 
 	let form = (
 		<React.Fragment>
