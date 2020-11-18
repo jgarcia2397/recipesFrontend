@@ -39,8 +39,8 @@ const InputPair = props => {
 				<TextField // native for mobile?
 					id={`${props.id}Units`}
 					select
-					// value={props.timeUnits}
-					value={props.isModify ? props.oldUnits : props.timeUnits}
+					value={props.timeUnits}
+					// value={props.isModify ? props.oldUnits : props.timeUnits}
 					variant='outlined'
 					onChange={event => props.handleChange(event, dropdownID)}
 					className={classes.dropdown}

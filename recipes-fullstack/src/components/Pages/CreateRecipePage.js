@@ -210,7 +210,22 @@ const CreateRecipePage = props => {
 		let mergedDirectionArray = [];
 
 		if (isModifyRecipe) {
+			
+			// componentDidMount, update basicRecipeForm dropdown state
+			let updatedBasicDropdowns = {};
+			const inputIDs = ['prepTimeUnits', 'cookTimeUnits', 'difficulty'];
 
+			for (const inputID of inputIDs) {
+				const updatedFormElement = updateObject(basicRecipeForm[inputID], {
+					value: oldRecipeDetails[inputID],
+				});
+
+				updatedBasicDropdowns[inputID] = updatedFormElement;
+			}
+
+			setBasicRecipeForm(updatedBasicDropdowns);
+
+			// componentDidMount, update detailRecipeForm ingredient and direction array state
 			mergedIngredientArray = [
 				...oldRecipeDetails.ingredientArray,
 				...detailRecipeForm.ingredients.value,
@@ -271,7 +286,7 @@ const CreateRecipePage = props => {
 		});
 
 		setBasicRecipeForm(updatedForm);
-		console.log(updatedForm);
+		// console.log(updatedForm);
 	};
 
 	const detailedListChangedHandler = (modalTextValue, mode, list, index) => {
