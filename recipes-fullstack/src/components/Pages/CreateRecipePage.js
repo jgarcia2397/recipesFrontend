@@ -205,56 +205,63 @@ const CreateRecipePage = props => {
 		oldRecipeDetails = {};
 	}
 
-	useEffect(() => {
+	const updateBasicFormOnMount = () => {
+		let updatedBasicDropdowns = {};
+		const inputIDs = ['prepTimeUnits', 'cookTimeUnits', 'difficulty'];
+
+		for (const inputID of inputIDs) {
+			const updatedFormElement = updateObject(basicRecipeForm[inputID], {
+				value: oldRecipeDetails[inputID],
+			});
+
+			updatedBasicDropdowns[inputID] = updatedFormElement;
+		}
+
+		setBasicRecipeForm(updatedBasicDropdowns);
+	};
+
+	const updateDetailFormOnMount = () => {
 		let mergedIngredientArray = [];
 		let mergedDirectionArray = [];
 
-		if (isModifyRecipe) {
-			
-			// componentDidMount, update basicRecipeForm dropdown state
-			let updatedBasicDropdowns = {};
-			const inputIDs = ['prepTimeUnits', 'cookTimeUnits', 'difficulty'];
+		mergedIngredientArray = [
+			...oldRecipeDetails.ingredientArray,
+			...detailRecipeForm.ingredients.value,
+		];
+		mergedDirectionArray = [
+			...oldRecipeDetails.directionsArray,
+			...detailRecipeForm.directions.value,
+		];
 
-			for (const inputID of inputIDs) {
-				const updatedFormElement = updateObject(basicRecipeForm[inputID], {
-					value: oldRecipeDetails[inputID],
-				});
-
-				updatedBasicDropdowns[inputID] = updatedFormElement;
+		const updatedIngredientList = updateObject(
+			detailRecipeForm['ingredients'],
+			{
+				value: mergedIngredientArray,
 			}
+		);
 
-			setBasicRecipeForm(updatedBasicDropdowns);
+		const updatedDirectionList = updateObject(
+			detailRecipeForm['directions'],
+			{
+				value: mergedDirectionArray,
+			}
+		);
 
-			// componentDidMount, update detailRecipeForm ingredient and direction array state
-			mergedIngredientArray = [
-				...oldRecipeDetails.ingredientArray,
-				...detailRecipeForm.ingredients.value,
-			];
-			mergedDirectionArray = [
-				...oldRecipeDetails.directionsArray,
-				...detailRecipeForm.directions.value,
-			];
+		const updatedForm = updateObject(detailRecipeForm, {
+			ingredients: updatedIngredientList,
+			directions: updatedDirectionList,
+		});
 
-			const updatedIngredientList = updateObject(
-				detailRecipeForm['ingredients'],
-				{
-					value: mergedIngredientArray,
-				}
-			);
+		setDetailRecipeForm(updatedForm);
+	};
 
-			const updatedDirectionList = updateObject(
-				detailRecipeForm['directions'],
-				{
-					value: mergedDirectionArray,
-				}
-			);
+	useEffect(() => {
+		if (isModifyRecipe) {
+			// acts like componentDidMount, update basicRecipeForm dropdown state
+			updateBasicFormOnMount();
 
-			const updatedForm = updateObject(detailRecipeForm, {
-				'ingredients': updatedIngredientList,
-				'directions': updatedDirectionList,
-			});
-
-			setDetailRecipeForm(updatedForm);
+			// acts like componentDidMount, update detailRecipeForm ingredient and direction array state
+			updateDetailFormOnMount();
 		}
 	}, []);
 
