@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
-import { updateObject } from '../../shared/utility';
+import { updateObject, checkInputValidity } from '../../shared/utility';
 import BasicRecipeInfoInputs from '../UI/BasicRecipeInfoInputs';
 import ImageUpload from '../UI/ImageUpload';
 import RecipeInstructions from '../UI/RecipeInstructions';
@@ -97,6 +97,7 @@ const CreateRecipePage = props => {
 			value: '',
 			validation: {
 				required: true,
+				isNumeric: true,
 			},
 			valid: false,
 			// touched: false,
@@ -104,9 +105,6 @@ const CreateRecipePage = props => {
 		prepTimeUnits: {
 			elementType: 'dropdown',
 			value: 'minutes',
-			validation: {
-				required: true,
-			},
 			valid: true,
 		},
 		cookTime: {
@@ -114,6 +112,7 @@ const CreateRecipePage = props => {
 			value: '',
 			validation: {
 				required: true,
+				isNumeric: true,
 			},
 			valid: false,
 			// touched: false,
@@ -121,9 +120,6 @@ const CreateRecipePage = props => {
 		cookTimeUnits: {
 			elementType: 'dropdown',
 			value: 'minutes',
-			validation: {
-				required: true,
-			},
 			valid: true,
 		},
 		servings: {
@@ -131,6 +127,7 @@ const CreateRecipePage = props => {
 			value: '',
 			validation: {
 				required: true,
+				isNumeric: true,
 			},
 			valid: false,
 			// touched: false,
@@ -138,9 +135,6 @@ const CreateRecipePage = props => {
 		difficulty: {
 			elementType: 'dropdown',
 			value: 'Easy',
-			validation: {
-				required: true,
-			},
 			valid: true,
 		},
 	});
@@ -286,6 +280,7 @@ const CreateRecipePage = props => {
 	const basicInputChangedHandler = (event, inputID) => {
 		const updatedFormElement = updateObject(basicRecipeForm[inputID], {
 			value: event.target.value,
+			valid: checkInputValidity(event.target.value, basicRecipeForm[inputID].validation),
 		});
 
 		const updatedForm = updateObject(basicRecipeForm, {
@@ -293,7 +288,7 @@ const CreateRecipePage = props => {
 		});
 
 		setBasicRecipeForm(updatedForm);
-		// console.log(updatedForm);
+		console.log(updatedForm);
 	};
 
 	const detailedListChangedHandler = (modalTextValue, mode, list, index) => {
