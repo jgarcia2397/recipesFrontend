@@ -17,7 +17,7 @@ export const checkInputValidity = (value, rules) => {
     }
 
     if (rules.isNumeric) {
-        const pattern = /^\d+$/;
+        const pattern = /^[1-9][0-9]*$/;            // This regex does not allow 0 as first digit (or a single 0 not allowed). Any number from 1 to infinity allowed.
         isValid = pattern.test(value) && isValid;
     }
 
