@@ -75,6 +75,7 @@ const BasicRecipeInfoInputs = props => {
 					isModify={props.isModify}
 					oldValue={props.oldDetails.prepTime}
 					oldUnits={props.oldDetails.prepTimeUnits}
+					error={props.errors[1]}
 				/>
 			</Grid>
 			<Grid item className={classes.inputSet}>
@@ -87,6 +88,7 @@ const BasicRecipeInfoInputs = props => {
 					isModify={props.isModify}
 					oldValue={props.oldDetails.cookTime}
 					oldUnits={props.oldDetails.cookTimeUnits}
+					error={props.errors[2]}
 				/>
 			</Grid>
 			<Grid item className={classes.inputSet}>
@@ -97,6 +99,7 @@ const BasicRecipeInfoInputs = props => {
 					defaultValue={props.isModify ? props.oldDetails.servings : ''}
 					className={classes.textInput}
 					onChange={(event) => props.changed(event, 'servings')}
+					error={props.errors[3]}
 				/>
 			</Grid>
 			<Grid item className={classes.inputSet}>

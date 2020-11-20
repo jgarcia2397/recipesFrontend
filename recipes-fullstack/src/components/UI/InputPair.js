@@ -32,6 +32,7 @@ const InputPair = props => {
 						defaultValue={props.isModify ? props.oldValue : ''}
 						className={classes.textInput}
 						onChange={event => props.handleChange(event, props.id)}
+						error={props.error}
 					/>
 				</Grid>
 			) : null}

@@ -158,6 +158,7 @@ const CreateRecipePage = props => {
 			touched: false,
 		},
 	});
+	const [textInputErrors, setTextInputErrors] = useState([false, false, false, false]);
 	const [formIsValid, setFormIsValid] = useState(false);
 
 	const dispatch = useDispatch();
@@ -259,6 +260,25 @@ const CreateRecipePage = props => {
 		}
 	}, []);
 
+	// ToDo: Validity check does not work when modifying a recipe
+	useEffect(() => {
+		let inputIDs = ['recipeName', 'prepTime', 'cookTime', 'servings'];
+		let errorArray = [...textInputErrors];
+
+		for (const inputID of inputIDs) {
+			const indexOfID = inputIDs.indexOf(inputID);
+
+			if (!basicRecipeForm[inputID].valid) {
+				errorArray[indexOfID] = true;
+			} else {
+				errorArray[indexOfID] = false;
+			}
+		}
+
+		setTextInputErrors(errorArray);
+	
+	}, [basicRecipeForm]);
+
 	const newRecipeHandler = event => {
 		// event.preventDefault();
 
@@ -338,6 +358,7 @@ const CreateRecipePage = props => {
 					defaultValue={isModifyRecipe ? oldRecipeDetails.name : ''}
 					className={classes.textInput}
 					onChange={event => basicInputChangedHandler(event, 'recipeName')}
+					error={textInputErrors[0]}
 				/>
 			</Grid>
 			<Grid item>
@@ -348,6 +369,7 @@ const CreateRecipePage = props => {
 					difficulty={basicRecipeForm.difficulty.value}
 					isModify={isModifyRecipe}
 					oldDetails={oldRecipeDetails}
+					errors={textInputErrors}
 				/>
 			</Grid>
 			<Grid item>
