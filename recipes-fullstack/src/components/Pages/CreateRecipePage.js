@@ -90,7 +90,7 @@ const CreateRecipePage = props => {
 				required: true,
 			},
 			valid: false,
-			// touched: false,
+			touched: false,
 		},
 		prepTime: {
 			elementType: 'input',
@@ -100,7 +100,7 @@ const CreateRecipePage = props => {
 				isNumeric: true,
 			},
 			valid: false,
-			// touched: false,
+			touched: false,
 		},
 		prepTimeUnits: {
 			elementType: 'dropdown',
@@ -115,7 +115,7 @@ const CreateRecipePage = props => {
 				isNumeric: true,
 			},
 			valid: false,
-			// touched: false,
+			touched: false,
 		},
 		cookTimeUnits: {
 			elementType: 'dropdown',
@@ -130,7 +130,7 @@ const CreateRecipePage = props => {
 				isNumeric: true,
 			},
 			valid: false,
-			// touched: false,
+			touched: false,
 		},
 		difficulty: {
 			elementType: 'dropdown',
@@ -268,7 +268,7 @@ const CreateRecipePage = props => {
 		for (const inputID of inputIDs) {
 			const indexOfID = inputIDs.indexOf(inputID);
 
-			if (!basicRecipeForm[inputID].valid) {
+			if (!basicRecipeForm[inputID].valid && basicRecipeForm[inputID].touched) {
 				errorArray[indexOfID] = true;
 			} else {
 				errorArray[indexOfID] = false;
@@ -301,6 +301,7 @@ const CreateRecipePage = props => {
 		const updatedFormElement = updateObject(basicRecipeForm[inputID], {
 			value: event.target.value,
 			valid: checkInputValidity(event.target.value, basicRecipeForm[inputID].validation),
+			touched: true,
 		});
 
 		const updatedForm = updateObject(basicRecipeForm, {
