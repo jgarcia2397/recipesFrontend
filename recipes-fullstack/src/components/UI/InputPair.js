@@ -33,6 +33,7 @@ const InputPair = props => {
 						className={classes.textInput}
 						onChange={event => props.handleChange(event, props.id)}
 						error={props.error}
+						helperText={props.error ? 'Time value must be a number greater than 0.' : null}
 					/>
 				</Grid>
 			) : null}

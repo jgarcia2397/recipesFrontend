@@ -341,6 +341,7 @@ const CreateRecipePage = props => {
 		console.log(updatedForm);
 	};
 
+	// ToDo: Add padding/margin on bottom of BasicRecipeInfoInputs TextFields so components don't shift when theres an error message
 	let form = (
 		<React.Fragment>
 			<Grid item className={classes.titleContainer}>
@@ -360,6 +361,7 @@ const CreateRecipePage = props => {
 					className={classes.textInput}
 					onChange={event => basicInputChangedHandler(event, 'recipeName')}
 					error={textInputErrors[0]}
+					helperText={textInputErrors[0] ? "Recipe name must not be blank." : null}
 				/>
 			</Grid>
 			<Grid item>

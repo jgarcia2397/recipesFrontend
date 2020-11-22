@@ -100,6 +100,7 @@ const BasicRecipeInfoInputs = props => {
 					className={classes.textInput}
 					onChange={(event) => props.changed(event, 'servings')}
 					error={props.errors[3]}
+					helperText={props.errors[3] ? "Servings must be a number." : null}
 				/>
 			</Grid>
 			<Grid item className={classes.inputSet}>
