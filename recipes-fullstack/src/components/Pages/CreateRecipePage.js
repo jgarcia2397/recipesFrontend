@@ -10,6 +10,8 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 import { updateObject, checkInputValidity } from '../../shared/utility';
 import BasicRecipeInfoInputs from '../UI/BasicRecipeInfoInputs';
@@ -158,8 +160,14 @@ const CreateRecipePage = props => {
 			touched: false,
 		},
 	});
-	const [textInputErrors, setTextInputErrors] = useState([false, false, false, false]);
+	const [textInputErrors, setTextInputErrors] = useState([
+		false,
+		false,
+		false,
+		false,
+	]);
 	const [formIsValid, setFormIsValid] = useState(false);
+	const [alert, setAlert] = useState({ open: false, message: '' });
 
 	const dispatch = useDispatch();
 
@@ -235,12 +243,9 @@ const CreateRecipePage = props => {
 			}
 		);
 
-		const updatedDirectionList = updateObject(
-			detailRecipeForm['directions'],
-			{
-				value: mergedDirectionArray,
-			}
-		);
+		const updatedDirectionList = updateObject(detailRecipeForm['directions'], {
+			value: mergedDirectionArray,
+		});
 
 		const updatedForm = updateObject(detailRecipeForm, {
 			ingredients: updatedIngredientList,
@@ -276,31 +281,52 @@ const CreateRecipePage = props => {
 		}
 
 		setTextInputErrors(errorArray);
-	
 	}, [basicRecipeForm]);
+
+	const checkFormErrors = () => {
+		let errorFound = false;
+
+		for (const error of textInputErrors) {
+			if (error) {
+				errorFound = true;
+				break;
+			}
+		}
+
+		return errorFound;
+	};
 
 	const newRecipeHandler = event => {
 		// event.preventDefault();
 
-		const basicDetails = {};
-		for (let formElementID in basicRecipeForm) {
-			basicDetails[formElementID] = basicRecipeForm[formElementID].value;
-		}
+		const isFormErrorFound = checkFormErrors();
 
-		const ingredientList = [...detailRecipeForm.ingredients.value];
-		const directionList = [...detailRecipeForm.directions.value];
-
-		if (recipeId === -1) {
-			onCreateRecipe(basicDetails, ingredientList, directionList);
+		if (isFormErrorFound) {
+			setAlert({open: true, message: 'There is an error with your Basic Recipe Info!'});
 		} else {
-			onUpdateRecipe(basicDetails, ingredientList, directionList);
+			const basicDetails = {};
+			for (let formElementID in basicRecipeForm) {
+				basicDetails[formElementID] = basicRecipeForm[formElementID].value;
+			}
+
+			const ingredientList = [...detailRecipeForm.ingredients.value];
+			const directionList = [...detailRecipeForm.directions.value];
+
+			if (recipeId === -1) {
+				onCreateRecipe(basicDetails, ingredientList, directionList);
+			} else {
+				onUpdateRecipe(basicDetails, ingredientList, directionList);
+			}
 		}
 	};
 
 	const basicInputChangedHandler = (event, inputID) => {
 		const updatedFormElement = updateObject(basicRecipeForm[inputID], {
 			value: event.target.value,
-			valid: checkInputValidity(event.target.value, basicRecipeForm[inputID].validation),
+			valid: checkInputValidity(
+				event.target.value,
+				basicRecipeForm[inputID].validation
+			),
 			touched: true,
 		});
 
@@ -341,6 +367,10 @@ const CreateRecipePage = props => {
 		console.log(updatedForm);
 	};
 
+	const handleAlertClose = () => {
+		setAlert({ ...alert, open: false });
+	};
+
 	// ToDo: Add padding/margin on bottom of BasicRecipeInfoInputs TextFields so components don't shift when theres an error message
 	let form = (
 		<React.Fragment>
@@ -361,7 +391,9 @@ const CreateRecipePage = props => {
 					className={classes.textInput}
 					onChange={event => basicInputChangedHandler(event, 'recipeName')}
 					error={textInputErrors[0]}
-					helperText={textInputErrors[0] ? "Recipe name must not be blank." : null}
+					helperText={
+						textInputErrors[0] ? 'Recipe name must not be blank.' : null
+					}
 				/>
 			</Grid>
 			<Grid item>
@@ -427,6 +459,16 @@ const CreateRecipePage = props => {
 	return (
 		<div className={classes.root}>
 			{createRecipeRedirect}
+			<Snackbar
+				open={alert.open}
+				autoHideDuration={5000}
+				onClose={handleAlertClose}
+				anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+			>
+				<Alert severity='error' variant='filled' elevation={5}>
+					{alert.message}
+				</Alert>
+			</Snackbar>
 			<Paper className={classes.background} square>
 				<Grid container direction='column' alignItems='center'>
 					{form}
