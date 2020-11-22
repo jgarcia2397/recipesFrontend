@@ -284,26 +284,35 @@ const CreateRecipePage = props => {
 	}, [basicRecipeForm]);
 
 	const checkFormErrors = () => {
-		let errorFound = false;
+		setFormIsValid(true);
 
-		for (const error of textInputErrors) {
-			if (error) {
-				errorFound = true;
+		for (const key of Object.keys(basicRecipeForm)) {
+			if (!basicRecipeForm[key].valid) {
+				setFormIsValid(false);
+				setAlert({ open: true, message: 'There is an error with your Basic Recipe Info!' });
 				break;
 			}
 		}
 
-		return errorFound;
+		for (const key of Object.keys(detailRecipeForm)) {
+			if (detailRecipeForm[key].value.length === 0) {
+				setFormIsValid(false);
+				setAlert({
+					open: true,
+					message: 'You must have at least 1 ingredient and direction!',
+				});
+				break;
+			}
+		}
 	};
 
+	// ToDo: Form with no errors takes two clicks to successfully submit???
 	const newRecipeHandler = event => {
 		// event.preventDefault();
 
-		const isFormErrorFound = checkFormErrors();
+		checkFormErrors();
 
-		if (isFormErrorFound) {
-			setAlert({open: true, message: 'There is an error with your Basic Recipe Info!'});
-		} else {
+		if (formIsValid) {		
 			const basicDetails = {};
 			for (let formElementID in basicRecipeForm) {
 				basicDetails[formElementID] = basicRecipeForm[formElementID].value;
@@ -317,7 +326,7 @@ const CreateRecipePage = props => {
 			} else {
 				onUpdateRecipe(basicDetails, ingredientList, directionList);
 			}
-		}
+		} 
 	};
 
 	const basicInputChangedHandler = (event, inputID) => {
