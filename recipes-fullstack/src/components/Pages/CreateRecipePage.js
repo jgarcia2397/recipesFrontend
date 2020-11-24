@@ -210,11 +210,11 @@ const CreateRecipePage = props => {
 
 	const updateBasicFormOnMount = () => {
 		let updatedBasicDropdowns = {};
-		const inputIDs = ['prepTimeUnits', 'cookTimeUnits', 'difficulty'];
-
-		for (const inputID of inputIDs) {
+		
+		for (const inputID of Object.keys(basicRecipeForm)) {
 			const updatedFormElement = updateObject(basicRecipeForm[inputID], {
 				value: oldRecipeDetails[inputID],
+				valid: true,
 			});
 
 			updatedBasicDropdowns[inputID] = updatedFormElement;
@@ -265,8 +265,9 @@ const CreateRecipePage = props => {
 		}
 	}, []);
 
-	// ToDo: Validity check does not work when modifying a recipe
 	useEffect(() => {
+		console.log(basicRecipeForm);
+
 		let inputIDs = ['recipeName', 'prepTime', 'cookTime', 'servings'];
 		let errorArray = [...textInputErrors];
 
