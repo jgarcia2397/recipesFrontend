@@ -397,7 +397,7 @@ const CreateRecipePage = props => {
 					id='recipeName'
 					label='Recipe Name'
 					variant='outlined'
-					defaultValue={isModifyRecipe ? oldRecipeDetails.name : ''}
+					defaultValue={isModifyRecipe ? oldRecipeDetails.recipeName : ''}
 					className={classes.textInput}
 					onChange={event => basicInputChangedHandler(event, 'recipeName')}
 					error={textInputErrors[0]}

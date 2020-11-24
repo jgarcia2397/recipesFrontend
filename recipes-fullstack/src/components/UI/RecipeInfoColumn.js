@@ -71,7 +71,7 @@ const RecipeInfoColumn = props => {
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
 	const recipeDetails = {
-		name: props.recipeName,
+		recipeName: props.recipeName,
 		prepTime: props.prepTime,
 		prepTimeUnits: props.prepTimeUnits,
 		cookTime: props.cookTime,
