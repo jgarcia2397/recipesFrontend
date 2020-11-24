@@ -209,7 +209,7 @@ const CreateRecipePage = props => {
 	}
 
 	const updateBasicFormOnMount = () => {
-		let updatedBasicDropdowns = {};
+		let updatedBasicFormState = {};
 		
 		for (const inputID of Object.keys(basicRecipeForm)) {
 			const updatedFormElement = updateObject(basicRecipeForm[inputID], {
@@ -217,10 +217,10 @@ const CreateRecipePage = props => {
 				valid: true,
 			});
 
-			updatedBasicDropdowns[inputID] = updatedFormElement;
+			updatedBasicFormState[inputID] = updatedFormElement;
 		}
 
-		setBasicRecipeForm(updatedBasicDropdowns);
+		setBasicRecipeForm(updatedBasicFormState);
 	};
 
 	const updateDetailFormOnMount = () => {
