@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 
 import UserProfile from '../UI/UserProfile';
 import RecipeCard from '../UI/RecipeCard';
+import Modal from '../UI/Modal';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -86,6 +87,12 @@ const ProfilePage = props => {
 	const classes = useStyles();
 	const theme = useTheme();
 
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	// const [clickedButton, setClickedButton] = useState('Edit');
+	// const [listIndex, setListIndex] = useState(-1);
+	const [editType, setEditType] = useState('');
+	const [textToEdit, setTextToEdit] = useState('');
+
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const recipes = useSelector(state => state.createRecipe.recipes);
@@ -105,6 +112,31 @@ const ProfilePage = props => {
 			}
 		});
 	}, [tabValue, routes, setTabValue]);
+
+	const modalOpenHandler = () => {
+		setIsModalOpen(true);
+	};
+
+	const modalCloseHandler = () => {
+		setIsModalOpen(false);
+	};
+
+	const editTypes = ['About Me', 'Favourite Things to Cook'];
+	const editTexts = [
+		"My name's Cheffff... Just kidding, my real name is up top! I love to cook and Gordon Ramsey is my hero! I wanna be like him someday, but I'm not a great chef like him. I can make some decent scrambled eggs though!",
+		"I like to make Idiot Sandwiches and Gordon's famous Lamb Sauce.",
+	];
+
+	const buttonClickHandler = (editType, textToEdit) => {
+		if (editType === editTypes[0]) {
+			setEditType(editTypes[0]);
+		} else {
+			setEditType(editTypes[1]);
+		}
+		setTextToEdit(textToEdit);
+
+		modalOpenHandler();
+	};
 
 	return (
 		<div className={classes.root}>
@@ -129,16 +161,18 @@ const ProfilePage = props => {
 								</Typography>
 							</Grid>
 							<Grid item>
-								<Button className={classes.editButton}>Edit</Button>
+								<Button
+									className={classes.editButton}
+									onClick={() => buttonClickHandler(editTypes[0], editTexts[0])}
+								>
+									Edit
+								</Button>
 							</Grid>
 						</Grid>
 					</Grid>
 					<Grid item className={classes.profileText}>
 						<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
-							My name's Cheffff... Just kidding, my real name is up top! I love
-							to cook and Gordon Ramsey is my hero! I wanna be like him someday,
-							but I'm not a great chef like him. I can make some decent
-							scrambled eggs though!
+							{editTexts[0]}
 						</Typography>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
@@ -153,13 +187,18 @@ const ProfilePage = props => {
 								</Typography>
 							</Grid>
 							<Grid item>
-								<Button className={classes.editButton}>Edit</Button>
+								<Button
+									className={classes.editButton}
+									onClick={() => buttonClickHandler(editTypes[1], editTexts[1])}
+								>
+									Edit
+								</Button>
 							</Grid>
 						</Grid>
 					</Grid>
 					<Grid item className={classes.profileText}>
 						<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
-							I like to make Idiot Sandwiches and Gordon's famous Lamb Sauce.
+							{editTexts[1]}
 						</Typography>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
@@ -186,6 +225,16 @@ const ProfilePage = props => {
 						))}
 					</Grid>
 				</Grid>
+				<Modal
+					isOpen={isModalOpen}
+					modalCloseHandler={modalCloseHandler}
+					// mode={clickedButton}						// ToDo: Need to modify Modal.js to handle edit types other than 'Ingredient' or 'Direction'
+					mode={'Edit'}
+					columnType={editType}
+					// listChange={props.changedList}	// probably don't need this
+					// clickedListIndex={listIndex}		// probably don't need this
+					textToEdit={textToEdit}
+				/>
 			</Paper>
 		</div>
 	);
