@@ -6,6 +6,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 import UserProfile from '../UI/UserProfile';
 import RecipeCard from '../UI/RecipeCard';
@@ -69,6 +70,16 @@ const useStyles = makeStyles(theme => ({
 	recipeCardsContainer: {
 		margin: '30px auto',
 	},
+	editButton: {
+		...theme.typography.button,
+		marginLeft: '25px',
+		lineHeight: '1.25',
+		borderRadius: 50,
+		backgroundColor: theme.palette.secondary.main,
+		'&:hover': {
+			backgroundColor: theme.palette.secondary.dark,
+		},
+	},
 }));
 
 const ProfilePage = props => {
@@ -107,13 +118,20 @@ const ProfilePage = props => {
 						<UserProfile />
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
-						<Typography
-							variant='h4'
-							style={{ fontWeight: 'bold' }}
-							align={matchesSM ? 'center' : 'left'}
-						>
-							About Me
-						</Typography>
+						<Grid container direction='row' alignItems='center'>
+							<Grid item>
+								<Typography
+									variant='h4'
+									style={{ fontWeight: 'bold' }}
+									align={matchesSM ? 'center' : 'left'}
+								>
+									About Me
+								</Typography>
+							</Grid>
+							<Grid item>
+								<Button className={classes.editButton}>Edit</Button>
+							</Grid>
+						</Grid>
 					</Grid>
 					<Grid item className={classes.profileText}>
 						<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
@@ -124,13 +142,20 @@ const ProfilePage = props => {
 						</Typography>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
-						<Typography
-							variant='h4'
-							style={{ fontWeight: 'bold' }}
-							align={matchesSM ? 'center' : 'left'}
-						>
-							Favourite Things to Cook
-						</Typography>
+						<Grid container direction='row' alignItems='center'>
+							<Grid item>
+								<Typography
+									variant='h4'
+									style={{ fontWeight: 'bold' }}
+									align={matchesSM ? 'center' : 'left'}
+								>
+									Favourite Things to Cook
+								</Typography>
+							</Grid>
+							<Grid item>
+								<Button className={classes.editButton}>Edit</Button>
+							</Grid>
+						</Grid>
 					</Grid>
 					<Grid item className={classes.profileText}>
 						<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>

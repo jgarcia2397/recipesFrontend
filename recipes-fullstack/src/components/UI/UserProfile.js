@@ -5,6 +5,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 import profile from '../../assets/blankProfile.png';
 
@@ -32,6 +33,19 @@ const useStyles = makeStyles(theme => ({
 			marginLeft: '0px',
 			marginTop: '35px',
 		},
+	},
+	editButton: {
+		...theme.typography.button,
+		marginTop: '15px',
+		lineHeight: '1.25',
+		borderRadius: 50,
+		backgroundColor: theme.palette.secondary.main,
+		'&:hover': {
+			backgroundColor: theme.palette.secondary.dark,
+		},
+	},
+	editButtonContainer: {
+		textAlign: 'center',
 	},
 }));
 
@@ -68,6 +82,9 @@ const UserProfile = props => {
 						<Typography variant='h4' align={matchesXS ? 'center' : 'left'}>
 							Master Chef
 						</Typography>
+					</Grid>
+					<Grid item className={classes.editButtonContainer}>
+						<Button className={classes.editButton}>Edit</Button>
 					</Grid>
 				</Grid>
 			</Grid>
