@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -76,7 +77,9 @@ const ProfilePage = props => {
 
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
-	const {tabValue, routes, setTabValue} = props;
+	const recipes = useSelector(state => state.createRecipe.recipes);
+
+	const { tabValue, routes, setTabValue } = props;
 
 	useEffect(() => {
 		[...routes].forEach(route => {
@@ -144,9 +147,18 @@ const ProfilePage = props => {
 						</Typography>
 					</Grid>
 					<Grid item className={classes.recipeCardsContainer}>
-						<RecipeCard />
-						<RecipeCard />
-						<RecipeCard />
+						{recipes.map((recipe, index) => (
+							<RecipeCard
+								key={index}
+								id={index}
+								recipeName={recipe.basicDetails.recipeName}
+								prepTime={recipe.basicDetails.prepTime}
+								cookTime={recipe.basicDetails.cookTime}
+								prepTimeUnits={recipe.basicDetails.prepTimeUnits}
+								cookTimeUnits={recipe.basicDetails.cookTimeUnits}
+								setTabValue={setTabValue}
+							/>
+						))}
 					</Grid>
 				</Grid>
 			</Paper>
