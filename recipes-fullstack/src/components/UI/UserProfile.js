@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+
+import Modal from './Modal';
 
 import profile from '../../assets/blankProfile.png';
 
@@ -53,42 +55,77 @@ const UserProfile = props => {
 	const classes = useStyles();
 	const theme = useTheme();
 
+	const [name, setName] = useState('Your Name');
+	const [title, setTitle] = useState('Your Title');
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	// const [editType, setEditType] = useState('');
+	// const [textToEdit, setTextToEdit] = useState('');
+
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
+	const modalOpenHandler = () => {
+		setIsModalOpen(true);
+	};
+
+	const modalCloseHandler = () => {
+		setIsModalOpen(false);
+	};
+
+	const buttonClickHandler = () => {
+		modalOpenHandler();
+	};
+
 	return (
-		<Grid
-			container
-			direction={matchesXS ? 'column' : 'row'}
-			justify='center'
-			alignItems='center'
-			className={classes.profileContainer}
-		>
-			<Grid item>
-				<Paper className={classes.profilePic} elevation={3} />
-			</Grid>
-			<Grid item>
-				<Grid
-					container
-					direction='column'
-					justify='center'
-					className={classes.profileTitlesContainer}
-				>
-					<Grid item>
-						<Typography variant='h3' align={matchesXS ? 'center' : 'left'}>
-							Joshua Garcia
-						</Typography>
-					</Grid>
-					<Grid item>
-						<Typography variant='h4' align={matchesXS ? 'center' : 'left'}>
-							Master Chef
-						</Typography>
-					</Grid>
-					<Grid item className={classes.editButtonContainer}>
-						<Button className={classes.editButton}>Edit</Button>
+		<React.Fragment>
+			<Grid
+				container
+				direction={matchesXS ? 'column' : 'row'}
+				justify='center'
+				alignItems='center'
+				className={classes.profileContainer}
+			>
+				<Grid item>
+					<Paper className={classes.profilePic} elevation={3} />
+				</Grid>
+				<Grid item>
+					<Grid
+						container
+						direction='column'
+						justify='center'
+						className={classes.profileTitlesContainer}
+					>
+						<Grid item>
+							<Typography variant='h3' align={matchesXS ? 'center' : 'left'}>
+								{name}
+							</Typography>
+						</Grid>
+						<Grid item>
+							<Typography variant='h4' align={matchesXS ? 'center' : 'left'}>
+								{title}
+							</Typography>
+						</Grid>
+						<Grid item className={classes.editButtonContainer}>
+							<Button
+								className={classes.editButton}
+								onClick={() => buttonClickHandler()}
+							>
+								Edit
+							</Button>
+						</Grid>
 					</Grid>
 				</Grid>
 			</Grid>
-		</Grid>
+			<Modal
+				isOpen={isModalOpen}
+				modalCloseHandler={modalCloseHandler}
+				// mode={clickedButton}						// ToDo: Need to modify Modal.js to handle edit types other than 'Ingredient' or 'Direction'
+				mode={'Edit'}
+				type={'Profile'}
+				// listChange={props.changedList}	// probably don't need this
+				// clickedListIndex={listIndex}		// probably don't need this
+				textToEdit={name}
+			/>
+		</React.Fragment>
 	);
 };
 
