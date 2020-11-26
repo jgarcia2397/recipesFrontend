@@ -60,12 +60,44 @@ const Modal = props => {
 		}
 	}, [mode, textToEdit]);
 
-	const inputChangedHandler = (event) => {
+	let editType;
+	let textField = (		// Set multiline TextField as default since it is used for three cases (Directions, About Me, Fav Things to Cook)
+		<TextField
+			id='newEntry'
+			variant='outlined'
+			defaultValue={textValue}
+			className={classes.textInput}
+			multiline
+			rows={4}
+			onChange={event => inputChangedHandler(event)}
+		/>
+	);
+	if (props.type === 'Ingredients') {
+		editType = 'Ingredient';
+		textField = (
+			<TextField
+				id='newEntry'
+				variant='outlined'
+				defaultValue={textValue}
+				className={classes.textInput}
+				onChange={event => inputChangedHandler(event)}
+			/>
+		);
+	} else if (props.type === 'Directions') {
+		editType = 'Direction';
+	} else if (props.type === 'About Me') {
+		editType = 'About Me';
+	} else if (props.type === 'Favourite Things to Cook') {
+		editType = 'Favourite Things to Cook';
+	}
+
+	const inputChangedHandler = event => {
 		setTextValue(event.target.value);
 	};
 
 	const updateRecipeDetailHandler = () => {
-		const listType = props.columnType === 'Ingredients' ? 'ingredients' : 'directions';
+		const listType =
+			props.type === 'Ingredients' ? 'ingredients' : 'directions';
 
 		props.listChange(textValue, props.mode, listType, props.clickedListIndex);
 		props.modalCloseHandler();
@@ -75,27 +107,6 @@ const Modal = props => {
 	const cancelHandler = () => {
 		props.modalCloseHandler();
 	};
-
-	let textField =
-		props.columnType === 'Ingredients' ? (
-			<TextField
-				id='newEntry'
-				variant='outlined'
-				defaultValue={textValue}
-				className={classes.textInput}
-				onChange={event => inputChangedHandler(event)}
-			/>
-		) : (
-			<TextField
-				id='newEntry'
-				variant='outlined'
-				defaultValue={textValue}
-				className={classes.textInput}
-				multiline
-				rows={4}
-				onChange={event => inputChangedHandler(event)}
-			/>
-		);
 
 	return (
 		<Dialog
@@ -110,17 +121,14 @@ const Modal = props => {
 		>
 			<DialogContent className={classes.contentContainer}>
 				<Typography variant='h4' className={classes.modalTitleContainer}>
-					{props.mode}{' '}
-					{props.columnType === 'Ingredients' ? 'Ingredient' : 'Direction'}
+					{props.mode} {editType}
+					{/* {props.type === 'Ingredients' ? 'Ingredient' : 'Direction'} */}
 					{props.mode === 'Delete' ? '?' : ''}
 				</Typography>
 				{props.mode !== 'Delete' ? textField : null}
 			</DialogContent>
 			<DialogActions>
-				<Button
-					onClick={cancelHandler}
-					className={classes.cancelButton}
-				>
+				<Button onClick={cancelHandler} className={classes.cancelButton}>
 					Cancel
 				</Button>
 				<Button

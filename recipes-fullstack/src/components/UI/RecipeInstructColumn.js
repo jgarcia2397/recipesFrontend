@@ -87,7 +87,7 @@ const RecipeInstructColumn = props => {
 				isOpen={isModalOpen}
 				modalCloseHandler={modalCloseHandler}
 				mode={clickedButton}
-				columnType={props.label}
+				type={props.label}
 				listChange={props.changedList}
 				clickedListIndex={listIndex}
 				textToEdit={textToEdit}
