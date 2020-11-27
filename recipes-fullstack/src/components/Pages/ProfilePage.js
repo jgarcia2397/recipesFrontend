@@ -228,7 +228,7 @@ const ProfilePage = props => {
 				<Modal
 					isOpen={isModalOpen}
 					modalCloseHandler={modalCloseHandler}
-					// mode={clickedButton}						// ToDo: Need to modify Modal.js to handle edit types other than 'Ingredient' or 'Direction'
+					// mode={clickedButton}						
 					mode={'Edit'}
 					type={editType}
 					// listChange={props.changedList}	// probably don't need this

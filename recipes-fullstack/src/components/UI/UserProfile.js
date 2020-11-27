@@ -118,12 +118,14 @@ const UserProfile = props => {
 			<Modal
 				isOpen={isModalOpen}
 				modalCloseHandler={modalCloseHandler}
-				// mode={clickedButton}						// ToDo: Need to modify Modal.js to handle edit types other than 'Ingredient' or 'Direction'
+				// mode={clickedButton}						
 				mode={'Edit'}
 				type={'Profile'}
 				// listChange={props.changedList}	// probably don't need this
 				// clickedListIndex={listIndex}		// probably don't need this
-				textToEdit={name}
+				// textToEdit={name}
+				name={name}
+				title={title}
 			/>
 		</React.Fragment>
 	);
