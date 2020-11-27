@@ -63,7 +63,7 @@ const Modal = props => {
 		}
 	}, [mode, textToEdit]);
 
-	let editType;
+	let editType = props.type;
 	let textField = ( // Set multiline TextField as default since it is used for three cases (Directions, About Me, Fav Things to Cook)
 		<TextField
 			id='newEntry'
@@ -75,7 +75,7 @@ const Modal = props => {
 			onChange={event => inputChangedHandler('newEntry', event)}
 		/>
 	);
-	if (props.type === 'Ingredients') {
+	if (editType === 'Ingredients') {
 		editType = 'Ingredient';
 		textField = (
 			<TextField
@@ -86,14 +86,9 @@ const Modal = props => {
 				onChange={event => inputChangedHandler('newEntry', event)}
 			/>
 		);
-	} else if (props.type === 'Directions') {
+	} else if (editType === 'Directions') {
 		editType = 'Direction';
-	} else if (props.type === 'About Me') {
-		editType = 'About Me';
-	} else if (props.type === 'Favourite Things to Cook') {
-		editType = 'Favourite Things to Cook';
-	} else if (props.type === 'Profile') {
-		editType = 'Profile';
+	} else if (editType === 'Profile') {
 		textField = (
 			<React.Fragment>
 				<TextField
