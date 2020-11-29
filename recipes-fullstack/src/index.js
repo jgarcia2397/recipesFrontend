@@ -6,11 +6,13 @@ import thunk from 'redux-thunk';
 
 import App from './App';
 import createRecipeReducer from './store/reducers/createRecipe';
+import userReducer from './store/reducers/user';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-	createRecipe: createRecipeReducer
+	createRecipe: createRecipeReducer,
+	user: userReducer,
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
