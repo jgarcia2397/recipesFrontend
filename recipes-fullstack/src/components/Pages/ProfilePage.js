@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -11,6 +11,8 @@ import Button from '@material-ui/core/Button';
 import UserProfile from '../UI/UserProfile';
 import RecipeCard from '../UI/RecipeCard';
 import Modal from '../UI/Modal';
+
+import * as actions from '../../store/actions/index';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -92,13 +94,25 @@ const ProfilePage = props => {
 	// const [listIndex, setListIndex] = useState(-1);
 	const [editType, setEditType] = useState('');
 	const [textToEdit, setTextToEdit] = useState('');
-	const [aboutMe, setAboutMe] = useState('Tell us a bit about yourself!');
-	const [favThingsToCook, setFavThingsToCook] = useState('Feel free to brag about your most famous dishes!');
+	// const [aboutMe, setAboutMe] = useState('Tell us a bit about yourself!');
+	// const [favThingsToCook, setFavThingsToCook] = useState('Feel free to brag about your most famous dishes!');
 	const editTypes = ['About Me', 'Favourite Things to Cook'];
 
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
+	const dispatch = useDispatch();
+
 	const recipes = useSelector(state => state.createRecipe.recipes);
+	const name = useSelector(state => state.user.name);
+	const title = useSelector(state => state.user.title);
+	const aboutMe = useSelector(state => state.user.aboutMe);
+	const favThingsToCook = useSelector(state => state.user.favesToCook);
+
+	const onSetNameAndTitle = (name, title) =>
+		dispatch(actions.setNameAndTitle(name, title));
+	const onSetAboutMe = newValue => dispatch(actions.setAboutMe(newValue));
+	const onSetFavesToCook = newValue =>
+		dispatch(actions.setFavesToCook(newValue));
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -137,9 +151,11 @@ const ProfilePage = props => {
 
 	const updateProfile = newTextValue => {
 		if (editType === editTypes[0]) {
-			setAboutMe(newTextValue);
+			// setAboutMe(newTextValue);
+			onSetAboutMe(newTextValue);
 		} else {
-			setFavThingsToCook(newTextValue);
+			// setFavThingsToCook(newTextValue);
+			onSetFavesToCook(newTextValue);
 		}
 	};
 
@@ -152,7 +168,11 @@ const ProfilePage = props => {
 					className={classes.profileDetailsContainer}
 				>
 					<Grid item>
-						<UserProfile />
+						<UserProfile
+							updateHandler={onSetNameAndTitle}
+							name={name}
+							title={title}
+						/>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
 						<Grid container direction='row' alignItems='center'>
@@ -194,7 +214,9 @@ const ProfilePage = props => {
 							<Grid item>
 								<Button
 									className={classes.editButton}
-									onClick={() => buttonClickHandler(editTypes[1], favThingsToCook)}
+									onClick={() =>
+										buttonClickHandler(editTypes[1], favThingsToCook)
+									}
 								>
 									Edit
 								</Button>
@@ -232,7 +254,7 @@ const ProfilePage = props => {
 				</Grid>
 				<Modal
 					isOpen={isModalOpen}
-					modalCloseHandler={modalCloseHandler}					
+					modalCloseHandler={modalCloseHandler}
 					mode={'Edit'}
 					type={editType}
 					updateProfile={updateProfile}

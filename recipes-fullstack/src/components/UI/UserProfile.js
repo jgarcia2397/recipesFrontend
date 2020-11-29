@@ -55,8 +55,8 @@ const UserProfile = props => {
 	const classes = useStyles();
 	const theme = useTheme();
 
-	const [name, setName] = useState('Your Name');
-	const [title, setTitle] = useState('Your Title');
+	// const [name, setName] = useState('Your Name');
+	// const [title, setTitle] = useState('Your Title');
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	// const [editType, setEditType] = useState('');
 	// const [textToEdit, setTextToEdit] = useState('');
@@ -76,8 +76,9 @@ const UserProfile = props => {
 	};
 
 	const updateProfile = (name, title) => {
-		setName(name);
-		setTitle(title);
+		// setName(name);
+		// setTitle(title);
+		props.updateHandler(name, title);
 	};
 
 	return (
@@ -101,12 +102,12 @@ const UserProfile = props => {
 					>
 						<Grid item>
 							<Typography variant='h3' align={matchesXS ? 'center' : 'left'}>
-								{name}
+								{props.name}
 							</Typography>
 						</Grid>
 						<Grid item>
 							<Typography variant='h4' align={matchesXS ? 'center' : 'left'}>
-								{title}
+								{props.title}
 							</Typography>
 						</Grid>
 						<Grid item className={classes.editButtonContainer}>
@@ -126,8 +127,8 @@ const UserProfile = props => {
 				mode={'Edit'}
 				type={'Name and Title'}
 				updateProfile={updateProfile}	
-				name={name}
-				title={title}
+				name={props.name}
+				title={props.title}
 			/>
 		</React.Fragment>
 	);
