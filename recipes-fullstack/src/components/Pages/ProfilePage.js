@@ -92,6 +92,9 @@ const ProfilePage = props => {
 	// const [listIndex, setListIndex] = useState(-1);
 	const [editType, setEditType] = useState('');
 	const [textToEdit, setTextToEdit] = useState('');
+	const [aboutMe, setAboutMe] = useState('Tell us a bit about yourself!');
+	const [favThingsToCook, setFavThingsToCook] = useState('Feel free to brag about your most famous dishes!');
+	const editTypes = ['About Me', 'Favourite Things to Cook'];
 
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -121,12 +124,6 @@ const ProfilePage = props => {
 		setIsModalOpen(false);
 	};
 
-	const editTypes = ['About Me', 'Favourite Things to Cook'];
-	const editTexts = [
-		"My name's Cheffff... Just kidding, my real name is up top! I love to cook and Gordon Ramsey is my hero! I wanna be like him someday, but I'm not a great chef like him. I can make some decent scrambled eggs though!",
-		"I like to make Idiot Sandwiches and Gordon's famous Lamb Sauce.",
-	];
-
 	const buttonClickHandler = (editType, textToEdit) => {
 		if (editType === editTypes[0]) {
 			setEditType(editTypes[0]);
@@ -136,6 +133,10 @@ const ProfilePage = props => {
 		setTextToEdit(textToEdit);
 
 		modalOpenHandler();
+	};
+
+	const updateProfile = newTextValue => {
+
 	};
 
 	return (
@@ -163,7 +164,7 @@ const ProfilePage = props => {
 							<Grid item>
 								<Button
 									className={classes.editButton}
-									onClick={() => buttonClickHandler(editTypes[0], editTexts[0])}
+									onClick={() => buttonClickHandler(editTypes[0], aboutMe)}
 								>
 									Edit
 								</Button>
@@ -172,7 +173,7 @@ const ProfilePage = props => {
 					</Grid>
 					<Grid item className={classes.profileText}>
 						<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
-							{editTexts[0]}
+							{aboutMe}
 						</Typography>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
@@ -189,7 +190,7 @@ const ProfilePage = props => {
 							<Grid item>
 								<Button
 									className={classes.editButton}
-									onClick={() => buttonClickHandler(editTypes[1], editTexts[1])}
+									onClick={() => buttonClickHandler(editTypes[1], favThingsToCook)}
 								>
 									Edit
 								</Button>
@@ -198,7 +199,7 @@ const ProfilePage = props => {
 					</Grid>
 					<Grid item className={classes.profileText}>
 						<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
-							{editTexts[1]}
+							{favThingsToCook}
 						</Typography>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
@@ -227,12 +228,10 @@ const ProfilePage = props => {
 				</Grid>
 				<Modal
 					isOpen={isModalOpen}
-					modalCloseHandler={modalCloseHandler}
-					// mode={clickedButton}						
+					modalCloseHandler={modalCloseHandler}					
 					mode={'Edit'}
 					type={editType}
-					// listChange={props.changedList}	// probably don't need this
-					// clickedListIndex={listIndex}		// probably don't need this
+					updateProfile={updateProfile}
 					textToEdit={textToEdit}
 				/>
 			</Paper>
