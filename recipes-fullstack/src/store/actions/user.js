@@ -75,7 +75,7 @@ export const setFavesToCookStart = () => {
 
 export const setFavesToCookSuccess = (newValue) => {
 	return {
-		type: actionTypes.SET_FAVE_COOKS_START,
+		type: actionTypes.SET_FAVE_COOKS_SUCCESS,
         value: newValue,
 	};
 };
