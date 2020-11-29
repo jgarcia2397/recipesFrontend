@@ -75,6 +75,11 @@ const UserProfile = props => {
 		modalOpenHandler();
 	};
 
+	const updateProfile = (name, title) => {
+		setName(name);
+		setTitle(title);
+	};
+
 	return (
 		<React.Fragment>
 			<Grid
@@ -117,13 +122,10 @@ const UserProfile = props => {
 			</Grid>
 			<Modal
 				isOpen={isModalOpen}
-				modalCloseHandler={modalCloseHandler}
-				// mode={clickedButton}						
+				modalCloseHandler={modalCloseHandler}					
 				mode={'Edit'}
-				type={'Profile'}
-				// listChange={props.changedList}	// probably don't need this
-				// clickedListIndex={listIndex}		// probably don't need this
-				// textToEdit={name}
+				type={'Name and Title'}
+				updateProfile={updateProfile}	
 				name={name}
 				title={title}
 			/>

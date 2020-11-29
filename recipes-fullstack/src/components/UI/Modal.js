@@ -88,7 +88,7 @@ const Modal = props => {
 		);
 	} else if (editType === 'Directions') {
 		editType = 'Direction';
-	} else if (editType === 'Profile') {
+	} else if (editType === 'Name and Title') {
 		textField = (
 			<React.Fragment>
 				<TextField
@@ -123,10 +123,15 @@ const Modal = props => {
 
 	// ToDo: This function needs to handle updates of other types
 	const updateRecipeDetailHandler = () => {
-		const listType =
-			props.type === 'Ingredients' ? 'ingredients' : 'directions';
+		if (props.type === 'Ingredients' || props.type === 'Directions') {
+			const listType =
+				props.type === 'Ingredients' ? 'ingredients' : 'directions';
 
-		props.listChange(textValue, props.mode, listType, props.clickedListIndex);
+			props.listChange(textValue, props.mode, listType, props.clickedListIndex);
+		} else if (props.type === 'Name and Title') {
+			props.updateProfile(nameValue, titleValue);
+		}
+
 		props.modalCloseHandler();
 		setTextValue('');
 	};
