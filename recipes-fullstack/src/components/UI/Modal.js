@@ -122,7 +122,7 @@ const Modal = props => {
 	};
 
 	// ToDo: This function needs to handle updates of other types
-	const updateRecipeDetailHandler = () => {
+	const updateHandler = () => {
 		if (props.type === 'Ingredients' || props.type === 'Directions') {
 			const listType =
 				props.type === 'Ingredients' ? 'ingredients' : 'directions';
@@ -164,7 +164,7 @@ const Modal = props => {
 					Cancel
 				</Button>
 				<Button
-					onClick={updateRecipeDetailHandler}
+					onClick={updateHandler}
 					className={classes.confirmButton}
 				>
 					{props.mode === 'Delete' ? 'Delete' : 'Save'}
