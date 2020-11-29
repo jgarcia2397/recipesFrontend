@@ -136,7 +136,11 @@ const ProfilePage = props => {
 	};
 
 	const updateProfile = newTextValue => {
-
+		if (editType === editTypes[0]) {
+			setAboutMe(newTextValue);
+		} else {
+			setFavThingsToCook(newTextValue);
+		}
 	};
 
 	return (

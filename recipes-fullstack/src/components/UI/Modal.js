@@ -121,7 +121,6 @@ const Modal = props => {
 		// console.log('entry: ' + textValue + ', ' + 'name: ' + nameValue + ', ' + 'title: ' + titleValue);
 	};
 
-	// ToDo: This function needs to handle updates of other types
 	const updateHandler = () => {
 		if (props.type === 'Ingredients' || props.type === 'Directions') {
 			const listType =
@@ -130,6 +129,8 @@ const Modal = props => {
 			props.listChange(textValue, props.mode, listType, props.clickedListIndex);
 		} else if (props.type === 'Name and Title') {
 			props.updateProfile(nameValue, titleValue);
+		} else {
+			props.updateProfile(textValue);
 		}
 
 		props.modalCloseHandler();
