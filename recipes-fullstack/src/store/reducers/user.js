@@ -109,11 +109,11 @@ const reducer = (state = initialState, action) => {
 			return setAboutMeSuccess(state, action);
 		case actionTypes.SET_ABOUT_ME_FAILED:
 			return setAboutMeFailed(state, action);
-		case actionTypes.SET_ABOUT_ME_START:
+		case actionTypes.SET_FAVE_COOKS_START:
 			return setFavesToCookStart(state, action);
-		case actionTypes.SET_ABOUT_ME_SUCCCESS:
+		case actionTypes.SET_FAVE_COOKS_SUCCESS:
 			return setFavesToCookSuccess(state, action);
-		case actionTypes.SET_ABOUT_ME_FAILED:
+		case actionTypes.SET_FAVE_COOKS_FAILED:
 			return setFavesToCookFailed(state, action);
 		default:
 			return state;
