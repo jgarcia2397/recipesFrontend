@@ -99,13 +99,13 @@ const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.SET_NAME_AND_TITLE_START:
 			return setNameAndTitleStart(state, action);
-		case actionTypes.SET_NAME_AND_TITLE_SUCCCESS:
+		case actionTypes.SET_NAME_AND_TITLE_SUCCESS:
 			return setNameAndTitleSuccess(state, action);
 		case actionTypes.SET_NAME_AND_TITLE_FAILED:
 			return setNameAndTitleFailed(state, action);
 		case actionTypes.SET_ABOUT_ME_START:
 			return setAboutMeStart(state, action);
-		case actionTypes.SET_ABOUT_ME_SUCCCESS:
+		case actionTypes.SET_ABOUT_ME_SUCCESS:
 			return setAboutMeSuccess(state, action);
 		case actionTypes.SET_ABOUT_ME_FAILED:
 			return setAboutMeFailed(state, action);
