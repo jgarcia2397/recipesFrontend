@@ -71,6 +71,7 @@ const useStyles = makeStyles(theme => ({
 	textInput: {
 		width: '15vw',
 		minWidth: '150px',
+		height: '5vh',
 	},
 	recipeNameInput: {
 		marginBottom: '25px',
@@ -381,7 +382,6 @@ const CreateRecipePage = props => {
 		setAlert({ ...alert, open: false });
 	};
 
-	// ToDo: Add padding/margin on bottom of BasicRecipeInfoInputs TextFields so components don't shift when theres an error message
 	let form = (
 		<React.Fragment>
 			<Grid item className={classes.titleContainer}>

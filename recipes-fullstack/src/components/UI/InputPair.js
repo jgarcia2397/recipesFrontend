@@ -9,10 +9,12 @@ const useStyles = makeStyles(theme => ({
 	dropdown: {
 		width: '7.5vw',
 		minWidth: '115px',
+		height: '7vh',
 	},
 	textInput: {
 		width: '11.5vw',
 		minWidth: '150px',
+		height: '7vh',
 	},
 }));
 
