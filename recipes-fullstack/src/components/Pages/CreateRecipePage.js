@@ -201,13 +201,19 @@ const CreateRecipePage = props => {
 	}, [tabValue, routes, setTabValue]);
 
 	let oldRecipeDetails;
-	const isModifyRecipe = Object.keys(props.location.recipeDetails).length !== 0;
-
-	if (isModifyRecipe) {
-		oldRecipeDetails = props.location.recipeDetails;
-	} else {
+	if (props.location.recipeDetails === undefined) {
 		oldRecipeDetails = {};
+	} else {
+		oldRecipeDetails = props.location.recipeDetails;
 	}
+
+	const isModifyRecipe = Object.keys(oldRecipeDetails).length !== 0;		// props.location.recipeDetails
+
+	// if (isModifyRecipe) {
+	// 	oldRecipeDetails = props.location.recipeDetails;
+	// } else {
+	// 	oldRecipeDetails = {};
+	// }
 
 	const updateBasicFormOnMount = () => {
 		let updatedBasicFormState = {};
