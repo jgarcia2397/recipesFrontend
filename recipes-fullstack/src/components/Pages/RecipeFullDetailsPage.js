@@ -65,6 +65,13 @@ const RecipeFullDetailsPage = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
+	let storedCardId;
+	if (props.location.id == null) {
+		storedCardId = JSON.parse(localStorage.getItem('cardId'));
+	} else {
+		storedCardId = props.location.id.cardId;
+	}
+
 	return (
 		<Grid
 			container
@@ -75,16 +82,16 @@ const RecipeFullDetailsPage = props => {
 				{/* Can probably clean up the props passed here. Instead only pass recipes and props.location.id.cardId ??? */}
 				<RecipeInfoColumn
 					recipeInit={onUpdateRecipeInit}
-					recipeId={props.location.id.cardId}
-					recipeName={recipes[props.location.id.cardId].basicDetails.recipeName}
-					prepTime={recipes[props.location.id.cardId].basicDetails.prepTime}
-					cookTime={recipes[props.location.id.cardId].basicDetails.cookTime}
-					prepTimeUnits={recipes[props.location.id.cardId].basicDetails.prepTimeUnits}
-					cookTimeUnits={recipes[props.location.id.cardId].basicDetails.cookTimeUnits}
-					servings={recipes[props.location.id.cardId].basicDetails.servings}
-					difficulty={recipes[props.location.id.cardId].basicDetails.difficulty}
-					ingredientArray={recipes[props.location.id.cardId].ingredients}
-					directionsArray={recipes[props.location.id.cardId].directions}
+					recipeId={storedCardId}
+					recipeName={recipes[storedCardId].basicDetails.recipeName}
+					prepTime={recipes[storedCardId].basicDetails.prepTime}
+					cookTime={recipes[storedCardId].basicDetails.cookTime}
+					prepTimeUnits={recipes[storedCardId].basicDetails.prepTimeUnits}
+					cookTimeUnits={recipes[storedCardId].basicDetails.cookTimeUnits}
+					servings={recipes[storedCardId].basicDetails.servings}
+					difficulty={recipes[storedCardId].basicDetails.difficulty}
+					ingredientArray={recipes[storedCardId].ingredients}
+					directionsArray={recipes[storedCardId].directions}
 				/>
 			</Grid>
 			<Grid item className={classes.divider}>

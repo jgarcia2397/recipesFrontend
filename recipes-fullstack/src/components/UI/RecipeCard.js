@@ -78,11 +78,16 @@ const RecipeCard = props => {
 
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
+	const saveIDToLocalStorage = () => {
+		localStorage.setItem('cardId', props.id);
+	};
+
 	return (
 		<Card className={classes.root} elevation={3}>
 			<CardActionArea
 				classes={{ root: classes.cardActionContainer }}
 				component={Link}
+				onClick={saveIDToLocalStorage}
 				to={{
 					pathname: '/recipe-full-details',
 					id: { cardId: props.id },
