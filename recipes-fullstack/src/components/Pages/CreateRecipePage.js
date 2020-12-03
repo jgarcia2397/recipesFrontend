@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
 		height: '5vh',
 	},
 	recipeNameInput: {
-		marginBottom: '25px',
+		marginBottom: '35px',
 	},
 }));
 
