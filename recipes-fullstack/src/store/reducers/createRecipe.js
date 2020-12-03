@@ -5,12 +5,13 @@ const initialState = {
 	recipes: [],
 	recipeId: -1,
 	recipeCreated: false,
+	isModifyRecipe: false,
 	loading: false,
 	error: null,
 };
 
 const createRecipeInit = (state, action) => {
-	return updateObject(state, { recipeCreated: false });
+	return updateObject(state, { recipeCreated: false, isModifyRecipe: false });
 };
 
 const createRecipeStart = (state, action) => {
@@ -48,7 +49,7 @@ const createRecipeFailed = (state, action) => {
 };
 
 const updateRecipeInit = (state, action) => {
-	return updateObject(state, { recipeCreated: false, recipeId: action.id });
+	return updateObject(state, { recipeCreated: false, recipeId: action.id, isModifyRecipe: true });
 };
 
 const updateRecipeStart = (state, action) => {

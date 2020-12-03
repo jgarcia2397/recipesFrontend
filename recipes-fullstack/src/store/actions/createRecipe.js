@@ -3,6 +3,7 @@ import * as actionTypes from './actionTypes';
 export const createRecipeInit = () => {
 	return {
 		type: actionTypes.CREATE_RECIPE_INIT,
+		isModifyRecipe: false,
 	};
 };
 
@@ -45,6 +46,7 @@ export const updateRecipeInit = recipeId => {
 	return {
 		type: actionTypes.UPDATE_RECIPE_INIT,
 		id: recipeId,
+		isModifyRecipe: true,
 	};
 };
 
