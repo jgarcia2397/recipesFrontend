@@ -202,18 +202,13 @@ const CreateRecipePage = props => {
 
 	let oldRecipeDetails;
 	if (props.location.recipeDetails === undefined) {
-		oldRecipeDetails = {};
+		// This case occurs when we are modifying an existing recipe and the page is refreshed
+		oldRecipeDetails = JSON.parse(localStorage.getItem('recipeDetails'));
 	} else {
 		oldRecipeDetails = props.location.recipeDetails;
 	}
 
-	const isModifyRecipe = Object.keys(oldRecipeDetails).length !== 0;		// props.location.recipeDetails
-
-	// if (isModifyRecipe) {
-	// 	oldRecipeDetails = props.location.recipeDetails;
-	// } else {
-	// 	oldRecipeDetails = {};
-	// }
+	const isModifyRecipe = Object.keys(oldRecipeDetails).length !== 0;
 
 	const updateBasicFormOnMount = () => {
 		let updatedBasicFormState = {};

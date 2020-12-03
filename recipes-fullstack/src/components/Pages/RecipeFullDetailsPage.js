@@ -47,9 +47,12 @@ const RecipeFullDetailsPage = props => {
 
 	const recipes = useSelector(state => state.createRecipe.recipes);
 
-	const onUpdateRecipeInit = (id) => dispatch(actions.updateRecipeInit(id));
+	const onUpdateRecipeInit = (id, oldRecipeObj) => {
+		localStorage.setItem('recipeDetails', JSON.stringify({ ...oldRecipeObj }));
+		dispatch(actions.updateRecipeInit(id));
+	};
 
-	const {tabValue, routes, setTabValue} = props;
+	const { tabValue, routes, setTabValue } = props;
 
 	useEffect(() => {
 		[...routes].forEach(route => {
