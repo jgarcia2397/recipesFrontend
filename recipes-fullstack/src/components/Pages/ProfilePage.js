@@ -82,6 +82,10 @@ const useStyles = makeStyles(theme => ({
 		'&:hover': {
 			backgroundColor: theme.palette.secondary.dark,
 		},
+		[theme.breakpoints.down('xs')]: {
+			marginLeft: '0px',
+			marginTop: '15px',
+		},
 	},
 }));
 
@@ -99,6 +103,7 @@ const ProfilePage = props => {
 	const editTypes = ['About Me', 'Favourite Things to Cook'];
 
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
+	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
 	const dispatch = useDispatch();
 
@@ -175,7 +180,7 @@ const ProfilePage = props => {
 						/>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
-						<Grid container direction='row' alignItems='center'>
+						<Grid container direction={matchesXS ? 'column' : 'row'} alignItems='center'>
 							<Grid item>
 								<Typography
 									variant='h4'
@@ -201,7 +206,7 @@ const ProfilePage = props => {
 						</Typography>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
-						<Grid container direction='row' alignItems='center'>
+						<Grid container direction={matchesXS ? 'column' : 'row'} alignItems='center'>
 							<Grid item>
 								<Typography
 									variant='h4'
