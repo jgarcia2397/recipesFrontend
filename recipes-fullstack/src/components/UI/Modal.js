@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -48,6 +48,8 @@ const useStyles = makeStyles(theme => ({
 const Modal = props => {
 	const classes = useStyles();
 	const theme = useTheme();
+
+	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
 	const [textValue, setTextValue] = useState('');
 	const [nameValue, setNameValue] = useState('');
@@ -153,7 +155,7 @@ const Modal = props => {
 			}}
 		>
 			<DialogContent className={classes.contentContainer}>
-				<Typography variant='h4' className={classes.modalTitleContainer}>
+				<Typography variant={matchesXS ? 'h5' : 'h4'} className={classes.modalTitleContainer}>
 					{props.mode} {editType}
 					{/* {props.type === 'Ingredients' ? 'Ingredient' : 'Direction'} */}
 					{props.mode === 'Delete' ? '?' : ''}
