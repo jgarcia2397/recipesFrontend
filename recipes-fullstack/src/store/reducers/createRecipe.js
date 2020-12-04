@@ -11,6 +11,7 @@ const initialState = {
 };
 
 const createRecipeInit = (state, action) => {
+	localStorage.setItem('isModifyRecipe', false);
 	return updateObject(state, { recipeCreated: false, isModifyRecipe: false });
 };
 
@@ -49,6 +50,7 @@ const createRecipeFailed = (state, action) => {
 };
 
 const updateRecipeInit = (state, action) => {
+	localStorage.setItem('isModifyRecipe', true);
 	return updateObject(state, { recipeCreated: false, recipeId: action.id, isModifyRecipe: true });
 };
 

@@ -177,6 +177,9 @@ const CreateRecipePage = props => {
 	);
 
 	const recipeId = useSelector(state => state.createRecipe.recipeId);
+	const isModifyRecipe = useSelector(
+		state => state.createRecipe.isModifyRecipe
+	); // can use this to have additional UI message when updating recipe?
 
 	const onCreateRecipe = (basicDetails, ingredients, directions) =>
 		dispatch(actions.createRecipe(basicDetails, ingredients, directions));
@@ -201,18 +204,31 @@ const CreateRecipePage = props => {
 	}, [tabValue, routes, setTabValue]);
 
 	let oldRecipeDetails;
-	if (props.location.recipeDetails === undefined) {
-		// This case occurs when we are modifying an existing recipe and the page is refreshed
+	const isModifyLocalStorage = localStorage.getItem('isModifyRecipe');
+	if (isModifyLocalStorage === 'true') {
+		// previously isModifyRecipe from Redux store
+		// This case occurs when we are modifying an existing recipe and the page is refreshed, cannot use isModifyRecipe from Redux store since it resets to false on refresh
 		oldRecipeDetails = JSON.parse(localStorage.getItem('recipeDetails'));
 	} else {
-		oldRecipeDetails = props.location.recipeDetails;
+		// oldRecipeDetails = props.location.recipeDetails;
+		oldRecipeDetails = {
+			recipeName: '',
+			prepTime: '',
+			prepTimeUnits: 'minutes',
+			cookTime: '',
+			cookTimeUnits: 'minutes',
+			servings: '',
+			difficulty: 'Easy',
+			ingredientArray: [],
+			directionsArray: [],
+		};
 	}
 
-	const isModifyRecipe = Object.keys(oldRecipeDetails).length !== 0;
+	// const isModifyRecipe = Object.keys(oldRecipeDetails).length !== 0;
 
 	const updateBasicFormOnMount = () => {
 		let updatedBasicFormState = {};
-		
+
 		for (const inputID of Object.keys(basicRecipeForm)) {
 			const updatedFormElement = updateObject(basicRecipeForm[inputID], {
 				value: oldRecipeDetails[inputID],
@@ -258,7 +274,8 @@ const CreateRecipePage = props => {
 	};
 
 	useEffect(() => {
-		if (isModifyRecipe) {
+		if (isModifyLocalStorage === 'true') {
+			// previously isModifyRecipe from Redux store
 			// acts like componentDidMount, update basicRecipeForm dropdown state
 			updateBasicFormOnMount();
 
@@ -292,7 +309,10 @@ const CreateRecipePage = props => {
 		for (const key of Object.keys(basicRecipeForm)) {
 			if (!basicRecipeForm[key].valid) {
 				setFormIsValid(false);
-				setAlert({ open: true, message: 'There is an error with your Basic Recipe Info!' });
+				setAlert({
+					open: true,
+					message: 'There is an error with your Basic Recipe Info!',
+				});
 				break;
 			}
 		}
@@ -315,7 +335,7 @@ const CreateRecipePage = props => {
 
 		checkFormErrors();
 
-		if (formIsValid) {		
+		if (formIsValid) {
 			const basicDetails = {};
 			for (let formElementID in basicRecipeForm) {
 				basicDetails[formElementID] = basicRecipeForm[formElementID].value;
@@ -329,7 +349,7 @@ const CreateRecipePage = props => {
 			} else {
 				onUpdateRecipe(basicDetails, ingredientList, directionList);
 			}
-		} 
+		}
 	};
 
 	const basicInputChangedHandler = (event, inputID) => {
@@ -398,7 +418,9 @@ const CreateRecipePage = props => {
 					id='recipeName'
 					label='Recipe Name'
 					variant='outlined'
-					defaultValue={isModifyRecipe ? oldRecipeDetails.recipeName : ''}
+					defaultValue={
+						isModifyLocalStorage === 'true' ? oldRecipeDetails.recipeName : ''
+					} // previously isModifyRecipe from Redux store
 					className={classes.textInput}
 					onChange={event => basicInputChangedHandler(event, 'recipeName')}
 					error={textInputErrors[0]}
@@ -413,7 +435,7 @@ const CreateRecipePage = props => {
 					prepTimeUnits={basicRecipeForm.prepTimeUnits.value}
 					cookTimeUnits={basicRecipeForm.cookTimeUnits.value}
 					difficulty={basicRecipeForm.difficulty.value}
-					isModify={isModifyRecipe}
+					isModify={isModifyLocalStorage === 'true'} // previously isModifyRecipe from Redux store
 					oldDetails={oldRecipeDetails}
 					errors={textInputErrors}
 				/>
@@ -443,7 +465,7 @@ const CreateRecipePage = props => {
 						directionsArray={detailRecipeForm.directions.value}
 						isNewRecipe
 						changedListHandler={detailedListChangedHandler}
-						isModify={isModifyRecipe}
+						isModify={isModifyLocalStorage === 'true'} // previously isModifyRecipe from Redux store
 						oldDetails={oldRecipeDetails}
 					/>
 				</Grid>
