@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -55,7 +55,19 @@ const useStyles = makeStyles(theme => ({
 	},
 	loginButton: {
 		...theme.typography.button,
-		marginTop: '80px',
+		marginTop: '40px',
+		borderRadius: 50,
+		backgroundColor: theme.palette.secondary.main,
+		'&:hover': {
+			backgroundColor: theme.palette.secondary.dark,
+		},
+		[theme.breakpoints.down('md')]: {
+			marginTop: '45px',
+		},
+	},
+	switchAuthModeButton: {
+		...theme.typography.button,
+		marginTop: '10px',
 		borderRadius: 50,
 		backgroundColor: theme.palette.secondary.main,
 		'&:hover': {
@@ -70,7 +82,40 @@ const useStyles = makeStyles(theme => ({
 const Auth = props => {
 	const classes = useStyles();
 
-	const {tabValue, routes, setTabValue} = props;
+	const [authForm, setAuthForm] = useState({
+		name: {
+			elementType: 'input',
+			value: '',
+			validation: {
+				required: true,
+			},
+			valid: false,
+			touched: false,
+		},
+		email: {
+			elementType: 'input',
+			value: '',
+			validation: {
+				required: true,
+				isEmail: true,
+			},
+			valid: false,
+			touched: false,
+		},
+		password: {
+			elementType: 'input',
+			value: '',
+			validation: {
+				required: true,
+				minLength: 8,
+			},
+			valid: false,
+			touched: false,
+		},
+		isSignUp: true,
+	});
+
+	const { tabValue, routes, setTabValue } = props;
 
 	useEffect(() => {
 		[...routes].forEach(route => {
@@ -85,6 +130,10 @@ const Auth = props => {
 			}
 		});
 	}, [tabValue, routes, setTabValue]);
+
+	const switchAuthModeHandler = () => {
+		setAuthForm({ isSignUp: !authForm.isSignUp });
+	};
 
 	return (
 		<div className={classes.root}>
@@ -118,7 +167,16 @@ const Auth = props => {
 								className={classes.loginButton}
 								style={{ maxWidth: '140px', minWidth: '140px' }}
 							>
-								Login
+								{authForm.isSignUp ? 'Sign Up' : 'Login'}
+							</Button>
+						</Grid>
+						<Grid item>
+							<Button
+								className={classes.switchAuthModeButton}
+								style={{ maxWidth: '180px', minWidth: '180px' }}
+								onClick={switchAuthModeHandler}
+							>
+								Switch to {authForm.isSignUp ? 'Login' : 'Sign Up'}
 							</Button>
 						</Grid>
 					</Grid>
