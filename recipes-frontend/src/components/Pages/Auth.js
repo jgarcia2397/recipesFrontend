@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 	},
 	loginContainer: {
-		height: '500px',
+		// height: '500px',
 		width: '700px',
 		position: 'fixed',
 		top: '0',
@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: '20px',
 	},
 	inputContainer: {
-		marginTop: '50px',
+		marginTop: '40px',
 		[theme.breakpoints.down('md')]: {
 			marginTop: '25px',
 		},
@@ -138,13 +138,27 @@ const Auth = props => {
 	return (
 		<div className={classes.root}>
 			<Paper square className={classes.background}>
-				<Paper elevation={4} className={classes.loginContainer}>
+				<Paper
+					elevation={4}
+					className={classes.loginContainer}
+					style={{ height: authForm.isSignUp ? '575px' : '500px' }}
+				>
 					<Grid container direction='column' alignItems='center'>
 						<Grid item>
 							<Typography variant='h3' className={classes.title}>
 								Login
 							</Typography>
 						</Grid>
+						{authForm.isSignUp ? (
+							<Grid item className={classes.inputContainer}>
+								<TextField
+									id='name'
+									label='Name'
+									variant='outlined'
+									className={classes.input}
+								/>
+							</Grid>
+						) : null}
 						<Grid item className={classes.inputContainer}>
 							<TextField
 								id='email'
