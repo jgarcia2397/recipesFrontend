@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { updateObject } from '../../shared/utility';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
+import * as actions from '../../store/actions/index';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -115,6 +118,14 @@ const Auth = props => {
 		},
 		isSignUp: true,
 	});
+
+	const dispatch = useDispatch();
+
+	const onAuthLogin = (email, password) =>
+		dispatch(actions.authLogin(email, password));
+
+	const onAuthSignup = (name, email, password) =>
+		dispatch(actions.authLogin(name, email, password));
 
 	const { tabValue, routes, setTabValue } = props;
 

@@ -8,5 +8,7 @@ export {
 export { 
     setNameAndTitle, 
     setAboutMe, 
-    setFavesToCook, 
+	setFavesToCook,
+	authLogin,
+	authSignup, 
 } from './user';
