@@ -125,7 +125,7 @@ const Auth = props => {
 		dispatch(actions.authLogin(email, password));
 
 	const onAuthSignup = (name, email, password) =>
-		dispatch(actions.authLogin(name, email, password));
+		dispatch(actions.authSignup(name, email, password));
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -165,6 +165,16 @@ const Auth = props => {
 		console.log(authForm);
 	};
 
+	const authSubmitHandler = event => {
+		event.preventDefault();
+
+		if (authForm.isSignUp) {
+			onAuthSignup(authForm.name.value, authForm.email.value, authForm.password.value);
+		} else {
+			onAuthLogin(authForm.email.value, authForm.password.value);
+		}
+	};
+
 	const form = (
 		<React.Fragment>
 			{authForm.isSignUp ? (
@@ -201,6 +211,7 @@ const Auth = props => {
 				<Button
 					className={classes.loginButton}
 					style={{ maxWidth: '140px', minWidth: '140px' }}
+					onClick={authSubmitHandler}
 				>
 					{authForm.isSignUp ? 'Sign Up' : 'Login'}
 				</Button>
