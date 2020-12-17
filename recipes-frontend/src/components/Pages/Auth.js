@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import { updateObject } from '../../shared/utility';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -132,8 +133,69 @@ const Auth = props => {
 	}, [tabValue, routes, setTabValue]);
 
 	const switchAuthModeHandler = () => {
-		setAuthForm({ isSignUp: !authForm.isSignUp });
+		const updatedAuthForm = updateObject(authForm, {
+			isSignUp: !authForm.isSignUp,
+		});
+
+		setAuthForm(updatedAuthForm);
 	};
+
+	const inputChangedHandler = (event, inputId) => {
+		const updatedFormElement = updateObject(authForm[inputId], {
+			value: event.target.value,
+			touched: true,
+		});
+
+		const updatedAuthForm = updateObject(authForm, {
+			[inputId]: updatedFormElement,
+		});
+
+		setAuthForm(updatedAuthForm);
+		console.log(authForm);
+	};
+
+	const form = (
+		<React.Fragment>
+			{authForm.isSignUp ? (
+				<Grid item className={classes.inputContainer}>
+					<TextField
+						id='name'
+						label='Name'
+						variant='outlined'
+						className={classes.input}
+						onChange={event => inputChangedHandler(event, 'name')}
+					/>
+				</Grid>
+			) : null}
+			<Grid item className={classes.inputContainer}>
+				<TextField
+					id='email'
+					label='Email'
+					variant='outlined'
+					className={classes.input}
+					onChange={event => inputChangedHandler(event, 'email')}
+				/>
+			</Grid>
+			<Grid item className={classes.inputContainer}>
+				<TextField
+					id='password'
+					label='Password'
+					variant='outlined'
+					type='password'
+					className={classes.input}
+					onChange={event => inputChangedHandler(event, 'password')}
+				/>
+			</Grid>
+			<Grid item>
+				<Button
+					className={classes.loginButton}
+					style={{ maxWidth: '140px', minWidth: '140px' }}
+				>
+					{authForm.isSignUp ? 'Sign Up' : 'Login'}
+				</Button>
+			</Grid>
+		</React.Fragment>
+	);
 
 	return (
 		<div className={classes.root}>
@@ -149,41 +211,7 @@ const Auth = props => {
 								Login
 							</Typography>
 						</Grid>
-						{authForm.isSignUp ? (
-							<Grid item className={classes.inputContainer}>
-								<TextField
-									id='name'
-									label='Name'
-									variant='outlined'
-									className={classes.input}
-								/>
-							</Grid>
-						) : null}
-						<Grid item className={classes.inputContainer}>
-							<TextField
-								id='email'
-								label='Email'
-								variant='outlined'
-								className={classes.input}
-							/>
-						</Grid>
-						<Grid item className={classes.inputContainer}>
-							<TextField
-								id='password'
-								label='Password'
-								variant='outlined'
-								type='password'
-								className={classes.input}
-							/>
-						</Grid>
-						<Grid item>
-							<Button
-								className={classes.loginButton}
-								style={{ maxWidth: '140px', minWidth: '140px' }}
-							>
-								{authForm.isSignUp ? 'Sign Up' : 'Login'}
-							</Button>
-						</Grid>
+						{form}
 						<Grid item>
 							<Button
 								className={classes.switchAuthModeButton}
