@@ -99,3 +99,72 @@ export const setFavesToCook = (value) => {
         }
     };
 };
+
+export const authLoginStart = () => {
+	return {
+		type: actionTypes.AUTH_LOGIN_START,
+	};
+};
+
+export const authLoginSuccess = (email, password) => {
+	return {
+		type: actionTypes.AUTH_LOGIN_SUCCESS,
+		email: email,
+		password: password,
+	};
+};
+
+export const authLoginFailed = error => {
+	return {
+		type: actionTypes.AUTH_LOGIN_FAILED,
+		error: error,
+	};
+};
+
+export const authLogin = (email, password) => {
+	return dispatch => {
+		dispatch(authLoginStart());
+
+		try {
+			dispatch(authLoginSuccess(email, password));
+		} catch (err) {
+			dispatch(authLoginFailed(err));
+		}
+	};
+};
+
+export const authSignupStart = () => {
+	return {
+		type: actionTypes.AUTH_SIGNUP_START,
+	};
+};
+
+export const authSignupSuccess = (name, email, password) => {
+	return {
+		type: actionTypes.AUTH_SIGNUP_SUCCESS,
+		name: name,
+		email: email,
+		password: password,
+	};
+};
+
+export const authSignupFailed = error => {
+	return {
+		type: actionTypes.AUTH_SIGNUP_FAILED,
+		error: error,
+	};
+};
+
+export const authSignup = (name, email, password) => {
+	return dispatch => {
+		dispatch(authSignupStart());
+
+		try {
+			dispatch(authSignupSuccess(name, email, password));
+		} catch (err) {
+			dispatch(authSignupFailed(err));
+		}
+	};
+};
+
+// export const authLogout = () => {};
