@@ -2,6 +2,9 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../shared/utility';
 
 const initialState = {
+	isLoggedIn: false,
+	email: '',
+	password: '', // email and password only temporary to test dummy login
 	name: 'Your Name',
 	title: 'Your Title',
 	nameAndTitleUpdated: false,
@@ -95,6 +98,53 @@ const setFavesToCookFailed = (state, action) => {
 	});
 };
 
+const authLoginStart = (state, action) => {
+	return updateObject(state, {
+		isLoggedIn: action.isLoggedIn,
+		error: null,
+	});
+};
+
+const authLoginSuccess = (state, action) => {
+	return updateObject(state, {
+		email: action.email,
+		password: action.password,
+		isLoggedIn: action.isLoggedIn,
+		error: null,
+	});
+};
+
+const authLoginFailed = (state, action) => {
+	return updateObject(state, {
+		error: action.error,
+		isLoggedIn: action.isLoggedIn,
+	});
+};
+
+const authSignupStart = (state, action) => {
+	return updateObject(state, {
+		isLoggedIn: action.isLoggedIn,
+		error: null,
+	});
+};
+
+const authSignupSuccess = (state, action) => {
+	return updateObject(state, {
+		name: action.name,
+		email: action.email,
+		password: action.password,
+		isLoggedIn: action.isLoggedIn,
+		error: null,
+	});
+};
+
+const authSignupFailed = (state, action) => {
+	return updateObject(state, {
+		error: action.error,
+		isLoggedIn: action.isLoggedIn,
+	});
+};
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.SET_NAME_AND_TITLE_START:
@@ -115,6 +165,18 @@ const reducer = (state = initialState, action) => {
 			return setFavesToCookSuccess(state, action);
 		case actionTypes.SET_FAVE_COOKS_FAILED:
 			return setFavesToCookFailed(state, action);
+		case actionTypes.AUTH_LOGIN_START:
+			return authLoginStart(state, action);
+		case actionTypes.AUTH_LOGIN_SUCCESS:
+			return authLoginSuccess(state, action);
+		case actionTypes.AUTH_LOGIN_FAILED:
+			return authLoginFailed(state, action);
+		case actionTypes.AUTH_SIGNUP_START:
+			return authSignupStart(state, action);
+		case actionTypes.AUTH_SIGNUP_SUCCESS:
+			return authSignupSuccess(state, action);
+		case actionTypes.AUTH_SIGNUP_FAILED:
+			return authSignupFailed(state, action);
 		default:
 			return state;
 	}
