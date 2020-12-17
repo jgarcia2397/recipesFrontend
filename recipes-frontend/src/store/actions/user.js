@@ -103,6 +103,7 @@ export const setFavesToCook = (value) => {
 export const authLoginStart = () => {
 	return {
 		type: actionTypes.AUTH_LOGIN_START,
+		isLoggedIn: false,
 	};
 };
 
@@ -111,6 +112,7 @@ export const authLoginSuccess = (email, password) => {
 		type: actionTypes.AUTH_LOGIN_SUCCESS,
 		email: email,
 		password: password,
+		isLoggedIn: true,
 	};
 };
 
@@ -118,6 +120,7 @@ export const authLoginFailed = error => {
 	return {
 		type: actionTypes.AUTH_LOGIN_FAILED,
 		error: error,
+		isLoggedIn: false,
 	};
 };
 
@@ -136,6 +139,7 @@ export const authLogin = (email, password) => {
 export const authSignupStart = () => {
 	return {
 		type: actionTypes.AUTH_SIGNUP_START,
+		isLoggedIn: false,
 	};
 };
 
@@ -145,6 +149,7 @@ export const authSignupSuccess = (name, email, password) => {
 		name: name,
 		email: email,
 		password: password,
+		isLoggedIn: true,
 	};
 };
 
@@ -152,6 +157,7 @@ export const authSignupFailed = error => {
 	return {
 		type: actionTypes.AUTH_SIGNUP_FAILED,
 		error: error,
+		isLoggedIn: false,
 	};
 };
 
