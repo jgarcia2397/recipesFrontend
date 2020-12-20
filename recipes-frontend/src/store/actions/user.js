@@ -126,11 +126,24 @@ export const authLogin = (email, password) => {
 	return dispatch => {
 		dispatch(authLoginStart());
 
-		try {
-			dispatch(authLoginSuccess(email, password));
-		} catch (err) {
-			dispatch(authLoginFailed(err));
-		}
+		const authData = {
+			email,
+			password,
+		};
+
+		axiosRecipes
+			.post('/user/login', JSON.stringify(authData))
+			.then(response => {
+				dispatch(
+					authLoginSuccess(
+						response.data.email,
+						response.data.password
+					)
+				);
+			})
+			.catch(err => {
+				dispatch(authLoginFailed(err.response.data.message));
+			});
 	};
 };
 
