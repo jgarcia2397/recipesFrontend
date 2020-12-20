@@ -174,7 +174,11 @@ const Auth = props => {
 		event.preventDefault();
 
 		if (authForm.isSignUp) {
-			onAuthSignup(authForm.name.value, authForm.email.value, authForm.password.value);
+			onAuthSignup(
+				authForm.name.value,
+				authForm.email.value,
+				authForm.password.value
+			);
 		} else {
 			onAuthLogin(authForm.email.value, authForm.password.value);
 		}
