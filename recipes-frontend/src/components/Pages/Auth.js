@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { updateObject } from '../../shared/utility';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import * as actions from '../../store/actions/index';
 
@@ -118,6 +119,9 @@ const Auth = props => {
 		},
 		isSignUp: true,
 	});
+
+	const isLoading = useSelector(state => state.user.loading);
+	const authError = useSelector(state => state.user.error);
 
 	const dispatch = useDispatch();
 
@@ -234,7 +238,7 @@ const Auth = props => {
 								Login
 							</Typography>
 						</Grid>
-						{form}
+						{isLoading ? <CircularProgress color='secondary' /> : form}
 						<Grid item>
 							<Button
 								className={classes.switchAuthModeButton}
