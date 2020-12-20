@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 import * as actions from '../../store/actions/index';
 
@@ -87,6 +89,7 @@ const useStyles = makeStyles(theme => ({
 const Auth = props => {
 	const classes = useStyles();
 
+	const [isSnackbarOpen, setIsSnackBarOpen] = useState(false);
 	const [authForm, setAuthForm] = useState({
 		name: {
 			elementType: 'input',
@@ -147,6 +150,12 @@ const Auth = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
+	useEffect(() => {
+		if (authError !== null) {
+			setIsSnackBarOpen(true);
+		}
+	}, [authError]);
+
 	const switchAuthModeHandler = () => {
 		const updatedAuthForm = updateObject(authForm, {
 			isSignUp: !authForm.isSignUp,
@@ -182,6 +191,10 @@ const Auth = props => {
 		} else {
 			onAuthLogin(authForm.email.value, authForm.password.value);
 		}
+	};
+
+	const handleSnackbarClose = () => {
+		setIsSnackBarOpen(false);
 	};
 
 	const form = (
@@ -228,8 +241,22 @@ const Auth = props => {
 		</React.Fragment>
 	);
 
+	const snackbar = (
+		<Snackbar
+			open={isSnackbarOpen}
+			autoHideDuration={5000}
+			onClose={handleSnackbarClose}
+			anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+		>
+			<Alert severity='error' variant='filled' elevation={5}>
+				{authError}
+			</Alert>
+		</Snackbar>
+	);
+
 	return (
 		<div className={classes.root}>
+			{snackbar}
 			<Paper square className={classes.background}>
 				<Paper
 					elevation={4}

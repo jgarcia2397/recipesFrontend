@@ -181,7 +181,7 @@ export const authSignup = (name, email, password) => {
 				);
 			})
 			.catch(err => {
-				dispatch(authSignupFailed(err.response.data.error));
+				dispatch(authSignupFailed(err.response.data.message));
 			});
 	};
 };
