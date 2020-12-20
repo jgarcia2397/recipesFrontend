@@ -101,6 +101,7 @@ const setFavesToCookFailed = (state, action) => {
 const authLoginStart = (state, action) => {
 	return updateObject(state, {
 		isLoggedIn: action.isLoggedIn,
+		loading: true,
 		error: null,
 	});
 };
@@ -110,6 +111,7 @@ const authLoginSuccess = (state, action) => {
 		email: action.email,
 		password: action.password,
 		isLoggedIn: action.isLoggedIn,
+		loading: false,
 		error: null,
 	});
 };
@@ -117,6 +119,7 @@ const authLoginSuccess = (state, action) => {
 const authLoginFailed = (state, action) => {
 	return updateObject(state, {
 		error: action.error,
+		loading: false,
 		isLoggedIn: action.isLoggedIn,
 	});
 };
@@ -124,6 +127,7 @@ const authLoginFailed = (state, action) => {
 const authSignupStart = (state, action) => {
 	return updateObject(state, {
 		isLoggedIn: action.isLoggedIn,
+		loading: true,
 		error: null,
 	});
 };
@@ -134,6 +138,7 @@ const authSignupSuccess = (state, action) => {
 		email: action.email,
 		password: action.password,
 		isLoggedIn: action.isLoggedIn,
+		loading: false,
 		error: null,
 	});
 };
@@ -141,6 +146,7 @@ const authSignupSuccess = (state, action) => {
 const authSignupFailed = (state, action) => {
 	return updateObject(state, {
 		error: action.error,
+		loading: false,
 		isLoggedIn: action.isLoggedIn,
 	});
 };
