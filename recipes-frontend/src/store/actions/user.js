@@ -169,24 +169,20 @@ export const authSignup = (name, email, password) => {
 			password,
 		};
 
-		try {
-			axiosRecipes
-				.post('/user/signup', JSON.stringify(authData))
-				.then(response => {
-					dispatch(
-						authSignupSuccess(
-							response.data.name,
-							response.data.email,
-							response.data.password
-						)
-					);
-				})
-				.catch(err => {
-					dispatch(authSignupFailed(err.response.data.error));
-				});
-		} catch (err) {
-			dispatch(authSignupFailed(err));
-		}
+		axiosRecipes
+			.post('/user/signup', JSON.stringify(authData))
+			.then(response => {
+				dispatch(
+					authSignupSuccess(
+						response.data.name,
+						response.data.email,
+						response.data.password
+					)
+				);
+			})
+			.catch(err => {
+				dispatch(authSignupFailed(err.response.data.error));
+			});
 	};
 };
 
