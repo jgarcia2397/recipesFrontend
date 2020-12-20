@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import axiosRecipes from '../../axios-recipes';
 
 export const setNameAndTitleStart = () => {
 	return {
@@ -9,8 +10,8 @@ export const setNameAndTitleStart = () => {
 export const setNameAndTitleSuccess = (nameVal, titleVal) => {
 	return {
 		type: actionTypes.SET_NAME_AND_TITLE_SUCCESS,
-        name: nameVal,
-        title: titleVal,
+		name: nameVal,
+		title: titleVal,
 	};
 };
 
@@ -23,15 +24,14 @@ export const setNameAndTitleFailed = error => {
 
 export const setNameAndTitle = (name, title) => {
 	return dispatch => {
-        dispatch(setNameAndTitleStart());
+		dispatch(setNameAndTitleStart());
 
-        try {
-            dispatch(setNameAndTitleSuccess(name, title));
-        } 
-        catch (err) {
-            dispatch(setNameAndTitleFailed(err));
-        }
-    };
+		try {
+			dispatch(setNameAndTitleSuccess(name, title));
+		} catch (err) {
+			dispatch(setNameAndTitleFailed(err));
+		}
+	};
 };
 
 export const setAboutMeStart = () => {
@@ -40,10 +40,10 @@ export const setAboutMeStart = () => {
 	};
 };
 
-export const setAboutMeSuccess = (newValue) => {
+export const setAboutMeSuccess = newValue => {
 	return {
 		type: actionTypes.SET_ABOUT_ME_SUCCESS,
-        value: newValue,
+		value: newValue,
 	};
 };
 
@@ -54,17 +54,16 @@ export const setAboutMeFailed = error => {
 	};
 };
 
-export const setAboutMe = (value) => {
+export const setAboutMe = value => {
 	return dispatch => {
-        dispatch(setAboutMeStart());
+		dispatch(setAboutMeStart());
 
-        try {
-            dispatch(setAboutMeSuccess(value));
-        } 
-        catch (err) {
-            dispatch(setAboutMeFailed(err));
-        }
-    };
+		try {
+			dispatch(setAboutMeSuccess(value));
+		} catch (err) {
+			dispatch(setAboutMeFailed(err));
+		}
+	};
 };
 
 export const setFavesToCookStart = () => {
@@ -73,10 +72,10 @@ export const setFavesToCookStart = () => {
 	};
 };
 
-export const setFavesToCookSuccess = (newValue) => {
+export const setFavesToCookSuccess = newValue => {
 	return {
 		type: actionTypes.SET_FAVE_COOKS_SUCCESS,
-        value: newValue,
+		value: newValue,
 	};
 };
 
@@ -87,17 +86,16 @@ export const setFavesToCookFailed = error => {
 	};
 };
 
-export const setFavesToCook = (value) => {
+export const setFavesToCook = value => {
 	return dispatch => {
-        dispatch(setFavesToCookStart());
+		dispatch(setFavesToCookStart());
 
-        try {
-            dispatch(setFavesToCookSuccess(value));
-        } 
-        catch (err) {
-            dispatch(setFavesToCookFailed(err));
-        }
-    };
+		try {
+			dispatch(setFavesToCookSuccess(value));
+		} catch (err) {
+			dispatch(setFavesToCookFailed(err));
+		}
+	};
 };
 
 export const authLoginStart = () => {
@@ -165,8 +163,27 @@ export const authSignup = (name, email, password) => {
 	return dispatch => {
 		dispatch(authSignupStart());
 
+		const authData = {
+			name,
+			email,
+			password,
+		};
+
 		try {
-			dispatch(authSignupSuccess(name, email, password));
+			axiosRecipes
+				.post('/user/signup', JSON.stringify(authData))
+				.then(response => {
+					dispatch(
+						authSignupSuccess(
+							response.data.name,
+							response.data.email,
+							response.data.password
+						)
+					);
+				})
+				.catch(err => {
+					dispatch(authSignupFailed(err.response.data.error));
+				});
 		} catch (err) {
 			dispatch(authSignupFailed(err));
 		}

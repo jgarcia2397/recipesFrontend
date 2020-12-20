@@ -165,6 +165,7 @@ const Auth = props => {
 		console.log(authForm);
 	};
 
+	// ToDo: Add Redirect after successful auth submission
 	const authSubmitHandler = event => {
 		event.preventDefault();
 
