@@ -105,11 +105,12 @@ export const authLoginStart = () => {
 	};
 };
 
-export const authLoginSuccess = (email, password) => {
+export const authLoginSuccess = (email, password, userId) => {
 	return {
 		type: actionTypes.AUTH_LOGIN_SUCCESS,
 		email: email,
 		password: password,
+		id: userId,
 		isLoggedIn: true,
 	};
 };
@@ -137,7 +138,8 @@ export const authLogin = (email, password) => {
 				dispatch(
 					authLoginSuccess(
 						response.data.email,
-						response.data.password
+						response.data.password,
+						response.data.user.id,
 					)
 				);
 			})
@@ -154,12 +156,13 @@ export const authSignupStart = () => {
 	};
 };
 
-export const authSignupSuccess = (name, email, password) => {
+export const authSignupSuccess = (name, email, password, userId) => {
 	return {
 		type: actionTypes.AUTH_SIGNUP_SUCCESS,
 		name: name,
 		email: email,
 		password: password,
+		id: userId,
 		isLoggedIn: true,
 	};
 };
@@ -189,7 +192,8 @@ export const authSignup = (name, email, password) => {
 					authSignupSuccess(
 						response.data.name,
 						response.data.email,
-						response.data.password
+						response.data.password,
+						response.data.user.id,
 					)
 				);
 			})

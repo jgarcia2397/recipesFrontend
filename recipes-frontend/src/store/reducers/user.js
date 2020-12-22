@@ -5,6 +5,7 @@ const initialState = {
 	isLoggedIn: false,
 	email: '',
 	password: '', // email and password only temporary to test dummy login
+	userId: '',
 	name: 'Your Name',
 	title: 'Your Title',
 	nameAndTitleUpdated: false,
@@ -110,6 +111,7 @@ const authLoginSuccess = (state, action) => {
 	return updateObject(state, {
 		email: action.email,
 		password: action.password,
+		userId: action.id,
 		isLoggedIn: action.isLoggedIn,
 		loading: false,
 		error: null,
@@ -137,6 +139,7 @@ const authSignupSuccess = (state, action) => {
 		name: action.name,
 		email: action.email,
 		password: action.password,
+		userId: action.id,
 		isLoggedIn: action.isLoggedIn,
 		loading: false,
 		error: null,
