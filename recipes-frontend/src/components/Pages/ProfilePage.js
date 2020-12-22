@@ -112,12 +112,17 @@ const ProfilePage = props => {
 	const title = useSelector(state => state.user.title);
 	const aboutMe = useSelector(state => state.user.aboutMe);
 	const favThingsToCook = useSelector(state => state.user.favesToCook);
+	const userId = useSelector(state => state.user.userId);
 
 	const onSetNameAndTitle = (name, title) =>
 		dispatch(actions.setNameAndTitle(name, title));
+
 	const onSetAboutMe = newValue => dispatch(actions.setAboutMe(newValue));
+
 	const onSetFavesToCook = newValue =>
 		dispatch(actions.setFavesToCook(newValue));
+
+	const onGetUser = userId => dispatch(actions.getUser(userId));
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -134,6 +139,10 @@ const ProfilePage = props => {
 			}
 		});
 	}, [tabValue, routes, setTabValue]);
+
+	useEffect(() => {
+		onGetUser(userId);
+	}, [onGetUser, userId, name, title, aboutMe, favThingsToCook, recipes]);
 
 	const modalOpenHandler = () => {
 		setIsModalOpen(true);
