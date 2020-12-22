@@ -99,6 +99,32 @@ const setFavesToCookFailed = (state, action) => {
 	});
 };
 
+const getUserStart = (state, action) => {
+	return updateObject(state, {
+		loading: true,
+		error: null,
+	});
+};
+
+const getUserSuccess = (state, action) => {
+	return updateObject(state, {
+		name: action.name,
+		title: action.title,
+		aboutMe: action.aboutMe,
+		favesToCook: action.favesToCook,
+		// recipes: action.recipes,
+		loading: false,
+		error: null,
+	});
+};
+
+const getUserFailed = (state, action) => {
+	return updateObject(state, {
+		error: action.error,
+		loading: false,
+	});
+};
+
 const authLoginStart = (state, action) => {
 	return updateObject(state, {
 		isLoggedIn: action.isLoggedIn,
@@ -174,6 +200,12 @@ const reducer = (state = initialState, action) => {
 			return setFavesToCookSuccess(state, action);
 		case actionTypes.SET_FAVE_COOKS_FAILED:
 			return setFavesToCookFailed(state, action);
+		case actionTypes.GET_USER_START:
+			return getUserStart(state, action);
+		case actionTypes.GET_USER_SUCCESS:
+			return getUserSuccess(state, action);
+		case actionTypes.GET_USER_FAILED:
+			return getUserFailed(state, action);
 		case actionTypes.AUTH_LOGIN_START:
 			return authLoginStart(state, action);
 		case actionTypes.AUTH_LOGIN_SUCCESS:

@@ -10,5 +10,6 @@ export {
     setAboutMe, 
 	setFavesToCook,
 	authLogin,
-	authSignup, 
+	authSignup,
+	getUser, 
 } from './user';

@@ -98,6 +98,53 @@ export const setFavesToCook = value => {
 	};
 };
 
+export const getUserStart = () => {
+	return {
+		type: actionTypes.GET_USER_START,
+	};
+};
+
+export const getUserSuccess = (name, title, aboutMe, favesToCook, recipes) => {
+	return {
+		type: actionTypes.GET_USER_SUCCESS,
+		name, 
+		title,
+		aboutMe,
+		favesToCook,
+		recipes,
+	};
+};
+
+export const getUserFailed = error => {
+	return {
+		type: actionTypes.GET_USER_FAILED,
+		error: error,
+	};
+};
+
+export const getUser = (userId) => {
+	return dispatch => {
+		dispatch(getUserStart());
+
+		axiosRecipes
+			.get(`/user/${userId}`)
+			.then(response => {
+				dispatch(
+					getUserSuccess(
+						response.data.user.name,
+						response.data.user.title,
+						response.data.user.aboutMe,
+						response.data.user.favesToCook,
+						response.data.user.recipes,
+					)
+				);
+			})
+			.catch(err => {
+				dispatch(getUserFailed(err.response.data.message));
+			});
+	};
+};
+
 export const authLoginStart = () => {
 	return {
 		type: actionTypes.AUTH_LOGIN_START,
