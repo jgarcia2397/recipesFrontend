@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
 
 import Header from './components/UI/Header';
@@ -15,10 +16,12 @@ import CreateRecipePage from './components/Pages/CreateRecipePage';
 function App() {
 	const [tabValue, setTabValue] = useState(0);
 
+	const userId = useSelector(state => state.user.userId);
+
 	const routes = [
 		{ name: 'Home', link: '/', activeIndex: 0, isMainTab: true },
 		{ name: 'My Recipes', link: '/recipes', activeIndex: 1, isMainTab: true },
-		{ name: 'My Profile', link: '/profile', activeIndex: 2, isMainTab: true },
+		{ name: 'My Profile', link: `/profile/${userId}`, activeIndex: 2, isMainTab: true },
 		{ name: 'Log In/Out', link: '/auth', activeIndex: 3, isMainTab: true },
 		{
 			name: 'New Recipe',
@@ -86,7 +89,7 @@ function App() {
 					/>
 					<Route
 						exact
-						path='/profile'
+						path='/profile/:userId'
 						render={() => (
 							<ProfilePage routes={routes} setTabValue={setTabValue} />
 						)}

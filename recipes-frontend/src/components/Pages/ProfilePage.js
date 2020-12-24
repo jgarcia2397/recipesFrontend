@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -112,7 +113,8 @@ const ProfilePage = props => {
 	const title = useSelector(state => state.user.title);
 	const aboutMe = useSelector(state => state.user.aboutMe);
 	const favThingsToCook = useSelector(state => state.user.favesToCook);
-	const userId = useSelector(state => state.user.userId);
+	// const userId = useSelector(state => state.user.userId);
+	const userId = useParams().userId;
 
 	const onSetNameAndTitle = (name, title) =>
 		dispatch(actions.setNameAndTitle(name, title));
