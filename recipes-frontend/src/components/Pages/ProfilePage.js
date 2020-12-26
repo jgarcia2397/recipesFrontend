@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -120,12 +120,23 @@ const ProfilePage = props => {
 		dispatch(actions.setNameAndTitle(uid, name, title, aboutMe, favesToCook));
 
 	const onSetAboutMe = (uid, name, title, newAboutMeValue, favesToCook) =>
-		dispatch(actions.setAboutMe(uid, name, title, newAboutMeValue, favesToCook));
+		dispatch(
+			actions.setAboutMe(uid, name, title, newAboutMeValue, favesToCook)
+		);
 
 	const onSetFavesToCook = (uid, name, title, aboutMe, newFavesToCookValue) =>
-		dispatch(actions.setFavesToCook(uid, name, title, aboutMe, newFavesToCookValue));
+		dispatch(
+			actions.setFavesToCook(uid, name, title, aboutMe, newFavesToCookValue)
+		);
 
-	const onGetUser = userId => dispatch(actions.getUser(userId));
+	const onGetUser = useCallback(userId => dispatch(actions.getUser(userId)), [
+		dispatch,
+	]);
+
+	const onGetAllUserRecipes = useCallback(
+		uid => dispatch(actions.getAllUserRecipes(uid)),
+		[dispatch]
+	);
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -145,7 +156,12 @@ const ProfilePage = props => {
 
 	useEffect(() => {
 		onGetUser(userId);
-	}, [onGetUser, userId, name, title, aboutMe, favThingsToCook, recipes]);
+		onGetAllUserRecipes(userId);
+	}, [
+		onGetUser,
+		onGetAllUserRecipes,
+		userId,
+	]);
 
 	const modalOpenHandler = () => {
 		setIsModalOpen(true);
