@@ -3,6 +3,7 @@ export {
 	createRecipe,
 	updateRecipeInit,
 	updateRecipe,
+	getAllUserRecipes,
 } from './createRecipe';
 
 export { 

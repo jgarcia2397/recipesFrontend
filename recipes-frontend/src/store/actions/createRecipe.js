@@ -1,4 +1,40 @@
 import * as actionTypes from './actionTypes';
+import axiosRecipes from '../../axios-recipes';
+
+export const getAllUserRecipesStart = () => {
+	return {
+		type: actionTypes.GET_ALL_USER_RECIPES_START,
+	};
+};
+
+export const getAllUserRecipesSuccess = recipes => {
+	return {
+		type: actionTypes.GET_ALL_USER_RECIPES_SUCCESS,
+		recipes,
+	};
+};
+
+export const getAllUserRecipesFailed = error => {
+	return {
+		type: actionTypes.GET_ALL_USER_RECIPES_FAILED,
+		error: error,
+	};
+};
+
+export const getAllUserRecipes = userId => {
+	return dispatch => {
+		dispatch(getAllUserRecipesStart());
+
+		axiosRecipes
+			.get(`/recipes/user/${userId}`)
+			.then(response => {
+				dispatch(getAllUserRecipesSuccess(response.data.recipes));
+			})
+			.catch(err => {
+				dispatch(getAllUserRecipesFailed(err.response.data.message));
+			});
+	};
+};
 
 export const createRecipeInit = () => {
 	return {
@@ -16,9 +52,9 @@ export const createRecipeStart = () => {
 export const createRecipeSuccess = (basicDetails, ingredients, directions) => {
 	return {
 		type: actionTypes.CREATE_RECIPE_SUCCESS,
-        basicDetails: basicDetails,
-        ingredients: ingredients,
-        directions: directions,
+		basicDetails: basicDetails,
+		ingredients: ingredients,
+		directions: directions,
 	};
 };
 
@@ -31,15 +67,14 @@ export const createRecipeFailed = error => {
 
 export const createRecipe = (basicDetails, ingredients, directions) => {
 	return dispatch => {
-        dispatch(createRecipeStart());
+		dispatch(createRecipeStart());
 
-        try {
-            dispatch(createRecipeSuccess(basicDetails, ingredients, directions));
-        } 
-        catch (err) {
-            dispatch(createRecipeFailed(err));
-        }
-    };
+		try {
+			dispatch(createRecipeSuccess(basicDetails, ingredients, directions));
+		} catch (err) {
+			dispatch(createRecipeFailed(err));
+		}
+	};
 };
 
 export const updateRecipeInit = recipeId => {
@@ -59,9 +94,9 @@ export const updateRecipeStart = () => {
 export const updateRecipeSuccess = (basicDetails, ingredients, directions) => {
 	return {
 		type: actionTypes.UPDATE_RECIPE_SUCCESS,
-        basicDetails: basicDetails,
-        ingredients: ingredients,
-        directions: directions,
+		basicDetails: basicDetails,
+		ingredients: ingredients,
+		directions: directions,
 	};
 };
 
@@ -74,13 +109,12 @@ export const updateRecipeFailed = error => {
 
 export const updateRecipe = (basicDetails, ingredients, directions) => {
 	return dispatch => {
-        dispatch(updateRecipeStart());
+		dispatch(updateRecipeStart());
 
-        try {
-            dispatch(updateRecipeSuccess(basicDetails, ingredients, directions));
-        } 
-        catch (err) {
-            dispatch(updateRecipeFailed(err));
-        }
-    };
+		try {
+			dispatch(updateRecipeSuccess(basicDetails, ingredients, directions));
+		} catch (err) {
+			dispatch(updateRecipeFailed(err));
+		}
+	};
 };
