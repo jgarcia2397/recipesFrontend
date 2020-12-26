@@ -10,6 +10,22 @@ const initialState = {
 	error: null,
 };
 
+const getAllUserRecipesStart = (state, action) => {
+	return updateObject(state, { loading: true, error: null });
+};
+
+const getAllUserRecipesSuccess = (state, action) => {
+	return updateObject(state, {
+		recipes: action.recipes,
+		loading: false,
+		error: null,
+	});
+};
+
+const getAllUserRecipesFailed = (state, action) => {
+	return updateObject(state, { loading: false, error: action.error });
+};
+
 const createRecipeInit = (state, action) => {
 	localStorage.setItem('isModifyRecipe', false);
 	return updateObject(state, { recipeCreated: false, isModifyRecipe: false });
@@ -51,7 +67,11 @@ const createRecipeFailed = (state, action) => {
 
 const updateRecipeInit = (state, action) => {
 	localStorage.setItem('isModifyRecipe', true);
-	return updateObject(state, { recipeCreated: false, recipeId: action.id, isModifyRecipe: true });
+	return updateObject(state, {
+		recipeCreated: false,
+		recipeId: action.id,
+		isModifyRecipe: true,
+	});
 };
 
 const updateRecipeStart = (state, action) => {
@@ -60,10 +80,10 @@ const updateRecipeStart = (state, action) => {
 
 // helper function for updateRecipeSuccess
 const mergeObjects = (obj1, obj2) => {
-	let answer = {...obj1};
+	let answer = { ...obj1 };
 
 	const keys = Object.keys(obj2);
-	
+
 	for (const key of keys) {
 		if (obj2[key] !== '') {
 			answer[key] = obj2[key];
@@ -79,7 +99,10 @@ const updateRecipeSuccess = (state, action) => {
 	const newIngredients = [...action.ingredients];
 	const newDirections = [...action.directions];
 
-	const newBasicDetails = mergeObjects(state.recipes[state.recipeId].basicDetails, action.basicDetails);
+	const newBasicDetails = mergeObjects(
+		state.recipes[state.recipeId].basicDetails,
+		action.basicDetails
+	);
 
 	const newRecipe = {
 		basicDetails: newBasicDetails,
@@ -112,6 +135,12 @@ const updateRecipeFailed = (state, action) => {
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
+		case actionTypes.GET_ALL_USER_RECIPES_START:
+			return getAllUserRecipesStart(state, action);
+		case actionTypes.GET_ALL_USER_RECIPES_SUCCESS:
+			return getAllUserRecipesSuccess(state, action);
+		case actionTypes.GET_ALL_USER_RECIPES_FAILED:
+			return getAllUserRecipesFailed(state, action);
 		case actionTypes.CREATE_RECIPE_INIT:
 			return createRecipeInit(state, action);
 		case actionTypes.CREATE_RECIPE_START:
