@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -71,7 +72,18 @@ const RecipePage = props => {
 
 	const recipes = useSelector(state => state.createRecipe.recipes);
 
+	const userId = useParams().userId;
+
 	const onCreateRecipeInit = () => dispatch(actions.createRecipeInit());
+
+	const onGetAllUserRecipes = useCallback(
+		uid => dispatch(actions.getAllUserRecipes(uid)),
+		[dispatch]
+	);
+
+	useEffect(() => {
+		onGetAllUserRecipes(userId);
+	}, [onGetAllUserRecipes, userId]);
 
 	return (
 		<div className={classes.root}>
@@ -87,7 +99,7 @@ const RecipePage = props => {
 							component={Link}
 							to={{
 								pathname: '/new-recipe',
-								recipeDetails: {}
+								recipeDetails: {},
 							}}
 							onClick={() => onCreateRecipeInit()}
 						>
