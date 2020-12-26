@@ -20,7 +20,7 @@ function App() {
 
 	const routes = [
 		{ name: 'Home', link: '/', activeIndex: 0, isMainTab: true },
-		{ name: 'My Recipes', link: '/recipes', activeIndex: 1, isMainTab: true },
+		{ name: 'My Recipes', link: `/recipes/${userId}`, activeIndex: 1, isMainTab: true },
 		{ name: 'My Profile', link: `/profile/${userId}`, activeIndex: 2, isMainTab: true },
 		{ name: 'Log In/Out', link: '/auth', activeIndex: 3, isMainTab: true },
 		{
@@ -56,7 +56,7 @@ function App() {
 					/>
 					<Route
 						exact
-						path='/recipes'
+						path='/recipes/:userId'
 						render={() => (
 							<RecipePage
 								tabValue={tabValue}
