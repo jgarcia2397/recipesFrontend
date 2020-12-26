@@ -119,10 +119,11 @@ const ProfilePage = props => {
 	const onSetNameAndTitle = (name, title) =>
 		dispatch(actions.setNameAndTitle(name, title));
 
-	const onSetAboutMe = newValue => dispatch(actions.setAboutMe(newValue));
+	const onSetAboutMe = (uid, name, title, newAboutMeValue, favesToCook) =>
+		dispatch(actions.setAboutMe(uid, name, title, newAboutMeValue, favesToCook));
 
-	const onSetFavesToCook = newValue =>
-		dispatch(actions.setFavesToCook(newValue));
+	const onSetFavesToCook = (uid, name, title, aboutMe, newFavesToCookValue) =>
+		dispatch(actions.setFavesToCook(uid, name, title, aboutMe, newFavesToCookValue));
 
 	const onGetUser = userId => dispatch(actions.getUser(userId));
 
@@ -167,11 +168,9 @@ const ProfilePage = props => {
 
 	const updateProfile = newTextValue => {
 		if (editType === editTypes[0]) {
-			// setAboutMe(newTextValue);
-			onSetAboutMe(newTextValue);
+			onSetAboutMe(userId, name, title, newTextValue, favThingsToCook);
 		} else {
-			// setFavThingsToCook(newTextValue);
-			onSetFavesToCook(newTextValue);
+			onSetFavesToCook(userId, name, title, aboutMe, newTextValue);
 		}
 	};
 
@@ -191,7 +190,11 @@ const ProfilePage = props => {
 						/>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
-						<Grid container direction={matchesXS ? 'column' : 'row'} alignItems='center'>
+						<Grid
+							container
+							direction={matchesXS ? 'column' : 'row'}
+							alignItems='center'
+						>
 							<Grid item>
 								<Typography
 									variant='h4'
@@ -217,7 +220,11 @@ const ProfilePage = props => {
 						</Typography>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
-						<Grid container direction={matchesXS ? 'column' : 'row'} alignItems='center'>
+						<Grid
+							container
+							direction={matchesXS ? 'column' : 'row'}
+							alignItems='center'
+						>
 							<Grid item>
 								<Typography
 									variant='h4'

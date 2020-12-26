@@ -54,15 +54,26 @@ export const setAboutMeFailed = error => {
 	};
 };
 
-export const setAboutMe = value => {
+export const setAboutMe = (userId, name, title, newAboutMeValue, favesToCook) => {
 	return dispatch => {
 		dispatch(setAboutMeStart());
 
-		try {
-			dispatch(setAboutMeSuccess(value));
-		} catch (err) {
-			dispatch(setAboutMeFailed(err));
-		}
+		const updatedUserData = {
+			name,
+			title,
+			aboutMe: newAboutMeValue,
+			favesToCook,
+			image: 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',		// dummy image for now
+		};
+
+		axiosRecipes
+			.patch(`/user/${userId}`, updatedUserData)
+			.then(response => {
+				dispatch(setAboutMeSuccess(response.data.user.aboutMe));
+			})
+			.catch(err => {
+				dispatch(setAboutMeFailed(err.response.data.message));
+			});
 	};
 };
 
@@ -86,15 +97,26 @@ export const setFavesToCookFailed = error => {
 	};
 };
 
-export const setFavesToCook = value => {
+export const setFavesToCook = (userId, name, title, aboutMe, newFavesToCook) => {
 	return dispatch => {
 		dispatch(setFavesToCookStart());
 
-		try {
-			dispatch(setFavesToCookSuccess(value));
-		} catch (err) {
-			dispatch(setFavesToCookFailed(err));
-		}
+		const updatedUserData = {
+			name,
+			title,
+			aboutMe,
+			favesToCook: newFavesToCook,
+			image: 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',		// dummy image for now
+		};
+
+		axiosRecipes
+			.patch(`/user/${userId}`, updatedUserData)
+			.then(response => {
+				dispatch(setFavesToCookSuccess(response.data.user.favesToCook));
+			})
+			.catch(err => {
+				dispatch(setFavesToCookFailed(err.response.data.message));
+			});
 	};
 };
 
@@ -107,7 +129,7 @@ export const getUserStart = () => {
 export const getUserSuccess = (name, title, aboutMe, favesToCook, recipes) => {
 	return {
 		type: actionTypes.GET_USER_SUCCESS,
-		name, 
+		name,
 		title,
 		aboutMe,
 		favesToCook,
@@ -122,7 +144,7 @@ export const getUserFailed = error => {
 	};
 };
 
-export const getUser = (userId) => {
+export const getUser = userId => {
 	return dispatch => {
 		dispatch(getUserStart());
 
@@ -135,7 +157,7 @@ export const getUser = (userId) => {
 						response.data.user.title,
 						response.data.user.aboutMe,
 						response.data.user.favesToCook,
-						response.data.user.recipes,
+						response.data.user.recipes
 					)
 				);
 			})
@@ -186,7 +208,7 @@ export const authLogin = (email, password) => {
 					authLoginSuccess(
 						response.data.email,
 						response.data.password,
-						response.data.user.id,
+						response.data.user.id
 					)
 				);
 			})
@@ -240,7 +262,7 @@ export const authSignup = (name, email, password) => {
 						response.data.name,
 						response.data.email,
 						response.data.password,
-						response.data.user.id,
+						response.data.user.id
 					)
 				);
 			})
