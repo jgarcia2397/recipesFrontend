@@ -78,7 +78,7 @@ const UserProfile = props => {
 	const updateProfile = (name, title) => {
 		// setName(name);
 		// setTitle(title);
-		props.updateHandler(name, title);
+		props.updateHandler(props.uid, name, title, props.aboutMe, props.favesToCook);
 	};
 
 	return (

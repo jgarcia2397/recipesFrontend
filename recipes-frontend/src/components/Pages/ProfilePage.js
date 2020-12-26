@@ -116,8 +116,8 @@ const ProfilePage = props => {
 	// const userId = useSelector(state => state.user.userId);
 	const userId = useParams().userId;
 
-	const onSetNameAndTitle = (name, title) =>
-		dispatch(actions.setNameAndTitle(name, title));
+	const onSetNameAndTitle = (uid, name, title, aboutMe, favesToCook) =>
+		dispatch(actions.setNameAndTitle(uid, name, title, aboutMe, favesToCook));
 
 	const onSetAboutMe = (uid, name, title, newAboutMeValue, favesToCook) =>
 		dispatch(actions.setAboutMe(uid, name, title, newAboutMeValue, favesToCook));
@@ -185,8 +185,11 @@ const ProfilePage = props => {
 					<Grid item>
 						<UserProfile
 							updateHandler={onSetNameAndTitle}
+							uid={userId}
 							name={name}
 							title={title}
+							aboutMe={aboutMe}
+							favesToCook={favThingsToCook}
 						/>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>

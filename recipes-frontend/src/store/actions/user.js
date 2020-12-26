@@ -22,15 +22,38 @@ export const setNameAndTitleFailed = error => {
 	};
 };
 
-export const setNameAndTitle = (name, title) => {
+export const setNameAndTitle = (
+	userId,
+	newName,
+	newTitle,
+	aboutMe,
+	favesToCook
+) => {
 	return dispatch => {
 		dispatch(setNameAndTitleStart());
 
-		try {
-			dispatch(setNameAndTitleSuccess(name, title));
-		} catch (err) {
-			dispatch(setNameAndTitleFailed(err));
-		}
+		const updatedUserData = {
+			name: newName,
+			title: newTitle,
+			aboutMe,
+			favesToCook,
+			image:
+				'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png', // dummy image for now
+		};
+
+		axiosRecipes
+			.patch(`/user/${userId}`, updatedUserData)
+			.then(response => {
+				dispatch(
+					setNameAndTitleSuccess(
+						response.data.user.name,
+						response.data.user.title
+					)
+				);
+			})
+			.catch(err => {
+				dispatch(setNameAndTitleFailed(err.response.data.message));
+			});
 	};
 };
 
@@ -54,7 +77,13 @@ export const setAboutMeFailed = error => {
 	};
 };
 
-export const setAboutMe = (userId, name, title, newAboutMeValue, favesToCook) => {
+export const setAboutMe = (
+	userId,
+	name,
+	title,
+	newAboutMeValue,
+	favesToCook
+) => {
 	return dispatch => {
 		dispatch(setAboutMeStart());
 
@@ -63,7 +92,8 @@ export const setAboutMe = (userId, name, title, newAboutMeValue, favesToCook) =>
 			title,
 			aboutMe: newAboutMeValue,
 			favesToCook,
-			image: 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',		// dummy image for now
+			image:
+				'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png', // dummy image for now
 		};
 
 		axiosRecipes
@@ -97,7 +127,13 @@ export const setFavesToCookFailed = error => {
 	};
 };
 
-export const setFavesToCook = (userId, name, title, aboutMe, newFavesToCook) => {
+export const setFavesToCook = (
+	userId,
+	name,
+	title,
+	aboutMe,
+	newFavesToCook
+) => {
 	return dispatch => {
 		dispatch(setFavesToCookStart());
 
@@ -106,7 +142,8 @@ export const setFavesToCook = (userId, name, title, aboutMe, newFavesToCook) => 
 			title,
 			aboutMe,
 			favesToCook: newFavesToCook,
-			image: 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',		// dummy image for now
+			image:
+				'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png', // dummy image for now
 		};
 
 		axiosRecipes
