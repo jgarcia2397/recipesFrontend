@@ -124,14 +124,30 @@ export const updateRecipeFailed = error => {
 	};
 };
 
-export const updateRecipe = (basicDetails, ingredients, directions) => {
+export const updateRecipe = (basicDetails, ingredients, directions, recipeId) => {
 	return dispatch => {
 		dispatch(updateRecipeStart());
 
-		try {
-			dispatch(updateRecipeSuccess(basicDetails, ingredients, directions));
-		} catch (err) {
-			dispatch(updateRecipeFailed(err));
-		}
+		const updatedRecipe = {
+			basicDetails,
+			ingredients,
+			directions,
+		};
+
+		axiosRecipes
+			.patch(`/recipes/${recipeId}`, JSON.stringify(updatedRecipe))
+			.then(response => {
+				dispatch(
+					updateRecipeSuccess(
+						response.data.recipe.basicDetails,
+						response.data.recipe.ingredients,
+						response.data.recipe.directions
+					)
+				);
+			})
+			.catch(err => {
+				// ToDo: This only returns error message from backend. For all requests, need to handle the error case for network issue with backend and no response is sent - need to show default error in this case 
+				dispatch(updateRecipeFailed(err.response.data.message));		
+			});
 	};
 };
