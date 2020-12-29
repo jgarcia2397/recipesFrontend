@@ -88,7 +88,8 @@ export const createRecipe = (basicDetails, ingredients, directions, creatorId) =
 				);
 			})
 			.catch(err => {
-				dispatch(createRecipeFailed(err.message));
+				// ToDo: This only returns error message from backend. For all requests, need to handle the error case for network issue with backend and no response is sent - need to show default error in this case 
+				dispatch(createRecipeFailed(err.response.data.message));		
 			});
 	};
 };
