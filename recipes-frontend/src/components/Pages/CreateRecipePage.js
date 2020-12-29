@@ -176,13 +176,14 @@ const CreateRecipePage = props => {
 		state => state.createRecipe.recipeCreated
 	);
 
+	const creatorId = useSelector(state => state.user.userId);
 	const recipeId = useSelector(state => state.createRecipe.recipeId);
 	const isModifyRecipe = useSelector(
 		state => state.createRecipe.isModifyRecipe
 	); // can use this to have additional UI message when updating recipe?
 
-	const onCreateRecipe = (basicDetails, ingredients, directions) =>
-		dispatch(actions.createRecipe(basicDetails, ingredients, directions));
+	const onCreateRecipe = (basicDetails, ingredients, directions, creator) =>
+		dispatch(actions.createRecipe(basicDetails, ingredients, directions, creator));
 
 	const onUpdateRecipe = (basicDetails, ingredients, directions) =>
 		dispatch(actions.updateRecipe(basicDetails, ingredients, directions));
@@ -345,7 +346,7 @@ const CreateRecipePage = props => {
 			const directionList = [...detailRecipeForm.directions.value];
 
 			if (recipeId === -1) {
-				onCreateRecipe(basicDetails, ingredientList, directionList);
+				onCreateRecipe(basicDetails, ingredientList, directionList, creatorId);
 			} else {
 				onUpdateRecipe(basicDetails, ingredientList, directionList);
 			}
@@ -486,7 +487,7 @@ const CreateRecipePage = props => {
 	);
 
 	const createRecipeRedirect = isRecipeCreated ? (
-		<Redirect to='/recipes' />
+		<Redirect to={`/recipes/${creatorId}`} />
 	) : null;
 
 	return (

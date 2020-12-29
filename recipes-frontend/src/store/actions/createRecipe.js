@@ -65,15 +65,31 @@ export const createRecipeFailed = error => {
 	};
 };
 
-export const createRecipe = (basicDetails, ingredients, directions) => {
+export const createRecipe = (basicDetails, ingredients, directions, creatorId) => {
 	return dispatch => {
 		dispatch(createRecipeStart());
 
-		try {
-			dispatch(createRecipeSuccess(basicDetails, ingredients, directions));
-		} catch (err) {
-			dispatch(createRecipeFailed(err));
-		}
+		const newRecipe = {
+			basicDetails,
+			ingredients,
+			directions,
+			creator: creatorId,
+		};
+
+		axiosRecipes
+			.post('/recipes', JSON.stringify(newRecipe))
+			.then(response => {
+				dispatch(
+					createRecipeSuccess(
+						response.data.recipe.basicDetails,
+						response.data.recipe.ingredients,
+						response.data.recipe.directions
+					)
+				);
+			})
+			.catch(err => {
+				dispatch(createRecipeFailed(err.message));
+			});
 	};
 };
 
