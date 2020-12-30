@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -305,11 +305,11 @@ const CreateRecipePage = props => {
 		setTextInputErrors(errorArray);
 	}, [basicRecipeForm]);
 
-	const checkFormErrors = () => {
+	const checkFormErrors = useCallback(() => {
 		setFormIsValid(true);
 
 		for (const key of Object.keys(basicRecipeForm)) {
-			if (!basicRecipeForm[key].valid) {
+			if (!basicRecipeForm[key].valid && basicRecipeForm[key].touched === true) {
 				setFormIsValid(false);
 				setAlert({
 					open: true,
@@ -320,22 +320,29 @@ const CreateRecipePage = props => {
 		}
 
 		for (const key of Object.keys(detailRecipeForm)) {
+			// On initial empty form, if both columns are not yet touched - we want invalid form but no Alert popup everytime basicRecipeForm is updated
+			if (!detailRecipeForm['ingredients'].touched && !detailRecipeForm['directions'].touched) {
+				setFormIsValid(false);
+				break;
+			}
+
 			if (detailRecipeForm[key].value.length === 0) {
 				setFormIsValid(false);
 				setAlert({
 					open: true,
-					message: 'You must have at least 1 ingredient and direction!',
+					message: `The ${key} column is empty!`,
 				});
 				break;
 			}
 		}
-	};
+	}, [basicRecipeForm, detailRecipeForm]);
 
-	// ToDo: Form with no errors takes two clicks to successfully submit???
-	const newRecipeHandler = event => {
-		// event.preventDefault();
-
+	useEffect(() => {
 		checkFormErrors();
+	}, [checkFormErrors]);
+
+	const newRecipeHandler = event => {
+		event.preventDefault();
 
 		if (formIsValid) {
 			const basicDetails = {};
@@ -392,6 +399,8 @@ const CreateRecipePage = props => {
 
 		const updatedList = updateObject(detailRecipeForm[list], {
 			value: newList,
+			valid: true,
+			touched: true,
 		});
 
 		const updatedForm = updateObject(detailRecipeForm, {
