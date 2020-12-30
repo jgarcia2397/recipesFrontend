@@ -487,6 +487,7 @@ const CreateRecipePage = props => {
 			</Grid>
 			<Grid item>
 				<Button
+					disabled={!formIsValid}
 					className={classes.saveRecipeButton}
 					style={{ maxWidth: '140px', minWidth: '140px' }}
 					onClick={newRecipeHandler}
