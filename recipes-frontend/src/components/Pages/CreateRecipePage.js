@@ -140,6 +140,11 @@ const CreateRecipePage = props => {
 			value: 'Easy',
 			valid: true,
 		},
+		image: {
+			elementType: 'imageInput',
+			value: null,
+			valid: true,
+		},
 	});
 	const [detailRecipeForm, setDetailRecipeForm] = useState({
 		ingredients: {
@@ -184,10 +189,14 @@ const CreateRecipePage = props => {
 	); // can use this to have additional UI message when updating recipe?
 
 	const onCreateRecipe = (basicDetails, ingredients, directions, creator) =>
-		dispatch(actions.createRecipe(basicDetails, ingredients, directions, creator));
+		dispatch(
+			actions.createRecipe(basicDetails, ingredients, directions, creator)
+		);
 
 	const onUpdateRecipe = (basicDetails, ingredients, directions, recipeId) =>
-		dispatch(actions.updateRecipe(basicDetails, ingredients, directions, recipeId));
+		dispatch(
+			actions.updateRecipe(basicDetails, ingredients, directions, recipeId)
+		);
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -309,7 +318,10 @@ const CreateRecipePage = props => {
 		setFormIsValid(true);
 
 		for (const key of Object.keys(basicRecipeForm)) {
-			if (!basicRecipeForm[key].valid && basicRecipeForm[key].touched === true) {
+			if (
+				!basicRecipeForm[key].valid &&
+				basicRecipeForm[key].touched === true
+			) {
 				setFormIsValid(false);
 				setAlert({
 					open: true,
@@ -321,7 +333,10 @@ const CreateRecipePage = props => {
 
 		for (const key of Object.keys(detailRecipeForm)) {
 			// On initial empty form, if both columns are not yet touched - we want invalid form but no Alert popup everytime basicRecipeForm is updated
-			if (!detailRecipeForm['ingredients'].touched && !detailRecipeForm['directions'].touched) {
+			if (
+				!detailRecipeForm['ingredients'].touched &&
+				!detailRecipeForm['directions'].touched
+			) {
 				setFormIsValid(false);
 				break;
 			}
@@ -357,7 +372,12 @@ const CreateRecipePage = props => {
 				onCreateRecipe(basicDetails, ingredientList, directionList, creatorId);
 			} else {
 				const recipeObjId = recipes[recipeId].id;
-				onUpdateRecipe(basicDetails, ingredientList, directionList, recipeObjId);
+				onUpdateRecipe(
+					basicDetails,
+					ingredientList,
+					directionList,
+					recipeObjId
+				);
 			}
 		}
 	};
@@ -411,6 +431,20 @@ const CreateRecipePage = props => {
 		console.log(updatedForm);
 	};
 
+	const imageInputHandler = (id, file, isFileValid) => {
+		const updatedFormElement = updateObject(basicRecipeForm[id], {
+			value: file,
+			valid: isFileValid,
+		});
+
+		const updatedForm = updateObject(basicRecipeForm, {
+			[id]: updatedFormElement,
+		});
+
+		setBasicRecipeForm(updatedForm);
+		console.log(updatedForm);
+	};
+
 	const handleAlertClose = () => {
 		setAlert({ ...alert, open: false });
 	};
@@ -453,7 +487,11 @@ const CreateRecipePage = props => {
 				/>
 			</Grid>
 			<Grid item>
-				<ImageUpload />
+				<ImageUpload
+					id='image'
+					onInput={imageInputHandler}
+					errorText='Please provide an image.'
+				/>
 			</Grid>
 			<Grid item className={classes.titleContainer}>
 				<Typography
