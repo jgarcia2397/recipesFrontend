@@ -93,6 +93,8 @@ const ImageUpload = props => {
 			setIsValid(false);
 			fileIsValid = false;
 		}
+
+		props.onInput(props.id, pickedFile, fileIsValid);
 	};
 
 	return (
@@ -122,6 +124,7 @@ const ImageUpload = props => {
 					Upload Image
 				</Button>
 			</div>
+			{!isValid && <p>{props.errorText}</p>}
 		</div>
 	);
 };
