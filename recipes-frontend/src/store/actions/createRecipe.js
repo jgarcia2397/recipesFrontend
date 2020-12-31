@@ -65,19 +65,40 @@ export const createRecipeFailed = error => {
 	};
 };
 
-export const createRecipe = (basicDetails, ingredients, directions, creatorId) => {
+export const createRecipe = (basicDetails, ingredients, directions, creatorId, image) => {
 	return dispatch => {
 		dispatch(createRecipeStart());
 
-		const newRecipe = {
-			basicDetails,
-			ingredients,
-			directions,
-			creator: creatorId,
-		};
+		// const newRecipe = {
+		// 	basicDetails,
+		// 	ingredients,
+		// 	directions,
+		// 	creator: creatorId,
+		// };
+
+		const { recipeName, prepTime, prepTimeUnits, cookTime, cookTimeUnits, servings, difficulty } = basicDetails;
+
+		// const basicDetailsStr = JSON.stringify(basicDetails);
+		const ingredientsStr = JSON.stringify(ingredients);
+		const directionsStr = JSON.stringify(directions);
+
+		const formData = new FormData();
+		// formData.append('basicDetails', basicDetailsStr);
+		formData.append('recipeName', recipeName);
+		formData.append('prepTime', prepTime);
+		formData.append('prepTimeUnits', prepTimeUnits);
+		formData.append('cookTime', cookTime);
+		formData.append('cookTimeUnits', cookTimeUnits);
+		formData.append('servings', servings);
+		formData.append('difficulty', difficulty);
+		formData.append('ingredients', ingredientsStr);		// ToDo: Backend cannot handle this
+		formData.append('directions', directionsStr);		// ToDo: Backend cannot handle this
+		formData.append('creator', creatorId);
+		formData.append('image', image);
 
 		axiosRecipes
-			.post('/recipes', JSON.stringify(newRecipe))
+			// .post('/recipes', JSON.stringify(newRecipe))
+			.post('/recipes', formData, {headers: {'Content-Type': 'multipart/form-data'}})
 			.then(response => {
 				dispatch(
 					createRecipeSuccess(
