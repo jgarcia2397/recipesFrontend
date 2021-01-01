@@ -65,25 +65,28 @@ export const createRecipeFailed = error => {
 	};
 };
 
-export const createRecipe = (basicDetails, ingredients, directions, creatorId, image) => {
+export const createRecipe = (
+	basicDetails,
+	ingredients,
+	directions,
+	creatorId,
+	image
+) => {
 	return dispatch => {
 		dispatch(createRecipeStart());
 
-		// const newRecipe = {
-		// 	basicDetails,
-		// 	ingredients,
-		// 	directions,
-		// 	creator: creatorId,
-		// };
-
-		const { recipeName, prepTime, prepTimeUnits, cookTime, cookTimeUnits, servings, difficulty } = basicDetails;
-
-		// const basicDetailsStr = JSON.stringify(basicDetails);
-		const ingredientsStr = JSON.stringify(ingredients);
-		const directionsStr = JSON.stringify(directions);
+		const {
+			recipeName,
+			prepTime,
+			prepTimeUnits,
+			cookTime,
+			cookTimeUnits,
+			servings,
+			difficulty,
+		} = basicDetails;
 
 		const formData = new FormData();
-		// formData.append('basicDetails', basicDetailsStr);
+		
 		formData.append('recipeName', recipeName);
 		formData.append('prepTime', prepTime);
 		formData.append('prepTimeUnits', prepTimeUnits);
@@ -91,14 +94,21 @@ export const createRecipe = (basicDetails, ingredients, directions, creatorId, i
 		formData.append('cookTimeUnits', cookTimeUnits);
 		formData.append('servings', servings);
 		formData.append('difficulty', difficulty);
-		formData.append('ingredients', ingredientsStr);		// ToDo: Backend cannot handle this
-		formData.append('directions', directionsStr);		// ToDo: Backend cannot handle this
 		formData.append('creator', creatorId);
 		formData.append('image', image);
 
+		for (let i = 0; i < ingredients.length; i++) {
+			formData.append('ingredients[]', ingredients[i]);
+		}
+
+		for (let i = 0; i < directions.length; i++) {
+			formData.append('directions[]', directions[i]);
+		}
+
 		axiosRecipes
-			// .post('/recipes', JSON.stringify(newRecipe))
-			.post('/recipes', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+			.post('/recipes', formData, {
+				headers: { 'Content-Type': 'multipart/form-data' },
+			})
 			.then(response => {
 				dispatch(
 					createRecipeSuccess(
@@ -109,8 +119,8 @@ export const createRecipe = (basicDetails, ingredients, directions, creatorId, i
 				);
 			})
 			.catch(err => {
-				// ToDo: This only returns error message from backend. For all requests, need to handle the error case for network issue with backend and no response is sent - need to show default error in this case 
-				dispatch(createRecipeFailed(err.response.data.message));		
+				// ToDo: This only returns error message from backend. For all requests, need to handle the error case for network issue with backend and no response is sent - need to show default error in this case
+				dispatch(createRecipeFailed(err.response.data.message));
 			});
 	};
 };
@@ -145,7 +155,12 @@ export const updateRecipeFailed = error => {
 	};
 };
 
-export const updateRecipe = (basicDetails, ingredients, directions, recipeId) => {
+export const updateRecipe = (
+	basicDetails,
+	ingredients,
+	directions,
+	recipeId
+) => {
 	return dispatch => {
 		dispatch(updateRecipeStart());
 
@@ -167,8 +182,8 @@ export const updateRecipe = (basicDetails, ingredients, directions, recipeId) =>
 				);
 			})
 			.catch(err => {
-				// ToDo: This only returns error message from backend. For all requests, need to handle the error case for network issue with backend and no response is sent - need to show default error in this case 
-				dispatch(updateRecipeFailed(err.response.data.message));		
+				// ToDo: This only returns error message from backend. For all requests, need to handle the error case for network issue with backend and no response is sent - need to show default error in this case
+				dispatch(updateRecipeFailed(err.response.data.message));
 			});
 	};
 };
