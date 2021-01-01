@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme => ({
 			height: '195px',
 			width: '195px',
 		},
+		'&:hover': {
+			cursor: 'pointer',
+		},
 	},
 	profileContainer: {
 		marginBottom: '50px',
@@ -60,6 +63,7 @@ const UserProfile = props => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	// const [editType, setEditType] = useState('');
 	// const [textToEdit, setTextToEdit] = useState('');
+	const [modalType, setModalType] = useState('');
 
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -72,6 +76,7 @@ const UserProfile = props => {
 	};
 
 	const buttonClickHandler = () => {
+		setModalType('Name and Title');
 		modalOpenHandler();
 	};
 
@@ -79,6 +84,11 @@ const UserProfile = props => {
 		// setName(name);
 		// setTitle(title);
 		props.updateHandler(props.uid, name, title, props.aboutMe, props.favesToCook);
+	};
+
+	const chooseProfilePicHandler = () => {
+		setModalType('Profile Pic');
+		modalOpenHandler();
 	};
 
 	return (
@@ -91,7 +101,7 @@ const UserProfile = props => {
 				className={classes.profileContainer}
 			>
 				<Grid item>
-					<Paper className={classes.profilePic} elevation={3} />
+					<Paper className={classes.profilePic} elevation={3} onClick={chooseProfilePicHandler} />
 				</Grid>
 				<Grid item>
 					<Grid
@@ -125,7 +135,7 @@ const UserProfile = props => {
 				isOpen={isModalOpen}
 				modalCloseHandler={modalCloseHandler}					
 				mode={'Edit'}
-				type={'Name and Title'}
+				type={modalType}
 				updateProfile={updateProfile}	
 				name={props.name}
 				title={props.title}
