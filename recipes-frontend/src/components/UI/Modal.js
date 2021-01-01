@@ -9,6 +9,8 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
+import ImageUpload from './ImageUpload';
+
 const useStyles = makeStyles(theme => ({
 	modalTitleContainer: {
 		marginBottom: '15px',
@@ -109,6 +111,8 @@ const Modal = props => {
 				/>
 			</React.Fragment>
 		);
+	} else if (editType === 'Profile Pic') {
+		textField = <ImageUpload />
 	}
 
 	const inputChangedHandler = (id, event) => {
@@ -123,6 +127,7 @@ const Modal = props => {
 		// console.log('entry: ' + textValue + ', ' + 'name: ' + nameValue + ', ' + 'title: ' + titleValue);
 	};
 
+	// ToDo: Add handle condition for profile pic selection
 	const updateHandler = () => {
 		if (props.type === 'Ingredients' || props.type === 'Directions') {
 			const listType =
