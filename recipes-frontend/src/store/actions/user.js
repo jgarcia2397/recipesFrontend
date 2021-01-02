@@ -57,6 +57,38 @@ export const setNameAndTitle = (
 	};
 };
 
+export const setProfilePicStart = () => {
+	return {
+		type: actionTypes.SET_PROFILE_PIC_START,
+	};
+};
+
+export const setProfilePicSuccess = newImage => {
+	return {
+		type: actionTypes.SET_PROFILE_PIC_SUCCESS,
+		image: newImage,
+	};
+};
+
+export const setProfilePicFailed = error => {
+	return {
+		type: actionTypes.SET_PROFILE_PIC_FAILED,
+		error: error,
+	};
+};
+
+export const setProfilePic = image => {
+	return dispatch => {
+		dispatch(setProfilePicStart());
+
+		try {
+			dispatch(setProfilePicSuccess(image));
+		} catch (err) {
+			dispatch(setProfilePicFailed(err));
+		}
+	};
+};
+
 export const setAboutMeStart = () => {
 	return {
 		type: actionTypes.SET_ABOUT_ME_START,

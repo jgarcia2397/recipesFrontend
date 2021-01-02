@@ -7,7 +7,8 @@ export {
 } from './createRecipe';
 
 export { 
-    setNameAndTitle, 
+	setNameAndTitle,
+	setProfilePic, 
     setAboutMe, 
 	setFavesToCook,
 	authLogin,

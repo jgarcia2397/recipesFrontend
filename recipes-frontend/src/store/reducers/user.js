@@ -8,6 +8,7 @@ const initialState = {
 	userId: '',
 	name: 'Your Name',
 	title: 'Your Title',
+	profilePic: null,		// 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
 	nameAndTitleUpdated: false,
 	aboutMe: 'Tell us a bit about yourself!',
 	aboutMeUpdated: false,
@@ -42,6 +43,30 @@ const setNameAndTitleFailed = (state, action) => {
 		loading: false,
 		error: action.error,
 		nameAndTitleUpdated: false,
+	});
+};
+
+const setProfilePicStart = (state, action) => {
+	return updateObject(state, {
+		loading: true,
+		error: null,
+	});
+};
+
+const setProfilePicSuccess = (state, action) => {
+	const updatedState = {
+		profilePic: action.image,
+		loading: false,
+		error: null,
+	};
+
+	return updateObject(state, updatedState);
+};
+
+const setProfilePicFailed = (state, action) => {
+	return updateObject(state, {
+		loading: false,
+		error: action.error,
 	});
 };
 
@@ -188,6 +213,12 @@ const reducer = (state = initialState, action) => {
 			return setNameAndTitleSuccess(state, action);
 		case actionTypes.SET_NAME_AND_TITLE_FAILED:
 			return setNameAndTitleFailed(state, action);
+		case actionTypes.SET_PROFILE_PIC_START:
+			return setProfilePicStart(state, action);
+		case actionTypes.SET_PROFILE_PIC_SUCCESS:
+			return setProfilePicSuccess(state, action);
+		case actionTypes.SET_PROFILE_PIC_FAILED:
+			return setProfilePicFailed(state, action);
 		case actionTypes.SET_ABOUT_ME_START:
 			return setAboutMeStart(state, action);
 		case actionTypes.SET_ABOUT_ME_SUCCESS:
