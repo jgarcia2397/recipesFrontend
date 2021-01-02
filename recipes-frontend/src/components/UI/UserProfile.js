@@ -86,6 +86,10 @@ const UserProfile = props => {
 		props.updateHandler(props.uid, name, title, props.aboutMe, props.favesToCook);
 	};
 
+	const updateProfilePic = (image) => {
+		props.updatePicHandler(image);
+	};
+
 	const chooseProfilePicHandler = () => {
 		setModalType('Profile Pic');
 		modalOpenHandler();
@@ -136,7 +140,8 @@ const UserProfile = props => {
 				modalCloseHandler={modalCloseHandler}					
 				mode={'Edit'}
 				type={modalType}
-				updateProfile={updateProfile}	
+				updateProfile={updateProfile}
+				updateProfilePic={updateProfilePic}	
 				name={props.name}
 				title={props.title}
 			/>
