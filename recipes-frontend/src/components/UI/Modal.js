@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 import ImageUpload from './ImageUpload';
+import { updateObject } from '../../shared/utility';
 
 const useStyles = makeStyles(theme => ({
 	modalTitleContainer: {
@@ -69,7 +70,15 @@ const Modal = props => {
 	}, [mode, textToEdit]);
 
 	const imageInputHandler = (id, file, isFileValid) => {
-		setImageValue({ value: file, valid: isFileValid });
+		const updatedImgState = updateObject(imageValue, {
+			value: file,
+			valid: isFileValid,
+		});
+
+		// console.log(updatedImgState);
+
+		setImageValue(updatedImgState);
+		// setImageValue({ value: file, valid: isFileValid });
 	};
 
 	let editType = props.type;
@@ -138,7 +147,6 @@ const Modal = props => {
 		// console.log('entry: ' + textValue + ', ' + 'name: ' + nameValue + ', ' + 'title: ' + titleValue);
 	};
 
-	// ToDo: Add handle condition for profile pic selection
 	const updateHandler = () => {
 		if (props.type === 'Ingredients' || props.type === 'Directions') {
 			const listType =
@@ -147,6 +155,9 @@ const Modal = props => {
 			props.listChange(textValue, props.mode, listType, props.clickedListIndex);
 		} else if (props.type === 'Name and Title') {
 			props.updateProfile(nameValue, titleValue);
+		} else if (props.type === 'Profile Pic') {
+			// console.log(imageValue.value);
+			props.updateProfilePic(imageValue.value);
 		} else {
 			props.updateProfile(textValue);
 		}
