@@ -56,6 +56,7 @@ const Modal = props => {
 	const [textValue, setTextValue] = useState('');
 	const [nameValue, setNameValue] = useState('');
 	const [titleValue, setTitleValue] = useState('');
+	const [imageValue, setImageValue] = useState({ value: null, valid: true });
 
 	const { mode, textToEdit } = props;
 
@@ -66,6 +67,10 @@ const Modal = props => {
 			setTextValue(textToEdit);
 		}
 	}, [mode, textToEdit]);
+
+	const imageInputHandler = (id, file, isFileValid) => {
+		setImageValue({ value: file, valid: isFileValid });
+	};
 
 	let editType = props.type;
 	let textField = ( // Set multiline TextField as default since it is used for three cases (Directions, About Me, Fav Things to Cook)
@@ -112,7 +117,13 @@ const Modal = props => {
 			</React.Fragment>
 		);
 	} else if (editType === 'Profile Pic') {
-		textField = <ImageUpload />
+		textField = (
+			<ImageUpload
+				id='image'
+				onInput={imageInputHandler}
+				errorText='Please provide an image.'
+			/>
+		);
 	}
 
 	const inputChangedHandler = (id, event) => {
@@ -160,7 +171,10 @@ const Modal = props => {
 			}}
 		>
 			<DialogContent className={classes.contentContainer}>
-				<Typography variant={matchesXS ? 'h5' : 'h4'} className={classes.modalTitleContainer}>
+				<Typography
+					variant={matchesXS ? 'h5' : 'h4'}
+					className={classes.modalTitleContainer}
+				>
 					{props.mode} {editType}
 					{/* {props.type === 'Ingredients' ? 'Ingredient' : 'Direction'} */}
 					{props.mode === 'Delete' ? '?' : ''}
@@ -171,10 +185,7 @@ const Modal = props => {
 				<Button onClick={cancelHandler} className={classes.cancelButton}>
 					Cancel
 				</Button>
-				<Button
-					onClick={updateHandler}
-					className={classes.confirmButton}
-				>
+				<Button onClick={updateHandler} className={classes.confirmButton}>
 					{props.mode === 'Delete' ? 'Delete' : 'Save'}
 				</Button>
 			</DialogActions>
