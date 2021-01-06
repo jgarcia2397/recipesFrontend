@@ -77,15 +77,23 @@ export const setProfilePicFailed = error => {
 	};
 };
 
-export const setProfilePic = image => {
+export const setProfilePic = (userId, image) => {
 	return dispatch => {
 		dispatch(setProfilePicStart());
 
-		try {
-			dispatch(setProfilePicSuccess(image));
-		} catch (err) {
-			dispatch(setProfilePicFailed(err));
-		}
+		const formData = new FormData();
+		formData.append('image', image);
+
+		axiosRecipes
+			.patch(`/user/profilePic/${userId}`, formData, {
+				headers: { 'Content-Type': 'multipart/form-data' },
+			})
+			.then(response => {
+				dispatch(setProfilePicSuccess(response.data.user.image));
+			})
+			.catch(err => {
+				dispatch(setProfilePicFailed(err.response.data.message));
+			});
 	};
 };
 
