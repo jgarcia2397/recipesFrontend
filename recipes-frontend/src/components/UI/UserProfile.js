@@ -87,7 +87,7 @@ const UserProfile = props => {
 	};
 
 	const updateProfilePic = (image) => {
-		props.updatePicHandler(image);
+		props.updatePicHandler(props.uid, image);
 	};
 
 	const chooseProfilePicHandler = () => {

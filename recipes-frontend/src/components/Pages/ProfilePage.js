@@ -119,7 +119,7 @@ const ProfilePage = props => {
 	const onSetNameAndTitle = (uid, name, title, aboutMe, favesToCook) =>
 		dispatch(actions.setNameAndTitle(uid, name, title, aboutMe, favesToCook));
 
-	const onSetProfilePic = image => dispatch(actions.setProfilePic(image));
+	const onSetProfilePic = (uid, image) => dispatch(actions.setProfilePic(uid, image));
 
 	const onSetAboutMe = (uid, name, title, newAboutMeValue, favesToCook) =>
 		dispatch(
