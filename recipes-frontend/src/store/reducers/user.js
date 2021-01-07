@@ -137,7 +137,7 @@ const getUserSuccess = (state, action) => {
 		title: action.title,
 		aboutMe: action.aboutMe,
 		favesToCook: action.favesToCook,
-		// recipes: action.recipes,
+		profilePic: action.profilePic,
 		loading: false,
 		error: null,
 	});

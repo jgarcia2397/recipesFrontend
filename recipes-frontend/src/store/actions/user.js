@@ -203,14 +203,14 @@ export const getUserStart = () => {
 	};
 };
 
-export const getUserSuccess = (name, title, aboutMe, favesToCook, recipes) => {
+export const getUserSuccess = (name, title, aboutMe, favesToCook, profilePic) => {
 	return {
 		type: actionTypes.GET_USER_SUCCESS,
 		name,
 		title,
 		aboutMe,
 		favesToCook,
-		recipes,
+		profilePic,
 	};
 };
 
@@ -234,7 +234,7 @@ export const getUser = userId => {
 						response.data.user.title,
 						response.data.user.aboutMe,
 						response.data.user.favesToCook,
-						response.data.user.recipes
+						response.data.user.image,
 					)
 				);
 			})
