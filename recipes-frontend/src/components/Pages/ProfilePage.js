@@ -113,7 +113,7 @@ const ProfilePage = props => {
 	const title = useSelector(state => state.user.title);
 	const aboutMe = useSelector(state => state.user.aboutMe);
 	const favThingsToCook = useSelector(state => state.user.favesToCook);
-	// const userId = useSelector(state => state.user.userId);
+	const profilePic = useSelector(state => state.user.profilePic);
 	const userId = useParams().userId;
 
 	const onSetNameAndTitle = (uid, name, title, aboutMe, favesToCook) =>
@@ -209,6 +209,7 @@ const ProfilePage = props => {
 							title={title}
 							aboutMe={aboutMe}
 							favesToCook={favThingsToCook}
+							profilePic={profilePic}
 						/>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>

@@ -4,8 +4,8 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 
 import Modal from './Modal';
 
@@ -13,11 +13,6 @@ import profile from '../../assets/blankProfile.png';
 
 const useStyles = makeStyles(theme => ({
 	profilePic: {
-		backgroundImage: `url(${profile})`,
-		backgroundPosition: 'center',
-		backgroundSize: 'cover',
-		backgroundRepeat: 'no-repeat',
-		borderRadius: 120,
 		height: '225px',
 		width: '225px',
 		[theme.breakpoints.down('sm')]: {
@@ -83,10 +78,16 @@ const UserProfile = props => {
 	const updateProfile = (name, title) => {
 		// setName(name);
 		// setTitle(title);
-		props.updateHandler(props.uid, name, title, props.aboutMe, props.favesToCook);
+		props.updateHandler(
+			props.uid,
+			name,
+			title,
+			props.aboutMe,
+			props.favesToCook
+		);
 	};
 
-	const updateProfilePic = (image) => {
+	const updateProfilePic = image => {
 		props.updatePicHandler(props.uid, image);
 	};
 
@@ -105,7 +106,17 @@ const UserProfile = props => {
 				className={classes.profileContainer}
 			>
 				<Grid item>
-					<Paper className={classes.profilePic} elevation={3} onClick={chooseProfilePicHandler} />
+					<Avatar
+						alt='Profile Pic'
+						className={classes.profilePic}
+						src={
+							props.profilePic
+								? `http://localhost:5000/${props.profilePic}`
+								: profile
+						}
+						onClick={chooseProfilePicHandler}
+						style={{ boxShadow: theme.shadows[5] }}
+					/>
 				</Grid>
 				<Grid item>
 					<Grid
@@ -137,11 +148,11 @@ const UserProfile = props => {
 			</Grid>
 			<Modal
 				isOpen={isModalOpen}
-				modalCloseHandler={modalCloseHandler}					
+				modalCloseHandler={modalCloseHandler}
 				mode={'Edit'}
 				type={modalType}
 				updateProfile={updateProfile}
-				updateProfilePic={updateProfilePic}	
+				updateProfilePic={updateProfilePic}
 				name={props.name}
 				title={props.title}
 			/>
