@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	loginContainer: {
 		// height: '500px',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
 		width: '700px',
 		position: 'fixed',
 		top: '0',
@@ -238,6 +241,15 @@ const Auth = props => {
 					{authForm.isSignUp ? 'Sign Up' : 'Login'}
 				</Button>
 			</Grid>
+			<Grid item>
+				<Button
+					className={classes.switchAuthModeButton}
+					style={{ maxWidth: '180px', minWidth: '180px' }}
+					onClick={switchAuthModeHandler}
+				>
+					Switch to {authForm.isSignUp ? 'Login' : 'Sign Up'}
+				</Button>
+			</Grid>
 		</React.Fragment>
 	);
 
@@ -254,6 +266,12 @@ const Auth = props => {
 		</Snackbar>
 	);
 
+	const circularProgress = (
+		<div>
+			<CircularProgress color='secondary' size={75} thickness={4.5} />+
+		</div>
+	);
+
 	return (
 		<div className={classes.root}>
 			{snackbar}
@@ -264,21 +282,14 @@ const Auth = props => {
 					style={{ height: authForm.isSignUp ? '575px' : '500px' }}
 				>
 					<Grid container direction='column' alignItems='center'>
-						<Grid item>
-							<Typography variant='h3' className={classes.title}>
-								Login
-							</Typography>
-						</Grid>
-						{isLoading ? <CircularProgress color='secondary' /> : form}
-						<Grid item>
-							<Button
-								className={classes.switchAuthModeButton}
-								style={{ maxWidth: '180px', minWidth: '180px' }}
-								onClick={switchAuthModeHandler}
-							>
-								Switch to {authForm.isSignUp ? 'Login' : 'Sign Up'}
-							</Button>
-						</Grid>
+						{!isLoading ? (
+							<Grid item>
+								<Typography variant='h3' className={classes.title}>
+									Login
+								</Typography>
+							</Grid>
+						) : null}
+						{isLoading ? circularProgress : form}
 					</Grid>
 				</Paper>
 			</Paper>
