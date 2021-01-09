@@ -19,6 +19,7 @@ import ImageUpload from '../UI/ImageUpload';
 import RecipeInstructions from '../UI/RecipeInstructions';
 
 import * as actions from '../../store/actions/index';
+import { TurnedIn } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -260,6 +261,7 @@ const CreateRecipePage = props => {
 			const updatedFormElement = updateObject(basicRecipeForm[inputID], {
 				value: oldRecipeDetails[inputID],
 				valid: true,
+				touched: true,
 			});
 
 			updatedBasicFormState[inputID] = updatedFormElement;
@@ -285,11 +287,13 @@ const CreateRecipePage = props => {
 			detailRecipeForm['ingredients'],
 			{
 				value: mergedIngredientArray,
+				touched: true,
 			}
 		);
 
 		const updatedDirectionList = updateObject(detailRecipeForm['directions'], {
 			value: mergedDirectionArray,
+			touched: true,
 		});
 
 		const updatedForm = updateObject(detailRecipeForm, {
@@ -367,7 +371,7 @@ const CreateRecipePage = props => {
 			}
 		}
 
-		if (basicRecipeForm['image'].value === null) {
+		if (!isModifyRecipe && basicRecipeForm['image'].value === null) {
 			setFormIsValid(false);
 		}
 	}, [basicRecipeForm, detailRecipeForm]);
