@@ -496,7 +496,7 @@ const CreateRecipePage = props => {
 				<ImageUpload
 					id='image'
 					onInput={imageInputHandler}
-					errorText='Please provide an image.'
+					errorText='No image selected!'
 				/>
 			</Grid>
 			<Grid item className={classes.titleContainer}>

@@ -130,7 +130,7 @@ const Modal = props => {
 			<ImageUpload
 				id='image'
 				onInput={imageInputHandler}
-				errorText='Please provide an image.'
+				errorText='No image selected!'
 			/>
 		);
 	}

@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
 		marginTop: '50px',
 		marginBottom: '140px',
 		[theme.breakpoints.down('sm')]: {
-            marginTop: '30px',
+			marginTop: '30px',
 			marginBottom: '55px',
 		},
 	},
@@ -53,6 +53,12 @@ const useStyles = makeStyles(theme => ({
 		objectFit: 'cover', // do this for other images across app instead of above code?
 		height: '100%',
 		width: '100%',
+	},
+	errorMsgContainer: {
+		...theme.typography.body1,
+		color: theme.palette.error.dark,
+		fontWeight: 'bold',
+		textAlign: 'center',
 	},
 }));
 
@@ -124,7 +130,9 @@ const ImageUpload = props => {
 					Upload Image
 				</Button>
 			</div>
-			{!isValid && <p>{props.errorText}</p>}
+			{!isValid && (
+				<p className={classes.errorMsgContainer}>{props.errorText}</p>
+			)}
 		</div>
 	);
 };
