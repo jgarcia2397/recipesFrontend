@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-
-import applePie from '../../assets/applePie.jpg';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles(theme => ({
 	infoContainer: {
@@ -31,10 +29,7 @@ const useStyles = makeStyles(theme => ({
 		},
 	},
 	recipeImage: {
-		backgroundImage: `url(${applePie})`,
-		backgroundPosition: 'center',
-		backgroundSize: 'cover',
-		backgroundRepeat: 'no-repeat',
+		borderRadius: 10,
 		width: '100%',
 		height: '100%',
 	},
@@ -91,7 +86,13 @@ const RecipeInfoColumn = props => {
 			className={classes.infoContainer}
 		>
 			<Grid item className={classes.recipeImageContainer}>
-				<Paper className={classes.recipeImage} elevation={3} />
+				<Avatar
+					alt='Recipe Pic'
+					variant='square'
+					className={classes.recipeImage}
+					src={`http://localhost:5000/${props.image}`}
+					style={{ boxShadow: theme.shadows[5] }}
+				/>
 			</Grid>
 			<Grid item>
 				<Typography

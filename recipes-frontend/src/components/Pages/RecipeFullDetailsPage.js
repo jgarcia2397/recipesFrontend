@@ -95,6 +95,7 @@ const RecipeFullDetailsPage = props => {
 					difficulty={recipes[storedCardId].basicDetails.difficulty}
 					ingredientArray={recipes[storedCardId].ingredients}
 					directionsArray={recipes[storedCardId].directions}
+					image={recipes[storedCardId].image}
 				/>
 			</Grid>
 			<Grid item className={classes.divider}>
