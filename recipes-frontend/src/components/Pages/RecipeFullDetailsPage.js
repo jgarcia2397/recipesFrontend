@@ -102,8 +102,8 @@ const RecipeFullDetailsPage = props => {
 				<Divider orientation={matchesMD ? 'horizontal' : 'vertical'} />
 			</Grid>
 			<RecipeInstructions
-				ingredientArray={recipes[props.location.id.cardId].ingredients}
-				directionsArray={recipes[props.location.id.cardId].directions}
+				ingredientArray={recipes[storedCardId].ingredients}
+				directionsArray={recipes[storedCardId].directions}
 			/>
 		</Grid>
 	);
