@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { updateObject } from '../../shared/utility';
 import { makeStyles } from '@material-ui/core/styles';
@@ -128,6 +129,7 @@ const Auth = props => {
 
 	const isLoading = useSelector(state => state.user.loading);
 	const authError = useSelector(state => state.user.error);
+	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
 
 	const dispatch = useDispatch();
 
@@ -181,7 +183,6 @@ const Auth = props => {
 		console.log(authForm);
 	};
 
-	// ToDo: Add Redirect after successful auth submission
 	const authSubmitHandler = event => {
 		event.preventDefault();
 
@@ -272,8 +273,13 @@ const Auth = props => {
 		</div>
 	);
 
+	const authRedirect = isLoggedIn ? (
+		<Redirect to='/' />
+	) : null;
+
 	return (
 		<div className={classes.root}>
+			{authRedirect}
 			{snackbar}
 			<Paper square className={classes.background}>
 				<Paper
