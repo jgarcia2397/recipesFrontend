@@ -350,6 +350,10 @@ const CreateRecipePage = props => {
 				break;
 			}
 		}
+
+		if (basicRecipeForm['image'].value === null) {
+			setFormIsValid(false);
+		}
 	}, [basicRecipeForm, detailRecipeForm]);
 
 	useEffect(() => {
