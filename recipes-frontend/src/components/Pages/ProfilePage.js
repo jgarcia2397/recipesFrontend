@@ -116,19 +116,19 @@ const ProfilePage = props => {
 	const profilePic = useSelector(state => state.user.profilePic);
 	const userId = useParams().userId;
 
-	const onSetNameAndTitle = (uid, name, title, aboutMe, favesToCook) =>
-		dispatch(actions.setNameAndTitle(uid, name, title, aboutMe, favesToCook));
+	const onSetNameAndTitle = (uid, name, title, aboutMe, favesToCook, image) =>
+		dispatch(actions.setNameAndTitle(uid, name, title, aboutMe, favesToCook, image));
 
 	const onSetProfilePic = (uid, image) => dispatch(actions.setProfilePic(uid, image));
 
-	const onSetAboutMe = (uid, name, title, newAboutMeValue, favesToCook) =>
+	const onSetAboutMe = (uid, name, title, newAboutMeValue, favesToCook, image) =>
 		dispatch(
-			actions.setAboutMe(uid, name, title, newAboutMeValue, favesToCook)
+			actions.setAboutMe(uid, name, title, newAboutMeValue, favesToCook, image)
 		);
 
-	const onSetFavesToCook = (uid, name, title, aboutMe, newFavesToCookValue) =>
+	const onSetFavesToCook = (uid, name, title, aboutMe, newFavesToCookValue, image) =>
 		dispatch(
-			actions.setFavesToCook(uid, name, title, aboutMe, newFavesToCookValue)
+			actions.setFavesToCook(uid, name, title, aboutMe, newFavesToCookValue, image)
 		);
 
 	const onGetUser = useCallback(userId => dispatch(actions.getUser(userId)), [
@@ -186,9 +186,9 @@ const ProfilePage = props => {
 
 	const updateProfile = newTextValue => {
 		if (editType === editTypes[0]) {
-			onSetAboutMe(userId, name, title, newTextValue, favThingsToCook);
+			onSetAboutMe(userId, name, title, newTextValue, favThingsToCook, profilePic);
 		} else {
-			onSetFavesToCook(userId, name, title, aboutMe, newTextValue);
+			onSetFavesToCook(userId, name, title, aboutMe, newTextValue, profilePic);
 		}
 	};
 

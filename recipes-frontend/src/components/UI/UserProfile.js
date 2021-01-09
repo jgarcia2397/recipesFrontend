@@ -83,7 +83,8 @@ const UserProfile = props => {
 			name,
 			title,
 			props.aboutMe,
-			props.favesToCook
+			props.favesToCook,
+			props.profilePic,
 		);
 	};
 

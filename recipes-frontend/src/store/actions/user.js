@@ -27,7 +27,8 @@ export const setNameAndTitle = (
 	newName,
 	newTitle,
 	aboutMe,
-	favesToCook
+	favesToCook,
+	image,
 ) => {
 	return dispatch => {
 		dispatch(setNameAndTitleStart());
@@ -37,8 +38,7 @@ export const setNameAndTitle = (
 			title: newTitle,
 			aboutMe,
 			favesToCook,
-			image:
-				'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png', // dummy image for now
+			image,
 		};
 
 		axiosRecipes
@@ -122,7 +122,8 @@ export const setAboutMe = (
 	name,
 	title,
 	newAboutMeValue,
-	favesToCook
+	favesToCook,
+	image,
 ) => {
 	return dispatch => {
 		dispatch(setAboutMeStart());
@@ -132,8 +133,7 @@ export const setAboutMe = (
 			title,
 			aboutMe: newAboutMeValue,
 			favesToCook,
-			image:
-				'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png', // dummy image for now
+			image,
 		};
 
 		axiosRecipes
@@ -172,7 +172,8 @@ export const setFavesToCook = (
 	name,
 	title,
 	aboutMe,
-	newFavesToCook
+	newFavesToCook,
+	image,
 ) => {
 	return dispatch => {
 		dispatch(setFavesToCookStart());
@@ -182,8 +183,7 @@ export const setFavesToCook = (
 			title,
 			aboutMe,
 			favesToCook: newFavesToCook,
-			image:
-				'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png', // dummy image for now
+			image,
 		};
 
 		axiosRecipes
