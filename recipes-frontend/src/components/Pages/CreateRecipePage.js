@@ -25,6 +25,10 @@ const useStyles = makeStyles(theme => ({
 		height: '180vh',
 		display: 'flex',
 	},
+	rootModifyRecipe: {
+		height: '140vh',
+		display: 'flex',
+	},
 	background: {
 		backgroundColor: theme.palette.primary.light,
 		height: '100%',
@@ -188,9 +192,21 @@ const CreateRecipePage = props => {
 		state => state.createRecipe.isModifyRecipe
 	); // can use this to have additional UI message when updating recipe?
 
-	const onCreateRecipe = (basicDetails, ingredients, directions, creator, image) =>
+	const onCreateRecipe = (
+		basicDetails,
+		ingredients,
+		directions,
+		creator,
+		image
+	) =>
 		dispatch(
-			actions.createRecipe(basicDetails, ingredients, directions, creator, image)
+			actions.createRecipe(
+				basicDetails,
+				ingredients,
+				directions,
+				creator,
+				image
+			)
 		);
 
 	const onUpdateRecipe = (basicDetails, ingredients, directions, recipeId) =>
@@ -375,7 +391,13 @@ const CreateRecipePage = props => {
 			const image = basicDetails['image'];
 
 			if (recipeId === -1) {
-				onCreateRecipe(basicDetails, ingredientList, directionList, creatorId, image);
+				onCreateRecipe(
+					basicDetails,
+					ingredientList,
+					directionList,
+					creatorId,
+					image
+				);
 			} else {
 				const recipeObjId = recipes[recipeId].id;
 				onUpdateRecipe(
@@ -493,11 +515,13 @@ const CreateRecipePage = props => {
 				/>
 			</Grid>
 			<Grid item>
-				<ImageUpload
-					id='image'
-					onInput={imageInputHandler}
-					errorText='No image selected!'
-				/>
+				{!isModifyRecipe ? (
+					<ImageUpload
+						id='image'
+						onInput={imageInputHandler}
+						errorText='No image selected!'
+					/>
+				) : null}
 			</Grid>
 			<Grid item className={classes.titleContainer}>
 				<Typography
@@ -547,7 +571,7 @@ const CreateRecipePage = props => {
 	) : null;
 
 	return (
-		<div className={classes.root}>
+		<div className={!isModifyRecipe ? classes.root : classes.rootModifyRecipe}>
 			{createRecipeRedirect}
 			<Snackbar
 				open={alert.open}
