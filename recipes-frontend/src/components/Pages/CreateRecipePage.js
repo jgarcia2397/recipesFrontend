@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { updateObject, checkInputValidity } from '../../shared/utility';
 import BasicRecipeInfoInputs from '../UI/BasicRecipeInfoInputs';
@@ -19,7 +20,6 @@ import ImageUpload from '../UI/ImageUpload';
 import RecipeInstructions from '../UI/RecipeInstructions';
 
 import * as actions from '../../store/actions/index';
-import { TurnedIn } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -80,6 +80,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	recipeNameInput: {
 		marginBottom: '35px',
+	},
+	circProgressContainer: {
+		marginTop: '25px',
 	},
 }));
 
@@ -192,6 +195,7 @@ const CreateRecipePage = props => {
 	const isModifyRecipe = useSelector(
 		state => state.createRecipe.isModifyRecipe
 	); // can use this to have additional UI message when updating recipe?
+	const isLoading = useSelector(state => state.createRecipe.loading);
 
 	const onCreateRecipe = (
 		basicDetails,
@@ -558,14 +562,23 @@ const CreateRecipePage = props => {
 				<Divider />
 			</Grid>
 			<Grid item>
-				<Button
-					disabled={!formIsValid}
-					className={classes.saveRecipeButton}
-					style={{ maxWidth: '140px', minWidth: '140px' }}
-					onClick={newRecipeHandler}
-				>
-					Save Recipe
-				</Button>
+				{!isLoading ? (
+					<Button
+						disabled={!formIsValid}
+						className={classes.saveRecipeButton}
+						style={{ maxWidth: '140px', minWidth: '140px' }}
+						onClick={newRecipeHandler}
+					>
+						Save Recipe
+					</Button>
+				) : (
+					<CircularProgress
+						className={classes.circProgressContainer}
+						color='secondary'
+						size={50}
+						thickness={4.0}
+					/>
+				)}
 			</Grid>
 		</React.Fragment>
 	);
