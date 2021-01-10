@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
+
+import Modal from './Modal';
 
 const useStyles = makeStyles(theme => ({
 	infoContainer: {
@@ -57,11 +59,26 @@ const useStyles = makeStyles(theme => ({
 			marginTop: '10px',
 		},
 	},
+	deleteRecipeButton: {
+		...theme.typography.button,
+		marginTop: '15px',
+		borderRadius: 50,
+		backgroundColor: theme.palette.error.main,
+		'&:hover': {
+			backgroundColor: theme.palette.error.dark,
+		},
+		[theme.breakpoints.down('xs')]: {
+			marginTop: '10px',
+		},
+	},
 }));
 
 const RecipeInfoColumn = props => {
 	const classes = useStyles();
 	const theme = useTheme();
+
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [modalType, setModalType] = useState('');
 
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -77,77 +94,107 @@ const RecipeInfoColumn = props => {
 		directionsArray: props.directionsArray,
 	};
 
+	const modalOpenHandler = () => {
+		setIsModalOpen(true);
+	};
+
+	const modalCloseHandler = () => {
+		setIsModalOpen(false);
+	};
+
+	const buttonClickHandler = () => {
+		setModalType('Recipe');
+		modalOpenHandler();
+	};
+
 	return (
-		<Grid
-			container
-			alignItems='center'
-			justify='center'
-			direction='column'
-			className={classes.infoContainer}
-		>
-			<Grid item className={classes.recipeImageContainer}>
-				<Avatar
-					alt='Recipe Pic'
-					variant='square'
-					className={classes.recipeImage}
-					src={`http://localhost:5000/${props.image}`}
-					style={{ boxShadow: theme.shadows[5] }}
-				/>
+		<React.Fragment>
+			<Grid
+				container
+				alignItems='center'
+				justify='center'
+				direction='column'
+				className={classes.infoContainer}
+			>
+				<Grid item className={classes.recipeImageContainer}>
+					<Avatar
+						alt='Recipe Pic'
+						variant='square'
+						className={classes.recipeImage}
+						src={`http://localhost:5000/${props.image}`}
+						style={{ boxShadow: theme.shadows[5] }}
+					/>
+				</Grid>
+				<Grid item>
+					<Typography
+						variant={matchesXS ? 'h4' : 'h3'}
+						className={classes.recipeTitle}
+					>
+						{props.recipeName}
+					</Typography>
+				</Grid>
+				<Grid item>
+					<Typography
+						variant={matchesXS ? 'body2' : 'body1'}
+						className={classes.info}
+					>
+						Prep Time: {props.prepTime} {props.prepTimeUnits}
+					</Typography>
+				</Grid>
+				<Grid item>
+					<Typography
+						variant={matchesXS ? 'body2' : 'body1'}
+						className={classes.info}
+					>
+						Cook Time: {props.cookTime} {props.cookTimeUnits}
+					</Typography>
+				</Grid>
+				<Grid item>
+					<Typography
+						variant={matchesXS ? 'body2' : 'body1'}
+						className={classes.info}
+					>
+						Servings: {props.servings}
+					</Typography>
+				</Grid>
+				<Grid item>
+					<Typography
+						variant={matchesXS ? 'body2' : 'body1'}
+						className={classes.info}
+					>
+						Difficulty: {props.difficulty}
+					</Typography>
+				</Grid>
+				<Grid item>
+					<Button
+						className={classes.modifyRecipeButton}
+						component={Link}
+						to={{
+							pathname: '/new-recipe',
+							recipeDetails: recipeDetails,
+						}}
+						onClick={() => props.recipeInit(props.recipeId, recipeDetails)}
+					>
+						Modify Recipe
+					</Button>
+				</Grid>
+				<Grid item>
+					<Button
+						className={classes.deleteRecipeButton}
+						onClick={() => buttonClickHandler()}
+					>
+						Delete Recipe
+					</Button>
+				</Grid>
 			</Grid>
-			<Grid item>
-				<Typography
-					variant={matchesXS ? 'h4' : 'h3'}
-					className={classes.recipeTitle}
-				>
-					{props.recipeName}
-				</Typography>
-			</Grid>
-			<Grid item>
-				<Typography
-					variant={matchesXS ? 'body2' : 'body1'}
-					className={classes.info}
-				>
-					Prep Time: {props.prepTime} {props.prepTimeUnits}
-				</Typography>
-			</Grid>
-			<Grid item>
-				<Typography
-					variant={matchesXS ? 'body2' : 'body1'}
-					className={classes.info}
-				>
-					Cook Time: {props.cookTime} {props.cookTimeUnits}
-				</Typography>
-			</Grid>
-			<Grid item>
-				<Typography
-					variant={matchesXS ? 'body2' : 'body1'}
-					className={classes.info}
-				>
-					Servings: {props.servings}
-				</Typography>
-			</Grid>
-			<Grid item>
-				<Typography
-					variant={matchesXS ? 'body2' : 'body1'}
-					className={classes.info}
-				>
-					Difficulty: {props.difficulty}
-				</Typography>
-			</Grid>
-			<Grid item>
-				<Button
-					className={classes.modifyRecipeButton}
-					component={Link}
-					to={{
-						pathname: '/new-recipe',
-						recipeDetails: recipeDetails,
-					}}
-					onClick={() => props.recipeInit(props.recipeId, recipeDetails)}
-				>
-					Modify Recipe
-				</Button>
-			</Grid>
-		</Grid>
+			<Modal
+				isOpen={isModalOpen}
+				modalCloseHandler={modalCloseHandler}
+				mode={'Delete'}
+				type={modalType}
+				// isLoading={props.isLoading}
+			/>
+		</React.Fragment>
 	);
 };
 
