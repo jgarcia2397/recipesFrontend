@@ -80,6 +80,7 @@ const RecipeCard = props => {
 
 	const saveIDToLocalStorage = () => {
 		localStorage.setItem('cardId', props.id);
+		props.deleteRecipeInit();	// need to set recipeDeleted in redux store back to false so we can get into RecipeFullDetailsPage
 	};
 
 	return (

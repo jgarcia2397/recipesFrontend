@@ -76,6 +76,8 @@ const RecipePage = props => {
 
 	const onCreateRecipeInit = () => dispatch(actions.createRecipeInit());
 
+	const onDeleteRecipeInit = () => dispatch(actions.deleteRecipeInit());
+
 	const onGetAllUserRecipes = useCallback(
 		uid => dispatch(actions.getAllUserRecipes(uid)),
 		[dispatch]
@@ -119,6 +121,7 @@ const RecipePage = props => {
 								prepTimeUnits={recipe.basicDetails.prepTimeUnits}
 								cookTimeUnits={recipe.basicDetails.cookTimeUnits}
 								setTabValue={setTabValue}
+								deleteRecipeInit={onDeleteRecipeInit}
 							/>
 						))}
 					</Grid>
