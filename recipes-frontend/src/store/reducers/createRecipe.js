@@ -134,6 +134,10 @@ const updateRecipeFailed = (state, action) => {
 	});
 };
 
+const deleteRecipeInit = (state, action) => {
+	return updateObject(state, { recipeDeleted: false });
+};
+
 const deleteRecipeStart = (state, action) => {
 	return updateObject(state, { loading: true, recipeDeleted: false });
 };
@@ -174,6 +178,8 @@ const reducer = (state = initialState, action) => {
 			return updateRecipeSuccess(state, action);
 		case actionTypes.UPDATE_RECIPE_FAILED:
 			return updateRecipeFailed(state, action);
+		case actionTypes.DELETE_RECIPE_INIT:
+			return deleteRecipeInit(state, action);
 		case actionTypes.DELETE_RECIPE_START:
 			return deleteRecipeStart(state, action);
 		case actionTypes.DELETE_RECIPE_SUCCESS:

@@ -188,6 +188,12 @@ export const updateRecipe = (
 	};
 };
 
+export const deleteRecipeInit = () => {
+	return {
+		type: actionTypes.DELETE_RECIPE_INIT,
+	};
+};
+
 export const deleteRecipeStart = () => {
 	return {
 		type: actionTypes.DELETE_RECIPE_START,
