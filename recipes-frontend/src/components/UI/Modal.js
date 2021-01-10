@@ -172,6 +172,11 @@ const Modal = props => {
 		} else {
 			props.updateProfile(textValue);
 		}
+
+		if (props.isRecipeUpdateModal) {
+			props.modalCloseHandler();
+			setTextValue('');
+		}
 	};
 
 	const cancelHandler = () => {

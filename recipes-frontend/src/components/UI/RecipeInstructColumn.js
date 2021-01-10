@@ -91,6 +91,7 @@ const RecipeInstructColumn = props => {
 				listChange={props.changedList}
 				clickedListIndex={listIndex}
 				textToEdit={textToEdit}
+				isRecipeUpdateModal={true}
 			/>
 		</React.Fragment>
 	);
