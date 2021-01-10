@@ -156,6 +156,7 @@ const UserProfile = props => {
 				updateProfilePic={updateProfilePic}
 				name={props.name}
 				title={props.title}
+				isLoading={props.isLoading}
 			/>
 		</React.Fragment>
 	);

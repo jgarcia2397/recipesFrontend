@@ -8,6 +8,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
 
 import ImageUpload from './ImageUpload';
 import { updateObject } from '../../shared/utility';
@@ -58,8 +60,9 @@ const Modal = props => {
 	const [nameValue, setNameValue] = useState('');
 	const [titleValue, setTitleValue] = useState('');
 	const [imageValue, setImageValue] = useState({ value: null, valid: true });
+	const [loading, setLoading] = useState(false);
 
-	const { mode, textToEdit } = props;
+	const { mode, textToEdit, isLoading } = props;
 
 	useEffect(() => {
 		if (mode === 'Delete' || mode === 'Add New') {
@@ -68,6 +71,14 @@ const Modal = props => {
 			setTextValue(textToEdit);
 		}
 	}, [mode, textToEdit]);
+
+	useEffect(() => {
+		if (!isLoading) {
+			props.modalCloseHandler();
+			setTextValue('');
+		}
+		setLoading(isLoading);
+	}, [isLoading]);
 
 	const imageInputHandler = (id, file, isFileValid) => {
 		const updatedImgState = updateObject(imageValue, {
@@ -161,9 +172,6 @@ const Modal = props => {
 		} else {
 			props.updateProfile(textValue);
 		}
-
-		props.modalCloseHandler();
-		setTextValue('');
 	};
 
 	const cancelHandler = () => {
@@ -182,15 +190,27 @@ const Modal = props => {
 			}}
 		>
 			<DialogContent className={classes.contentContainer}>
-				<Typography
-					variant={matchesXS ? 'h5' : 'h4'}
-					className={classes.modalTitleContainer}
-				>
-					{props.mode} {editType}
-					{/* {props.type === 'Ingredients' ? 'Ingredient' : 'Direction'} */}
-					{props.mode === 'Delete' ? '?' : ''}
-				</Typography>
-				{props.mode !== 'Delete' ? textField : null}
+				{!loading ? (
+					<Grid container direction='column'>
+						<Grid item>
+							<Typography
+								variant={matchesXS ? 'h5' : 'h4'}
+								className={classes.modalTitleContainer}
+							>
+								{props.mode} {editType}
+								{/* {props.type === 'Ingredients' ? 'Ingredient' : 'Direction'} */}
+								{props.mode === 'Delete' ? '?' : ''}
+							</Typography>
+						</Grid>
+						<Grid item>{props.mode !== 'Delete' ? textField : null}</Grid>
+					</Grid>
+				) : (
+					<Grid container direction='column' alignItems='center'>
+						<Grid item>
+							<CircularProgress color='secondary' size={50} thickness={4.0} />
+						</Grid>
+					</Grid>
+				)}
 			</DialogContent>
 			<DialogActions>
 				<Button onClick={cancelHandler} className={classes.cancelButton}>

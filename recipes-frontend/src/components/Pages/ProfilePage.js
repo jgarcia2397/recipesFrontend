@@ -114,6 +114,7 @@ const ProfilePage = props => {
 	const aboutMe = useSelector(state => state.user.aboutMe);
 	const favThingsToCook = useSelector(state => state.user.favesToCook);
 	const profilePic = useSelector(state => state.user.profilePic);
+	const isLoading = useSelector(state => state.user.loading);
 	const userId = useParams().userId;
 
 	const onSetNameAndTitle = (uid, name, title, aboutMe, favesToCook, image) =>
@@ -210,6 +211,7 @@ const ProfilePage = props => {
 							aboutMe={aboutMe}
 							favesToCook={favThingsToCook}
 							profilePic={profilePic}
+							isLoading={isLoading}
 						/>
 					</Grid>
 					<Grid item className={classes.profileHeadings}>
@@ -306,6 +308,7 @@ const ProfilePage = props => {
 					type={editType}
 					updateProfile={updateProfile}
 					textToEdit={textToEdit}
+					isLoading={isLoading}
 				/>
 			</Paper>
 		</div>
