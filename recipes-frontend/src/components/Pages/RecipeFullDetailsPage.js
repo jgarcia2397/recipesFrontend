@@ -46,11 +46,14 @@ const RecipeFullDetailsPage = props => {
 	const dispatch = useDispatch();
 
 	const recipes = useSelector(state => state.createRecipe.recipes);
+	const isLoading = useSelector(state => state.createRecipe.loading);
 
 	const onUpdateRecipeInit = (id, oldRecipeObj) => {
 		localStorage.setItem('recipeDetails', JSON.stringify({ ...oldRecipeObj }));
 		dispatch(actions.updateRecipeInit(id));
 	};
+
+	const onDeleteRecipe = id => dispatch(actions.deleteRecipe(id));
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -85,7 +88,8 @@ const RecipeFullDetailsPage = props => {
 				{/* Can probably clean up the props passed here. Instead only pass recipes and props.location.id.cardId ??? */}
 				<RecipeInfoColumn
 					recipeInit={onUpdateRecipeInit}
-					recipeId={storedCardId}
+					recipeIndex={storedCardId}
+					recipeId={recipes[storedCardId].id}
 					recipeName={recipes[storedCardId].basicDetails.recipeName}
 					prepTime={recipes[storedCardId].basicDetails.prepTime}
 					cookTime={recipes[storedCardId].basicDetails.cookTime}
@@ -96,6 +100,8 @@ const RecipeFullDetailsPage = props => {
 					ingredientArray={recipes[storedCardId].ingredients}
 					directionsArray={recipes[storedCardId].directions}
 					image={recipes[storedCardId].image}
+					isLoading={isLoading}
+					deleteRecipe={onDeleteRecipe}
 				/>
 			</Grid>
 			<Grid item className={classes.divider}>

@@ -173,7 +173,7 @@ const RecipeInfoColumn = props => {
 							pathname: '/new-recipe',
 							recipeDetails: recipeDetails,
 						}}
-						onClick={() => props.recipeInit(props.recipeId, recipeDetails)}
+						onClick={() => props.recipeInit(props.recipeIndex, recipeDetails)}
 					>
 						Modify Recipe
 					</Button>
@@ -192,7 +192,9 @@ const RecipeInfoColumn = props => {
 				modalCloseHandler={modalCloseHandler}
 				mode={'Delete'}
 				type={modalType}
-				// isLoading={props.isLoading}
+				isLoading={props.isLoading}
+				recipeId={props.recipeId}
+				deleteRecipe={props.deleteRecipe}
 			/>
 		</React.Fragment>
 	);

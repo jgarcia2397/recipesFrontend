@@ -169,6 +169,8 @@ const Modal = props => {
 		} else if (props.type === 'Profile Pic') {
 			// console.log(imageValue.value);
 			props.updateProfilePic(imageValue.value);
+		} else if (props.type === 'Recipe') {
+			props.deleteRecipe(props.recipeId);
 		} else {
 			props.updateProfile(textValue);
 		}
