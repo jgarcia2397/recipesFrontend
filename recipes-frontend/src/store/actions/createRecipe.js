@@ -86,7 +86,7 @@ export const createRecipe = (
 		} = basicDetails;
 
 		const formData = new FormData();
-		
+
 		formData.append('recipeName', recipeName);
 		formData.append('prepTime', prepTime);
 		formData.append('prepTimeUnits', prepTimeUnits);
@@ -184,6 +184,39 @@ export const updateRecipe = (
 			.catch(err => {
 				// ToDo: This only returns error message from backend. For all requests, need to handle the error case for network issue with backend and no response is sent - need to show default error in this case
 				dispatch(updateRecipeFailed(err.response.data.message));
+			});
+	};
+};
+
+export const deleteRecipeStart = () => {
+	return {
+		type: actionTypes.DELETE_RECIPE_START,
+	};
+};
+
+export const deleteRecipeSuccess = () => {
+	return {
+		type: actionTypes.DELETE_RECIPE_SUCCESS,
+	};
+};
+
+export const deleteRecipeFailed = error => {
+	return {
+		type: actionTypes.DELETE_RECIPE_FAILED,
+		error: error,
+	};
+};
+
+export const deleteRecipe = recipeId => {
+	return dispatch => {
+		dispatch(deleteRecipeStart());
+
+		axiosRecipes.delete(`/recipes/${recipeId}`)
+			.then(response => {
+				dispatch(deleteRecipeSuccess());
+			})
+			.catch(err => {
+				dispatch(deleteRecipeFailed(err.response.data.message));
 			});
 	};
 };
