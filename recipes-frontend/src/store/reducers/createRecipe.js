@@ -133,6 +133,18 @@ const updateRecipeFailed = (state, action) => {
 	});
 };
 
+const deleteRecipeStart = (state, action) => {
+	return updateObject(state, { loading: true });
+};
+
+const deleteRecipeSuccess = (state, action) => {
+	return updateObject(state, { loading: true });
+};
+
+const deleteRecipeFailed = (state, action) => {
+	return updateObject(state, { loading: false, error: action.error });
+};
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.GET_ALL_USER_RECIPES_START:
@@ -157,6 +169,12 @@ const reducer = (state = initialState, action) => {
 			return updateRecipeSuccess(state, action);
 		case actionTypes.UPDATE_RECIPE_FAILED:
 			return updateRecipeFailed(state, action);
+		case actionTypes.DELETE_RECIPE_START:
+			return deleteRecipeStart(state, action);
+		case actionTypes.DELETE_RECIPE_SUCCESS:
+			return deleteRecipeSuccess(state, action);
+		case actionTypes.DELETE_RECIPE_FAILED:
+			return deleteRecipeFailed(state, action);
 		default:
 			return state;
 	}
