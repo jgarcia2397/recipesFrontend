@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -47,6 +48,8 @@ const RecipeFullDetailsPage = props => {
 
 	const recipes = useSelector(state => state.createRecipe.recipes);
 	const isLoading = useSelector(state => state.createRecipe.loading);
+	const isRecipeDeleted = useSelector(state => state.createRecipe.recipeDeleted);
+	const creatorId = useSelector(state => state.user.userId);
 
 	const onUpdateRecipeInit = (id, oldRecipeObj) => {
 		localStorage.setItem('recipeDetails', JSON.stringify({ ...oldRecipeObj }));
@@ -78,12 +81,17 @@ const RecipeFullDetailsPage = props => {
 		storedCardId = props.location.id.cardId;
 	}
 
+	const deleteRecipeRedirect = isRecipeDeleted ? (
+		<Redirect to={`/recipes/${creatorId}`} />
+	) : null;
+
 	return (
 		<Grid
 			container
 			direction={matchesMD ? 'column' : 'row'}
 			className={classes.root}
 		>
+			{deleteRecipeRedirect}
 			<Grid item className={classes.infoColumn}>
 				{/* Can probably clean up the props passed here. Instead only pass recipes and props.location.id.cardId ??? */}
 				<RecipeInfoColumn

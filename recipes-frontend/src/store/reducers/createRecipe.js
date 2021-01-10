@@ -5,6 +5,7 @@ const initialState = {
 	recipes: [],
 	recipeId: -1,
 	recipeCreated: false,
+	recipeDeleted: false,
 	isModifyRecipe: false,
 	loading: false,
 	error: null,
@@ -134,15 +135,19 @@ const updateRecipeFailed = (state, action) => {
 };
 
 const deleteRecipeStart = (state, action) => {
-	return updateObject(state, { loading: true });
+	return updateObject(state, { loading: true, recipeDeleted: false });
 };
 
 const deleteRecipeSuccess = (state, action) => {
-	return updateObject(state, { loading: false });
+	return updateObject(state, { loading: false, recipeDeleted: true });
 };
 
 const deleteRecipeFailed = (state, action) => {
-	return updateObject(state, { loading: false, error: action.error });
+	return updateObject(state, {
+		loading: false,
+		recipeDeleted: false,
+		error: action.error,
+	});
 };
 
 const reducer = (state = initialState, action) => {
