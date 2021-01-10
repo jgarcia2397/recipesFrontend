@@ -138,7 +138,7 @@ const deleteRecipeStart = (state, action) => {
 };
 
 const deleteRecipeSuccess = (state, action) => {
-	return updateObject(state, { loading: true });
+	return updateObject(state, { loading: false });
 };
 
 const deleteRecipeFailed = (state, action) => {
