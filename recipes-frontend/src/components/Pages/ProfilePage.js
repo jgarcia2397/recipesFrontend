@@ -165,6 +165,8 @@ const ProfilePage = props => {
 		[dispatch]
 	);
 
+	const onDeleteRecipeInit = () => dispatch(actions.deleteRecipeInit());
+
 	const { tabValue, routes, setTabValue } = props;
 
 	useEffect(() => {
@@ -313,7 +315,6 @@ const ProfilePage = props => {
 		</React.Fragment>
 	);
 
-	// ToDo: Clicking RecipCard here introduces error - props.deleteRecipeInit is not a function
 	const recipeList = (
 		<React.Fragment>
 			<Grid item className={classes.profileHeadings}>
@@ -337,6 +338,7 @@ const ProfilePage = props => {
 						prepTimeUnits={recipe.basicDetails.prepTimeUnits}
 						cookTimeUnits={recipe.basicDetails.cookTimeUnits}
 						setTabValue={setTabValue}
+						deleteRecipeInit={onDeleteRecipeInit}
 					/>
 				))}
 			</Grid>
