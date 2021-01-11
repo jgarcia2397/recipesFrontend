@@ -118,18 +118,42 @@ const ProfilePage = props => {
 	const userId = useParams().userId;
 
 	const onSetNameAndTitle = (uid, name, title, aboutMe, favesToCook, image) =>
-		dispatch(actions.setNameAndTitle(uid, name, title, aboutMe, favesToCook, image));
+		dispatch(
+			actions.setNameAndTitle(uid, name, title, aboutMe, favesToCook, image)
+		);
 
-	const onSetProfilePic = (uid, image) => dispatch(actions.setProfilePic(uid, image));
+	const onSetProfilePic = (uid, image) =>
+		dispatch(actions.setProfilePic(uid, image));
 
-	const onSetAboutMe = (uid, name, title, newAboutMeValue, favesToCook, image) =>
+	const onSetAboutMe = (
+		uid,
+		name,
+		title,
+		newAboutMeValue,
+		favesToCook,
+		image
+	) =>
 		dispatch(
 			actions.setAboutMe(uid, name, title, newAboutMeValue, favesToCook, image)
 		);
 
-	const onSetFavesToCook = (uid, name, title, aboutMe, newFavesToCookValue, image) =>
+	const onSetFavesToCook = (
+		uid,
+		name,
+		title,
+		aboutMe,
+		newFavesToCookValue,
+		image
+	) =>
 		dispatch(
-			actions.setFavesToCook(uid, name, title, aboutMe, newFavesToCookValue, image)
+			actions.setFavesToCook(
+				uid,
+				name,
+				title,
+				aboutMe,
+				newFavesToCookValue,
+				image
+			)
 		);
 
 	const onGetUser = useCallback(userId => dispatch(actions.getUser(userId)), [
@@ -160,11 +184,7 @@ const ProfilePage = props => {
 	useEffect(() => {
 		onGetUser(userId);
 		onGetAllUserRecipes(userId);
-	}, [
-		onGetUser,
-		onGetAllUserRecipes,
-		userId,
-	]);
+	}, [onGetUser, onGetAllUserRecipes, userId]);
 
 	useEffect(() => {
 		if (userError !== null) {
@@ -193,7 +213,14 @@ const ProfilePage = props => {
 
 	const updateProfile = newTextValue => {
 		if (editType === editTypes[0]) {
-			onSetAboutMe(userId, name, title, newTextValue, favThingsToCook, profilePic);
+			onSetAboutMe(
+				userId,
+				name,
+				title,
+				newTextValue,
+				favThingsToCook,
+				profilePic
+			);
 		} else {
 			onSetFavesToCook(userId, name, title, aboutMe, newTextValue, profilePic);
 		}
@@ -214,6 +241,106 @@ const ProfilePage = props => {
 				{userError}
 			</Alert>
 		</Snackbar>
+	);
+
+	const aboutMeSection = (
+		<React.Fragment>
+			<Grid item className={classes.profileHeadings}>
+				<Grid
+					container
+					direction={matchesXS ? 'column' : 'row'}
+					alignItems='center'
+				>
+					<Grid item>
+						<Typography
+							variant='h4'
+							style={{ fontWeight: 'bold' }}
+							align={matchesSM ? 'center' : 'left'}
+						>
+							About Me
+						</Typography>
+					</Grid>
+					<Grid item>
+						<Button
+							className={classes.editButton}
+							onClick={() => buttonClickHandler(editTypes[0], aboutMe)}
+						>
+							Edit
+						</Button>
+					</Grid>
+				</Grid>
+			</Grid>
+			<Grid item className={classes.profileText}>
+				<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
+					{aboutMe}
+				</Typography>
+			</Grid>
+		</React.Fragment>
+	);
+
+	const favThingsToCookSection = (
+		<React.Fragment>
+			<Grid item className={classes.profileHeadings}>
+				<Grid
+					container
+					direction={matchesXS ? 'column' : 'row'}
+					alignItems='center'
+				>
+					<Grid item>
+						<Typography
+							variant='h4'
+							style={{ fontWeight: 'bold' }}
+							align={matchesSM ? 'center' : 'left'}
+						>
+							Favourite Things to Cook
+						</Typography>
+					</Grid>
+					<Grid item>
+						<Button
+							className={classes.editButton}
+							onClick={() => buttonClickHandler(editTypes[1], favThingsToCook)}
+						>
+							Edit
+						</Button>
+					</Grid>
+				</Grid>
+			</Grid>
+			<Grid item className={classes.profileText}>
+				<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
+					{favThingsToCook}
+				</Typography>
+			</Grid>
+		</React.Fragment>
+	);
+
+	// ToDo: Clicking RecipCard here introduces error - props.deleteRecipeInit is not a function
+	const recipeList = (
+		<React.Fragment>
+			<Grid item className={classes.profileHeadings}>
+				<Typography
+					variant='h4'
+					style={{ fontWeight: 'bold' }}
+					align={matchesSM ? 'center' : 'left'}
+				>
+					Recipe Preview
+				</Typography>
+			</Grid>
+			<Grid item className={classes.recipeCardsContainer}>
+				{recipes.map((recipe, index) => (
+					<RecipeCard
+						key={index}
+						id={index}
+						image={recipe.image}
+						recipeName={recipe.basicDetails.recipeName}
+						prepTime={recipe.basicDetails.prepTime}
+						cookTime={recipe.basicDetails.cookTime}
+						prepTimeUnits={recipe.basicDetails.prepTimeUnits}
+						cookTimeUnits={recipe.basicDetails.cookTimeUnits}
+						setTabValue={setTabValue}
+					/>
+				))}
+			</Grid>
+		</React.Fragment>
 	);
 
 	return (
@@ -238,92 +365,9 @@ const ProfilePage = props => {
 							isLoading={isLoading}
 						/>
 					</Grid>
-					<Grid item className={classes.profileHeadings}>
-						<Grid
-							container
-							direction={matchesXS ? 'column' : 'row'}
-							alignItems='center'
-						>
-							<Grid item>
-								<Typography
-									variant='h4'
-									style={{ fontWeight: 'bold' }}
-									align={matchesSM ? 'center' : 'left'}
-								>
-									About Me
-								</Typography>
-							</Grid>
-							<Grid item>
-								<Button
-									className={classes.editButton}
-									onClick={() => buttonClickHandler(editTypes[0], aboutMe)}
-								>
-									Edit
-								</Button>
-							</Grid>
-						</Grid>
-					</Grid>
-					<Grid item className={classes.profileText}>
-						<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
-							{aboutMe}
-						</Typography>
-					</Grid>
-					<Grid item className={classes.profileHeadings}>
-						<Grid
-							container
-							direction={matchesXS ? 'column' : 'row'}
-							alignItems='center'
-						>
-							<Grid item>
-								<Typography
-									variant='h4'
-									style={{ fontWeight: 'bold' }}
-									align={matchesSM ? 'center' : 'left'}
-								>
-									Favourite Things to Cook
-								</Typography>
-							</Grid>
-							<Grid item>
-								<Button
-									className={classes.editButton}
-									onClick={() =>
-										buttonClickHandler(editTypes[1], favThingsToCook)
-									}
-								>
-									Edit
-								</Button>
-							</Grid>
-						</Grid>
-					</Grid>
-					<Grid item className={classes.profileText}>
-						<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
-							{favThingsToCook}
-						</Typography>
-					</Grid>
-					<Grid item className={classes.profileHeadings}>
-						<Typography
-							variant='h4'
-							style={{ fontWeight: 'bold' }}
-							align={matchesSM ? 'center' : 'left'}
-						>
-							Recipe Preview
-						</Typography>
-					</Grid>
-					<Grid item className={classes.recipeCardsContainer}>
-						{recipes.map((recipe, index) => (
-							<RecipeCard
-								key={index}
-								id={index}
-								image={recipe.image}
-								recipeName={recipe.basicDetails.recipeName}
-								prepTime={recipe.basicDetails.prepTime}
-								cookTime={recipe.basicDetails.cookTime}
-								prepTimeUnits={recipe.basicDetails.prepTimeUnits}
-								cookTimeUnits={recipe.basicDetails.cookTimeUnits}
-								setTabValue={setTabValue}
-							/>
-						))}
-					</Grid>
+					{aboutMeSection}
+					{favThingsToCookSection}
+					{recipeList}
 				</Grid>
 				<Modal
 					isOpen={isModalOpen}
