@@ -8,6 +8,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 import UserProfile from '../UI/UserProfile';
 import RecipeCard from '../UI/RecipeCard';
@@ -95,12 +97,9 @@ const ProfilePage = props => {
 	const theme = useTheme();
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	// const [clickedButton, setClickedButton] = useState('Edit');
-	// const [listIndex, setListIndex] = useState(-1);
 	const [editType, setEditType] = useState('');
 	const [textToEdit, setTextToEdit] = useState('');
-	// const [aboutMe, setAboutMe] = useState('Tell us a bit about yourself!');
-	// const [favThingsToCook, setFavThingsToCook] = useState('Feel free to brag about your most famous dishes!');
+	const [isSnackbarOpen, setIsSnackBarOpen] = useState(false);
 	const editTypes = ['About Me', 'Favourite Things to Cook'];
 
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
@@ -115,6 +114,7 @@ const ProfilePage = props => {
 	const favThingsToCook = useSelector(state => state.user.favesToCook);
 	const profilePic = useSelector(state => state.user.profilePic);
 	const isLoading = useSelector(state => state.user.loading);
+	const userError = useSelector(state => state.user.error);
 	const userId = useParams().userId;
 
 	const onSetNameAndTitle = (uid, name, title, aboutMe, favesToCook, image) =>
@@ -166,6 +166,12 @@ const ProfilePage = props => {
 		userId,
 	]);
 
+	useEffect(() => {
+		if (userError !== null) {
+			setIsSnackBarOpen(true);
+		}
+	}, [userError]);
+
 	const modalOpenHandler = () => {
 		setIsModalOpen(true);
 	};
@@ -193,8 +199,26 @@ const ProfilePage = props => {
 		}
 	};
 
+	const handleSnackbarClose = () => {
+		setIsSnackBarOpen(false);
+	};
+
+	const snackbar = (
+		<Snackbar
+			open={isSnackbarOpen}
+			autoHideDuration={5000}
+			onClose={handleSnackbarClose}
+			anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+		>
+			<Alert severity='error' variant='filled' elevation={5}>
+				{userError}
+			</Alert>
+		</Snackbar>
+	);
+
 	return (
 		<div className={classes.root}>
+			{snackbar}
 			<Paper className={classes.background} square>
 				<Grid
 					container
