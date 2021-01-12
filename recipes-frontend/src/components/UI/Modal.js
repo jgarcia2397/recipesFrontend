@@ -158,6 +158,18 @@ const Modal = props => {
 		// console.log('entry: ' + textValue + ', ' + 'name: ' + nameValue + ', ' + 'title: ' + titleValue);
 	};
 
+	const updateNameTitleHelper = (name, title) => {
+		if (name === '') {
+			props.updateProfile(props.name, title);
+		} else if (title === '') {
+			props.updateProfile(name, props.title);
+		} else if (name === '' && title === '') {
+			props.updateProfile(props.name, props.title);
+		} else {
+			props.updateProfile(name, title);
+		}
+	};
+
 	const updateHandler = () => {
 		if (props.type === 'Ingredients' || props.type === 'Directions') {
 			const listType =
@@ -165,7 +177,7 @@ const Modal = props => {
 
 			props.listChange(textValue, props.mode, listType, props.clickedListIndex);
 		} else if (props.type === 'Name and Title') {
-			props.updateProfile(nameValue, titleValue);
+			updateNameTitleHelper(nameValue, titleValue);
 		} else if (props.type === 'Profile Pic') {
 			// console.log(imageValue.value);
 			props.updateProfilePic(imageValue.value);
