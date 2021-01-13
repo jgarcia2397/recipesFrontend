@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -9,6 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 import RecipeCard from '../../components/UI/RecipeCard';
 
@@ -53,6 +55,8 @@ const useStyles = makeStyles(theme => ({
 const RecipePage = props => {
 	const classes = useStyles();
 
+	const [isSnackbarOpen, setIsSnackBarOpen] = useState(false);
+
 	const { tabValue, routes, setTabValue } = props;
 
 	useEffect(() => {
@@ -69,10 +73,17 @@ const RecipePage = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
-	const dispatch = useDispatch();
-
 	const recipes = useSelector(state => state.createRecipe.recipes);
 	const isLoading = useSelector(state => state.createRecipe.loading);
+	const error = useSelector(state => state.createRecipe.error);
+
+	useEffect(() => {
+		if (error !== null) {
+			setIsSnackBarOpen(true);
+		}
+	}, [error]);
+
+	const dispatch = useDispatch();
 
 	const userId = useParams().userId;
 
@@ -88,6 +99,10 @@ const RecipePage = props => {
 	useEffect(() => {
 		onGetAllUserRecipes(userId);
 	}, [onGetAllUserRecipes, userId]);
+
+	const handleSnackbarClose = () => {
+		setIsSnackBarOpen(false);
+	};
 
 	const recipeList = !isLoading ? (
 		recipes.map((recipe, index) => (
@@ -108,8 +123,22 @@ const RecipePage = props => {
 		<CircularProgress color='secondary' size={75} thickness={4.5} />
 	);
 
+	const snackbar = (
+		<Snackbar
+			open={isSnackbarOpen}
+			autoHideDuration={5000}
+			onClose={handleSnackbarClose}
+			anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+		>
+			<Alert severity='error' variant='filled' elevation={5}>
+				{error}
+			</Alert>
+		</Snackbar>
+	);
+
 	return (
 		<div className={classes.root}>
+			{snackbar}
 			<Paper className={classes.background} square>
 				<Grid container direction='column'>
 					<Grid item className={classes.titleContainer}>
