@@ -182,13 +182,14 @@ const CreateRecipePage = props => {
 	]);
 	const [formIsValid, setFormIsValid] = useState(false);
 	const [alert, setAlert] = useState({ open: false, message: '' });
+	const [isSnackbarOpen, setIsSnackBarOpen] = useState(false);
 
 	const dispatch = useDispatch();
 
 	const isRecipeCreated = useSelector(
 		state => state.createRecipe.recipeCreated
 	);
-
+	const error = useSelector(state => state.createRecipe.error);
 	const creatorId = useSelector(state => state.user.userId);
 	const recipeId = useSelector(state => state.createRecipe.recipeId);
 	const recipes = useSelector(state => state.createRecipe.recipes);
@@ -234,6 +235,12 @@ const CreateRecipePage = props => {
 			}
 		});
 	}, [tabValue, routes, setTabValue]);
+
+	useEffect(() => {
+		if (error !== null) {
+			setIsSnackBarOpen(true);
+		}
+	}, [error]);
 
 	let oldRecipeDetails;
 	const isModifyLocalStorage = localStorage.getItem('isModifyRecipe');
@@ -485,6 +492,10 @@ const CreateRecipePage = props => {
 		setAlert({ ...alert, open: false });
 	};
 
+	const handleSnackbarClose = () => {
+		setIsSnackBarOpen(false);
+	};
+
 	let form = (
 		<React.Fragment>
 			<Grid item className={classes.titleContainer}>
@@ -587,9 +598,22 @@ const CreateRecipePage = props => {
 		<Redirect to={`/recipes/${creatorId}`} />
 	) : null;
 
-	return (
-		<div className={!isModifyRecipe ? classes.root : classes.rootModifyRecipe}>
-			{createRecipeRedirect}
+	let snackbar;
+	if (error) {
+		snackbar = (
+			<Snackbar
+				open={isSnackbarOpen}
+				autoHideDuration={5000}
+				onClose={handleSnackbarClose}
+				anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+			>
+				<Alert severity='error' variant='filled' elevation={5}>
+					{error}
+				</Alert>
+			</Snackbar>
+		);
+	} else if (alert.message) {
+		snackbar = (
 			<Snackbar
 				open={alert.open}
 				autoHideDuration={5000}
@@ -600,6 +624,13 @@ const CreateRecipePage = props => {
 					{alert.message}
 				</Alert>
 			</Snackbar>
+		);
+	}
+
+	return (
+		<div className={!isModifyRecipe ? classes.root : classes.rootModifyRecipe}>
+			{createRecipeRedirect}
+			{snackbar}
 			<Paper className={classes.background} square>
 				<Grid container direction='column' alignItems='center'>
 					{form}
