@@ -7,9 +7,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import RecipeCard from '../../components/UI/RecipeCard';
-import { Typography } from '@material-ui/core';
 
 import * as actions from '../../store/actions/index';
 
@@ -71,6 +72,7 @@ const RecipePage = props => {
 	const dispatch = useDispatch();
 
 	const recipes = useSelector(state => state.createRecipe.recipes);
+	const isLoading = useSelector(state => state.createRecipe.loading);
 
 	const userId = useParams().userId;
 
@@ -86,6 +88,25 @@ const RecipePage = props => {
 	useEffect(() => {
 		onGetAllUserRecipes(userId);
 	}, [onGetAllUserRecipes, userId]);
+
+	const recipeList = !isLoading ? (
+		recipes.map((recipe, index) => (
+			<RecipeCard
+				key={index}
+				id={index}
+				image={recipe.image}
+				recipeName={recipe.basicDetails.recipeName}
+				prepTime={recipe.basicDetails.prepTime}
+				cookTime={recipe.basicDetails.cookTime}
+				prepTimeUnits={recipe.basicDetails.prepTimeUnits}
+				cookTimeUnits={recipe.basicDetails.cookTimeUnits}
+				setTabValue={setTabValue}
+				deleteRecipeInit={onDeleteRecipeInit}
+			/>
+		))
+	) : (
+		<CircularProgress color='secondary' size={75} thickness={4.5} />
+	);
 
 	return (
 		<div className={classes.root}>
@@ -109,21 +130,7 @@ const RecipePage = props => {
 						</Button>
 					</Grid>
 					<Grid item className={classes.recipeCardsContainer}>
-						{/* <RecipeCard setTabValue={setTabValue} /> */}
-						{recipes.map((recipe, index) => (
-							<RecipeCard
-								key={index}
-								id={index}
-								image={recipe.image}
-								recipeName={recipe.basicDetails.recipeName}
-								prepTime={recipe.basicDetails.prepTime}
-								cookTime={recipe.basicDetails.cookTime}
-								prepTimeUnits={recipe.basicDetails.prepTimeUnits}
-								cookTimeUnits={recipe.basicDetails.cookTimeUnits}
-								setTabValue={setTabValue}
-								deleteRecipeInit={onDeleteRecipeInit}
-							/>
-						))}
+						{recipeList}
 					</Grid>
 				</Grid>
 			</Paper>
