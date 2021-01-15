@@ -129,7 +129,8 @@ const Auth = props => {
 
 	const isLoading = useSelector(state => state.user.loading);
 	const authError = useSelector(state => state.user.error);
-	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+	const token = useSelector(state => state.user.token);
+	const isLoggedIn = !!token;
 
 	const dispatch = useDispatch();
 

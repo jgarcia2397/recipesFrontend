@@ -247,17 +247,17 @@ export const getUser = userId => {
 export const authLoginStart = () => {
 	return {
 		type: actionTypes.AUTH_LOGIN_START,
-		isLoggedIn: false,
+		// isLoggedIn: false,
 	};
 };
 
-export const authLoginSuccess = (email, password, userId) => {
+export const authLoginSuccess = (email, userId, token) => {
 	return {
 		type: actionTypes.AUTH_LOGIN_SUCCESS,
 		email: email,
-		password: password,
 		id: userId,
-		isLoggedIn: true,
+		token,
+		// isLoggedIn: true,
 	};
 };
 
@@ -265,7 +265,7 @@ export const authLoginFailed = error => {
 	return {
 		type: actionTypes.AUTH_LOGIN_FAILED,
 		error: error,
-		isLoggedIn: false,
+		// isLoggedIn: false,
 	};
 };
 
@@ -284,8 +284,8 @@ export const authLogin = (email, password) => {
 				dispatch(
 					authLoginSuccess(
 						response.data.email,
-						response.data.password,
-						response.data.user.id
+						response.data.userId,
+						response.data.token
 					)
 				);
 			})
@@ -298,18 +298,17 @@ export const authLogin = (email, password) => {
 export const authSignupStart = () => {
 	return {
 		type: actionTypes.AUTH_SIGNUP_START,
-		isLoggedIn: false,
+		// isLoggedIn: false,
 	};
 };
 
-export const authSignupSuccess = (name, email, password, userId) => {
+export const authSignupSuccess = (email, userId, token) => {
 	return {
 		type: actionTypes.AUTH_SIGNUP_SUCCESS,
-		name: name,
 		email: email,
-		password: password,
 		id: userId,
-		isLoggedIn: true,
+		token,
+		// isLoggedIn: true,
 	};
 };
 
@@ -317,7 +316,7 @@ export const authSignupFailed = error => {
 	return {
 		type: actionTypes.AUTH_SIGNUP_FAILED,
 		error: error,
-		isLoggedIn: false,
+		// isLoggedIn: false,
 	};
 };
 
@@ -336,10 +335,9 @@ export const authSignup = (name, email, password) => {
 			.then(response => {
 				dispatch(
 					authSignupSuccess(
-						response.data.name,
 						response.data.email,
-						response.data.password,
-						response.data.user.id
+						response.data.userId,
+						response.data.token,
 					)
 				);
 			})

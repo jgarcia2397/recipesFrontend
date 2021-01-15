@@ -2,10 +2,10 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../shared/utility';
 
 const initialState = {
-	isLoggedIn: false,
+	// isLoggedIn: false,
 	email: '',
-	password: '', // email and password only temporary to test dummy login
 	userId: '',
+	token: null,
 	name: 'Your Name',
 	title: 'Your Title',
 	profilePic: null,		// 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
@@ -152,7 +152,7 @@ const getUserFailed = (state, action) => {
 
 const authLoginStart = (state, action) => {
 	return updateObject(state, {
-		isLoggedIn: action.isLoggedIn,
+		// isLoggedIn: action.isLoggedIn,
 		loading: true,
 		error: null,
 	});
@@ -161,9 +161,9 @@ const authLoginStart = (state, action) => {
 const authLoginSuccess = (state, action) => {
 	return updateObject(state, {
 		email: action.email,
-		password: action.password,
 		userId: action.id,
-		isLoggedIn: action.isLoggedIn,
+		token: action.token,
+		// isLoggedIn: action.isLoggedIn,
 		loading: false,
 		error: null,
 	});
@@ -173,13 +173,13 @@ const authLoginFailed = (state, action) => {
 	return updateObject(state, {
 		error: action.error,
 		loading: false,
-		isLoggedIn: action.isLoggedIn,
+		// isLoggedIn: action.isLoggedIn,
 	});
 };
 
 const authSignupStart = (state, action) => {
 	return updateObject(state, {
-		isLoggedIn: action.isLoggedIn,
+		// isLoggedIn: action.isLoggedIn,
 		loading: true,
 		error: null,
 	});
@@ -189,9 +189,9 @@ const authSignupSuccess = (state, action) => {
 	return updateObject(state, {
 		name: action.name,
 		email: action.email,
-		password: action.password,
 		userId: action.id,
-		isLoggedIn: action.isLoggedIn,
+		token: action.token,
+		// isLoggedIn: action.isLoggedIn,
 		loading: false,
 		error: null,
 	});
@@ -201,7 +201,7 @@ const authSignupFailed = (state, action) => {
 	return updateObject(state, {
 		error: action.error,
 		loading: false,
-		isLoggedIn: action.isLoggedIn,
+		// isLoggedIn: action.isLoggedIn,
 	});
 };
 
