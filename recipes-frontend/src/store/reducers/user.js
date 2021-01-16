@@ -8,7 +8,7 @@ const initialState = {
 	token: null,
 	name: 'Your Name',
 	title: 'Your Title',
-	profilePic: null,		// 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
+	profilePic: null, // 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
 	nameAndTitleUpdated: false,
 	aboutMe: 'Tell us a bit about yourself!',
 	aboutMeUpdated: false,
@@ -159,6 +159,11 @@ const authLoginStart = (state, action) => {
 };
 
 const authLoginSuccess = (state, action) => {
+	localStorage.setItem(
+		'userData',
+		JSON.stringify({ userId: action.id, token: action.token })
+	);
+
 	return updateObject(state, {
 		email: action.email,
 		userId: action.id,
