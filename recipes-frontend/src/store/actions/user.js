@@ -244,6 +244,40 @@ export const getUser = userId => {
 	};
 };
 
+export const autoLoginStart = () => {
+	return {
+		type: actionTypes.AUTO_LOGIN_START,
+	};
+};
+
+export const autoLoginSuccess = (userId, token) => {
+	return {
+		type: actionTypes.AUTO_LOGIN_SUCCESS,
+		// email: email,
+		id: userId,
+		token,
+	};
+};
+
+export const autoLoginFailed = error => {
+	return {
+		type: actionTypes.AUTO_LOGIN_FAILED,
+		error: error,
+	};
+};
+
+export const autoLogin = (userId, token) => {
+	return dispatch => {
+		dispatch(autoLoginStart());
+
+		try {
+			dispatch(autoLoginSuccess(userId, token));
+		} catch (err) {
+			dispatch(autoLoginFailed(err));
+		}
+	};
+};
+
 export const authLoginStart = () => {
 	return {
 		type: actionTypes.AUTH_LOGIN_START,
