@@ -104,24 +104,33 @@ const RecipePage = props => {
 		setIsSnackBarOpen(false);
 	};
 
-	const recipeList = !isLoading ? (
-		recipes.map((recipe, index) => (
-			<RecipeCard
-				key={index}
-				id={index}
-				image={recipe.image}
-				recipeName={recipe.basicDetails.recipeName}
-				prepTime={recipe.basicDetails.prepTime}
-				cookTime={recipe.basicDetails.cookTime}
-				prepTimeUnits={recipe.basicDetails.prepTimeUnits}
-				cookTimeUnits={recipe.basicDetails.cookTimeUnits}
-				setTabValue={setTabValue}
-				deleteRecipeInit={onDeleteRecipeInit}
-			/>
-		))
-	) : (
-		<CircularProgress color='secondary' size={75} thickness={4.5} />
-	);
+	let recipeList;
+	if (recipes.length > 0) {
+		recipeList = !isLoading ? (
+			recipes.map((recipe, index) => (
+				<RecipeCard
+					key={index}
+					id={index}
+					image={recipe.image}
+					recipeName={recipe.basicDetails.recipeName}
+					prepTime={recipe.basicDetails.prepTime}
+					cookTime={recipe.basicDetails.cookTime}
+					prepTimeUnits={recipe.basicDetails.prepTimeUnits}
+					cookTimeUnits={recipe.basicDetails.cookTimeUnits}
+					setTabValue={setTabValue}
+					deleteRecipeInit={onDeleteRecipeInit}
+				/>
+			))
+		) : (
+			<CircularProgress color='secondary' size={75} thickness={4.5} />
+		)
+	} else {
+		recipeList = (
+			<Typography variant='h4'>
+				You have no recipes, try adding some!
+			</Typography>
+		);
+	}
 
 	const snackbar = (
 		<Snackbar
