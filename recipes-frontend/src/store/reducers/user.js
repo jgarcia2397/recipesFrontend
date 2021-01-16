@@ -167,6 +167,26 @@ const autoLoginSuccess = (state, action) => {
 	});
 };
 
+const authLogout = (state, action) => {
+	localStorage.removeItem('userData');
+
+	return updateObject(state, {
+		email: '',
+		userId: '',
+		token: null,
+		name: 'Your Name',
+		title: 'Your Title',
+		profilePic: null,
+		nameAndTitleUpdated: false,
+		aboutMe: 'Tell us a bit about yourself!',
+		aboutMeUpdated: false,
+		favesToCook: 'Feel free to brag about your most famous dishes!',
+		favesToCookUpdated: false,
+		loading: false,
+		error: null,
+	});
+};
+
 const autoLoginFailed = (state, action) => {
 	return updateObject(state, {
 		error: action.error,
@@ -272,6 +292,8 @@ const reducer = (state = initialState, action) => {
 			return autoLoginSuccess(state, action);
 		case actionTypes.AUTO_LOGIN_FAILED:
 			return autoLoginFailed(state, action);
+		case actionTypes.AUTH_LOGOUT:
+			return authLogout(state, action);
 		case actionTypes.AUTH_LOGIN_START:
 			return authLoginStart(state, action);
 		case actionTypes.AUTH_LOGIN_SUCCESS:
