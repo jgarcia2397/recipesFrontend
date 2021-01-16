@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
 
 import Header from './components/UI/Header';
@@ -13,6 +13,8 @@ import ProfilePage from './components/Pages/ProfilePage';
 import RecipeFullDetailsPage from './components/Pages/RecipeFullDetailsPage';
 import CreateRecipePage from './components/Pages/CreateRecipePage';
 
+import * as actions from './store/actions/index';
+
 function App() {
 	const [tabValue, setTabValue] = useState(0);
 
@@ -20,8 +22,18 @@ function App() {
 
 	const routes = [
 		{ name: 'Home', link: '/', activeIndex: 0, isMainTab: true },
-		{ name: 'My Recipes', link: `/recipes/${userId}`, activeIndex: 1, isMainTab: true },
-		{ name: 'My Profile', link: `/profile/${userId}`, activeIndex: 2, isMainTab: true },
+		{
+			name: 'My Recipes',
+			link: `/recipes/${userId}`,
+			activeIndex: 1,
+			isMainTab: true,
+		},
+		{
+			name: 'My Profile',
+			link: `/profile/${userId}`,
+			activeIndex: 2,
+			isMainTab: true,
+		},
 		{ name: 'Log In/Out', link: '/auth', activeIndex: 3, isMainTab: true },
 		{
 			name: 'New Recipe',
@@ -36,6 +48,20 @@ function App() {
 			isMainTab: false,
 		},
 	];
+
+	const dispatch = useDispatch();
+
+	const onAutoLogin = useCallback(
+		(userId, token) => dispatch(actions.autoLogin(userId, token)),
+		[dispatch]
+	);
+
+	useEffect(() => {
+		const storedUserData = JSON.parse(localStorage.getItem('userData'));
+		if (storedUserData && storedUserData.token) {
+			onAutoLogin(storedUserData.userId, storedUserData.token);
+		}
+	}, [onAutoLogin]);
 
 	return (
 		<ThemeProvider theme={theme}>

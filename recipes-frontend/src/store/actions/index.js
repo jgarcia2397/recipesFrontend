@@ -13,6 +13,7 @@ export {
 	setProfilePic, 
     setAboutMe, 
 	setFavesToCook,
+	autoLogin,
 	authLogin,
 	authSignup,
 	getUser, 
