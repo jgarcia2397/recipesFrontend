@@ -150,6 +150,30 @@ const getUserFailed = (state, action) => {
 	});
 };
 
+const autoLoginStart = (state, action) => {
+	return updateObject(state, {
+		loading: true,
+		error: null,
+	});
+};
+
+const autoLoginSuccess = (state, action) => {
+	return updateObject(state, {
+		// email: action.email,
+		userId: action.id,
+		token: action.token,
+		loading: false,
+		error: null,
+	});
+};
+
+const autoLoginFailed = (state, action) => {
+	return updateObject(state, {
+		error: action.error,
+		loading: false,
+	});
+};
+
 const authLoginStart = (state, action) => {
 	return updateObject(state, {
 		// isLoggedIn: action.isLoggedIn,
@@ -242,6 +266,12 @@ const reducer = (state = initialState, action) => {
 			return getUserSuccess(state, action);
 		case actionTypes.GET_USER_FAILED:
 			return getUserFailed(state, action);
+		case actionTypes.AUTO_LOGIN_START:
+			return autoLoginStart(state, action);
+		case actionTypes.AUTO_LOGIN_SUCCESS:
+			return autoLoginSuccess(state, action);
+		case actionTypes.AUTO_LOGIN_FAILED:
+			return autoLoginFailed(state, action);
 		case actionTypes.AUTH_LOGIN_START:
 			return authLoginStart(state, action);
 		case actionTypes.AUTH_LOGIN_SUCCESS:
