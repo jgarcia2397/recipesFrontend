@@ -194,6 +194,7 @@ const RecipeInfoColumn = props => {
 				type={modalType}
 				isLoading={props.isLoading}
 				recipeId={props.recipeId}
+				token={props.token}
 				deleteRecipe={props.deleteRecipe}
 			/>
 		</React.Fragment>

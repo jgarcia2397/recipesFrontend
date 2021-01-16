@@ -220,12 +220,14 @@ export const deleteRecipeFailed = error => {
 	};
 };
 
-export const deleteRecipe = recipeId => {
+export const deleteRecipe = (recipeId, token) => {
 	return dispatch => {
 		dispatch(deleteRecipeStart());
 
 		axiosRecipes
-			.delete(`/recipes/${recipeId}`)
+			.delete(`/recipes/${recipeId}`, {
+				headers: { Authorization: 'Bearer ' + token },
+			})
 			.then(response => {
 				dispatch(deleteRecipeSuccess());
 			})

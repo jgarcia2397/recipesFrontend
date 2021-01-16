@@ -50,13 +50,14 @@ const RecipeFullDetailsPage = props => {
 	const isLoading = useSelector(state => state.createRecipe.loading);
 	const isRecipeDeleted = useSelector(state => state.createRecipe.recipeDeleted);
 	const creatorId = useSelector(state => state.user.userId);
+	const token = useSelector(state => state.user.token);
 
 	const onUpdateRecipeInit = (id, oldRecipeObj) => {
 		localStorage.setItem('recipeDetails', JSON.stringify({ ...oldRecipeObj }));
 		dispatch(actions.updateRecipeInit(id));
 	};
 
-	const onDeleteRecipe = id => dispatch(actions.deleteRecipe(id));
+	const onDeleteRecipe = (id, token) => dispatch(actions.deleteRecipe(id, token));
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -109,6 +110,7 @@ const RecipeFullDetailsPage = props => {
 					directionsArray={recipes[storedCardId].directions}
 					image={recipes[storedCardId].image}
 					isLoading={isLoading}
+					token={token}
 					deleteRecipe={onDeleteRecipe}
 				/>
 			</Grid>

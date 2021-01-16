@@ -182,7 +182,7 @@ const Modal = props => {
 			// console.log(imageValue.value);
 			props.updateProfilePic(imageValue.value);
 		} else if (props.type === 'Recipe') {
-			props.deleteRecipe(props.recipeId);
+			props.deleteRecipe(props.recipeId, props.token);
 		} else {
 			props.updateProfile(textValue);
 		}
