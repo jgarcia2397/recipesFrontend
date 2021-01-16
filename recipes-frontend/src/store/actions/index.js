@@ -14,6 +14,7 @@ export {
     setAboutMe, 
 	setFavesToCook,
 	autoLogin,
+	authLogout,
 	authLogin,
 	authSignup,
 	getUser, 

@@ -278,6 +278,12 @@ export const autoLogin = (userId, token) => {
 	};
 };
 
+export const authLogout = () => {
+	return {
+		type: actionTypes.AUTH_LOGOUT,
+	};
+};
+
 export const authLoginStart = () => {
 	return {
 		type: actionTypes.AUTH_LOGIN_START,
@@ -380,5 +386,3 @@ export const authSignup = (name, email, password) => {
 			});
 	};
 };
-
-// export const authLogout = () => {};
