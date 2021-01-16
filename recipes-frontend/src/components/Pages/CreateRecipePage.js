@@ -197,13 +197,15 @@ const CreateRecipePage = props => {
 		state => state.createRecipe.isModifyRecipe
 	); // can use this to have additional UI message when updating recipe?
 	const isLoading = useSelector(state => state.createRecipe.loading);
+	const token = useSelector(state => state.user.token);
 
 	const onCreateRecipe = (
 		basicDetails,
 		ingredients,
 		directions,
 		creator,
-		image
+		image,
+		token
 	) =>
 		dispatch(
 			actions.createRecipe(
@@ -211,7 +213,8 @@ const CreateRecipePage = props => {
 				ingredients,
 				directions,
 				creator,
-				image
+				image,
+				token
 			)
 		);
 
@@ -411,7 +414,8 @@ const CreateRecipePage = props => {
 					ingredientList,
 					directionList,
 					creatorId,
-					image
+					image,
+					token
 				);
 			} else {
 				const recipeObjId = recipes[recipeId].id;

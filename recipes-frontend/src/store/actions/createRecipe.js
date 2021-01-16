@@ -70,7 +70,8 @@ export const createRecipe = (
 	ingredients,
 	directions,
 	creatorId,
-	image
+	image,
+	token
 ) => {
 	return dispatch => {
 		dispatch(createRecipeStart());
@@ -107,7 +108,10 @@ export const createRecipe = (
 
 		axiosRecipes
 			.post('/recipes', formData, {
-				headers: { 'Content-Type': 'multipart/form-data' },
+				headers: {
+					'Content-Type': 'multipart/form-data',
+					'Authorization': 'Bearer ' + token,
+				},
 			})
 			.then(response => {
 				dispatch(
@@ -217,7 +221,8 @@ export const deleteRecipe = recipeId => {
 	return dispatch => {
 		dispatch(deleteRecipeStart());
 
-		axiosRecipes.delete(`/recipes/${recipeId}`)
+		axiosRecipes
+			.delete(`/recipes/${recipeId}`)
 			.then(response => {
 				dispatch(deleteRecipeSuccess());
 			})
