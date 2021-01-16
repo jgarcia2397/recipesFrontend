@@ -110,7 +110,7 @@ export const createRecipe = (
 			.post('/recipes', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
-					'Authorization': 'Bearer ' + token,
+					Authorization: 'Bearer ' + token,
 				},
 			})
 			.then(response => {
@@ -163,7 +163,8 @@ export const updateRecipe = (
 	basicDetails,
 	ingredients,
 	directions,
-	recipeId
+	recipeId,
+	token
 ) => {
 	return dispatch => {
 		dispatch(updateRecipeStart());
@@ -175,7 +176,9 @@ export const updateRecipe = (
 		};
 
 		axiosRecipes
-			.patch(`/recipes/${recipeId}`, JSON.stringify(updatedRecipe))
+			.patch(`/recipes/${recipeId}`, JSON.stringify(updatedRecipe), {
+				headers: { Authorization: 'Bearer ' + token },
+			})
 			.then(response => {
 				dispatch(
 					updateRecipeSuccess(

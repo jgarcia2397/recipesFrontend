@@ -218,9 +218,9 @@ const CreateRecipePage = props => {
 			)
 		);
 
-	const onUpdateRecipe = (basicDetails, ingredients, directions, recipeId) =>
+	const onUpdateRecipe = (basicDetails, ingredients, directions, recipeId, token) =>
 		dispatch(
-			actions.updateRecipe(basicDetails, ingredients, directions, recipeId)
+			actions.updateRecipe(basicDetails, ingredients, directions, recipeId, token)
 		);
 
 	const { tabValue, routes, setTabValue } = props;
@@ -423,7 +423,8 @@ const CreateRecipePage = props => {
 					basicDetails,
 					ingredientList,
 					directionList,
-					recipeObjId
+					recipeObjId,
+					token
 				);
 			}
 		}
