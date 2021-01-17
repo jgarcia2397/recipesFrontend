@@ -6,6 +6,7 @@ const initialState = {
 	email: '',
 	userId: '',
 	token: null,
+	tokenExpiration: null,
 	name: 'Your Name',
 	title: 'Your Title',
 	profilePic: null, // 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
@@ -158,12 +159,31 @@ const autoLoginStart = (state, action) => {
 };
 
 const autoLoginSuccess = (state, action) => {
+	const tokenExpirationDate = action.expiration;
+
+	localStorage.setItem(
+		'userData',
+		JSON.stringify({
+			userId: action.id,
+			token: action.token,
+			expiration: tokenExpirationDate.toISOString(),
+		})
+	);
+
 	return updateObject(state, {
-		// email: action.email,
+		email: action.email,
 		userId: action.id,
 		token: action.token,
+		tokenExpiration: tokenExpirationDate.toISOString(),
 		loading: false,
 		error: null,
+	});
+};
+
+const autoLoginFailed = (state, action) => {
+	return updateObject(state, {
+		error: action.error,
+		loading: false,
 	});
 };
 
@@ -187,13 +207,6 @@ const authLogout = (state, action) => {
 	});
 };
 
-const autoLoginFailed = (state, action) => {
-	return updateObject(state, {
-		error: action.error,
-		loading: false,
-	});
-};
-
 const authLoginStart = (state, action) => {
 	return updateObject(state, {
 		// isLoggedIn: action.isLoggedIn,
@@ -203,15 +216,22 @@ const authLoginStart = (state, action) => {
 };
 
 const authLoginSuccess = (state, action) => {
+	const tokenExpirationDate = new Date(new Date().getTime() + 1000 * 60 * 60);
+
 	localStorage.setItem(
 		'userData',
-		JSON.stringify({ userId: action.id, token: action.token })
+		JSON.stringify({
+			userId: action.id,
+			token: action.token,
+			expiration: tokenExpirationDate.toISOString(),
+		})
 	);
 
 	return updateObject(state, {
 		email: action.email,
 		userId: action.id,
 		token: action.token,
+		tokenExpiration: tokenExpirationDate.toISOString(),
 		// isLoggedIn: action.isLoggedIn,
 		loading: false,
 		error: null,

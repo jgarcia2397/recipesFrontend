@@ -250,12 +250,14 @@ export const autoLoginStart = () => {
 	};
 };
 
-export const autoLoginSuccess = (userId, token) => {
+// export const autoLoginSuccess = (userId, token) => {
+export const autoLoginSuccess = (userId, token, expiration) => {
 	return {
 		type: actionTypes.AUTO_LOGIN_SUCCESS,
 		// email: email,
 		id: userId,
 		token,
+		expiration,
 	};
 };
 
@@ -266,12 +268,14 @@ export const autoLoginFailed = error => {
 	};
 };
 
-export const autoLogin = (userId, token) => {
+// export const autoLogin = (userId, token) => {
+export const autoLogin = (userId, token, expiration) => {
 	return dispatch => {
 		dispatch(autoLoginStart());
 
 		try {
-			dispatch(autoLoginSuccess(userId, token));
+			// dispatch(autoLoginSuccess(userId, token));
+			dispatch(autoLoginSuccess(userId, token, expiration));
 		} catch (err) {
 			dispatch(autoLoginFailed(err));
 		}

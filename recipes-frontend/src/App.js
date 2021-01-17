@@ -52,14 +52,23 @@ function App() {
 	const dispatch = useDispatch();
 
 	const onAutoLogin = useCallback(
-		(userId, token) => dispatch(actions.autoLogin(userId, token)),
+		(userId, token, expiration) =>
+			dispatch(actions.autoLogin(userId, token, expiration)),
 		[dispatch]
 	);
 
 	useEffect(() => {
 		const storedUserData = JSON.parse(localStorage.getItem('userData'));
-		if (storedUserData && storedUserData.token) {
-			onAutoLogin(storedUserData.userId, storedUserData.token);
+		if (
+			storedUserData &&
+			storedUserData.token &&
+			new Date(storedUserData.expiration) > new Date()
+		) {
+			onAutoLogin(
+				storedUserData.userId,
+				storedUserData.token,
+				new Date(storedUserData.expiration)
+			);
 		}
 	}, [onAutoLogin]);
 
