@@ -23,18 +23,17 @@ import * as actions from '../../store/actions/index';
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		height: '180vh',
+		height: '182vh',
 		display: 'flex',
 	},
 	rootModifyRecipe: {
-		height: '140vh',
+		height: '136vh',
 		display: 'flex',
 	},
 	background: {
 		backgroundColor: theme.palette.primary.light,
 		height: '100%',
 		width: '100%',
-		overflow: 'auto',
 	},
 	divider: {
 		backgroundColor: theme.divider.main,
@@ -55,7 +54,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	saveRecipeButton: {
 		...theme.typography.button,
-		marginTop: '45px',
+		marginTop: '25px',
+		marginBottom: '25px',
 		borderRadius: 50,
 		backgroundColor: theme.palette.secondary.main,
 		'&:hover': {
