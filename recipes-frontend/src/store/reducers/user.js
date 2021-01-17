@@ -194,6 +194,7 @@ const authLogout = (state, action) => {
 		email: '',
 		userId: '',
 		token: null,
+		tokenExpiration: null,
 		name: 'Your Name',
 		title: 'Your Title',
 		profilePic: null,
@@ -216,7 +217,7 @@ const authLoginStart = (state, action) => {
 };
 
 const authLoginSuccess = (state, action) => {
-	const tokenExpirationDate = new Date(new Date().getTime() + 1000 * 60 * 60);
+	const tokenExpirationDate = new Date(new Date().getTime() + 1000 * 60 * 60);		
 
 	localStorage.setItem(
 		'userData',

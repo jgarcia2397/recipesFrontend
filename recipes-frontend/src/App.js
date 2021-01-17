@@ -15,6 +15,8 @@ import CreateRecipePage from './components/Pages/CreateRecipePage';
 
 import * as actions from './store/actions/index';
 
+let logoutTimer;
+
 function App() {
 	const [tabValue, setTabValue] = useState(0);
 
@@ -49,6 +51,9 @@ function App() {
 		},
 	];
 
+	const token = useSelector(state => state.user.token);
+	const tokenExpiration = useSelector(state => state.user.tokenExpiration);
+
 	const dispatch = useDispatch();
 
 	const onAutoLogin = useCallback(
@@ -56,6 +61,19 @@ function App() {
 			dispatch(actions.autoLogin(userId, token, expiration)),
 		[dispatch]
 	);
+
+	const onAutoLogout = useCallback(() => dispatch(actions.authLogout()), [
+		dispatch,
+	]);
+
+	useEffect(() => {
+		if (token && tokenExpiration) {
+			const remainingTime = new Date(tokenExpiration).getTime() - new Date().getTime();
+			logoutTimer = setTimeout(onAutoLogout, remainingTime);
+		} else {
+			clearTimeout(logoutTimer);
+		}
+	}, [token, onAutoLogout, tokenExpiration]);
 
 	useEffect(() => {
 		const storedUserData = JSON.parse(localStorage.getItem('userData'));
