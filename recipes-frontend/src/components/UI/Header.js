@@ -112,6 +112,8 @@ const Header = props => {
 								tabValue={tabValue}
 								setOpenDrawer={setOpenDrawer}
 								openDrawer={openDrawer}
+								isLoggedIn={props.isLoggedIn}
+								logout={props.logout}
 							/>
 						) : (
 							<NavTabs

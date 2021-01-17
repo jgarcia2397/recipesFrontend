@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,6 +8,7 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
 	toolbarMargin: {
@@ -40,10 +41,38 @@ const useStyles = makeStyles(theme => ({
 	drawer: {
 		backgroundColor: theme.palette.common.green,
 	},
+	logoutButton: {
+		...theme.typography.button,
+		marginTop: '10px',
+		borderRadius: 50,
+		backgroundColor: theme.palette.secondary.main,
+		'&:hover': {
+			backgroundColor: theme.palette.secondary.dark,
+		},
+		[theme.breakpoints.down('md')]: {
+			marginBottom: '20px',
+		},
+	},
 }));
 
 const NavDrawer = props => {
 	const classes = useStyles();
+
+	const history = useHistory();
+
+	const logOutButton = props.isLoggedIn ? (
+			<Button
+				className={classes.logoutButton}
+				style={{ maxWidth: '100px', minWidth: '100px' }}
+				onClick={() => {
+					props.logout();
+					history.push('/');
+					props.setOpenDrawer(false);
+				}}
+			>
+				Log Out
+			</Button>
+		) : null;
 
 	return (
 		<React.Fragment>
@@ -76,6 +105,9 @@ const NavDrawer = props => {
 							</ListItem>
 						) : null
 					)}
+					<ListItem>
+						{logOutButton}
+					</ListItem>
 				</List>
 			</SwipeableDrawer>
 			<IconButton
