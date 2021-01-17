@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -6,6 +6,8 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 import RecipeInfoColumn from '../../components/UI/RecipeInfoColumn';
 import RecipeInstructions from '../UI/RecipeInstructions';
@@ -44,6 +46,9 @@ const RecipeFullDetailsPage = props => {
 	const theme = useTheme();
 	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
+	const [alert, setAlert] = useState({ open: false, message: '' });
+	const [isSnackbarOpen, setIsSnackBarOpen] = useState(false);
+
 	const dispatch = useDispatch();
 
 	const recipes = useSelector(state => state.createRecipe.recipes);
@@ -51,6 +56,7 @@ const RecipeFullDetailsPage = props => {
 	const isRecipeDeleted = useSelector(state => state.createRecipe.recipeDeleted);
 	const creatorId = useSelector(state => state.user.userId);
 	const token = useSelector(state => state.user.token);
+	const error = useSelector(state => state.createRecipe.error);
 
 	const onUpdateRecipeInit = (id, oldRecipeObj) => {
 		localStorage.setItem('recipeDetails', JSON.stringify({ ...oldRecipeObj }));
@@ -75,11 +81,54 @@ const RecipeFullDetailsPage = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
+	useEffect(() => {
+		if (error !== null) {
+			setIsSnackBarOpen(true);
+		}
+	}, [error]);
+
 	let storedCardId;
 	if (props.location.id == null) {
 		storedCardId = JSON.parse(localStorage.getItem('cardId'));
 	} else {
 		storedCardId = props.location.id.cardId;
+	}
+
+	const handleAlertClose = () => {
+		setAlert({ ...alert, open: false });
+	};
+
+	const handleSnackbarClose = () => {
+		setIsSnackBarOpen(false);
+	};
+
+	let snackbar;
+	if (error) {
+		snackbar = (
+			<Snackbar
+				open={isSnackbarOpen}
+				autoHideDuration={5000}
+				onClose={handleSnackbarClose}
+				anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+			>
+				<Alert severity='error' variant='filled' elevation={5}>
+					{error}
+				</Alert>
+			</Snackbar>
+		);
+	} else if (alert.message) {
+		snackbar = (
+			<Snackbar
+				open={alert.open}
+				autoHideDuration={5000}
+				onClose={handleAlertClose}
+				anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+			>
+				<Alert severity='error' variant='filled' elevation={5}>
+					{alert.message}
+				</Alert>
+			</Snackbar>
+		);
 	}
 
 	const deleteRecipeRedirect = isRecipeDeleted ? (
@@ -93,6 +142,7 @@ const RecipeFullDetailsPage = props => {
 			className={classes.root}
 		>
 			{deleteRecipeRedirect}
+			{snackbar}
 			<Grid item className={classes.infoColumn}>
 				{/* Can probably clean up the props passed here. Instead only pass recipes and props.location.id.cardId ??? */}
 				<RecipeInfoColumn
