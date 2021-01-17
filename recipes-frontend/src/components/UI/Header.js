@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
@@ -58,6 +59,8 @@ const Header = props => {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
+	const history = useHistory();
+
 	const [openDrawer, setOpenDrawer] = useState(false);
 
 	const { tabValue, routes, setTabValue } = props;
@@ -80,15 +83,19 @@ const Header = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
-	const logOutButton = (!matches && props.isLoggedIn) ? (
-		<Button
-			className={classes.logoutButton}
-			style={{ maxWidth: '140px', minWidth: '140px' }}
-			onClick={() => props.logout()}
-		>
-			Log Out
-		</Button>
-	) : null;
+	const logOutButton =
+		!matches && props.isLoggedIn ? (
+			<Button
+				className={classes.logoutButton}
+				style={{ maxWidth: '140px', minWidth: '140px' }}
+				onClick={() => {
+					props.logout();
+					history.push('/');
+				}}
+			>
+				Log Out
+			</Button>
+		) : null;
 
 	return (
 		<React.Fragment>
