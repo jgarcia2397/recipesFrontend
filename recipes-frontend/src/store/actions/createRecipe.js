@@ -31,7 +31,11 @@ export const getAllUserRecipes = userId => {
 				dispatch(getAllUserRecipesSuccess(response.data.recipes));
 			})
 			.catch(err => {
-				dispatch(getAllUserRecipesFailed(err.response.data.message));
+				if (!err.response) {
+					dispatch(getAllUserRecipesFailed('There is a network problem, could not get recipes.'));
+				} else {
+					dispatch(getAllUserRecipesFailed(err.response.data.message));
+				}
 			});
 	};
 };
@@ -123,8 +127,11 @@ export const createRecipe = (
 				);
 			})
 			.catch(err => {
-				// ToDo: This only returns error message from backend. For all requests, need to handle the error case for network issue with backend and no response is sent - need to show default error in this case
-				dispatch(createRecipeFailed(err.response.data.message));
+				if (!err.response) {
+					dispatch(createRecipeFailed('There is a network problem, could not create your recipe.'));
+				} else {
+					dispatch(createRecipeFailed(err.response.data.message));
+				}
 			});
 	};
 };
@@ -189,8 +196,11 @@ export const updateRecipe = (
 				);
 			})
 			.catch(err => {
-				// ToDo: This only returns error message from backend. For all requests, need to handle the error case for network issue with backend and no response is sent - need to show default error in this case
-				dispatch(updateRecipeFailed(err.response.data.message));
+				if (!err.response) {
+					dispatch(updateRecipeFailed('There is a network problem, could not update recipe.'));
+				} else {
+					dispatch(updateRecipeFailed(err.response.data.message));
+				}
 			});
 	};
 };
@@ -232,7 +242,12 @@ export const deleteRecipe = (recipeId, token) => {
 				dispatch(deleteRecipeSuccess());
 			})
 			.catch(err => {
-				dispatch(deleteRecipeFailed(err.response.data.message));
+				console.log(err.response);
+				if (!err.response) {
+					dispatch(deleteRecipeFailed('There is a network problem, could not delete recipe.'));
+				} else {
+					dispatch(deleteRecipeFailed(err.response.data.message));
+				}
 			});
 	};
 };
