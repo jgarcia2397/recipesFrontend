@@ -7,6 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Button from '@material-ui/core/Button';
 
 import NavTabs from '../Navigation/NavTabs';
 import NavDrawer from '../Navigation/NavDrawer';
@@ -25,6 +26,17 @@ const useStyles = makeStyles(theme => ({
 		...theme.typography.h3,
 		[theme.breakpoints.down('sm')]: {
 			fontSize: '2.5rem',
+		},
+	},
+	logoutButton: {
+		...theme.typography.button,
+		borderRadius: 50,
+		backgroundColor: theme.palette.secondary.main,
+		'&:hover': {
+			backgroundColor: theme.palette.secondary.dark,
+		},
+		[theme.breakpoints.down('md')]: {
+			marginBottom: '20px',
 		},
 	},
 }));
@@ -48,7 +60,7 @@ const Header = props => {
 
 	const [openDrawer, setOpenDrawer] = useState(false);
 
-	const {tabValue, routes, setTabValue} = props;
+	const { tabValue, routes, setTabValue } = props;
 
 	const handleTabChange = (event, newValue) => {
 		setTabValue(newValue);
@@ -67,6 +79,16 @@ const Header = props => {
 			}
 		});
 	}, [tabValue, routes, setTabValue]);
+
+	const logOutButton = (!matches && props.isLoggedIn) ? (
+		<Button
+			className={classes.logoutButton}
+			style={{ maxWidth: '140px', minWidth: '140px' }}
+			onClick={() => props.logout()}
+		>
+			Log Out
+		</Button>
+	) : null;
 
 	return (
 		<React.Fragment>
@@ -91,6 +113,7 @@ const Header = props => {
 								handleTabChange={handleTabChange}
 							/>
 						)}
+						{logOutButton}
 					</Toolbar>
 				</AppBar>
 			</ElevationScroll>

@@ -41,7 +41,7 @@ function App() {
 				activeIndex: 2,
 				isMainTab: true,
 			},
-			{ name: 'Log Out', link: '/auth', activeIndex: 3, isMainTab: true },
+			{ name: 'Log Out', link: '/auth', activeIndex: 3, isMainTab: false },
 			{
 				name: 'New Recipe',
 				link: '/new-recipe',
@@ -177,7 +177,13 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
-				<Header routes={routes} tabValue={tabValue} setTabValue={setTabValue} />
+				<Header
+					routes={routes}
+					tabValue={tabValue}
+					setTabValue={setTabValue}
+					isLoggedIn={!!token}
+					logout={onAutoLogout}
+				/>
 				{routeComponents}
 			</BrowserRouter>
 		</ThemeProvider>
