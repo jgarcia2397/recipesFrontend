@@ -52,7 +52,11 @@ export const setNameAndTitle = (
 				);
 			})
 			.catch(err => {
-				dispatch(setNameAndTitleFailed(err.response.data.message));
+				if (!err.response) {
+					dispatch(setNameAndTitleFailed('There is a network problem, please try again later.'));
+				} else {
+					dispatch(setNameAndTitleFailed(err.response.data.message));
+				}
 			});
 	};
 };
@@ -92,7 +96,11 @@ export const setProfilePic = (userId, image) => {
 				dispatch(setProfilePicSuccess(response.data.user.image));
 			})
 			.catch(err => {
-				dispatch(setProfilePicFailed(err.response.data.message));
+				if (!err.response) {
+					dispatch(setProfilePicFailed('There is a network problem, please try again later.'));
+				} else {
+					dispatch(setProfilePicFailed(err.response.data.message));
+				}
 			});
 	};
 };
@@ -142,7 +150,11 @@ export const setAboutMe = (
 				dispatch(setAboutMeSuccess(response.data.user.aboutMe));
 			})
 			.catch(err => {
-				dispatch(setAboutMeFailed(err.response.data.message));
+				if (!err.response) {
+					dispatch(setAboutMeFailed('There is a network problem, please try again later.'));
+				} else {
+					dispatch(setAboutMeFailed(err.response.data.message));
+				}
 			});
 	};
 };
@@ -192,7 +204,11 @@ export const setFavesToCook = (
 				dispatch(setFavesToCookSuccess(response.data.user.favesToCook));
 			})
 			.catch(err => {
-				dispatch(setFavesToCookFailed(err.response.data.message));
+				if (!err.response) {
+					dispatch(setFavesToCookFailed('There is a network problem, please try again later.'));
+				} else {
+					dispatch(setFavesToCookFailed(err.response.data.message));
+				}
 			});
 	};
 };
@@ -239,7 +255,11 @@ export const getUser = userId => {
 				);
 			})
 			.catch(err => {
-				dispatch(getUserFailed(err.response.data.message));
+				if (!err.response) {
+					dispatch(getUserFailed('There is a network problem, please try again later.'));
+				} else {
+					dispatch(getUserFailed(err.response.data.message));
+				}
 			});
 	};
 };
@@ -334,7 +354,11 @@ export const authLogin = (email, password) => {
 				);
 			})
 			.catch(err => {
-				dispatch(authLoginFailed(err.response.data.message));
+				if (!err.response) {
+					dispatch(authLoginFailed('There is a network problem, please try again later.'));
+				} else {
+					dispatch(authLoginFailed(err.response.data.message));
+				}
 			});
 	};
 };
@@ -386,7 +410,11 @@ export const authSignup = (name, email, password) => {
 				);
 			})
 			.catch(err => {
-				dispatch(authSignupFailed(err.response.data.message));
+				if (!err.response) {
+					dispatch(authSignupFailed('There is a network problem, please try again later.'));
+				} else {
+					dispatch(authSignupFailed(err.response.data.message));
+				}
 			});
 	};
 };
