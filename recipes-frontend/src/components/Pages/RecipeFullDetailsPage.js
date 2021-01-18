@@ -61,6 +61,7 @@ const RecipeFullDetailsPage = props => {
 	const creatorId = useSelector(state => state.user.userId);
 	const token = useSelector(state => state.user.token);
 	const error = useSelector(state => state.createRecipe.error);
+	const currentRecipe = useSelector(state => state.createRecipe.currentRecipe);
 
 	const onUpdateRecipeInit = (id, oldRecipeObj) => {
 		localStorage.setItem('recipeDetails', JSON.stringify({ ...oldRecipeObj }));
@@ -149,6 +150,13 @@ const RecipeFullDetailsPage = props => {
 		<Redirect to={`/recipes/${creatorId}`} />
 	) : null;
 
+	let recipe;
+	if (Object.keys(currentRecipe).length === 0) {
+		recipe = JSON.parse(localStorage.getItem('currentRecipe'));
+	} else {
+		recipe = currentRecipe;
+	}
+
 	return (
 		<Grid
 			container
@@ -162,17 +170,17 @@ const RecipeFullDetailsPage = props => {
 				<RecipeInfoColumn
 					recipeInit={onUpdateRecipeInit}
 					recipeIndex={storedCardId}
-					recipeId={recipes[storedCardId].id}
-					recipeName={recipes[storedCardId].basicDetails.recipeName}
-					prepTime={recipes[storedCardId].basicDetails.prepTime}
-					cookTime={recipes[storedCardId].basicDetails.cookTime}
-					prepTimeUnits={recipes[storedCardId].basicDetails.prepTimeUnits}
-					cookTimeUnits={recipes[storedCardId].basicDetails.cookTimeUnits}
-					servings={recipes[storedCardId].basicDetails.servings}
-					difficulty={recipes[storedCardId].basicDetails.difficulty}
-					ingredientArray={recipes[storedCardId].ingredients}
-					directionsArray={recipes[storedCardId].directions}
-					image={recipes[storedCardId].image}
+					recipeId={recipe.id}
+					recipeName={recipe.basicDetails.recipeName}
+					prepTime={recipe.basicDetails.prepTime}
+					cookTime={recipe.basicDetails.cookTime}
+					prepTimeUnits={recipe.basicDetails.prepTimeUnits}
+					cookTimeUnits={recipe.basicDetails.cookTimeUnits}
+					servings={recipe.basicDetails.servings}
+					difficulty={recipe.basicDetails.difficulty}
+					ingredientArray={recipe.ingredients}
+					directionsArray={recipe.directions}
+					image={recipe.image}
 					isLoading={isLoading}
 					token={token}
 					deleteRecipe={onDeleteRecipe}
@@ -182,8 +190,8 @@ const RecipeFullDetailsPage = props => {
 				<Divider orientation={matchesMD ? 'horizontal' : 'vertical'} />
 			</Grid>
 			<RecipeInstructions
-				ingredientArray={recipes[storedCardId].ingredients}
-				directionsArray={recipes[storedCardId].directions}
+				ingredientArray={recipe.ingredients}
+				directionsArray={recipe.directions}
 			/>
 		</Grid>
 	);
