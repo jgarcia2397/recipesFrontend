@@ -7,6 +7,7 @@ export {
 	deleteRecipe,
 	getRecipeByRecipeId,
 	getAllUserRecipes,
+	getOtherUserRecipes,
 } from './createRecipe';
 
 export { 
