@@ -78,7 +78,7 @@ const RecipeCard = props => {
 
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
-	const saveIDToLocalStorage = () => {
+	const onClickRecipeCard = () => {
 		localStorage.setItem('cardId', props.id);
 		props.deleteRecipeInit();	// need to set recipeDeleted in redux store back to false so we can get into RecipeFullDetailsPage
 	};
@@ -88,9 +88,9 @@ const RecipeCard = props => {
 			<CardActionArea
 				classes={{ root: classes.cardActionContainer }}
 				component={Link}
-				onClick={saveIDToLocalStorage}
+				onClick={onClickRecipeCard}
 				to={{
-					pathname: '/recipe-full-details',
+					pathname: `/recipe-full-details/${props.recipeId}`,
 					id: { cardId: props.id },
 				}}
 			>

@@ -111,6 +111,7 @@ const RecipePage = props => {
 				<RecipeCard
 					key={index}
 					id={index}
+					recipeId={recipe.id}
 					image={recipe.image}
 					recipeName={recipe.basicDetails.recipeName}
 					prepTime={recipe.basicDetails.prepTime}

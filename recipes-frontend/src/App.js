@@ -50,7 +50,7 @@ function App() {
 			},
 			{
 				name: 'Full Recipe Details',
-				link: '/recipe-full-details',
+				//link: '/recipe-full-details',
 				activeIndex: false,
 				isMainTab: false,
 			},
@@ -89,7 +89,7 @@ function App() {
 				/>
 				<Route
 					exact
-					path='/recipe-full-details'
+					path='/recipe-full-details/:rid'
 					render={props => (
 						<RecipeFullDetailsPage
 							{...props}
