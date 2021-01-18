@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -49,11 +49,15 @@ const RecipeFullDetailsPage = props => {
 	const [alert, setAlert] = useState({ open: false, message: '' });
 	const [isSnackbarOpen, setIsSnackBarOpen] = useState(false);
 
+	const recipeId = useParams().rid;
+
 	const dispatch = useDispatch();
 
 	const recipes = useSelector(state => state.createRecipe.recipes);
 	const isLoading = useSelector(state => state.createRecipe.loading);
-	const isRecipeDeleted = useSelector(state => state.createRecipe.recipeDeleted);
+	const isRecipeDeleted = useSelector(
+		state => state.createRecipe.recipeDeleted
+	);
 	const creatorId = useSelector(state => state.user.userId);
 	const token = useSelector(state => state.user.token);
 	const error = useSelector(state => state.createRecipe.error);
@@ -63,7 +67,13 @@ const RecipeFullDetailsPage = props => {
 		dispatch(actions.updateRecipeInit(id));
 	};
 
-	const onDeleteRecipe = (id, token) => dispatch(actions.deleteRecipe(id, token));
+	const onDeleteRecipe = (id, token) =>
+		dispatch(actions.deleteRecipe(id, token));
+
+	const onGetRecipeByRecipeId = useCallback(
+		rid => dispatch(actions.getRecipeByRecipeId(rid)),
+		[dispatch]
+	);
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -86,6 +96,10 @@ const RecipeFullDetailsPage = props => {
 			setIsSnackBarOpen(true);
 		}
 	}, [error]);
+
+	useEffect(() => {
+		onGetRecipeByRecipeId(recipeId);
+	}, [onGetRecipeByRecipeId, recipeId]);
 
 	let storedCardId;
 	if (props.location.id == null) {
