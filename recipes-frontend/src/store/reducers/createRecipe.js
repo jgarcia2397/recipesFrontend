@@ -3,12 +3,31 @@ import { updateObject } from '../../shared/utility';
 
 const initialState = {
 	recipes: [],
+	currentRecipe: {},
 	recipeId: -1,
 	recipeCreated: false,
 	recipeDeleted: false,
 	isModifyRecipe: false,
 	loading: false,
 	error: null,
+};
+
+const getRecipeByRecipeIdStart = (state, action) => {
+	return updateObject(state, { loading: true, error: null });
+};
+
+const getRecipeByRecipeIdSuccess = (state, action) => {
+	const foundRecipe = {...action.recipe};
+
+	return updateObject(state, {
+		currentRecipe: foundRecipe,
+		loading: false,
+		error: null,
+	});
+};
+
+const getRecipeByRecipeIdFailed = (state, action) => {
+	return updateObject(state, { loading: false, error: action.error });
 };
 
 const getAllUserRecipesStart = (state, action) => {
@@ -156,6 +175,12 @@ const deleteRecipeFailed = (state, action) => {
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
+		case actionTypes.GET_RECIPE_BY_RECIPE_ID_START:
+			return getRecipeByRecipeIdStart(state, action);
+		case actionTypes.GET_RECIPE_BY_RECIPE_ID_SUCCESS:
+			return getRecipeByRecipeIdSuccess(state, action);
+		case actionTypes.GET_RECIPE_BY_RECIPE_ID_FAILED:
+			return getRecipeByRecipeIdFailed(state, action);
 		case actionTypes.GET_ALL_USER_RECIPES_START:
 			return getAllUserRecipesStart(state, action);
 		case actionTypes.GET_ALL_USER_RECIPES_SUCCESS:
