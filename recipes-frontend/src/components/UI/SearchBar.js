@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		elevation: 5,
         minWidth: 200,
 		padding: '3px 6px',
 		margin: '0 auto',
@@ -28,7 +27,7 @@ const SearchBar = () => {
 	const classes = useStyles();
 
 	return (
-		<Paper component='form' className={classes.root}>
+		<Paper component='form' className={classes.root} elevation={12}>
 			<IconButton type='submit' className={classes.searchIconContainer}>
 				<SearchIcon />
 			</IconButton>
