@@ -17,7 +17,7 @@ const getRecipeByRecipeIdStart = (state, action) => {
 };
 
 const getRecipeByRecipeIdSuccess = (state, action) => {
-	const foundRecipe = {...action.recipe};
+	const foundRecipe = {...action.currentRecipe};
 
 	return updateObject(state, {
 		currentRecipe: foundRecipe,
