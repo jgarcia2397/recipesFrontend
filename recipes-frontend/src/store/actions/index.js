@@ -5,6 +5,7 @@ export {
 	updateRecipe,
 	deleteRecipeInit,
 	deleteRecipe,
+	getRecipeByRecipeId,
 	getAllUserRecipes,
 } from './createRecipe';
 

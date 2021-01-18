@@ -1,6 +1,45 @@
 import * as actionTypes from './actionTypes';
 import axiosRecipes from '../../axios-recipes';
 
+export const getRecipeByRecipeIdStart = () => {
+	return {
+		type: actionTypes.GET_RECIPE_BY_RECIPE_ID_START,
+	};
+};
+
+export const getRecipeByRecipeIdSuccess = recipe => {
+	return {
+		type: actionTypes.GET_RECIPE_BY_RECIPE_ID_SUCCESS,
+		currentRecipe: recipe,
+	};
+};
+
+export const getRecipeByRecipeIdFailed = error => {
+	return {
+		type: actionTypes.GET_RECIPE_BY_RECIPE_ID_FAILED,
+		error: error,
+	};
+};
+
+export const getRecipeByRecipeId = recipeId => {
+	return dispatch => {
+		dispatch(getRecipeByRecipeIdStart());
+
+		axiosRecipes
+			.get(`/recipes/${recipeId}`)
+			.then(response => {
+				dispatch(getRecipeByRecipeIdSuccess(response.data.recipe));
+			})
+			.catch(err => {
+				if (!err.response) {
+					dispatch(getRecipeByRecipeIdFailed('There is a network problem, could not get recipe.'));
+				} else {
+					dispatch(getRecipeByRecipeIdFailed(err.response.data.message));
+				}
+			});
+	};
+};
+
 export const getAllUserRecipesStart = () => {
 	return {
 		type: actionTypes.GET_ALL_USER_RECIPES_START,
