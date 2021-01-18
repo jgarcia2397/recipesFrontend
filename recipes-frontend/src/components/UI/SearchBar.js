@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -23,26 +23,23 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-const SearchBar = () => {
+const SearchBar = (props) => {
 	const classes = useStyles();
-
-	const [searchValue, setSearchValue] = useState('');
-
-	const searchValueChangeHandler = event => {
-		setSearchValue(event.target.value);
-		console.log(searchValue);
-	};
 
 	return (
 		<Paper component='form' className={classes.root} elevation={12}>
-			<IconButton type='submit' className={classes.searchIconContainer}>
+			<IconButton
+				type='button'
+				className={classes.searchIconContainer}
+				onClick={e => props.submitHandler(e, props.searchVal)}
+			>
 				<SearchIcon />
 			</IconButton>
 			<InputBase
 				placeholder='Search users or recipes'
 				className={classes.input}
-				value={searchValue}
-				onChange={searchValueChangeHandler}
+				value={props.searchValue}
+				onChange={e => props.searchValueChangeHandler(e)}
 			/>
 		</Paper>
 	);
