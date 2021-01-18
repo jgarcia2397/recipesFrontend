@@ -19,6 +19,8 @@ const getRecipeByRecipeIdStart = (state, action) => {
 const getRecipeByRecipeIdSuccess = (state, action) => {
 	const foundRecipe = {...action.currentRecipe};
 
+	localStorage.setItem('currentRecipe', JSON.stringify(foundRecipe));
+
 	return updateObject(state, {
 		currentRecipe: foundRecipe,
 		loading: false,
