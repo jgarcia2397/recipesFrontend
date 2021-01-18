@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -8,10 +8,10 @@ import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(theme => ({
 	root: {
-        minWidth: 200,
+		minWidth: 200,
 		padding: '3px 6px',
 		margin: '0 auto',
-        display: 'flex',
+		display: 'flex',
 	},
 	searchIconContainer: {
 		'&:hover': {
@@ -26,6 +26,13 @@ const useStyles = makeStyles(theme => ({
 const SearchBar = () => {
 	const classes = useStyles();
 
+	const [searchValue, setSearchValue] = useState('');
+
+	const searchValueChangeHandler = event => {
+		setSearchValue(event.target.value);
+		console.log(searchValue);
+	};
+
 	return (
 		<Paper component='form' className={classes.root} elevation={12}>
 			<IconButton type='submit' className={classes.searchIconContainer}>
@@ -34,6 +41,8 @@ const SearchBar = () => {
 			<InputBase
 				placeholder='Search users or recipes'
 				className={classes.input}
+				value={searchValue}
+				onChange={searchValueChangeHandler}
 			/>
 		</Paper>
 	);
