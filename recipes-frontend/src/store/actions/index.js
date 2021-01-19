@@ -7,7 +7,7 @@ export {
 	deleteRecipe,
 	getRecipeByRecipeId,
 	getAllUserRecipes,
-	getOtherUserRecipes,
+	// getOtherUserRecipes,
 } from './createRecipe';
 
 export { 
@@ -20,4 +20,5 @@ export {
 	authLogin,
 	authSignup,
 	getUser, 
+	getOtherUserId,
 } from './user';

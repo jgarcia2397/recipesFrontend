@@ -71,8 +71,12 @@ const HomePage = props => {
 
 	const dispatch = useDispatch();
 
-	const onGetOtherUserRecipes = useCallback(
-		fullName => dispatch(actions.getOtherUserRecipes(fullName)),
+	// const onGetOtherUserRecipes = useCallback(
+	// 	fullName => dispatch(actions.getOtherUserRecipes(fullName)),
+	// 	[dispatch]
+	// );
+	const onGetOtherUserId = useCallback(
+		fullName => dispatch(actions.getOtherUserId(fullName)),
 		[dispatch]
 	);
 
@@ -83,7 +87,8 @@ const HomePage = props => {
 
 	const onUserSearchSubmit = (event, searchValue) => {
 		event.preventDefault();
-		onGetOtherUserRecipes(searchValue);
+		// onGetOtherUserRecipes(searchValue);
+		onGetOtherUserId(searchValue);
 	};
 
 	return (

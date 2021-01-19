@@ -7,6 +7,7 @@ const initialState = {
 	userId: '',
 	token: null,
 	tokenExpiration: null,
+	searchedUser: null,
 	name: 'Your Name',
 	title: 'Your Title',
 	profilePic: null, // 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
@@ -149,6 +150,22 @@ const getUserFailed = (state, action) => {
 		error: action.error,
 		loading: false,
 	});
+};
+
+const getOtherUserIdStart = (state, action) => {
+	return updateObject(state, { loading: true, error: null });
+};
+
+const getOtherUserIdSuccess = (state, action) => {
+	return updateObject(state, {
+		searchedUser: action.fullName,
+		loading: false,
+		error: null,
+	});
+};
+
+const getOtherUserIdFailed = (state, action) => {
+	return updateObject(state, { loading: false, error: action.error });
 };
 
 const autoLoginStart = (state, action) => {
@@ -307,6 +324,12 @@ const reducer = (state = initialState, action) => {
 			return getUserSuccess(state, action);
 		case actionTypes.GET_USER_FAILED:
 			return getUserFailed(state, action);
+		case actionTypes.GET_OTHER_USER_ID_START:
+			return getOtherUserIdStart(state, action);
+		case actionTypes.GET_OTHER_USER_ID_SUCCESS:
+			return getOtherUserIdSuccess(state, action);
+		case actionTypes.GET_OTHER_USER_ID_FAILED:
+			return getOtherUserIdFailed(state, action);
 		case actionTypes.AUTO_LOGIN_START:
 			return autoLoginStart(state, action);
 		case actionTypes.AUTO_LOGIN_SUCCESS:

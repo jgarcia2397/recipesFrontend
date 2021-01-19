@@ -264,6 +264,39 @@ export const getUser = userId => {
 	};
 };
 
+export const getOtherUserIdStart = () => {
+	return {
+		type: actionTypes.GET_OTHER_USER_ID_START,
+	};
+};
+
+export const getOtherUserIdSuccess = fullName => {
+	return {
+		type: actionTypes.GET_OTHER_USER_ID_SUCCESS,
+		fullName,
+		//otherUserId,
+	};
+};
+
+export const getOtherUserIdFailed = error => {
+	return {
+		type: actionTypes.GET_OTHER_USER_ID_FAILED,
+		error: error,
+	};
+};
+
+export const getOtherUserId = fullName => {
+	return dispatch => {
+		dispatch(getOtherUserIdStart());
+
+		try {
+			dispatch(getOtherUserIdSuccess(fullName));
+		} catch (err) {
+			dispatch(getOtherUserIdFailed(err));
+		}
+	};
+};
+
 export const autoLoginStart = () => {
 	return {
 		type: actionTypes.AUTO_LOGIN_START,

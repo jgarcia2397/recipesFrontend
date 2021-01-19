@@ -79,38 +79,38 @@ export const getAllUserRecipes = userId => {
 	};
 };
 
-export const getOtherUserRecipesStart = () => {
-	return {
-		type: actionTypes.GET_OTHER_USER_RECIPES_START,
-	};
-};
+// export const getOtherUserRecipesStart = () => {
+// 	return {
+// 		type: actionTypes.GET_OTHER_USER_RECIPES_START,
+// 	};
+// };
 
-export const getOtherUserRecipesSuccess = fullName => {
-	return {
-		type: actionTypes.GET_OTHER_USER_RECIPES_SUCCESS,
-		fullName,
-		//otherUserId,
-	};
-};
+// export const getOtherUserRecipesSuccess = fullName => {
+// 	return {
+// 		type: actionTypes.GET_OTHER_USER_RECIPES_SUCCESS,
+// 		fullName,
+// 		//otherUserId,
+// 	};
+// };
 
-export const getOtherUserRecipesFailed = error => {
-	return {
-		type: actionTypes.GET_OTHER_USER_RECIPES_FAILED,
-		error: error,
-	};
-};
+// export const getOtherUserRecipesFailed = error => {
+// 	return {
+// 		type: actionTypes.GET_OTHER_USER_RECIPES_FAILED,
+// 		error: error,
+// 	};
+// };
 
-export const getOtherUserRecipes = fullName => {
-	return dispatch => {
-		dispatch(getOtherUserRecipesStart());
+// export const getOtherUserRecipes = fullName => {
+// 	return dispatch => {
+// 		dispatch(getOtherUserRecipesStart());
 
-		try {
-			dispatch(getOtherUserRecipesSuccess(fullName));
-		} catch (err) {
-			dispatch(getOtherUserRecipesFailed(err));
-		}
-	};
-};
+// 		try {
+// 			dispatch(getOtherUserRecipesSuccess(fullName));
+// 		} catch (err) {
+// 			dispatch(getOtherUserRecipesFailed(err));
+// 		}
+// 	};
+// };
 
 export const createRecipeInit = () => {
 	return {
