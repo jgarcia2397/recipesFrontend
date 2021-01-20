@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -69,6 +70,8 @@ const HomePage = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
+	const searchedUserId = useSelector(state => state.user.searchedUserId);
+
 	const dispatch = useDispatch();
 
 	// const onGetOtherUserRecipes = useCallback(
@@ -91,8 +94,13 @@ const HomePage = props => {
 		onGetOtherUserId(searchValue);
 	};
 
+	const profileRedirect = searchedUserId ? (
+		<Redirect to={`/profile/${searchedUserId}`} />
+	) : null;
+
 	return (
 		<React.Fragment>
+			{profileRedirect}
 			<Paper className={classes.paperContainer}>
 				<SearchBar
 					searchVal={searchValue}
