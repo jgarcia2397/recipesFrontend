@@ -28,7 +28,7 @@ export const setNameAndTitle = (
 	newTitle,
 	aboutMe,
 	favesToCook,
-	image,
+	image
 ) => {
 	return dispatch => {
 		dispatch(setNameAndTitleStart());
@@ -53,7 +53,11 @@ export const setNameAndTitle = (
 			})
 			.catch(err => {
 				if (!err.response) {
-					dispatch(setNameAndTitleFailed('There is a network problem, please try again later.'));
+					dispatch(
+						setNameAndTitleFailed(
+							'There is a network problem, please try again later.'
+						)
+					);
 				} else {
 					dispatch(setNameAndTitleFailed(err.response.data.message));
 				}
@@ -97,7 +101,11 @@ export const setProfilePic = (userId, image) => {
 			})
 			.catch(err => {
 				if (!err.response) {
-					dispatch(setProfilePicFailed('There is a network problem, please try again later.'));
+					dispatch(
+						setProfilePicFailed(
+							'There is a network problem, please try again later.'
+						)
+					);
 				} else {
 					dispatch(setProfilePicFailed(err.response.data.message));
 				}
@@ -131,7 +139,7 @@ export const setAboutMe = (
 	title,
 	newAboutMeValue,
 	favesToCook,
-	image,
+	image
 ) => {
 	return dispatch => {
 		dispatch(setAboutMeStart());
@@ -151,7 +159,11 @@ export const setAboutMe = (
 			})
 			.catch(err => {
 				if (!err.response) {
-					dispatch(setAboutMeFailed('There is a network problem, please try again later.'));
+					dispatch(
+						setAboutMeFailed(
+							'There is a network problem, please try again later.'
+						)
+					);
 				} else {
 					dispatch(setAboutMeFailed(err.response.data.message));
 				}
@@ -185,7 +197,7 @@ export const setFavesToCook = (
 	title,
 	aboutMe,
 	newFavesToCook,
-	image,
+	image
 ) => {
 	return dispatch => {
 		dispatch(setFavesToCookStart());
@@ -205,7 +217,11 @@ export const setFavesToCook = (
 			})
 			.catch(err => {
 				if (!err.response) {
-					dispatch(setFavesToCookFailed('There is a network problem, please try again later.'));
+					dispatch(
+						setFavesToCookFailed(
+							'There is a network problem, please try again later.'
+						)
+					);
 				} else {
 					dispatch(setFavesToCookFailed(err.response.data.message));
 				}
@@ -219,7 +235,13 @@ export const getUserStart = () => {
 	};
 };
 
-export const getUserSuccess = (name, title, aboutMe, favesToCook, profilePic) => {
+export const getUserSuccess = (
+	name,
+	title,
+	aboutMe,
+	favesToCook,
+	profilePic
+) => {
 	return {
 		type: actionTypes.GET_USER_SUCCESS,
 		name,
@@ -250,13 +272,15 @@ export const getUser = userId => {
 						response.data.user.title,
 						response.data.user.aboutMe,
 						response.data.user.favesToCook,
-						response.data.user.image,
+						response.data.user.image
 					)
 				);
 			})
 			.catch(err => {
 				if (!err.response) {
-					dispatch(getUserFailed('There is a network problem, please try again later.'));
+					dispatch(
+						getUserFailed('There is a network problem, please try again later.')
+					);
 				} else {
 					dispatch(getUserFailed(err.response.data.message));
 				}
@@ -270,11 +294,10 @@ export const getOtherUserIdStart = () => {
 	};
 };
 
-export const getOtherUserIdSuccess = fullName => {
+export const getOtherUserIdSuccess = otherUserId => {
 	return {
 		type: actionTypes.GET_OTHER_USER_ID_SUCCESS,
-		fullName,
-		//otherUserId,
+		otherUserId,
 	};
 };
 
@@ -289,11 +312,20 @@ export const getOtherUserId = fullName => {
 	return dispatch => {
 		dispatch(getOtherUserIdStart());
 
-		try {
-			dispatch(getOtherUserIdSuccess(fullName));
-		} catch (err) {
-			dispatch(getOtherUserIdFailed(err));
-		}
+		axiosRecipes
+			.get('/user/search/name', { params: { username: fullName } })
+			.then(response => {
+				dispatch(getOtherUserIdSuccess(response.data.user.id));
+			})
+			.catch(err => {
+				if (!err.response) {
+					dispatch(
+						getOtherUserIdFailed('There is a network problem, please try again later.')
+					);
+				} else {
+					dispatch(getOtherUserIdFailed(err.response.data.message));
+				}
+			});
 	};
 };
 
@@ -388,7 +420,11 @@ export const authLogin = (email, password) => {
 			})
 			.catch(err => {
 				if (!err.response) {
-					dispatch(authLoginFailed('There is a network problem, please try again later.'));
+					dispatch(
+						authLoginFailed(
+							'There is a network problem, please try again later.'
+						)
+					);
 				} else {
 					dispatch(authLoginFailed(err.response.data.message));
 				}
@@ -438,13 +474,17 @@ export const authSignup = (name, email, password) => {
 					authSignupSuccess(
 						response.data.email,
 						response.data.userId,
-						response.data.token,
+						response.data.token
 					)
 				);
 			})
 			.catch(err => {
 				if (!err.response) {
-					dispatch(authSignupFailed('There is a network problem, please try again later.'));
+					dispatch(
+						authSignupFailed(
+							'There is a network problem, please try again later.'
+						)
+					);
 				} else {
 					dispatch(authSignupFailed(err.response.data.message));
 				}
