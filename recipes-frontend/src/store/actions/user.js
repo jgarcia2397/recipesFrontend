@@ -329,6 +329,12 @@ export const getOtherUserId = fullName => {
 	};
 };
 
+export const clearSearchedUserId = () => {
+	return {
+		type: actionTypes.CLEAR_SEARCHED_USER_ID,
+	};
+};
+
 export const autoLoginStart = () => {
 	return {
 		type: actionTypes.AUTO_LOGIN_START,

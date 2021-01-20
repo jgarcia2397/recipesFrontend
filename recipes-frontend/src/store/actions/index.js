@@ -21,4 +21,5 @@ export {
 	authSignup,
 	getUser, 
 	getOtherUserId,
+	clearSearchedUserId,
 } from './user';
