@@ -131,6 +131,24 @@ function App() {
 					path='/auth'
 					render={() => <Auth routes={routes} setTabValue={setTabValue} />}
 				/>
+				<Route
+					exact
+					path='/recipe-full-details/:rid'
+					render={props => (
+						<RecipeFullDetailsPage
+							{...props}
+							routes={routes}
+							setTabValue={setTabValue}
+						/>
+					)}
+				/>
+				<Route
+					exact
+					path='/profile/:userId'
+					render={() => (
+						<ProfilePage routes={routes} setTabValue={setTabValue} />
+					)}
+				/>
 			</Switch>
 		);
 	}
