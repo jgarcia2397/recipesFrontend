@@ -167,7 +167,13 @@ const ProfilePage = props => {
 
 	const onDeleteRecipeInit = () => dispatch(actions.deleteRecipeInit());
 
+	const onClearSearchedUserId = () => dispatch(actions.clearSearchedUserId());
+
 	const { tabValue, routes, setTabValue } = props;
+
+	useEffect(() => {
+		onClearSearchedUserId();
+	}, []);
 
 	useEffect(() => {
 		[...routes].forEach(route => {
