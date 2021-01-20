@@ -168,6 +168,10 @@ const getOtherUserIdFailed = (state, action) => {
 	return updateObject(state, { loading: false, error: action.error });
 };
 
+const clearSearchedUserId = (state, action) => {
+	return updateObject(state, { searchedUserId: null });
+};
+
 const autoLoginStart = (state, action) => {
 	return updateObject(state, {
 		loading: true,
@@ -234,7 +238,7 @@ const authLoginStart = (state, action) => {
 };
 
 const authLoginSuccess = (state, action) => {
-	const tokenExpirationDate = new Date(new Date().getTime() + 1000 * 60 * 60);		
+	const tokenExpirationDate = new Date(new Date().getTime() + 1000 * 60 * 60);
 
 	localStorage.setItem(
 		'userData',
@@ -330,6 +334,8 @@ const reducer = (state = initialState, action) => {
 			return getOtherUserIdSuccess(state, action);
 		case actionTypes.GET_OTHER_USER_ID_FAILED:
 			return getOtherUserIdFailed(state, action);
+		case actionTypes.CLEAR_SEARCHED_USER_ID:
+			return clearSearchedUserId(state, action);
 		case actionTypes.AUTO_LOGIN_START:
 			return autoLoginStart(state, action);
 		case actionTypes.AUTO_LOGIN_SUCCESS:
