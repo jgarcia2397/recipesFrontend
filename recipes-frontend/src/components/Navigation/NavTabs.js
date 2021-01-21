@@ -24,7 +24,7 @@ const NavTabs = props => {
 	return (
 		<Tabs
 			className={classes.tabContainer}
-			value={props.tabVal}
+			value={props.isDeselectTabs ? false : props.tabVal}
 			onChange={props.handleTabChange}
 			/*indicatorColor='primary'*/
 		>

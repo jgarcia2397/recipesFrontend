@@ -24,6 +24,7 @@ function App() {
 	const token = useSelector(state => state.user.token);
 	const tokenExpiration = useSelector(state => state.user.tokenExpiration);
 	const userId = useSelector(state => state.user.userId);
+	const isDeselectTabs = useSelector(state => state.user.isTabsDeselect);
 
 	let routes;
 	if (token) {
@@ -201,6 +202,7 @@ function App() {
 					setTabValue={setTabValue}
 					isLoggedIn={!!token}
 					logout={onAutoLogout}
+					isDeselectTabs={isDeselectTabs}
 				/>
 				{routeComponents}
 			</BrowserRouter>

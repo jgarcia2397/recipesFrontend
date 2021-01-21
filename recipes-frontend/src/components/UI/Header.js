@@ -120,6 +120,7 @@ const Header = props => {
 								routes={routes}
 								tabVal={tabValue}
 								handleTabChange={handleTabChange}
+								isDeselectTabs={props.isDeselectTabs}
 							/>
 						)}
 						{logOutButton}

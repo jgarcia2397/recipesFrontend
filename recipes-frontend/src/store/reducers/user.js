@@ -7,7 +7,7 @@ const initialState = {
 	userId: '',
 	token: null,
 	tokenExpiration: null,
-	searchedUserId: null,
+	isTabsDeselect: false,
 	name: 'Your Name',
 	title: 'Your Title',
 	profilePic: null, // 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
@@ -157,8 +157,14 @@ const getOtherUserIdStart = (state, action) => {
 };
 
 const getOtherUserIdSuccess = (state, action) => {
+	let isDifferentUser;
+	if (state.userId !== action.otherUserId) {
+		isDifferentUser = true;
+	}
+
 	return updateObject(state, {
 		searchedUserId: action.otherUserId,
+		isTabsDeselect: isDifferentUser,
 		loading: false,
 		error: null,
 	});
