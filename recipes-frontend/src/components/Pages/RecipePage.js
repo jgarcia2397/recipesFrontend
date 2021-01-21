@@ -96,9 +96,15 @@ const RecipePage = props => {
 		[dispatch]
 	);
 
+	const onClearIsTabsDeselect = () => dispatch(actions.clearIsTabsDeselect());
+
 	useEffect(() => {
 		onGetAllUserRecipes(userId);
 	}, [onGetAllUserRecipes, userId]);
+
+	useEffect(() => {
+		onClearIsTabsDeselect();
+	}, []);
 
 	const handleSnackbarClose = () => {
 		setIsSnackBarOpen(false);

@@ -74,10 +74,8 @@ const HomePage = props => {
 
 	const dispatch = useDispatch();
 
-	// const onGetOtherUserRecipes = useCallback(
-	// 	fullName => dispatch(actions.getOtherUserRecipes(fullName)),
-	// 	[dispatch]
-	// );
+	const onClearIsTabsDeselect = () => dispatch(actions.clearIsTabsDeselect());
+
 	const onGetOtherUserId = useCallback(
 		fullName => dispatch(actions.getOtherUserId(fullName)),
 		[dispatch]
@@ -93,6 +91,10 @@ const HomePage = props => {
 		// onGetOtherUserRecipes(searchValue);
 		onGetOtherUserId(searchValue);
 	};
+
+	useEffect(() => {
+		onClearIsTabsDeselect();
+	}, []);
 
 	const profileRedirect = searchedUserId ? (
 		<Redirect to={`/profile/${searchedUserId}`} />

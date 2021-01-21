@@ -140,6 +140,8 @@ const Auth = props => {
 	const onAuthSignup = (name, email, password) =>
 		dispatch(actions.authSignup(name, email, password));
 
+	const onClearIsTabsDeselect = () => dispatch(actions.clearIsTabsDeselect());
+
 	const { tabValue, routes, setTabValue } = props;
 
 	useEffect(() => {
@@ -161,6 +163,10 @@ const Auth = props => {
 			setIsSnackBarOpen(true);
 		}
 	}, [authError]);
+
+	useEffect(() => {
+		onClearIsTabsDeselect();
+	}, []);
 
 	const switchAuthModeHandler = () => {
 		const updatedAuthForm = updateObject(authForm, {
