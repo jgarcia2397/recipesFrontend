@@ -22,4 +22,5 @@ export {
 	getUser, 
 	getOtherUserId,
 	clearSearchedUserId,
+	clearIsTabsDeselect,
 } from './user';

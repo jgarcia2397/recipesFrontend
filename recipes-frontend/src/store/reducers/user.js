@@ -178,6 +178,10 @@ const clearSearchedUserId = (state, action) => {
 	return updateObject(state, { searchedUserId: null });
 };
 
+const clearIsTabsDeselect = (state, action) => {
+	return updateObject(state, { isTabsDeselect: false });
+};
+
 const autoLoginStart = (state, action) => {
 	return updateObject(state, {
 		loading: true,
@@ -342,6 +346,8 @@ const reducer = (state = initialState, action) => {
 			return getOtherUserIdFailed(state, action);
 		case actionTypes.CLEAR_SEARCHED_USER_ID:
 			return clearSearchedUserId(state, action);
+		case actionTypes.CLEAR_IS_TABS_DESELECT:
+			return clearIsTabsDeselect(state, action);
 		case actionTypes.AUTO_LOGIN_START:
 			return autoLoginStart(state, action);
 		case actionTypes.AUTO_LOGIN_SUCCESS:

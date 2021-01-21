@@ -335,6 +335,12 @@ export const clearSearchedUserId = () => {
 	};
 };
 
+export const clearIsTabsDeselect = () => {
+	return {
+		type: actionTypes.CLEAR_IS_TABS_DESELECT,
+	};
+};
+
 export const autoLoginStart = () => {
 	return {
 		type: actionTypes.AUTO_LOGIN_START,
