@@ -16,6 +16,7 @@ const initialState = {
 	aboutMeUpdated: false,
 	favesToCook: 'Feel free to brag about your most famous dishes!',
 	favesToCookUpdated: false,
+	searchedUserId: null,
 	loading: false,
 	error: null,
 };

@@ -115,6 +115,7 @@ const ProfilePage = props => {
 	const profilePic = useSelector(state => state.user.profilePic);
 	const isLoading = useSelector(state => state.user.loading);
 	const userError = useSelector(state => state.user.error);
+	const userIdRedux = useSelector(state => state.user.userId);
 	const userId = useParams().userId;
 
 	const onSetNameAndTitle = (uid, name, title, aboutMe, favesToCook, image) =>
@@ -169,7 +170,16 @@ const ProfilePage = props => {
 
 	const onClearSearchedUserId = () => dispatch(actions.clearSearchedUserId());
 
+	const onClearIsTabsDeselect = () => dispatch(actions.clearIsTabsDeselect());
+
 	const { tabValue, routes, setTabValue } = props;
+
+	useEffect(() => {
+		// When we search another user and then click 'My Profile' to go back to our own profile - compare userId in url to the one stored in Redux to check if it is your own
+		if (userId === userIdRedux) {
+			onClearIsTabsDeselect();
+		}
+	}, [userId, userIdRedux]);
 
 	useEffect(() => {
 		onClearSearchedUserId();
