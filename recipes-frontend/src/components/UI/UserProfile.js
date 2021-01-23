@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Modal from './Modal';
 
@@ -47,6 +48,11 @@ const useStyles = makeStyles(theme => ({
 	editButtonContainer: {
 		textAlign: 'center',
 	},
+	circProgContainer: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 }));
 
 const UserProfile = props => {
@@ -84,7 +90,7 @@ const UserProfile = props => {
 			title,
 			props.aboutMe,
 			props.favesToCook,
-			props.profilePic,
+			props.profilePic
 		);
 	};
 
@@ -97,56 +103,66 @@ const UserProfile = props => {
 		modalOpenHandler();
 	};
 
+	const circularProgress = (
+		<div className={classes.circProgContainer}>
+			<CircularProgress color='secondary' size={55} thickness={3.5} />
+		</div>
+	);
+
 	return (
 		<React.Fragment>
-			<Grid
-				container
-				direction={matchesXS ? 'column' : 'row'}
-				justify='center'
-				alignItems='center'
-				className={classes.profileContainer}
-			>
-				<Grid item>
-					<Avatar
-						alt='Profile Pic'
-						className={classes.profilePic}
-						src={
-							props.profilePic
-								? `http://localhost:5000/${props.profilePic}`
-								: profile
-						}
-						onClick={chooseProfilePicHandler}
-						style={{ boxShadow: theme.shadows[5] }}
-					/>
-				</Grid>
-				<Grid item>
-					<Grid
-						container
-						direction='column'
-						justify='center'
-						className={classes.profileTitlesContainer}
-					>
-						<Grid item>
-							<Typography variant='h3' align={matchesXS ? 'center' : 'left'}>
-								{props.name}
-							</Typography>
-						</Grid>
-						<Grid item>
-							<Typography variant='h4' align={matchesXS ? 'center' : 'left'}>
-								{props.title}
-							</Typography>
-						</Grid>
-						<Grid item className={classes.editButtonContainer}>
-							<Button
-								className={classes.editButton}
-								onClick={() => buttonClickHandler()}
-							>
-								Edit
-							</Button>
+			{props.isLoading ? (
+				circularProgress
+			) : (
+				<Grid
+					container
+					direction={matchesXS ? 'column' : 'row'}
+					justify='center'
+					alignItems='center'
+					className={classes.profileContainer}
+				>
+					<Grid item>
+						<Avatar
+							alt='Profile Pic'
+							className={classes.profilePic}
+							src={
+								props.profilePic
+									? `http://localhost:5000/${props.profilePic}`
+									: profile
+							}
+							onClick={chooseProfilePicHandler}
+							style={{ boxShadow: theme.shadows[5] }}
+						/>
+					</Grid>
+					<Grid item>
+						<Grid
+							container
+							direction='column'
+							justify='center'
+							className={classes.profileTitlesContainer}
+						>
+							<Grid item>
+								<Typography variant='h3' align={matchesXS ? 'center' : 'left'}>
+									{props.name}
+								</Typography>
+							</Grid>
+							<Grid item>
+								<Typography variant='h4' align={matchesXS ? 'center' : 'left'}>
+									{props.title}
+								</Typography>
+							</Grid>
+							<Grid item className={classes.editButtonContainer}>
+								<Button
+									className={classes.editButton}
+									onClick={() => buttonClickHandler()}
+								>
+									Edit
+								</Button>
+							</Grid>
 						</Grid>
 					</Grid>
 				</Grid>
-			</Grid>
+			)}
 			<Modal
 				isOpen={isModalOpen}
 				modalCloseHandler={modalCloseHandler}

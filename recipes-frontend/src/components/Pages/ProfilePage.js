@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import UserProfile from '../UI/UserProfile';
 import RecipeCard from '../UI/RecipeCard';
@@ -114,6 +115,7 @@ const ProfilePage = props => {
 	const favThingsToCook = useSelector(state => state.user.favesToCook);
 	const profilePic = useSelector(state => state.user.profilePic);
 	const isLoading = useSelector(state => state.user.loading);
+	const isRecipesLoading = useSelector(state => state.createRecipe.loading);
 	const userError = useSelector(state => state.user.error);
 	const userIdRedux = useSelector(state => state.user.userId);
 	const userId = useParams().userId;
@@ -261,6 +263,12 @@ const ProfilePage = props => {
 		</Snackbar>
 	);
 
+	const circularProgress = (
+		<div>
+			<CircularProgress color='secondary' size={55} thickness={3.5} />
+		</div>
+	);
+
 	const aboutMeSection = (
 		<React.Fragment>
 			<Grid item className={classes.profileHeadings}>
@@ -279,18 +287,20 @@ const ProfilePage = props => {
 						</Typography>
 					</Grid>
 					<Grid item>
-						<Button
-							className={classes.editButton}
-							onClick={() => buttonClickHandler(editTypes[0], aboutMe)}
-						>
-							Edit
-						</Button>
+						{isLoading ? null : (
+							<Button
+								className={classes.editButton}
+								onClick={() => buttonClickHandler(editTypes[0], aboutMe)}
+							>
+								Edit
+							</Button>
+						)}
 					</Grid>
 				</Grid>
 			</Grid>
 			<Grid item className={classes.profileText}>
 				<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
-					{aboutMe}
+					{isLoading ? circularProgress : aboutMe}
 				</Typography>
 			</Grid>
 		</React.Fragment>
@@ -314,18 +324,22 @@ const ProfilePage = props => {
 						</Typography>
 					</Grid>
 					<Grid item>
-						<Button
-							className={classes.editButton}
-							onClick={() => buttonClickHandler(editTypes[1], favThingsToCook)}
-						>
-							Edit
-						</Button>
+						{isLoading ? null : (
+							<Button
+								className={classes.editButton}
+								onClick={() =>
+									buttonClickHandler(editTypes[1], favThingsToCook)
+								}
+							>
+								Edit
+							</Button>
+						)}
 					</Grid>
 				</Grid>
 			</Grid>
 			<Grid item className={classes.profileText}>
 				<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
-					{favThingsToCook}
+					{isLoading ? circularProgress : favThingsToCook}
 				</Typography>
 			</Grid>
 		</React.Fragment>
@@ -343,20 +357,22 @@ const ProfilePage = props => {
 				</Typography>
 			</Grid>
 			<Grid item className={classes.recipeCardsContainer}>
-				{recipes.map((recipe, index) => (
-					<RecipeCard
-						key={index}
-						id={index}
-						image={recipe.image}
-						recipeName={recipe.basicDetails.recipeName}
-						prepTime={recipe.basicDetails.prepTime}
-						cookTime={recipe.basicDetails.cookTime}
-						prepTimeUnits={recipe.basicDetails.prepTimeUnits}
-						cookTimeUnits={recipe.basicDetails.cookTimeUnits}
-						setTabValue={setTabValue}
-						deleteRecipeInit={onDeleteRecipeInit}
-					/>
-				))}
+				{isRecipesLoading
+					? circularProgress
+					: recipes.map((recipe, index) => (
+							<RecipeCard
+								key={index}
+								id={index}
+								image={recipe.image}
+								recipeName={recipe.basicDetails.recipeName}
+								prepTime={recipe.basicDetails.prepTime}
+								cookTime={recipe.basicDetails.cookTime}
+								prepTimeUnits={recipe.basicDetails.prepTimeUnits}
+								cookTimeUnits={recipe.basicDetails.cookTimeUnits}
+								setTabValue={setTabValue}
+								deleteRecipeInit={onDeleteRecipeInit}
+							/>
+					  ))}
 			</Grid>
 		</React.Fragment>
 	);
