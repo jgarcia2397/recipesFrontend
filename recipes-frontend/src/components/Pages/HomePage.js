@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 import SearchBar from '../UI/SearchBar';
 import ViewPageLinks from '../UI/ViewPageLinks';
@@ -53,6 +55,7 @@ const HomePage = props => {
 	const classes = useStyles();
 
 	const [searchValue, setSearchValue] = useState('');
+	const [isSnackbarOpen, setIsSnackBarOpen] = useState(false);
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -71,6 +74,13 @@ const HomePage = props => {
 	}, [tabValue, routes, setTabValue]);
 
 	const searchedUserId = useSelector(state => state.user.searchedUserId);
+	const error = useSelector(state => state.user.error);
+
+	useEffect(() => {
+		if (error !== null) {
+			setIsSnackBarOpen(true);
+		}
+	}, [error]);
 
 	const dispatch = useDispatch();
 
@@ -92,9 +102,26 @@ const HomePage = props => {
 		onGetOtherUserId(searchValue);
 	};
 
+	const handleSnackbarClose = () => {
+		setIsSnackBarOpen(false);
+	};
+
 	useEffect(() => {
 		onClearIsTabsDeselect();
 	}, []);
+
+	const snackbar = (
+		<Snackbar
+			open={isSnackbarOpen}
+			autoHideDuration={5000}
+			onClose={handleSnackbarClose}
+			anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+		>
+			<Alert severity='error' variant='filled' elevation={5}>
+				{error}
+			</Alert>
+		</Snackbar>
+	);
 
 	const profileRedirect = searchedUserId ? (
 		<Redirect to={`/profile/${searchedUserId}`} />
@@ -103,6 +130,7 @@ const HomePage = props => {
 	return (
 		<React.Fragment>
 			{profileRedirect}
+			{snackbar}
 			<Paper className={classes.paperContainer}>
 				<SearchBar
 					searchVal={searchValue}
