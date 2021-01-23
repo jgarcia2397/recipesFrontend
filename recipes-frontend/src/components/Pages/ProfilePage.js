@@ -299,7 +299,11 @@ const ProfilePage = props => {
 				</Grid>
 			</Grid>
 			<Grid item className={classes.profileText}>
-				<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
+				<Typography
+					component={isLoading ? 'span' : 'p'}
+					variant='body1'
+					align={matchesSM ? 'center' : 'left'}
+				>
 					{isLoading ? circularProgress : aboutMe}
 				</Typography>
 			</Grid>
@@ -338,7 +342,11 @@ const ProfilePage = props => {
 				</Grid>
 			</Grid>
 			<Grid item className={classes.profileText}>
-				<Typography variant='body1' align={matchesSM ? 'center' : 'left'}>
+				<Typography
+					component={isLoading ? 'span' : 'p'}
+					variant='body1'
+					align={matchesSM ? 'center' : 'left'}
+				>
 					{isLoading ? circularProgress : favThingsToCook}
 				</Typography>
 			</Grid>
