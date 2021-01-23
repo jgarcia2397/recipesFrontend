@@ -30,6 +30,7 @@ const SearchBar = (props) => {
 		<Paper component='form' className={classes.root} elevation={12}>
 			<IconButton
 				type='button'
+				disabled={props.searchVal.length === 0}
 				className={classes.searchIconContainer}
 				onClick={e => props.submitHandler(e, props.searchVal)}
 			>
