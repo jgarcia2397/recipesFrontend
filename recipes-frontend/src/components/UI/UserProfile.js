@@ -86,6 +86,8 @@ const UserProfile = props => {
 		// setTitle(title);
 		props.updateHandler(
 			props.uid,
+			props.uidRedux,
+			props.token,
 			name,
 			title,
 			props.aboutMe,
@@ -95,7 +97,7 @@ const UserProfile = props => {
 	};
 
 	const updateProfilePic = image => {
-		props.updatePicHandler(props.uid, image);
+		props.updatePicHandler(props.uid, props.uidRedux, props.token, image);
 	};
 
 	const chooseProfilePicHandler = () => {

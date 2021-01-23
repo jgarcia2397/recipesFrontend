@@ -24,6 +24,8 @@ export const setNameAndTitleFailed = error => {
 
 export const setNameAndTitle = (
 	userId,
+	uidRedux,
+	token,
 	newName,
 	newTitle,
 	aboutMe,
@@ -35,6 +37,7 @@ export const setNameAndTitle = (
 
 		const updatedUserData = {
 			name: newName,
+			currentUser: userId,
 			title: newTitle,
 			aboutMe,
 			favesToCook,
@@ -42,7 +45,11 @@ export const setNameAndTitle = (
 		};
 
 		axiosRecipes
-			.patch(`/user/${userId}`, updatedUserData)
+			.patch(`/user/${uidRedux}`, updatedUserData, {
+				headers: {
+					Authorization: 'Bearer ' + token,
+				},
+			})
 			.then(response => {
 				dispatch(
 					setNameAndTitleSuccess(
@@ -85,16 +92,20 @@ export const setProfilePicFailed = error => {
 	};
 };
 
-export const setProfilePic = (userId, image) => {
+export const setProfilePic = (userId, uidRedux, token, image) => {
 	return dispatch => {
 		dispatch(setProfilePicStart());
 
 		const formData = new FormData();
 		formData.append('image', image);
+		formData.append('currentUser', userId);
 
 		axiosRecipes
-			.patch(`/user/profilePic/${userId}`, formData, {
-				headers: { 'Content-Type': 'multipart/form-data' },
+			.patch(`/user/profilePic/${uidRedux}`, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+					Authorization: 'Bearer ' + token,
+				},
 			})
 			.then(response => {
 				dispatch(setProfilePicSuccess(response.data.user.image));
@@ -135,6 +146,8 @@ export const setAboutMeFailed = error => {
 
 export const setAboutMe = (
 	userId,
+	uidRedux,
+	token,
 	name,
 	title,
 	newAboutMeValue,
@@ -146,6 +159,7 @@ export const setAboutMe = (
 
 		const updatedUserData = {
 			name,
+			currentUser: userId,
 			title,
 			aboutMe: newAboutMeValue,
 			favesToCook,
@@ -153,7 +167,11 @@ export const setAboutMe = (
 		};
 
 		axiosRecipes
-			.patch(`/user/${userId}`, updatedUserData)
+			.patch(`/user/${uidRedux}`, updatedUserData, {
+				headers: {
+					Authorization: 'Bearer ' + token,
+				},
+			})
 			.then(response => {
 				dispatch(setAboutMeSuccess(response.data.user.aboutMe));
 			})
@@ -193,6 +211,8 @@ export const setFavesToCookFailed = error => {
 
 export const setFavesToCook = (
 	userId,
+	uidRedux,
+	token,
 	name,
 	title,
 	aboutMe,
@@ -204,6 +224,7 @@ export const setFavesToCook = (
 
 		const updatedUserData = {
 			name,
+			currentUser: userId,
 			title,
 			aboutMe,
 			favesToCook: newFavesToCook,
@@ -211,7 +232,11 @@ export const setFavesToCook = (
 		};
 
 		axiosRecipes
-			.patch(`/user/${userId}`, updatedUserData)
+			.patch(`/user/${uidRedux}`, updatedUserData, {
+				headers: {
+					Authorization: 'Bearer ' + token,
+				},
+			})
 			.then(response => {
 				dispatch(setFavesToCookSuccess(response.data.user.favesToCook));
 			})
@@ -320,7 +345,9 @@ export const getOtherUserId = fullName => {
 			.catch(err => {
 				if (!err.response) {
 					dispatch(
-						getOtherUserIdFailed('There is a network problem, please try again later.')
+						getOtherUserIdFailed(
+							'There is a network problem, please try again later.'
+						)
 					);
 				} else {
 					dispatch(getOtherUserIdFailed(err.response.data.message));

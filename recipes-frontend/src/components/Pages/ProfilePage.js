@@ -108,6 +108,7 @@ const ProfilePage = props => {
 
 	const dispatch = useDispatch();
 
+	const token = useSelector(state => state.user.token);
 	const recipes = useSelector(state => state.createRecipe.recipes);
 	const name = useSelector(state => state.user.name);
 	const title = useSelector(state => state.user.title);
@@ -120,16 +121,18 @@ const ProfilePage = props => {
 	const userIdRedux = useSelector(state => state.user.userId);
 	const userId = useParams().userId;
 
-	const onSetNameAndTitle = (uid, name, title, aboutMe, favesToCook, image) =>
+	const onSetNameAndTitle = (uid, uidRedux, token, name, title, aboutMe, favesToCook, image) =>
 		dispatch(
-			actions.setNameAndTitle(uid, name, title, aboutMe, favesToCook, image)
+			actions.setNameAndTitle(uid, uidRedux, token, name, title, aboutMe, favesToCook, image)
 		);
 
-	const onSetProfilePic = (uid, image) =>
-		dispatch(actions.setProfilePic(uid, image));
+	const onSetProfilePic = (uid, uidRedux, token, image) =>
+		dispatch(actions.setProfilePic(uid, uidRedux, token, image));
 
 	const onSetAboutMe = (
 		uid,
+		uidRedux,
+		token,
 		name,
 		title,
 		newAboutMeValue,
@@ -137,11 +140,13 @@ const ProfilePage = props => {
 		image
 	) =>
 		dispatch(
-			actions.setAboutMe(uid, name, title, newAboutMeValue, favesToCook, image)
+			actions.setAboutMe(uid, uidRedux, token, name, title, newAboutMeValue, favesToCook, image)
 		);
 
 	const onSetFavesToCook = (
 		uid,
+		uidRedux,
+		token,
 		name,
 		title,
 		aboutMe,
@@ -151,6 +156,8 @@ const ProfilePage = props => {
 		dispatch(
 			actions.setFavesToCook(
 				uid,
+				uidRedux,
+				token,
 				name,
 				title,
 				aboutMe,
@@ -235,6 +242,8 @@ const ProfilePage = props => {
 		if (editType === editTypes[0]) {
 			onSetAboutMe(
 				userId,
+				userIdRedux,
+				token,
 				name,
 				title,
 				newTextValue,
@@ -242,7 +251,7 @@ const ProfilePage = props => {
 				profilePic
 			);
 		} else {
-			onSetFavesToCook(userId, name, title, aboutMe, newTextValue, profilePic);
+			onSetFavesToCook(userId, userIdRedux, token, name, title, aboutMe, newTextValue, profilePic);
 		}
 	};
 
@@ -399,6 +408,8 @@ const ProfilePage = props => {
 							updateHandler={onSetNameAndTitle}
 							updatePicHandler={onSetProfilePic}
 							uid={userId}
+							uidRedux={userIdRedux}
+							token={token}
 							name={name}
 							title={title}
 							aboutMe={aboutMe}
