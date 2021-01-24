@@ -278,6 +278,8 @@ const ProfilePage = props => {
 		</div>
 	);
 
+	const isOwnProfile = userId === userIdRedux;
+
 	const aboutMeSection = (
 		<React.Fragment>
 			<Grid item className={classes.profileHeadings}>
@@ -296,7 +298,7 @@ const ProfilePage = props => {
 						</Typography>
 					</Grid>
 					<Grid item>
-						{isLoading ? null : (
+						{(isLoading || !isOwnProfile) ? null : (
 							<Button
 								className={classes.editButton}
 								onClick={() => buttonClickHandler(editTypes[0], aboutMe)}
@@ -337,7 +339,7 @@ const ProfilePage = props => {
 						</Typography>
 					</Grid>
 					<Grid item>
-						{isLoading ? null : (
+						{(isLoading || !isOwnProfile) ? null : (
 							<Button
 								className={classes.editButton}
 								onClick={() =>
@@ -416,6 +418,7 @@ const ProfilePage = props => {
 							favesToCook={favThingsToCook}
 							profilePic={profilePic}
 							isLoading={isLoading}
+							isOwnProfile={isOwnProfile}
 						/>
 					</Grid>
 					{aboutMeSection}

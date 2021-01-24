@@ -154,12 +154,14 @@ const UserProfile = props => {
 								</Typography>
 							</Grid>
 							<Grid item className={classes.editButtonContainer}>
-								<Button
-									className={classes.editButton}
-									onClick={() => buttonClickHandler()}
-								>
-									Edit
-								</Button>
+								{!props.isOwnProfile ? null : (
+									<Button
+										className={classes.editButton}
+										onClick={() => buttonClickHandler()}
+									>
+										Edit
+									</Button>
+								)}
 							</Grid>
 						</Grid>
 					</Grid>
