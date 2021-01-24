@@ -327,6 +327,7 @@ const CreateRecipePage = props => {
 			// acts like componentDidMount, update detailRecipeForm ingredient and direction array state
 			updateDetailFormOnMount();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
@@ -346,6 +347,7 @@ const CreateRecipePage = props => {
 		}
 
 		setTextInputErrors(errorArray);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [basicRecipeForm]);
 
 	const checkFormErrors = useCallback(() => {
@@ -388,6 +390,7 @@ const CreateRecipePage = props => {
 		if (!isModifyRecipe && basicRecipeForm['image'].value === null) {
 			setFormIsValid(false);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [basicRecipeForm, detailRecipeForm]);
 
 	useEffect(() => {

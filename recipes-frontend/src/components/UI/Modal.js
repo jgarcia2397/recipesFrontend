@@ -62,7 +62,7 @@ const Modal = props => {
 	const [imageValue, setImageValue] = useState({ value: null, valid: true });
 	const [loading, setLoading] = useState(false);
 
-	const { mode, textToEdit, isLoading } = props;
+	const { mode, textToEdit, isLoading } = props;	// modalCloseHandler
 
 	useEffect(() => {
 		if (mode === 'Delete' || mode === 'Add New') {
@@ -78,6 +78,7 @@ const Modal = props => {
 			setTextValue('');
 		}
 		setLoading(isLoading);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isLoading]);
 
 	const imageInputHandler = (id, file, isFileValid) => {
