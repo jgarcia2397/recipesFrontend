@@ -10,8 +10,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-import applePie from '../../assets/applePie.jpg';
-
 const useStyles = makeStyles(theme => ({
 	root: {
 		height: '15vh',
