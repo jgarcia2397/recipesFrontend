@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -143,7 +143,10 @@ const Auth = props => {
 	const onAuthSignup = (name, email, password) =>
 		dispatch(actions.authSignup(name, email, password));
 
-	const onClearIsTabsDeselect = () => dispatch(actions.clearIsTabsDeselect());
+	const onClearIsTabsDeselect = useCallback(
+		() => dispatch(actions.clearIsTabsDeselect()),
+		[dispatch]
+	);
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -169,7 +172,7 @@ const Auth = props => {
 
 	useEffect(() => {
 		onClearIsTabsDeselect();
-	}, []);
+	}, [onClearIsTabsDeselect]);
 
 	const switchAuthModeHandler = () => {
 		const updatedAuthForm = updateObject(authForm, {
@@ -254,7 +257,9 @@ const Auth = props => {
 			</Grid>
 			<Grid item className={classes.switchMsgContainer}>
 				<Typography variant='body1'>
-					{authForm.isSignUp ? 'Already have an account? Login now!' : 'Don\'t have an account? Sign up now!'}
+					{authForm.isSignUp
+						? 'Already have an account? Login now!'
+						: "Don't have an account? Sign up now!"}
 				</Typography>
 			</Grid>
 			<Grid item>
@@ -288,9 +293,7 @@ const Auth = props => {
 		</div>
 	);
 
-	const authRedirect = isLoggedIn ? (
-		<Redirect to='/' />
-	) : null;
+	const authRedirect = isLoggedIn ? <Redirect to='/' /> : null;
 
 	return (
 		<div className={classes.root}>

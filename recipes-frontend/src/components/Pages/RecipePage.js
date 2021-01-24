@@ -96,7 +96,10 @@ const RecipePage = props => {
 		[dispatch]
 	);
 
-	const onClearIsTabsDeselect = () => dispatch(actions.clearIsTabsDeselect());
+	const onClearIsTabsDeselect = useCallback(
+		() => dispatch(actions.clearIsTabsDeselect()),
+		[dispatch]
+	);
 
 	useEffect(() => {
 		onGetAllUserRecipes(userId);
@@ -104,7 +107,7 @@ const RecipePage = props => {
 
 	useEffect(() => {
 		onClearIsTabsDeselect();
-	}, []);
+	}, [onClearIsTabsDeselect]);
 
 	const handleSnackbarClose = () => {
 		setIsSnackBarOpen(false);
@@ -130,7 +133,7 @@ const RecipePage = props => {
 			))
 		) : (
 			<CircularProgress color='secondary' size={75} thickness={4.5} />
-		)
+		);
 	} else {
 		recipeList = (
 			<Typography variant='h4'>

@@ -121,9 +121,27 @@ const ProfilePage = props => {
 	const userIdRedux = useSelector(state => state.user.userId);
 	const userId = useParams().userId;
 
-	const onSetNameAndTitle = (uid, uidRedux, token, name, title, aboutMe, favesToCook, image) =>
+	const onSetNameAndTitle = (
+		uid,
+		uidRedux,
+		token,
+		name,
+		title,
+		aboutMe,
+		favesToCook,
+		image
+	) =>
 		dispatch(
-			actions.setNameAndTitle(uid, uidRedux, token, name, title, aboutMe, favesToCook, image)
+			actions.setNameAndTitle(
+				uid,
+				uidRedux,
+				token,
+				name,
+				title,
+				aboutMe,
+				favesToCook,
+				image
+			)
 		);
 
 	const onSetProfilePic = (uid, uidRedux, token, image) =>
@@ -140,7 +158,16 @@ const ProfilePage = props => {
 		image
 	) =>
 		dispatch(
-			actions.setAboutMe(uid, uidRedux, token, name, title, newAboutMeValue, favesToCook, image)
+			actions.setAboutMe(
+				uid,
+				uidRedux,
+				token,
+				name,
+				title,
+				newAboutMeValue,
+				favesToCook,
+				image
+			)
 		);
 
 	const onSetFavesToCook = (
@@ -177,9 +204,15 @@ const ProfilePage = props => {
 
 	const onDeleteRecipeInit = () => dispatch(actions.deleteRecipeInit());
 
-	const onClearSearchedUserId = () => dispatch(actions.clearSearchedUserId());
+	const onClearSearchedUserId = useCallback(
+		() => dispatch(actions.clearSearchedUserId()),
+		[dispatch]
+	);
 
-	const onClearIsTabsDeselect = () => dispatch(actions.clearIsTabsDeselect());
+	const onClearIsTabsDeselect = useCallback(
+		() => dispatch(actions.clearIsTabsDeselect()),
+		[dispatch]
+	);
 
 	const { tabValue, routes, setTabValue } = props;
 
@@ -188,11 +221,11 @@ const ProfilePage = props => {
 		if (userId === userIdRedux) {
 			onClearIsTabsDeselect();
 		}
-	}, [userId, userIdRedux]);
+	}, [userId, userIdRedux, onClearIsTabsDeselect]);
 
 	useEffect(() => {
 		onClearSearchedUserId();
-	}, []);
+	}, [onClearSearchedUserId]);
 
 	useEffect(() => {
 		[...routes].forEach(route => {
@@ -251,7 +284,16 @@ const ProfilePage = props => {
 				profilePic
 			);
 		} else {
-			onSetFavesToCook(userId, userIdRedux, token, name, title, aboutMe, newTextValue, profilePic);
+			onSetFavesToCook(
+				userId,
+				userIdRedux,
+				token,
+				name,
+				title,
+				aboutMe,
+				newTextValue,
+				profilePic
+			);
 		}
 	};
 
@@ -298,7 +340,7 @@ const ProfilePage = props => {
 						</Typography>
 					</Grid>
 					<Grid item>
-						{(isLoading || !isOwnProfile) ? null : (
+						{isLoading || !isOwnProfile ? null : (
 							<Button
 								className={classes.editButton}
 								onClick={() => buttonClickHandler(editTypes[0], aboutMe)}
@@ -339,7 +381,7 @@ const ProfilePage = props => {
 						</Typography>
 					</Grid>
 					<Grid item>
-						{(isLoading || !isOwnProfile) ? null : (
+						{isLoading || !isOwnProfile ? null : (
 							<Button
 								className={classes.editButton}
 								onClick={() =>

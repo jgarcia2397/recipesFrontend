@@ -84,7 +84,10 @@ const HomePage = props => {
 
 	const dispatch = useDispatch();
 
-	const onClearIsTabsDeselect = () => dispatch(actions.clearIsTabsDeselect());
+	const onClearIsTabsDeselect = useCallback(
+		() => dispatch(actions.clearIsTabsDeselect()),
+		[dispatch]
+	);
 
 	const onGetOtherUserId = useCallback(
 		fullName => dispatch(actions.getOtherUserId(fullName)),
@@ -108,7 +111,7 @@ const HomePage = props => {
 
 	useEffect(() => {
 		onClearIsTabsDeselect();
-	}, []);
+	}, [onClearIsTabsDeselect]);
 
 	const snackbar = (
 		<Snackbar
