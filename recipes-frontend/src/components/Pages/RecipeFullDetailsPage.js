@@ -58,7 +58,7 @@ const RecipeFullDetailsPage = props => {
 	const isRecipeDeleted = useSelector(
 		state => state.createRecipe.recipeDeleted
 	);
-	const creatorId = useSelector(state => state.user.userId);
+	const userId = useSelector(state => state.user.userId);
 	const token = useSelector(state => state.user.token);
 	const error = useSelector(state => state.createRecipe.error);
 	const currentRecipe = useSelector(state => state.createRecipe.currentRecipe);
@@ -147,7 +147,7 @@ const RecipeFullDetailsPage = props => {
 	}
 
 	const deleteRecipeRedirect = isRecipeDeleted ? (
-		<Redirect to={`/recipes/${creatorId}`} />
+		<Redirect to={`/recipes/${userId}`} />
 	) : null;
 
 	let recipe;
