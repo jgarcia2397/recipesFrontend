@@ -170,6 +170,8 @@ const RecipeFullDetailsPage = props => {
 				<RecipeInfoColumn
 					recipeInit={onUpdateRecipeInit}
 					recipeIndex={storedCardId}
+					userId={userId}
+					creatorId={recipe.creator}
 					recipeId={recipe.id}
 					recipeName={recipe.basicDetails.recipeName}
 					prepTime={recipe.basicDetails.prepTime}

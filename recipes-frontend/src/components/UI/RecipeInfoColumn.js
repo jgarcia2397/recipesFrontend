@@ -107,6 +107,33 @@ const RecipeInfoColumn = props => {
 		modalOpenHandler();
 	};
 
+	const buttons =
+		props.userId === props.creatorId ? (
+			<React.Fragment>
+				<Grid item>
+					<Button
+						className={classes.modifyRecipeButton}
+						component={Link}
+						to={{
+							pathname: '/new-recipe',
+							recipeDetails: recipeDetails,
+						}}
+						onClick={() => props.recipeInit(props.recipeIndex, recipeDetails)}
+					>
+						Modify Recipe
+					</Button>
+				</Grid>
+				<Grid item>
+					<Button
+						className={classes.deleteRecipeButton}
+						onClick={() => buttonClickHandler()}
+					>
+						Delete Recipe
+					</Button>
+				</Grid>
+			</React.Fragment>
+		) : null;
+
 	return (
 		<React.Fragment>
 			<Grid
@@ -165,27 +192,7 @@ const RecipeInfoColumn = props => {
 						Difficulty: {props.difficulty}
 					</Typography>
 				</Grid>
-				<Grid item>
-					<Button
-						className={classes.modifyRecipeButton}
-						component={Link}
-						to={{
-							pathname: '/new-recipe',
-							recipeDetails: recipeDetails,
-						}}
-						onClick={() => props.recipeInit(props.recipeIndex, recipeDetails)}
-					>
-						Modify Recipe
-					</Button>
-				</Grid>
-				<Grid item>
-					<Button
-						className={classes.deleteRecipeButton}
-						onClick={() => buttonClickHandler()}
-					>
-						Delete Recipe
-					</Button>
-				</Grid>
+				{buttons}
 			</Grid>
 			<Modal
 				isOpen={isModalOpen}
