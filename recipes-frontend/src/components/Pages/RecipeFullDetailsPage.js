@@ -92,7 +92,7 @@ const RecipeFullDetailsPage = props => {
 	}, [tabValue, routes, setTabValue]);
 
 	useEffect(() => {
-		props.setTabValue(false);
+		setTabValue(false);
 	}, [setTabValue]);
 
 	useEffect(() => {
