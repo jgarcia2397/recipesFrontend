@@ -66,7 +66,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	loginButton: {
 		...theme.typography.button,
-		marginTop: '40px',
+		marginTop: '30px',
+		marginBottom: '10px',
 		borderRadius: 50,
 		backgroundColor: theme.palette.secondary.main,
 		'&:hover': {
@@ -78,7 +79,6 @@ const useStyles = makeStyles(theme => ({
 	},
 	switchAuthModeButton: {
 		...theme.typography.button,
-		marginTop: '10px',
 		borderRadius: 50,
 		backgroundColor: theme.palette.secondary.main,
 		'&:hover': {
@@ -124,7 +124,7 @@ const Auth = props => {
 			valid: false,
 			touched: false,
 		},
-		isSignUp: true,
+		isSignUp: false,
 	});
 
 	const isLoading = useSelector(state => state.user.loading);
@@ -250,6 +250,11 @@ const Auth = props => {
 				</Button>
 			</Grid>
 			<Grid item>
+				<Typography variant='body1'>
+					{authForm.isSignUp ? 'Already have an account? Login now!' : 'Don\'t have an account? Sign up now!'}
+				</Typography>
+			</Grid>
+			<Grid item>
 				<Button
 					className={classes.switchAuthModeButton}
 					style={{ maxWidth: '180px', minWidth: '180px' }}
@@ -298,7 +303,7 @@ const Auth = props => {
 						{!isLoading ? (
 							<Grid item>
 								<Typography variant='h3' className={classes.title}>
-									Login
+									{authForm.isSignUp ? 'Sign Up' : 'Login'}
 								</Typography>
 							</Grid>
 						) : null}
