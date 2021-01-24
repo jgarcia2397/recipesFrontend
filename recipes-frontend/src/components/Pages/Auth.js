@@ -88,6 +88,9 @@ const useStyles = makeStyles(theme => ({
 			marginTop: '45px',
 		},
 	},
+	switchMsgContainer: {
+		textAlign: 'center',
+	},
 }));
 
 const Auth = props => {
@@ -249,7 +252,7 @@ const Auth = props => {
 					{authForm.isSignUp ? 'Sign Up' : 'Login'}
 				</Button>
 			</Grid>
-			<Grid item>
+			<Grid item className={classes.switchMsgContainer}>
 				<Typography variant='body1'>
 					{authForm.isSignUp ? 'Already have an account? Login now!' : 'Don\'t have an account? Sign up now!'}
 				</Typography>
