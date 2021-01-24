@@ -93,6 +93,10 @@ const RecipeFullDetailsPage = props => {
 	}, [tabValue, routes, setTabValue]);
 
 	useEffect(() => {
+		props.setTabValue(false);
+	}, [setTabValue]);
+
+	useEffect(() => {
 		if (error !== null) {
 			setIsSnackBarOpen(true);
 		}
