@@ -406,6 +406,33 @@ const ProfilePage = props => {
 		</React.Fragment>
 	);
 
+	let list;
+	if (recipes.length > 0) {
+		list = isRecipesLoading
+			? circularProgress
+			: recipes.map((recipe, index) => (
+					<RecipeCard
+						key={index}
+						id={index}
+						recipeId={recipe.id}
+						image={recipe.image}
+						recipeName={recipe.basicDetails.recipeName}
+						prepTime={recipe.basicDetails.prepTime}
+						cookTime={recipe.basicDetails.cookTime}
+						prepTimeUnits={recipe.basicDetails.prepTimeUnits}
+						cookTimeUnits={recipe.basicDetails.cookTimeUnits}
+						setTabValue={setTabValue}
+						deleteRecipeInit={onDeleteRecipeInit}
+					/>
+			  ));
+	} else {
+		list = (
+			<Typography variant='h4'>
+				You have no recipes, try adding some!
+			</Typography>
+		);
+	}
+
 	const recipeList = (
 		<React.Fragment>
 			<Grid item className={classes.profileHeadings}>
@@ -418,23 +445,7 @@ const ProfilePage = props => {
 				</Typography>
 			</Grid>
 			<Grid item className={classes.recipeCardsContainer}>
-				{isRecipesLoading
-					? circularProgress
-					: recipes.map((recipe, index) => (
-							<RecipeCard
-								key={index}
-								id={index}
-								recipeId={recipe.id}
-								image={recipe.image}
-								recipeName={recipe.basicDetails.recipeName}
-								prepTime={recipe.basicDetails.prepTime}
-								cookTime={recipe.basicDetails.cookTime}
-								prepTimeUnits={recipe.basicDetails.prepTimeUnits}
-								cookTimeUnits={recipe.basicDetails.cookTimeUnits}
-								setTabValue={setTabValue}
-								deleteRecipeInit={onDeleteRecipeInit}
-							/>
-					  ))}
+				{list}
 			</Grid>
 		</React.Fragment>
 	);
