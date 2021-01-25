@@ -13,6 +13,7 @@ import ViewPageLinks from '../UI/ViewPageLinks';
 import cooking from '../../assets/cooking.jpg';
 
 import * as actions from '../../store/actions/index';
+import { formatNameHelper } from '../../shared/utility';
 
 const useStyles = makeStyles(theme => ({
 	paperContainer: {
@@ -102,8 +103,9 @@ const HomePage = props => {
 
 	const onUserSearchSubmit = (event, searchValue) => {
 		event.preventDefault();
-		// onGetOtherUserRecipes(searchValue);
-		onGetOtherUserId(searchValue);
+		
+		const formattedSearchVal = formatNameHelper(searchValue);
+		onGetOtherUserId(formattedSearchVal);
 	};
 
 	const handleSnackbarClose = () => {
