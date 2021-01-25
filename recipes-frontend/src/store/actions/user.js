@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axiosRecipes from '../../axios-recipes';
+import { formatNameHelper } from '../../shared/utility';
 
 export const setNameAndTitleStart = () => {
 	return {
@@ -500,8 +501,10 @@ export const authSignup = (name, email, password) => {
 	return dispatch => {
 		dispatch(authSignupStart());
 
+		let formattedName = formatNameHelper(name);
+
 		const authData = {
-			name,
+			name: formattedName,
 			email,
 			password,
 		};
