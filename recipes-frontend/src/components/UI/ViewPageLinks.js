@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	viewButton: {
 		...theme.typography.button,
-		textTransform: 'none',
+		borderRadius: 20,
 		padding: 0,
 		backgroundColor: theme.palette.secondary.main,
 		'&:hover': {
@@ -87,8 +87,8 @@ const ViewPageLinks = props => {
 						variant='outlined'
 						className={classes.viewButton}
 						component={Link}
-						to='/recipes'
-						style={{ maxWidth: '100px', minWidth: '100px' }}
+						to={`/recipes/${props.userId}`}
+						style={{ maxWidth: '120px', minWidth: '120px' }}
 						onClick={() => props.setTabValue(1)} // /recipes is activeIndex = 1
 					>
 						View Recipes
@@ -111,8 +111,8 @@ const ViewPageLinks = props => {
 						variant='outlined'
 						className={classes.viewButton}
 						component={Link}
-						to='/profile'
-						style={{ maxWidth: '100px', minWidth: '100px' }}
+						to={`/profile/${props.userId}`}
+						style={{ maxWidth: '120px', minWidth: '120px' }}
 						onClick={() => props.setTabValue(2)} // /profile is activeIndex = 2
 					>
 						View Profile

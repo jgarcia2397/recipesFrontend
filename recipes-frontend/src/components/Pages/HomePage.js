@@ -73,6 +73,7 @@ const HomePage = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
+	const userId = useSelector(state => state.user.userId);
 	const searchedUserId = useSelector(state => state.user.searchedUserId);
 	const error = useSelector(state => state.user.error);
 
@@ -141,7 +142,7 @@ const HomePage = props => {
 					submitHandler={onUserSearchSubmit}
 				/>
 			</Paper>
-			<ViewPageLinks setTabValue={setTabValue} />
+			<ViewPageLinks setTabValue={setTabValue} userId={userId} />
 		</React.Fragment>
 	);
 };
