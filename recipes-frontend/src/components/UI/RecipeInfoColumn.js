@@ -154,7 +154,8 @@ const RecipeInfoColumn = props => {
 				</Grid>
 				<Grid item>
 					<Typography
-						variant={matchesXS ? 'h4' : 'h3'}
+						variant={(matchesXS || props.recipeName.length > 12) ? 'h4' : 'h3'}
+						style={{ fontWeight: 'bold' }}
 						className={classes.recipeTitle}
 					>
 						{props.recipeName}
