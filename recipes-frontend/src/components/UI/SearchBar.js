@@ -41,6 +41,7 @@ const SearchBar = (props) => {
 				className={classes.input}
 				value={props.searchValue}
 				onChange={e => props.searchValueChangeHandler(e)}
+				onKeyPress={e => props.enterKeyHandler(e)}
 			/>
 		</Paper>
 	);

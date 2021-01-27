@@ -108,6 +108,14 @@ const HomePage = props => {
 		onGetOtherUserId(formattedSearchVal);
 	};
 
+	const keyPressHandler = event => {
+		// 'Enter' key press
+		if (event.key === 'Enter') {
+			console.log('Enter key pressed!');
+			onUserSearchSubmit(event, searchValue);
+		}
+	};
+
 	const handleSnackbarClose = () => {
 		setIsSnackBarOpen(false);
 	};
@@ -142,6 +150,7 @@ const HomePage = props => {
 					searchVal={searchValue}
 					searchValueChangeHandler={searchValueChangeHandler}
 					submitHandler={onUserSearchSubmit}
+					enterKeyHandler={keyPressHandler}
 				/>
 			</Paper>
 			<ViewPageLinks setTabValue={setTabValue} userId={userId} />
