@@ -62,7 +62,7 @@ const Modal = props => {
 	const [imageValue, setImageValue] = useState({ value: null, valid: true });
 	const [loading, setLoading] = useState(false);
 
-	const { mode, textToEdit, isLoading } = props;	// modalCloseHandler
+	const { mode, textToEdit, isLoading } = props; // modalCloseHandler
 
 	useEffect(() => {
 		if (mode === 'Delete' || mode === 'Add New') {
@@ -103,6 +103,7 @@ const Modal = props => {
 			multiline
 			rows={4}
 			onChange={event => inputChangedHandler('newEntry', event)}
+			onKeyPress={event => keyPressHandler(event)}
 		/>
 	);
 	if (editType === 'Ingredients') {
@@ -114,6 +115,7 @@ const Modal = props => {
 				defaultValue={textValue}
 				className={classes.textInput}
 				onChange={event => inputChangedHandler('newEntry', event)}
+				onKeyPress={event => keyPressHandler(event)}
 			/>
 		);
 	} else if (editType === 'Directions') {
@@ -127,6 +129,7 @@ const Modal = props => {
 					defaultValue={props.name}
 					className={classes.textInput}
 					onChange={event => inputChangedHandler('newNameEntry', event)}
+					onKeyPress={event => keyPressHandler(event)}
 				/>
 				<TextField
 					id='newTitleEntry'
@@ -134,6 +137,7 @@ const Modal = props => {
 					defaultValue={props.title}
 					className={classes.textInput}
 					onChange={event => inputChangedHandler('newTitleEntry', event)}
+					onKeyPress={event => keyPressHandler(event)}
 				/>
 			</React.Fragment>
 		);
@@ -171,7 +175,9 @@ const Modal = props => {
 		}
 	};
 
-	const updateHandler = () => {
+	const updateHandler = event => {
+		event.preventDefault();
+
 		if (props.type === 'Ingredients' || props.type === 'Directions') {
 			const listType =
 				props.type === 'Ingredients' ? 'ingredients' : 'directions';
@@ -191,6 +197,13 @@ const Modal = props => {
 		if (props.isRecipeUpdateModal) {
 			props.modalCloseHandler();
 			setTextValue('');
+		}
+	};
+
+	const keyPressHandler = event => {
+		// 'Enter' key press
+		if (event.key === 'Enter') {
+			updateHandler(event);
 		}
 	};
 
