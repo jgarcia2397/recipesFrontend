@@ -210,6 +210,13 @@ const Auth = props => {
 		}
 	};
 
+	const keyPressHandler = event => {
+		// 'Enter' key press
+		if (event.key === 'Enter') {
+			authSubmitHandler(event);
+		}
+	};
+
 	const handleSnackbarClose = () => {
 		setIsSnackBarOpen(false);
 	};
@@ -224,6 +231,7 @@ const Auth = props => {
 						variant='outlined'
 						className={classes.input}
 						onChange={event => inputChangedHandler(event, 'name')}
+						onKeyPress={event => keyPressHandler(event)}
 					/>
 				</Grid>
 			) : null}
@@ -234,6 +242,7 @@ const Auth = props => {
 					variant='outlined'
 					className={classes.input}
 					onChange={event => inputChangedHandler(event, 'email')}
+					onKeyPress={event => keyPressHandler(event)}
 				/>
 			</Grid>
 			<Grid item className={classes.inputContainer}>
@@ -244,6 +253,7 @@ const Auth = props => {
 					type='password'
 					className={classes.input}
 					onChange={event => inputChangedHandler(event, 'password')}
+					onKeyPress={event => keyPressHandler(event)}
 				/>
 			</Grid>
 			<Grid item>
