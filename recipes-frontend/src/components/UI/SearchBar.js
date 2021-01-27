@@ -37,7 +37,7 @@ const SearchBar = (props) => {
 				<SearchIcon />
 			</IconButton>
 			<InputBase
-				placeholder='Search users or recipes'
+				placeholder='Search for a user'
 				className={classes.input}
 				value={props.searchValue}
 				onChange={e => props.searchValueChangeHandler(e)}
