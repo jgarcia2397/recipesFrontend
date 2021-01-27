@@ -16,6 +16,10 @@ const useStyles = makeStyles(theme => ({
 			width: '100%',
 			height: '33.2%',
 		},
+		[theme.breakpoints.down('xs')]: {
+			width: '100%',
+			height: '31.9%',
+		},
 	},
 	instructColumnNewRecipe: {
 		width: '49.97%',

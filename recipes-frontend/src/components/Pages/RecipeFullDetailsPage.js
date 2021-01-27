@@ -30,6 +30,10 @@ const useStyles = makeStyles(theme => ({
 			width: '100%',
 			height: '33.4%',
 		},
+		[theme.breakpoints.down('xs')]: {
+			width: '100%',
+			height: '36%',
+		},
 	},
 	divider: {
 		backgroundColor: theme.divider.main,
