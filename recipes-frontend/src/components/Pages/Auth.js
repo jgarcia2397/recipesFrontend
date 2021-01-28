@@ -84,9 +84,6 @@ const useStyles = makeStyles(theme => ({
 		'&:hover': {
 			backgroundColor: theme.palette.secondary.dark,
 		},
-		[theme.breakpoints.down('md')]: {
-			marginTop: '45px',
-		},
 	},
 	switchMsgContainer: {
 		textAlign: 'center',
