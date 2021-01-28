@@ -74,6 +74,7 @@ const HomePage = props => {
 		});
 	}, [tabValue, routes, setTabValue]);
 
+	const token = useSelector(state => state.user.token);
 	const userId = useSelector(state => state.user.userId);
 	const searchedUserId = useSelector(state => state.user.searchedUserId);
 	const error = useSelector(state => state.user.error);
@@ -103,7 +104,7 @@ const HomePage = props => {
 
 	const onUserSearchSubmit = (event, searchValue) => {
 		event.preventDefault();
-		
+
 		const formattedSearchVal = formatNameHelper(searchValue);
 		onGetOtherUserId(formattedSearchVal);
 	};
@@ -153,7 +154,11 @@ const HomePage = props => {
 					enterKeyHandler={keyPressHandler}
 				/>
 			</Paper>
-			<ViewPageLinks setTabValue={setTabValue} userId={userId} />
+			<ViewPageLinks
+				setTabValue={setTabValue}
+				userId={userId}
+				isLoggedIn={!!token}
+			/>
 		</React.Fragment>
 	);
 };

@@ -87,7 +87,7 @@ const ViewPageLinks = props => {
 						variant='outlined'
 						className={classes.viewButton}
 						component={Link}
-						to={`/recipes/${props.userId}`}
+						to={props.isLoggedIn ? `/recipes/${props.userId}` : '/auth'}
 						style={{ maxWidth: '120px', minWidth: '120px' }}
 						onClick={() => props.setTabValue(1)} // /recipes is activeIndex = 1
 					>
@@ -111,9 +111,13 @@ const ViewPageLinks = props => {
 						variant='outlined'
 						className={classes.viewButton}
 						component={Link}
-						to={`/profile/${props.userId}`}
+						to={props.isLoggedIn ? `/profile/${props.userId}` : '/auth'}
 						style={{ maxWidth: '120px', minWidth: '120px' }}
-						onClick={() => props.setTabValue(2)} // /profile is activeIndex = 2
+						onClick={
+							props.isLoggedIn
+								? () => props.setTabValue(2)
+								: () => props.setTabValue(1)
+						} // /profile is activeIndex = 2, /auth is activeIndex = 1 when not logged in
 					>
 						View Profile
 					</Button>
