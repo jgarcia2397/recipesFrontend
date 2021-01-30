@@ -1,21 +1,24 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const darkGreen = '#205723';
+const darkGreen = '#005005';
 const green = '#2e7d32';
-const lightGreen = '#57975b';
-const darkYellow = '#b28704';
-const yellow = '#ffc107';
-const lightYellow = '#ffcd38';
+const lightGreen = '#60ad5e';
+const darkPurple = '#4e004d';
+const purple = '#7d3e79';
+const lightPurple = '#ae5ca8';
+const pastelPurple = '#b19cd9';
 const black = '#000000';
-
-// const defaultTheme = createMuiTheme();
+const white = '#ffffff';
+const ivory = '#fffff0';
 
 const theme = createMuiTheme({
-    // ...defaultTheme,
 	palette: {
         common: {
             green: green,
-            yellow: yellow,
+            purple: purple,
+            pastelPurple: pastelPurple,
+            white: white,
+            ivory: ivory,
         },
 		primary: {
             light: lightGreen,
@@ -23,9 +26,9 @@ const theme = createMuiTheme({
             dark: darkGreen,
         },
 		secondary: {
-            light: lightYellow,
-            main: yellow,
-            dark: darkYellow,
+            light: lightPurple,
+            main: purple,
+            dark: darkPurple,
         },
     },
     typography: {
@@ -60,25 +63,6 @@ const theme = createMuiTheme({
     divider: {
         main: black,
     },
-    // overrides: {
-    //     MuiTypography: {
-    //         h4: {
-    //             [defaultTheme.breakpoints.up('lg')]: {
-    //                 fontSize: '3.125rem'
-    //             }
-    //         },
-    //         body1: {
-    //             [defaultTheme.breakpoints.up('lg')]: {
-    //                 fontSize: '2rem'
-    //             }
-    //         },
-    //         button: {
-    //             [defaultTheme.breakpoints.up('lg')]: {
-    //                 fontSize: '1.875rem'
-    //             }
-    //         },
-    //     },
-    // }
 });
 
 export default theme;
