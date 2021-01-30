@@ -39,7 +39,8 @@ const useStyles = makeStyles(theme => ({
 		},
 	},
 	drawer: {
-		backgroundColor: theme.palette.common.green,
+		backgroundColor: theme.palette.primary.light,
+		width: '45vw',
 	},
 	logoutButton: {
 		...theme.typography.button,
@@ -105,7 +106,7 @@ const NavDrawer = props => {
 							</ListItem>
 						) : null
 					)}
-					<ListItem>
+					<ListItem style={{ justifyContent: 'center' }}>
 						{logOutButton}
 					</ListItem>
 				</List>
