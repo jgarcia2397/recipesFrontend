@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	drawerItemSelected: {
 		'& .MuiListItemText-root': {
-			color: theme.palette.common.yellow,
+			color: theme.palette.secondary.dark,
 			opacity: 1,
 		},
 	},

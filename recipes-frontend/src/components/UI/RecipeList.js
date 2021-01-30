@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles, useTheme } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -54,6 +54,7 @@ const ListItemWithWiderSecondaryAction = withStyles({
 
 const RecipeList = props => {
 	const classes = useStyles();
+	const theme = useTheme();
 
 	// const editButton = (index, value) => {
 	// 	props.isNewRecipe ? (
@@ -88,10 +89,23 @@ const RecipeList = props => {
 			<List className={classes.listContainer}>
 				{props.array.map((value, index) => (
 					<ListItemWithWiderSecondaryAction key={index}>
-						<ListItemIcon>
+						<ListItemIcon
+							style={
+								props.isNewRecipe
+									? { color: theme.palette.common.black }
+									: { color: theme.palette.secondary.main }
+							}
+						>
 							<ArrowRightIcon />
 						</ListItemIcon>
-						<ListItemText primary={value} />
+						<ListItemText
+							primary={value}
+							style={
+								props.isNewRecipe
+									? { color: theme.palette.common.black }
+									: { color: theme.palette.secondary.main }
+							}
+						/>
 						<ListItemSecondaryAction>
 							{props.isNewRecipe ? (
 								<IconButton

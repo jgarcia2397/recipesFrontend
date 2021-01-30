@@ -98,6 +98,7 @@ const Modal = props => {
 		<TextField
 			id='newEntry'
 			variant='outlined'
+			color='secondary'
 			defaultValue={textValue}
 			className={classes.textInput}
 			multiline
@@ -112,6 +113,7 @@ const Modal = props => {
 			<TextField
 				id='newEntry'
 				variant='outlined'
+				color='secondary'
 				defaultValue={textValue}
 				className={classes.textInput}
 				onChange={event => inputChangedHandler('newEntry', event)}
@@ -126,6 +128,7 @@ const Modal = props => {
 				<TextField
 					id='newNameEntry'
 					variant='outlined'
+					color='secondary'
 					defaultValue={props.name}
 					className={classes.textInput}
 					onChange={event => inputChangedHandler('newNameEntry', event)}
@@ -134,6 +137,7 @@ const Modal = props => {
 				<TextField
 					id='newTitleEntry'
 					variant='outlined'
+					color='secondary'
 					defaultValue={props.title}
 					className={classes.textInput}
 					onChange={event => inputChangedHandler('newTitleEntry', event)}

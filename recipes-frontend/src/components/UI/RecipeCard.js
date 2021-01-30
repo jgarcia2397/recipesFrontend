@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 		height: '15vh',
 		width: '40vw',
 		minHeight: '150px',
-		backgroundColor: theme.palette.secondary.main,
+		backgroundColor: theme.palette.common.pastelPurple,	// light or main? pastelPurple?
 		marginBottom: '30px',
 		minWidth: '300px',
 		[theme.breakpoints.down('md')]: {

@@ -11,6 +11,7 @@ import Modal from './Modal';
 
 const useStyles = makeStyles(theme => ({
 	titles: {
+		// color: theme.palette.secondary.main,
 		marginTop: '35px',
 		marginLeft: '15px',
 		fontWeight: 'bold',
@@ -72,7 +73,15 @@ const RecipeInstructColumn = props => {
 
 	return (
 		<React.Fragment>
-			<Typography variant={matchesXS ? 'h5' : 'h4'} className={classes.titles}>
+			<Typography
+				variant={matchesXS ? 'h5' : 'h4'}
+				className={classes.titles}
+				style={
+					props.isNewRecipe
+						? { color: theme.palette.common.black }
+						: { color: theme.palette.secondary.main }
+				}
+			>
 				{props.label}
 			</Typography>
 			<RecipeList
@@ -80,9 +89,7 @@ const RecipeInstructColumn = props => {
 				isNewRecipe={props.isNewRecipe}
 				clicked={buttonClickHandler}
 			/>
-			<div className={classes.addButtonContainer}>
-				{addButton}
-			</div>
+			<div className={classes.addButtonContainer}>{addButton}</div>
 			<Modal
 				isOpen={isModalOpen}
 				modalCloseHandler={modalCloseHandler}

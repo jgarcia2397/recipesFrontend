@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
 	instructColumn: {
 		width: '37.3%',
 		height: '100%',
-		backgroundColor: theme.palette.secondary.light,
+		backgroundColor: theme.palette.common.ivory,
 		[theme.breakpoints.down('md')]: {
 			width: '100%',
 			height: '33.2%',
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 	instructColumnNewRecipe: {
 		width: '49.97%',
 		height: '100%',
-		backgroundColor: theme.palette.secondary.light,
+		backgroundColor: theme.palette.common.pastelPurple,
 		[theme.breakpoints.down('md')]: {
 			width: '100%',
 			height: '49.97%',

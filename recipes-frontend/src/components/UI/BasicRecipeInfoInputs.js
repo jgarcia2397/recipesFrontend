@@ -97,6 +97,7 @@ const BasicRecipeInfoInputs = props => {
 					id='servings'
 					label='Servings'
 					variant='outlined'
+					color='secondary'
 					defaultValue={props.isModify ? props.oldDetails.servings : ''}
 					className={classes.textInput}
 					onChange={(event) => props.changed(event, 'servings')}

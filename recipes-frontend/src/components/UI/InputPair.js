@@ -31,6 +31,7 @@ const InputPair = props => {
 						id={props.id}
 						label={props.label}
 						variant='outlined'
+						color='secondary'
 						defaultValue={props.isModify ? props.oldValue : ''}
 						className={classes.textInput}
 						onChange={event => props.handleChange(event, props.id)}
@@ -46,6 +47,7 @@ const InputPair = props => {
 					value={props.timeUnits}
 					// value={props.isModify ? props.oldUnits : props.timeUnits}
 					variant='outlined'
+					color='secondary'
 					onChange={event => props.handleChange(event, dropdownID)}
 					className={classes.dropdown}
 					label={props.isSingleDropdown ? props.label : ''}
