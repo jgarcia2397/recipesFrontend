@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 	},
 	background: {
-		backgroundColor: theme.palette.primary.light,
+		backgroundColor: theme.palette.common.ivory,
 		height: '100%',
 		width: '100%',
 		overflow: 'auto',

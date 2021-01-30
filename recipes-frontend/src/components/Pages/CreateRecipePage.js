@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 	},
 	background: {
-		backgroundColor: theme.palette.primary.light,
+		backgroundColor: theme.palette.common.ivory,
 		height: '100%',
 		width: '100%',
 	},
@@ -519,6 +519,7 @@ const CreateRecipePage = props => {
 					id='recipeName'
 					label='Recipe Name'
 					variant='outlined'
+					color='secondary'
 					defaultValue={
 						isModifyLocalStorage === 'true' ? oldRecipeDetails.recipeName : ''
 					} // previously isModifyRecipe from Redux store

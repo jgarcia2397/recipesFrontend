@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 		height: '95vh',
 	},
 	background: {
-		backgroundColor: theme.palette.primary.light,
+		backgroundColor: theme.palette.common.ivory,
 		height: '100%',
 		width: '100%',
 	},
@@ -226,6 +226,7 @@ const Auth = props => {
 						id='name'
 						label='Name'
 						variant='outlined'
+						color='secondary'
 						className={classes.input}
 						onChange={event => inputChangedHandler(event, 'name')}
 						onKeyPress={event => keyPressHandler(event)}
@@ -237,6 +238,7 @@ const Auth = props => {
 					id='email'
 					label='Email'
 					variant='outlined'
+					color='secondary'
 					className={classes.input}
 					onChange={event => inputChangedHandler(event, 'email')}
 					onKeyPress={event => keyPressHandler(event)}
@@ -247,6 +249,7 @@ const Auth = props => {
 					id='password'
 					label='Password'
 					variant='outlined'
+					color='secondary'
 					type='password'
 					className={classes.input}
 					onChange={event => inputChangedHandler(event, 'password')}
