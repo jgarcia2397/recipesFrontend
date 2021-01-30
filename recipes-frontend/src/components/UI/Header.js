@@ -103,7 +103,7 @@ const Header = props => {
 				<AppBar position='fixed' color='primary' className={classes.appBar}>
 					<Toolbar>
 						<Typography className={classes.logo} variant='h3'>
-							Good Food
+							MyCookBook
 						</Typography>
 						{matches ? (
 							<NavDrawer
