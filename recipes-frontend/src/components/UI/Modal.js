@@ -87,10 +87,7 @@ const Modal = props => {
 			valid: isFileValid,
 		});
 
-		// console.log(updatedImgState);
-
 		setImageValue(updatedImgState);
-		// setImageValue({ value: file, valid: isFileValid });
 	};
 
 	let editType = props.type;
@@ -163,8 +160,6 @@ const Modal = props => {
 		} else if (id === 'newTitleEntry') {
 			setTitleValue(event.target.value);
 		}
-
-		// console.log('entry: ' + textValue + ', ' + 'name: ' + nameValue + ', ' + 'title: ' + titleValue);
 	};
 
 	const updateNameTitleHelper = (name, title) => {
@@ -190,7 +185,6 @@ const Modal = props => {
 		} else if (props.type === 'Name and Title') {
 			updateNameTitleHelper(nameValue, titleValue);
 		} else if (props.type === 'Profile Pic') {
-			// console.log(imageValue.value);
 			props.updateProfilePic(imageValue.value);
 		} else if (props.type === 'Recipe') {
 			props.deleteRecipe(props.recipeId, props.token);

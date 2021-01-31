@@ -99,7 +99,6 @@ const HomePage = props => {
 
 	const searchValueChangeHandler = event => {
 		setSearchValue(event.target.value);
-		console.log(searchValue);
 	};
 
 	const onUserSearchSubmit = (event, searchValue) => {
@@ -112,7 +111,6 @@ const HomePage = props => {
 	const keyPressHandler = event => {
 		// 'Enter' key press
 		if (event.key === 'Enter') {
-			console.log('Enter key pressed!');
 			onUserSearchSubmit(event, searchValue);
 		}
 	};

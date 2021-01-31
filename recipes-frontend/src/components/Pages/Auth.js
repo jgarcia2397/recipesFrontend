@@ -190,7 +190,6 @@ const Auth = props => {
 		});
 
 		setAuthForm(updatedAuthForm);
-		console.log(authForm);
 	};
 
 	const authSubmitHandler = event => {

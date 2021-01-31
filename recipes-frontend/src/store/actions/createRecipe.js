@@ -314,7 +314,6 @@ export const deleteRecipe = (recipeId, token) => {
 				dispatch(deleteRecipeSuccess());
 			})
 			.catch(err => {
-				console.log(err.response);
 				if (!err.response) {
 					dispatch(deleteRecipeFailed('There is a network problem, could not delete recipe.'));
 				} else {

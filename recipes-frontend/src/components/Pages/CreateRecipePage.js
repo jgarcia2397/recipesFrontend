@@ -331,8 +331,6 @@ const CreateRecipePage = props => {
 	}, []);
 
 	useEffect(() => {
-		console.log(basicRecipeForm);
-
 		let inputIDs = ['recipeName', 'prepTime', 'cookTime', 'servings'];
 		let errorArray = [...textInputErrors];
 
@@ -448,7 +446,6 @@ const CreateRecipePage = props => {
 		});
 
 		setBasicRecipeForm(updatedForm);
-		console.log(updatedForm);
 	};
 
 	const detailedListChangedHandler = (modalTextValue, mode, list, index) => {
@@ -479,7 +476,6 @@ const CreateRecipePage = props => {
 		});
 
 		setDetailRecipeForm(updatedForm);
-		console.log(updatedForm);
 	};
 
 	const imageInputHandler = (id, file, isFileValid) => {
@@ -493,7 +489,6 @@ const CreateRecipePage = props => {
 		});
 
 		setBasicRecipeForm(updatedForm);
-		console.log(updatedForm);
 	};
 
 	const handleAlertClose = () => {
