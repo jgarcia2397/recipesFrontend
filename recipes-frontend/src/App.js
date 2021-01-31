@@ -51,7 +51,6 @@ function App() {
 			},
 			{
 				name: 'Full Recipe Details',
-				//link: '/recipe-full-details',
 				activeIndex: false,
 				isMainTab: false,
 			},
