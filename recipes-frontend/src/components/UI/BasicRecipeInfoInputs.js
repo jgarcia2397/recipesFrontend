@@ -31,10 +31,6 @@ const BasicRecipeInfoInputs = props => {
 
 	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
-	// const [prepTimeUnits, setPrepTimeUnits] = useState('minutes');
-	// const [cookTimeUnits, setCookTimeUnits] = useState('minutes');
-	// const [difficulty, setDifficulty] = useState('Easy');
-
 	const timeUnits = [
 		{ value: 'minutes', label: 'minutes' },
 		{ value: 'hours', label: 'hours' },
@@ -45,18 +41,6 @@ const BasicRecipeInfoInputs = props => {
 		{ value: 'Medium', label: 'Medium' },
 		{ value: 'Hard', label: 'Hard' },
 	];
-
-	// const handlePrepTimeChange = event => {
-	// 	setPrepTimeUnits(event.target.value);
-	// };
-
-	// const handleCookTimeChange = event => {
-	// 	setCookTimeUnits(event.target.value);
-	// };
-
-	// const handleDifficultyChange = event => {
-	// 	setDifficulty(event.target.value);
-	// };
 
 	return (
 		<Grid

@@ -46,8 +46,6 @@ const RecipeInstructions = props => {
 
 	const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
-	// ToDo: Don't need to pass isModify as prop to this component
-
 	return (
 		<React.Fragment>
 			<Grid
@@ -61,8 +59,6 @@ const RecipeInstructions = props => {
 				<RecipeInstructColumn
 					label='Ingredients'
 					array={props.ingredientArray}
-					// array={props.isModify ? props.oldDetails.ingredientArray : props.ingredientArray}
-					// array={mergedIngredientArray}
 					isNewRecipe={props.isNewRecipe}
 					changedList={props.changedListHandler}
 				/>
@@ -81,8 +77,6 @@ const RecipeInstructions = props => {
 				<RecipeInstructColumn
 					label='Directions'
 					array={props.directionsArray}
-					// array={props.isModify ? props.oldDetails.directionsArray : props.directionsArray}
-					// array={mergedDirectionArray}
 					isNewRecipe={props.isNewRecipe}
 					changedList={props.changedListHandler}
 				/>

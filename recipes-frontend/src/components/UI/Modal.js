@@ -33,9 +33,6 @@ const useStyles = makeStyles(theme => ({
 		'&:hover': {
 			backgroundColor: theme.palette.primary.dark,
 		},
-		// [theme.breakpoints.down('md')]: {
-		// 	marginBottom: '20px',
-		// },
 	},
 	cancelButton: {
 		...theme.typography.button,
@@ -44,9 +41,6 @@ const useStyles = makeStyles(theme => ({
 		'&:hover': {
 			backgroundColor: theme.palette.error.dark,
 		},
-		// [theme.breakpoints.down('md')]: {
-		// 	marginBottom: '20px',
-		// },
 	},
 }));
 
@@ -62,7 +56,7 @@ const Modal = props => {
 	const [imageValue, setImageValue] = useState({ value: null, valid: true });
 	const [loading, setLoading] = useState(false);
 
-	const { mode, textToEdit, isLoading } = props; // modalCloseHandler
+	const { mode, textToEdit, isLoading } = props; 
 
 	useEffect(() => {
 		if (mode === 'Delete' || mode === 'Add New') {
@@ -229,7 +223,6 @@ const Modal = props => {
 								className={classes.modalTitleContainer}
 							>
 								{props.mode} {editType}
-								{/* {props.type === 'Ingredients' ? 'Ingredient' : 'Direction'} */}
 								{props.mode === 'Delete' ? '?' : ''}
 							</Typography>
 						</Grid>

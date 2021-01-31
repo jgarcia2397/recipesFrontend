@@ -11,7 +11,6 @@ import Modal from './Modal';
 
 const useStyles = makeStyles(theme => ({
 	titles: {
-		// color: theme.palette.secondary.main,
 		marginTop: '35px',
 		marginLeft: '15px',
 		fontWeight: 'bold',

@@ -59,11 +59,7 @@ const UserProfile = props => {
 	const classes = useStyles();
 	const theme = useTheme();
 
-	// const [name, setName] = useState('Your Name');
-	// const [title, setTitle] = useState('Your Title');
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	// const [editType, setEditType] = useState('');
-	// const [textToEdit, setTextToEdit] = useState('');
 	const [modalType, setModalType] = useState('');
 
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
@@ -82,8 +78,6 @@ const UserProfile = props => {
 	};
 
 	const updateProfile = (name, title) => {
-		// setName(name);
-		// setTitle(title);
 		props.updateHandler(
 			props.uid,
 			props.uidRedux,

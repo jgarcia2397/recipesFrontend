@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 		height: '15vh',
 		width: '40vw',
 		minHeight: '150px',
-		backgroundColor: theme.palette.common.pastelPurple,	// light or main? pastelPurple?
+		backgroundColor: theme.palette.common.pastelPurple,	
 		marginBottom: '30px',
 		minWidth: '300px',
 		[theme.breakpoints.down('md')]: {
@@ -26,7 +26,6 @@ const useStyles = makeStyles(theme => ({
 		},
 		[theme.breakpoints.down('xs')]: {
 			height: '50vh',
-			// width: '40vw',
 		},
 	},
 	mediaContainer: {

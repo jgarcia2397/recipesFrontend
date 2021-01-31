@@ -56,34 +56,6 @@ const RecipeList = props => {
 	const classes = useStyles();
 	const theme = useTheme();
 
-	// const editButton = (index, value) => {
-	// 	props.isNewRecipe ? (
-	// 		<IconButton
-	// 			edge='end'
-	// 			aria-label='edit'
-	// 			onClick={() => {
-	// 				props.clicked('Edit', index, value);
-	// 			}}
-	// 		>
-	// 			<EditIcon />
-	// 		</IconButton>
-	// 	) : null;
-	// };
-
-	// const deleteButton = index => {
-	// 	props.isNewRecipe ? (
-	// 		<IconButton
-	// 			edge='end'
-	// 			aria-label='delete'
-	// 			onClick={() => {
-	// 				props.clicked('Delete', index, '');
-	// 			}}
-	// 		>
-	// 			<DeleteIcon />
-	// 		</IconButton>
-	// 	) : null;
-	// };
-
 	return (
 		<div className={props.isNewRecipe ? classes.rootAlternate : classes.root}>
 			<List className={classes.listContainer}>

@@ -41,11 +41,10 @@ const InputPair = props => {
 				</Grid>
 			) : null}
 			<Grid item>
-				<TextField // native for mobile?
+				<TextField 
 					id={`${props.id}Units`}
 					select
 					value={props.timeUnits}
-					// value={props.isModify ? props.oldUnits : props.timeUnits}
 					variant='outlined'
 					color='secondary'
 					onChange={event => props.handleChange(event, dropdownID)}
