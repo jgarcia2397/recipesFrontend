@@ -80,7 +80,10 @@ const ViewPageLinks = props => {
 					<Typography variant='h4' style={{ marginBottom: '6px' }}>
 						My Recipes
 					</Typography>
-					<Typography variant='body1' style={{ marginBottom: '3px' }}>
+					<Typography
+						variant='body1'
+						style={{ marginBottom: '3px', textAlign: 'center' }}
+					>
 						View your recipes and add to your menu!
 					</Typography>
 					<Button
@@ -104,7 +107,10 @@ const ViewPageLinks = props => {
 					<Typography variant='h4' style={{ marginBottom: '6px' }}>
 						My Profile
 					</Typography>
-					<Typography variant='body1' style={{ marginBottom: '3px' }}>
+					<Typography
+						variant='body1'
+						style={{ marginBottom: '3px', textAlign: 'center' }}
+					>
 						Update your profile for others to see!
 					</Typography>
 					<Button
