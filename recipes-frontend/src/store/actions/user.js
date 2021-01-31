@@ -375,11 +375,9 @@ export const autoLoginStart = () => {
 	};
 };
 
-// export const autoLoginSuccess = (userId, token) => {
 export const autoLoginSuccess = (userId, token, expiration) => {
 	return {
 		type: actionTypes.AUTO_LOGIN_SUCCESS,
-		// email: email,
 		id: userId,
 		token,
 		expiration,
@@ -393,13 +391,11 @@ export const autoLoginFailed = error => {
 	};
 };
 
-// export const autoLogin = (userId, token) => {
 export const autoLogin = (userId, token, expiration) => {
 	return dispatch => {
 		dispatch(autoLoginStart());
 
 		try {
-			// dispatch(autoLoginSuccess(userId, token));
 			dispatch(autoLoginSuccess(userId, token, expiration));
 		} catch (err) {
 			dispatch(autoLoginFailed(err));
@@ -416,7 +412,6 @@ export const authLogout = () => {
 export const authLoginStart = () => {
 	return {
 		type: actionTypes.AUTH_LOGIN_START,
-		// isLoggedIn: false,
 	};
 };
 
@@ -426,7 +421,6 @@ export const authLoginSuccess = (email, userId, token) => {
 		email: email,
 		id: userId,
 		token,
-		// isLoggedIn: true,
 	};
 };
 
@@ -434,7 +428,6 @@ export const authLoginFailed = error => {
 	return {
 		type: actionTypes.AUTH_LOGIN_FAILED,
 		error: error,
-		// isLoggedIn: false,
 	};
 };
 
@@ -475,7 +468,6 @@ export const authLogin = (email, password) => {
 export const authSignupStart = () => {
 	return {
 		type: actionTypes.AUTH_SIGNUP_START,
-		// isLoggedIn: false,
 	};
 };
 
@@ -485,7 +477,6 @@ export const authSignupSuccess = (email, userId, token) => {
 		email: email,
 		id: userId,
 		token,
-		// isLoggedIn: true,
 	};
 };
 
@@ -493,7 +484,6 @@ export const authSignupFailed = error => {
 	return {
 		type: actionTypes.AUTH_SIGNUP_FAILED,
 		error: error,
-		// isLoggedIn: false,
 	};
 };
 
