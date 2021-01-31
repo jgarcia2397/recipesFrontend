@@ -1,19 +1,25 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import Header from './components/UI/Header';
 import theme from './components/UI/Theme';
 
-import HomePage from './components/Pages/HomePage';
-import Auth from './components/Pages/Auth';
-import RecipePage from './components/Pages/RecipePage';
-import ProfilePage from './components/Pages/ProfilePage';
-import RecipeFullDetailsPage from './components/Pages/RecipeFullDetailsPage';
-import CreateRecipePage from './components/Pages/CreateRecipePage';
-
 import * as actions from './store/actions/index';
+
+const HomePage = React.lazy(() => import('./components/Pages/HomePage'));
+const Auth = React.lazy(() => import('./components/Pages/Auth'));
+const RecipePage = React.lazy(() => import('./components/Pages/RecipePage'));
+const ProfilePage = React.lazy(() => import('./components/Pages/ProfilePage'));
+const RecipeFullDetailsPage = React.lazy(() =>
+	import('./components/Pages/RecipeFullDetailsPage')
+);
+const CreateRecipePage = React.lazy(() =>
+	import('./components/Pages/CreateRecipePage')
+);
 
 let logoutTimer;
 
@@ -203,7 +209,15 @@ function App() {
 					logout={onAutoLogout}
 					isDeselectTabs={isDeselectTabs}
 				/>
-				{routeComponents}
+				<Suspense
+					fallback={
+						<div className='center'>
+							<CircularProgress color='secondary' size={75} thickness={4.5} />
+						</div>
+					}
+				>
+					{routeComponents}
+				</Suspense>
 			</BrowserRouter>
 		</ThemeProvider>
 	);
