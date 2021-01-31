@@ -2,7 +2,6 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../shared/utility';
 
 const initialState = {
-	// isLoggedIn: false,
 	email: '',
 	userId: '',
 	token: null,
@@ -10,7 +9,7 @@ const initialState = {
 	isTabsDeselect: false,
 	name: 'Your Name',
 	title: 'Your Title',
-	profilePic: null, // 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
+	profilePic: null, 
 	nameAndTitleUpdated: false,
 	aboutMe: 'Tell us a bit about yourself!',
 	aboutMeUpdated: false,
@@ -242,7 +241,6 @@ const authLogout = (state, action) => {
 
 const authLoginStart = (state, action) => {
 	return updateObject(state, {
-		// isLoggedIn: action.isLoggedIn,
 		loading: true,
 		error: null,
 	});
@@ -265,7 +263,6 @@ const authLoginSuccess = (state, action) => {
 		userId: action.id,
 		token: action.token,
 		tokenExpiration: tokenExpirationDate.toISOString(),
-		// isLoggedIn: action.isLoggedIn,
 		loading: false,
 		error: null,
 	});
@@ -275,13 +272,11 @@ const authLoginFailed = (state, action) => {
 	return updateObject(state, {
 		error: action.error,
 		loading: false,
-		// isLoggedIn: action.isLoggedIn,
 	});
 };
 
 const authSignupStart = (state, action) => {
 	return updateObject(state, {
-		// isLoggedIn: action.isLoggedIn,
 		loading: true,
 		error: null,
 	});
@@ -293,7 +288,6 @@ const authSignupSuccess = (state, action) => {
 		email: action.email,
 		userId: action.id,
 		token: action.token,
-		// isLoggedIn: action.isLoggedIn,
 		loading: false,
 		error: null,
 	});
@@ -303,7 +297,6 @@ const authSignupFailed = (state, action) => {
 	return updateObject(state, {
 		error: action.error,
 		loading: false,
-		// isLoggedIn: action.isLoggedIn,
 	});
 };
 

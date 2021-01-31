@@ -8,7 +8,6 @@ const initialState = {
 	recipeCreated: false,
 	recipeDeleted: false,
 	isModifyRecipe: false,
-	// searchedUser: null, // this should be searchedUserId later
 	loading: false,
 	error: null,
 };
@@ -48,22 +47,6 @@ const getAllUserRecipesSuccess = (state, action) => {
 const getAllUserRecipesFailed = (state, action) => {
 	return updateObject(state, { loading: false, error: action.error });
 };
-
-// const getOtherUserRecipesStart = (state, action) => {
-// 	return updateObject(state, { loading: true, error: null });
-// };
-
-// const getOtherUserRecipesSuccess = (state, action) => {
-// 	return updateObject(state, {
-// 		searchedUser: action.fullName,
-// 		loading: false,
-// 		error: null,
-// 	});
-// };
-
-// const getOtherUserRecipesFailed = (state, action) => {
-// 	return updateObject(state, { loading: false, error: action.error });
-// };
 
 const createRecipeInit = (state, action) => {
 	localStorage.setItem('isModifyRecipe', false);
@@ -131,10 +114,7 @@ const mergeObjects = (obj1, obj2) => {
 	return answer;
 };
 
-// ToDo: RecipeList for ingredients and directions does not re-render when updating a recipe
 const updateRecipeSuccess = (state, action) => {
-	// const newIngredients = [...state.recipes[state.recipeId].ingredients, ...action.ingredients];
-	// const newDirections = [...state.recipes[state.recipeId].directions, ...action.directions];
 	const newIngredients = [...action.ingredients];
 	const newDirections = [...action.directions];
 
@@ -206,12 +186,6 @@ const reducer = (state = initialState, action) => {
 			return getAllUserRecipesSuccess(state, action);
 		case actionTypes.GET_ALL_USER_RECIPES_FAILED:
 			return getAllUserRecipesFailed(state, action);
-		// case actionTypes.GET_OTHER_USER_RECIPES_START:
-		// 	return getOtherUserRecipesStart(state, action);
-		// case actionTypes.GET_OTHER_USER_RECIPES_SUCCESS:
-		// 	return getOtherUserRecipesSuccess(state, action);
-		// case actionTypes.GET_OTHER_USER_RECIPES_FAILED:
-		// 	return getOtherUserRecipesFailed(state, action);
 		case actionTypes.CREATE_RECIPE_INIT:
 			return createRecipeInit(state, action);
 		case actionTypes.CREATE_RECIPE_START:
