@@ -26,7 +26,6 @@ const NavTabs = props => {
 			className={classes.tabContainer}
 			value={props.isDeselectTabs ? false : props.tabVal}
 			onChange={props.handleTabChange}
-			/*indicatorColor='primary'*/
 		>
 			{props.routes.map((route, index) =>
 				route.isMainTab ? (
