@@ -148,7 +148,7 @@ const RecipeInfoColumn = props => {
 						alt='Recipe Pic'
 						variant='square'
 						className={classes.recipeImage}
-						src={`http://localhost:5000/${props.image}`}
+						src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
 						style={{ boxShadow: theme.shadows[5] }}
 					/>
 				</Grid>

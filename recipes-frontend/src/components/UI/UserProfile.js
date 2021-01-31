@@ -123,7 +123,7 @@ const UserProfile = props => {
 							className={classes.profilePic}
 							src={
 								props.profilePic
-									? `http://localhost:5000/${props.profilePic}`
+									? `${process.env.REACT_APP_ASSET_URL}/${props.profilePic}`
 									: profile
 							}
 							onClick={chooseProfilePicHandler}

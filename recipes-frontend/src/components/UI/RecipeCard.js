@@ -99,7 +99,7 @@ const RecipeCard = props => {
 				>
 					<Grid item className={classes.mediaContainer}>
 						<CardMedia
-							src={`http://localhost:5000/${props.image}`}
+							src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
 							component='img'
 							title='RecipeImg'
 							className={classes.media}
