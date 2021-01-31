@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
@@ -9,9 +9,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
 
 import NavTabs from '../Navigation/NavTabs';
 import NavDrawer from '../Navigation/NavDrawer';
+
+import chefLogo from '../../assets/chef.jpg';
 
 const useStyles = makeStyles(theme => ({
 	appBar: {
@@ -58,6 +62,7 @@ const Header = props => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
 	const history = useHistory();
 
@@ -97,14 +102,29 @@ const Header = props => {
 			</Button>
 		) : null;
 
+	const appLogo = (
+		<Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
+			<Grid direction='row' container alignItems='center' spacing={2}>
+				<Grid item>
+					<Avatar alt='Logo' variant='square' src={chefLogo} />
+				</Grid>
+				{matchesXS ? null : (
+					<Grid item>
+						<Typography className={classes.logo} variant='h3'>
+							MyCookBook
+						</Typography>
+					</Grid>
+				)}
+			</Grid>
+		</Link>
+	);
+
 	return (
 		<React.Fragment>
 			<ElevationScroll>
 				<AppBar position='fixed' color='primary' className={classes.appBar}>
 					<Toolbar>
-						<Typography className={classes.logo} variant='h3'>
-							MyCookBook
-						</Typography>
+						{appLogo}
 						{matches ? (
 							<NavDrawer
 								routes={routes}
