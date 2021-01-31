@@ -38,10 +38,6 @@ const useStyles = makeStyles(theme => ({
 	divider: {
 		backgroundColor: theme.divider.main,
 		width: '100%',
-		// [theme.breakpoints.down('md')]: {
-		// 	width: '100%',
-		// 	height: '0.1%',
-		// },
 	},
 	recipeDetailsRoot: {
 		width: '100%',
@@ -252,7 +248,6 @@ const CreateRecipePage = props => {
 		// This case occurs when we are modifying an existing recipe and the page is refreshed, cannot use isModifyRecipe from Redux store since it resets to false on refresh
 		oldRecipeDetails = JSON.parse(localStorage.getItem('recipeDetails'));
 	} else {
-		// oldRecipeDetails = props.location.recipeDetails;
 		oldRecipeDetails = {
 			recipeName: '',
 			prepTime: '',
@@ -265,8 +260,6 @@ const CreateRecipePage = props => {
 			directionsArray: [],
 		};
 	}
-
-	// const isModifyRecipe = Object.keys(oldRecipeDetails).length !== 0;
 
 	const updateBasicFormOnMount = () => {
 		let updatedBasicFormState = {};

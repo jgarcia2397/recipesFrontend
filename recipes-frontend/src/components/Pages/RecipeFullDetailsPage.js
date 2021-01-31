@@ -173,7 +173,6 @@ const RecipeFullDetailsPage = props => {
 			{deleteRecipeRedirect}
 			{snackbar}
 			<Grid item className={classes.infoColumn}>
-				{/* Can probably clean up the props passed here. Instead only pass recipes and props.location.id.cardId ??? */}
 				<RecipeInfoColumn
 					recipeInit={onUpdateRecipeInit}
 					recipeIndex={storedCardId}

@@ -25,7 +25,6 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 	},
 	loginContainer: {
-		// height: '500px',
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
