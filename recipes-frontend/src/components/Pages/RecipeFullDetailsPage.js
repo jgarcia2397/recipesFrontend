@@ -57,6 +57,7 @@ const RecipeFullDetailsPage = props => {
 
 	const dispatch = useDispatch();
 
+	const recipes = useSelector(state => state.createRecipe.recipes);
 	const isLoading = useSelector(state => state.createRecipe.loading);
 	const isRecipeDeleted = useSelector(
 		state => state.createRecipe.recipeDeleted
@@ -162,6 +163,10 @@ const RecipeFullDetailsPage = props => {
 		recipe = JSON.parse(localStorage.getItem('currentRecipe'));
 	} else {
 		recipe = currentRecipe;
+	}
+
+	if (recipe === null) {
+		recipe = recipes[storedCardId];
 	}
 
 	return (
