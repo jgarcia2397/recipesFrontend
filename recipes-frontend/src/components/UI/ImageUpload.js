@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 		},
 	},
 	image: {
-		objectFit: 'cover', 
+		objectFit: 'cover',
 		height: '100%',
 		width: '100%',
 	},
@@ -68,6 +68,36 @@ const ImageUpload = props => {
 
 	const filePickerRef = useRef();
 
+	const uploadFile = useCallback((file, signedRequest, url) => {
+		const xhr = new XMLHttpRequest();
+
+		xhr.open('PUT', signedRequest);
+		xhr.onreadystatechange = () => {
+			if (xhr.readyState === 4) {
+				if (xhr.status === 200) {
+					setPreviewUrl(url);
+				} 
+			}
+		};
+		xhr.send(file);
+	}, []);	// previewUrl
+
+	const getSignedRequest = useCallback(file => {
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', `${process.env.REACT_APP_BACKEND_URL}sign-s3?file-name=${file.name}&file-type=${file.type}`);
+		xhr.onreadystatechange = () => {
+			if (xhr.readyState === 4) {
+				if (xhr.status === 200) {
+					const response = JSON.parse(xhr.responseText);
+					uploadFile(file, response.signedRequest, response.url);
+				} else {
+					alert('Could not get signed URL.');
+				}
+			}
+		};
+		xhr.send();
+	}, [uploadFile]);
+
 	useEffect(() => {
 		if (!file) {
 			return;
@@ -78,7 +108,9 @@ const ImageUpload = props => {
 			setPreviewUrl(fileReader.result);
 		}; // once readAsDataURL() below finishes, this onLoad function will execute
 		fileReader.readAsDataURL(file);
-	}, [file]);
+
+		getSignedRequest(file);
+	}, [file, getSignedRequest]);
 
 	const pickImageHandler = () => {
 		filePickerRef.current.click();
